@@ -1,0 +1,77 @@
+.searchCard{
+    display: flex;
+    position: relative;
+    margin: 20px;
+    padding: 20px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    cursor: pointer;
+}
+
+.searchCard:hover{
+    opacity: 0.8;
+}
+
+.searchCard > img{
+    height: 200px;
+    width: 350px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.searchCard__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 20px; 
+}
+
+.searchCard__heart{
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+
+.searchCard__infoTop{
+    width: 40vw;
+}
+
+.searchCard__infoTop > h3{
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+.searchCard__infoTop > p{
+    margin-top: 10px;
+    font-size: 13px;
+    color: gray;
+}
+
+.searchCard__infoBottom{
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchCard__star{
+    color: red;
+}
+
+.searchCard__stars{
+    display: flex;
+    align-items: center;
+}
+
+.searchCard__price{
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+}
+
+.searchCard__price > h2 + p, .searchCard__price > h2{
+    display: inline;
+}
+
+.searchCard__price > p{
+    text-align: right;
+}
+
