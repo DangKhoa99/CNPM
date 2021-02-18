@@ -4,11 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## DangKhoa - Hướng dẫn
 
-Step 1: Open your terminal and then type
+Step 1: 
+- Option 1: Open your terminal and then type
 
 ### `git clone https://github.com/DangKhoa99/Software-Engineering.git`
 
 This clones the repo
+
+- Option 2: Download zip to your device -> Unzip -> Open your terminal
 
 Step 2: cd into the new folder and type
 
