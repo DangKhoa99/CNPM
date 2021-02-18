@@ -7,6 +7,7 @@ import Home from './components/Home/Home'
 import SearchPage from './components/Search/SearchPage'
 import SignUp from './components/Account/SignUp'
 import SignIn from './components/Account/SignIn'
+import Room from './components/Room/Room'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/search-page' component={SearchPage} />
         <Route path='/sign-up' component={SignUp} />
         <Route path='/sign-in' component={SignIn} />
+        <Route path='/rooms' component={Room} />
       </Switch>
       <Footer />
     </Router>

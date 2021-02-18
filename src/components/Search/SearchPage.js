@@ -3,6 +3,7 @@ import "./SearchPage.css"
 import SearchCard from "./SearchCard"
 import { Button } from '@material-ui/core'
 import Header from '../Header'
+import { Link } from "react-router-dom"
 
 function SearchPage() {
     return (
@@ -27,36 +28,42 @@ function SearchPage() {
                     More filters
                 </Button> */}
             </div>
+            
+            <Link to="/rooms" className="searchPage__link">
+                <SearchCard
+                    img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
+                    location="Phòng riêng tại Quận 3"
+                    title="Tiamy Housie T4"
+                    description="2 khách · 1 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí"
+                    star="4.74 (27)"
+                    price="$14"
+                    total="Tổng $117"
+                />
+            </Link>
+            
+            <Link to="/rooms" className="searchPage__link">
+                <SearchCard
+                    img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
+                    location="Private room in center of London"
+                    title="Stay at this spacious Edwardian House"
+                    description="1 guest &middot; 1 bedroom &middot; 1.5 shared bthrooms &middot; Wifi &middot; Kitchen &middot; Free parking &middot; Washing Machine"
+                    star={4.73}
+                    price="30USD / night"
+                    total="117USD total"
+                />
+            </Link>
 
-            <SearchCard
-                img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
-                location="Phòng riêng tại Quận 3"
-                title="Tiamy Housie T4"
-                description="2 khách · 1 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí"
-                star="4.74 (27)"
-                price="$14"
-                total="Tổng $117"
-            />
-
-            <SearchCard
-                img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
-                location="Private room in center of London"
-                title="Stay at this spacious Edwardian House"
-                description="1 guest &middot; 1 bedroom &middot; 1.5 shared bthrooms &middot; Wifi &middot; Kitchen &middot; Free parking &middot; Washing Machine"
-                star={4.73}
-                price="30USD / night"
-                total="117USD total"
-            />
-
-            <SearchCard
-                img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
-                location="Private room in center of London"
-                title="Stay at this spacious Edwardian House"
-                description="1 guest &middot; 1 bedroom &middot; 1.5 shared bthrooms &middot; Wifi &middot; Kitchen &middot; Free parking &middot; Washing Machine"
-                star={4.73}
-                price="30USD / night"
-                total="117USD total"
-            />
+            <Link to="/rooms" className="searchPage__link">
+                <SearchCard
+                    img="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU"
+                    location="Private room in center of London"
+                    title="Stay at this spacious Edwardian House"
+                    description="1 guest &middot; 1 bedroom &middot; 1.5 shared bthrooms &middot; Wifi &middot; Kitchen &middot; Free parking &middot; Washing Machine"
+                    star={4.73}
+                    price="30USD / night"
+                    total="117USD total"
+                />
+            </Link>
         </div>
     )
 }

@@ -6,6 +6,10 @@
     padding: 50px;
 }
 
+.searchPage__link{
+    text-decoration: none !important;
+}
+
 .searchPage__info > p{
     margin-bottom: 10px;
     font-size: 14px;
@@ -16,54 +20,8 @@
     font-size: 50px;
 }
 
-.searchPage__info > button{
+/* .searchPage__info > button{
     border-radius: 30px;
     text-transform: inherit;
     margin: 5px;
-}
-
-/* custom header */
-/* .header {
-    background: white;
-    box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px !important;
-}
-
-.header__logo {
-    color: red;
-}
-
-.header__links {
-    color: black;
-}
-
-.header__links:hover {
-    border-bottom: 4px solid black;
-}
-
-.fa-bars {
-    color: black;
-}
-
-.btn__signIn{
-    color: black !important;
-    border: 1px solid black !important;
-}
-
-.btn__signIn:hover{
-    background-color: rgb(247, 247, 247) !important;
-    color: black !important;
-}
-
-.header__search > .input__search {
-    color: black;
-}
-
-@media screen and (max-width: 960px) {
-    .header__menu.active {
-        background: #adaaaa;
-    }
-
-    .fa-times {
-        color: black;
-    }
 } */
