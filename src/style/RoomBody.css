@@ -1,0 +1,207 @@
+.roomBody{
+    -moz-box-pack: start !important;
+    -moz-box-align: stretch !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.roomBody_container_left{
+    position: relative !important;
+    width: 58.3333% !important;
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+}
+
+/* .roomBody__block{
+    display: flex !important;
+    content: "" !important;
+} */
+
+.roomBody_line{
+    border-top-width: 1px !important;
+    border-top-style: solid !important;
+    border-top-color: rgb(221, 221, 221);
+}
+
+/* Phần mô tả */
+.roomBody_description, .roomBody_rooms, .roomBody_amenities, .roomBody_thingsToKnow{
+    padding-top: 32px;
+    padding-bottom: 48px;
+}
+
+.roomBody_description > h2, .roomBody_amenities > h2, .roomBody_rooms > h2, .roomBody_thingsToKnow > h2{
+    padding-bottom: 24px;
+    color: black;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+}
+
+.roomBody_description_paragraph{
+    display: inherit !important;
+    color: black !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    word-break: break-word !important;
+}
+
+/* Phần Loại phòng */
+.roomBody_rooms_options{
+    position: relative !important;
+    z-index: 0 !important;
+    margin-left: -8px !important;
+    margin-right: -8px !important;
+    overflow: hidden !important;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.roomBody_rooms_roomTypes{
+    overflow: visible !important;
+    padding: 0px !important;
+    margin-bottom: 0px !important;
+    transition: -ms-transform 0.5s ease 0s, transform 0.5s ease 0s, transform 0.5s ease 0s !important;
+    white-space: nowrap !important;
+    display: flex !important;
+}
+
+.roomBody_rooms_roomType{
+    width: 33.3333% !important;
+    display: inline-block !important;
+    white-space: normal !important;
+    flex: 0 0 auto !important;
+}
+
+.roomBody_rooms_roomType_space{
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.roomBody_rooms_roomType_frame{
+    padding: 24px !important;
+    border: 1px solid rgb(221, 221, 221) !important;
+    border-radius: 12px !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.roomBody_rooms_roomType_frame_icons{
+    margin-bottom: 16px !important;
+}
+
+.roomBody_rooms_roomType_frame_icon{
+    display: inline-block !important;
+    margin-right: 8px !important;
+}
+
+.roomBody_rooms_roomType_frame_icon > svg{
+    height: 24px;
+    width: 24px;
+    fill: currentcolor;
+}
+
+.roomBody_rooms_roomType_frame_title{
+    margin-bottom: 8px !important;
+    color: rgb(34, 34, 34) !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+}
+
+.roomBody_rooms_roomType_frame_subTitle{
+    color: rgb(34, 34, 34) !important;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+}
+
+.roomBody_rooms_roomType_frame_price{
+    color: rgb(180, 178, 178) !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    font-size: 12px !important;
+    line-height: 20px !important;
+}
+
+/* Phần tiện nghi, những điều cần biết */
+.roomBody_amenities_cells, .roomBody_thingsToKnow_cells{
+    margin-left: -8px !important;
+    margin-right: -8px !important;
+    width: calc(100% + 16px) !important;
+    -moz-box-pack: start !important;
+    -moz-box-align: stretch !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+}
+
+.roomBody_amenities_cell{
+    width: 50% !important;
+}
+
+.roomBody_amenities_cell, .roomBody_thingsToKnow_cell{
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
+.roomBody_thingsToKnow_cell > h3{
+    font-style: italic !important;
+    margin-bottom: 12px;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+}
+
+.roomBody_amenities_cell_detail{
+    max-width: 83.3333% !important;
+}
+
+.roomBody_amenities_cell_detail, .roomBody_thingsToKnow_cell_detail{
+    -moz-box-direction: reverse !important;
+    -moz-box-orient: horizontal !important;
+    -moz-box-pack: end !important;
+    justify-content: flex-end !important;
+    flex-direction: row-reverse !important;
+    -moz-box-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    padding-bottom: 16px !important;
+}
+
+.roomBody_amenities_cell_detail_icon{
+    min-width: 24px !important;
+}
+
+.roomBody_amenities_cell_detail_icon, .roomBody_thingsToKnow_cell_detail_icon{
+    margin-right: 16px !important;
+    margin-left: 0px !important;
+}
+
+.roomBody_amenities_cell_detail_icon > svg, .roomBody_thingsToKnow_cell_detail_icon > svg{
+    display: block;
+    height: 32px !important;
+    width: 32px !important;
+    fill: currentcolor;
+}
+
+/* Phần đặt phòng */
+.roomBody_container_right{
+    position: relative !important;
+    width: 33.3333% !important;
+    margin-left: 8.33333% !important;
+    margin-right: 0% !important;
+}
+    /* RoomBooking.css */

@@ -1,0 +1,20 @@
+.roomReview_container{
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+.roomReview_star{
+    color: black !important;
+    font-weight: 600 !important;
+    font-size: 22px !important;
+    line-height: 26px !important;
+}
+
+.roomReview_star > h2{
+    color: inherit !important;
+    font-size: 1em !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}

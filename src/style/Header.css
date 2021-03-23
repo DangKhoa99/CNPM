@@ -1,0 +1,345 @@
+.header {
+  background: transparent;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  /* background: rgba(0, 0, 0, 0.6) !important; */
+}
+
+/* .form-label::after {
+  content: '*';
+  margin-left: 2px;
+  color: red;
+} */
+
+.header.active{
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px !important;
+}
+
+.header_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  max-width: 1500px;
+}
+
+.header_logo {
+  color: white;
+  justify-self: start;
+  margin-left: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.header_logo.active {
+  color: red;
+}
+
+.header_logo > svg{
+  width: 102px;
+  height: 32px;
+  fill: currentColor;
+}
+
+.fa-typo3 {
+  margin-left: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.header_menu {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 10px;
+  list-style: none;
+  text-align: center;
+  width: 40vw;
+  justify-content: end;
+  margin-right: 2rem;
+}
+
+.header_item {
+  height: 80px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.header_links {
+  color: white;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  height: 100%;
+}
+
+.header_links.active {
+  color: black;
+}
+
+.header_links:hover {
+  border-bottom: 4px solid white;
+  transition: all 0.2s ease-out;
+}
+
+.header_links:hover.active {
+  border-bottom: 4px solid black;
+}
+
+.header_bar {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  height: 100%;
+}
+
+.header_bar::after{
+  width: 100%;
+  content: '|';
+  color: white;
+}
+
+.header_bar.active::after{
+  width: 100%;
+  content: '|';
+  color: black;
+}
+
+.fa-bars.headerMenuIcon {
+  color: white;
+}
+
+.fa-bars.headerMenuIcon_active {
+  color: black;
+}
+
+.header_links_mobile {
+  display: none;
+}
+
+.menu_icon {
+  display: none;
+}
+
+.header_btn_signIn{
+  background-color: transparent !important;
+  color: white !important;
+  text-transform: inherit;
+  margin-top: 20px;
+  font-weight: 600 !important;
+  padding: 8px 20px !important;
+  border-radius: 2px;
+  border: 1px solid white !important;
+}
+
+.header_btn_signIn.active{
+  color: black !important;
+  border: 1px solid black !important;
+}
+
+.header_btn_signIn:hover{
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+}
+
+.header_btn_signIn:hover.active{
+  background-color: rgb(247, 247, 247) !important;
+  color: black !important;
+}
+
+.header_search{
+  display: flex;
+  flex: 1;
+  align-items: center;
+  /* max-width: fit-content; */
+  padding: 10px;
+  height: 50px;
+  border: 1px solid lightgray;
+  border-radius: 999px; 
+  margin-left: 100px;
+}
+
+.header_search:hover{
+  box-shadow: 0px 6px 18px -9px rgb(247, 247, 247);
+}
+
+.header_search:hover.active{
+  box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
+}
+
+.header_search > .input_search {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px;
+  outline-width: 0;
+  width: 250px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.header_search > .input_search.active {
+  color: black;
+}
+
+.header_search > button{
+  color: rgb(227, 28, 95) 50% !important;
+  min-width: 0px !important;
+}
+
+.header_search > button:hover{
+  background-color: transparent!important;
+}
+
+.header_search .search_icon{
+  color: white !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%) repeat scroll 0% 0% !important;
+  padding: 10px !important;
+}
+
+.header_search .search_icon > svg{
+  display: block;
+  fill: none;
+  height: 12px;
+  width: 12px;
+  stroke: currentColor;
+  stroke-width: 5.333333333333333;
+  overflow: visible;
+}
+
+/* @media screen and (max-width: 1350px) {
+  .header_btn_signIn{
+    padding: 8px 4px !important;
+  }
+  
+  .header_menu {
+    margin-left: -50px;
+    margin-right: -1rem;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .NavbarItems {
+    position: relative;
+  }
+
+  .header_menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 90vh;
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .header_menu.active {
+    background: #242222;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .header_menu.active.scroll {
+    background: #adaaaa;
+  }
+
+  .header_bar::after{
+    width: 100%;
+    content: '----------------';
+    color: white;
+  }
+
+  .header_bar.active::after{
+    width: 100%;
+    content: '----------------';
+    color: black;
+  }
+
+  .header_links {
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    display: table;
+  }
+
+  .header_links:hover {
+    background-color: #fff;
+    color: #242424;
+    border-radius: 0;
+  }
+
+  .header_logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(25%, 50%);
+  }
+
+  .menu_icon {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 60%);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  .fa-times.headerMenuIcon {
+    color: white;
+    font-size: 2rem;
+  }
+
+  .fa-times.headerMenuIcon_active {
+    color: black;
+  }
+
+  .header_links_mobile {
+    display: block;
+    text-align: center;
+    margin: 2rem auto;
+    border-radius: 4px;
+    width: 80%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: #fff;
+    padding: 14px 20px;
+    border: 1px solid #fff;
+    transition: all 0.3s ease-out;
+  }
+
+  .header_links_mobile:hover {
+    background: #fff;
+    color: #242424;
+    transition: 250ms;
+  }
+
+  .header_search{
+    margin-left: 0px;
+  }
+
+  .header_search > .input_search {
+    width: 150px;
+  }
+
+  .header_search > .input_search.active {
+    width: 150px;
+  }
+} */

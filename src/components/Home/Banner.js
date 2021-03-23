@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import './Banner.css'
+import '../../style/Banner.css'
 import {Button} from "@material-ui/core"
 import { Link } from 'react-router-dom'
 
@@ -15,12 +15,12 @@ function Banner() {
   }
 
   return (
-    <div className='banner__container'  ref={myRef}>
+    <div className='banner_container'  ref={myRef}>
       <h1>TRẢI NGHIỆM KỲ NGHỈ TUYỆT VỜI</h1>
 
       <p>Trải nghiệm trọn vẹn - Giá cả phải chăng</p>
       
-      <div className='banner__btn'>
+      <div className='banner_btn'>
         {/* <Link> */}
           <Button 
             variant="outlined"

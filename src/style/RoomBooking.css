@@ -1,0 +1,319 @@
+.roomBooking{
+    position: sticky !important;
+    top: 80px !important;
+    z-index: 1 !important;
+    display: inline-block !important;
+    width: 100% !important;
+    padding-right: 1px !important;
+    padding-bottom: 48px;
+    margin-top: 48px;
+}
+
+.roomBooking_box{
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+}
+
+.roomBooking_box_layout{
+    color: black !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    -moz-box-direction: normal !important;
+    -moz-box-orient: vertical !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.roomBooking_box_layout_header{
+    -moz-box-align: baseline !important;
+    -moz-box-pack: justify !important;
+    -moz-box-direction: normal !important;
+    -moz-box-orient: horizontal !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+}
+
+/* .roomBooking_box_layout_header_left{
+    -moz-box-pack: center !important;
+    -moz-box-direction: normal !important;
+    -moz-box-orient: vertical !important;
+    -moz-box-align: start !important;
+    align-items: flex-start !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    margin-bottom: 24px !important;
+} */
+
+.roomBooking_box_layout_header_defaultPrice{
+    line-height: normal !important;
+    /* width: 100% !important; */
+    font-size: 22px !important;
+    line-height: 26px !important;
+}
+
+.roomBooking_defaultPrice{
+    font-weight: 600 !important;
+}
+
+.roomBooking_night{
+    color: black !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    white-space: nowrap !important;
+    padding-left: 4px !important;
+}
+
+.roomBooking_btn_remove{
+    cursor: pointer !important;
+    margin: 0px -8px !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: medium none !important;
+    background: transparent none repeat scroll 0% 0% !important;
+    padding: 8px;
+    color: rgb(34, 34, 34) !important;
+    text-decoration: underline !important;
+    -moz-box-align: center !important;
+    display: flex !important;
+}
+
+.roomBooking_btn_remove:hover{
+    border: medium none !important;
+    background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+/* .roomBooking_stars{
+    align-items: center;
+    display: inline-flex;
+    display: flex !important;
+    font-size: 15px !important;
+    line-height: 18px !important;
+}
+
+.roomFirst_star{
+    color: red;
+    margin-right: 4px;
+} */
+
+.roomBooking_box_layout_body{
+    margin-bottom: 16px !important;
+    position: relative !important;
+    border-radius: 8px;
+    background-color: white!important;
+}
+
+.roomBooking_box_layout_body_row{
+    /* display: flex !important; */
+    margin-top: 10px;
+}
+
+.roomBooking_box_layout_body_row_a{
+    width: 100% !important;
+    position: relative !important;
+}
+
+.roomBooking_box_layout_body_row_a > p{
+    padding-top: 8px !important;
+    font-size: 14px;
+    font-weight: 400 !important;
+    height: 36px !important;
+    color: rgb(113, 113, 113) !important;
+}
+
+.roomBooking_box_layout_body_row_a > h2{
+    padding-top: 8px !important;
+    color: black !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+}
+
+
+
+.nice-dates-day.-highlight { color: red !important; }
+.nice-dates-day.-disabled.-highlight { color: rgb(255, 188, 188) !important; }
+
+/* .nice-dates{
+  max-width: 20%;
+} */
+
+.date-range {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input::placeholder {
+  color: #d3dde6;
+}
+
+.date-range .input {
+  width: 100%;
+}
+
+.check_in > label, .check_out > label{
+  font-size: 10px;
+  font-weight: 600;
+  text-align: left !important;
+}
+
+.input {
+  -webkit-appearance: none;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #d3dde6;
+  color: #0e3254;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  height: 42px;
+  outline: none;
+  padding: 0 10px;
+  transition: border-color .2s;
+}
+
+.input.-focused, .input:focus {
+  border: 2px solid black;
+}
+
+.date-range_arrow::before {
+  border-right: 2px solid #d3dde6;
+  border-top: 2px solid #d3dde6;
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  height: 18px;
+  left: 50%;
+  margin-left: -14px;
+  margin-top: -9px;
+  position: absolute;
+  top: 65%;
+  transform: rotate(45deg);
+  width: 18px;
+}
+
+.date-range_arrow {
+  flex-shrink: 0;
+  position: relative;
+  width: 36px;
+}
+
+.nice-dates-popover {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  margin: 8px 0;
+  max-width: 520px !important;
+  position: absolute;
+  transform-origin: top;
+  transform: perspective(1000px);
+  transition-property: transform,opacity;
+  transition-duration: .4s;
+  transition-timing-function: cubic-bezier(.4,.2,0,1.1);
+  width: 100%;
+  will-change: transform,opacity;
+  z-index: 9;
+}
+
+.roomBooking_box_layout_body_b{
+    padding: 10px 0px;
+}
+
+.roomBooking_box_layout_body_b > p{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.room_type {
+    padding-left: 25px;
+    -moz-box-align: center;
+    align-items: center;
+    display: flex;
+    padding-bottom: 7px;
+    position: relative;
+    min-height: 32px;
+}
+
+.room_type input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.check_mark {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: transparent none repeat scroll 0% 0%;
+    border-radius: 50%;
+    border: 1px solid rgb(179, 179, 179);
+}
+
+.room_type:hover input ~ .check_mark {
+    border-color: red;
+}
+
+.room_type input:checked ~ .check_mark {
+    background: red none repeat scroll 0% 0%;
+    border-width: 0px;
+}
+  
+.check_mark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+.room_type input:checked ~ .check_mark:after {
+    display: block;
+}
+  
+.room_type .check_mark:after {
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    content: "";
+    height: 0.5em;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.5em;
+}
+
+.form_booking_btn {
+    margin-top: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s !important;
+    background-size: 200% auto;
+    color: white !important;            
+    /* box-shadow: 0 0 20px #eee; */
+    border-radius: 10px !important;
+    display: block;
+    background-image: linear-gradient(to right, #D31027 0%, #EA384D  51%, #D31027  100%);
+    width: 100%;
+    height: 50px;
+    outline: none;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.form_booking_btn:hover {
+    background-position: 100%;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+  
