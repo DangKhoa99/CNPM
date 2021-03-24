@@ -1,0 +1,76 @@
+.menuBooking_box{
+    display: flex;
+    position: relative;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.menuBooking_box:hover{
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+}
+
+.menuBooking_box > img{
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.menuBooking_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 20px;
+    color: black !important;
+}
+
+.menuBooking_infoTop > h3{
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.menuBooking_infoTop > p{
+    margin-top: 15px;
+    font-size: 13px;
+    color: gray;
+}
+
+.hotel_booking_status{
+    font-weight: 600;
+    color: black !important;
+}
+
+.hotel_booking_status.success{
+    color: green !important;
+}
+
+.hotel_booking_status.error{
+    color: red !important;
+}
+
+.hotel_booking_status.wait{
+    color: #007bff !important;
+}
+
+.menuBooking_infoBottom{
+    display: flex;
+    justify-content: space-between;
+}
+
+.menuBooking_price{
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+}
+
+.menuBooking_price > p{
+    text-align: right;
+}
+
+.menuBooking_price > h2, .menuBooking_price > h2 + p{
+    display: inline;
+}

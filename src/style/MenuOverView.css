@@ -1,0 +1,77 @@
+.menuOverview_subTitle{
+    font-size: 24px;
+    line-height: 32px;
+    padding: 0px 0px 1em;
+    letter-spacing: -0.25px;
+}
+
+.menuOverview_container > section{
+    margin-bottom: 1.5em;
+}
+
+.menuOverview_subTitle, .menuOverview_title{
+    box-sizing: border-box;
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: 600;
+    color: inherit;
+}
+
+.account_info_table{
+    border-collapse: collapse;
+    max-width: 100%;
+    text-align: left;
+    width: 100%;
+}
+
+.account_info_col{
+    width: 50%;
+}
+
+.account_info_row{
+    border-bottom: 1px solid var(--decorative-subdued,#dedede);
+}
+
+.account_info_col_left{
+    color: gray;
+    padding: 1em 1em 1em 0px;
+    white-space: nowrap;
+}
+
+.account_info_col_right{
+    text-align: left;
+    color: var(--black);
+    padding: 1em 0px;
+    text-align: right;
+    word-break: break-all;
+}
+
+.edit_profile{
+    letter-spacing: 1.5px;
+    font-size: 14px;
+    width: auto;
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px solid #757575;
+    color: #757575;
+
+    border-radius: 100px;
+    min-height: 48px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 1em 3em;
+    transition-duration: 33ms;
+    user-select: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.edit_profile:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px solid #181818;
+    color: #181818;
+    transform: scale(1.04);
+}

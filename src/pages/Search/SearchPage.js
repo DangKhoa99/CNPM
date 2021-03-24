@@ -23,7 +23,7 @@ function SearchPage() {
             img: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
             location: "Phòng riêng tại Quận 2",
             title: "CCC",
-            description: "2 khách · 1 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí",
+            description: "2 khách · 2 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí",
             stars: "4.74 (27)",
             price: "$14",
             total: "Tổng $200",

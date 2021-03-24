@@ -15,10 +15,14 @@ function SignUp() {
     setIsSubmitted(true);
   }
 
+  const myStyle={
+    background: `url('${process.env.PUBLIC_URL}/images/backgroundSignUp.jpg') center center/cover no-repeat`
+  }
+
   return (
     <div className="signUp">
       {/* <Header /> */}
-      <div className="signUp_background background_form">
+      <div className="signUp_background background_form" style={myStyle}>
         <div className='form_container'>
           <div className='form_content signUp_left'>
             <h1 className='form_content_header'>Chào mừng trở lại!</h1>

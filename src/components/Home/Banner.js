@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react'
 import '../../style/Banner.css'
 import {Button} from "@material-ui/core"
 import { Link } from 'react-router-dom'
+// import Background from '/test/img-home.png'
+
 
 function Banner() {
   const [inHover, setHover] = useState(false);
@@ -14,8 +16,12 @@ function Banner() {
     });
   }
 
+  const myStyleBackground={
+    background: `url('${process.env.PUBLIC_URL}/images/banner.jpg') center center/cover no-repeat`
+  }
+
   return (
-    <div className='banner_container'  ref={myRef}>
+    <div className='banner_container' style={myStyleBackground} ref={myRef}>
       <h1>TRẢI NGHIỆM KỲ NGHỈ TUYỆT VỜI</h1>
 
       <p>Trải nghiệm trọn vẹn - Giá cả phải chăng</p>

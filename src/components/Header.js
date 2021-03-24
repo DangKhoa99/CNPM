@@ -6,6 +6,8 @@ import {ReactComponent as LogoAirbnb} from "../icons/logoAirbnb.svg"
 import {ReactComponent as Logo} from "../icons/logoAirbn.svg"
 import Aos from "aos"
 import "aos/dist/aos.css"
+
+import {Avatar} from "@material-ui/core"
 // import {animateScroll as scroll} from "react-scroll"
 
 // Thanh header của website
@@ -15,11 +17,14 @@ function Header() {
   // console.log(location.pathname);
 
   const [click, setClick] = useState(false);
+  const [profileMenu, setProfileMenu] = useState(false);
   const [buttonSignIn, setButtonSignIn] = useState(true);
   const [colorHeader, setColorHeader] = useState(true);
 
-  // Nhấp để menu khi Responsive
+  // Nhấp để mở menu khi Responsive
   const handleClick = () => setClick(!click);
+
+  const openProfileMenu = () => setProfileMenu(!profileMenu);
 
   // Nhấp để đóng menu khi Responsive
   const closeMobileMenu = () => setClick(false);
@@ -91,7 +96,7 @@ function Header() {
 
           <div className={colorHeader ? "header_search active" : "header_search"}>
             <input className={colorHeader ? "input_search active" : "input_search"} type="text" placeholder="Bạn sắp đi đâu?"/>
-            <Button href="./search-page?result=">
+            <Button href="/search-page?result=">
               <div class="search_icon">
                 <svg viewBox="0 0 32 32">
                   <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"/>
@@ -100,11 +105,12 @@ function Header() {
             </Button>
           </div>
 
+          {/* Mobile Menu */}
           <div className='menu_icon' onClick={handleClick}>
             <i className={click ? colorHeader ? 'fas fa-times headerMenuIcon_active' : 'fas fa-times headerMenuIcon' : colorHeader ? 'fas fa-bars headerMenuIcon_active' : 'fas fa-bars headerMenuIcon'} />
           </div>
 
-          <ul className={click ? colorHeader ? 'header_menu active scroll' : 'header_menu active' : 'header_menu'} data-aos="fade-left">
+          <ul className={click ? colorHeader ? 'header_menu active scroll' : 'header_menu active' : 'header_menu'} data-aos={click ? "" : "fade-left"}>
             <li className='header_item'>
               <a href='/' className={colorHeader ? 'header_links active' : 'header_links'} onClick={closeMobileMenu}> 
                 <div>Trang chủ</div>
@@ -127,6 +133,30 @@ function Header() {
                 Đăng nhập
               </a>
             </li>
+
+            <li className='header_item'>
+              <button className={colorHeader ? 'header_avatar active' : 'header_avatar'} onClick={openProfileMenu}>
+                <Avatar className="avatar_header" alt="dangkhoa99" src="/images/Khoa.jpg"/>
+                <span>Hồ sơ</span>
+                <svg viewBox="0 0 1024 1024" className={profileMenu ? "reverse_svg" : ""}>
+                  <path d="M476.455 806.696L95.291 425.532Q80.67 410.911 80.67 390.239t14.621-34.789 35.293-14.117 34.789 14.117L508.219 698.8l349.4-349.4q14.621-14.117 35.293-14.117t34.789 14.117 14.117 34.789-14.117 34.789L546.537 800.142q-19.159 19.159-38.318 19.159t-31.764-12.605z"/>
+                </svg>
+              </button>
+
+              <div className={profileMenu ? "profile_menu" : "profile_menu close"}>
+                <ul className="profile_menu_lists">
+                  <li className="profile_menu_list">
+                    <a href="/account/overview/">Tài khoản</a>
+                  </li>
+                  <li className="profile_menu_list">
+                    <a className="log_out" href="#">Đăng xuất</a>
+                  </li>
+                </ul>
+
+              </div>
+            </li>
+
+
 
             {/* <li className='header_item'>
               <Link to='/host/homes' className={colorHeader ? 'header_links active' : 'header_links'} onClick={closeMobileMenu}>

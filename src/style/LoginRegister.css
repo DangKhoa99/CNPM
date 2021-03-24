@@ -7,11 +7,11 @@
 }
 
 .signUp_background{
-  background: url("../images/signin-1.jpg") center center/cover no-repeat;
+  /* background: url("../images/signin-1.jpg") center center/cover no-repeat; */
 }
 
 .signIn_background{
-  background: url("../images/signin-2.jpg") center center/cover no-repeat;
+  /* background: url("../images/signin-2.jpg") center center/cover no-repeat; */
 }
 
 .signUp_background::before, .signIn_background::before{

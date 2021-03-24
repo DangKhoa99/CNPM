@@ -1,0 +1,191 @@
+.menuProfile_form{
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid gray;
+}
+
+.menuProfile_form_row{
+    box-sizing: border-box;
+    padding-bottom: 24px;
+}
+
+.menuProfile_form_label{
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    -moz-box-align: center;
+    align-items: center;
+    display: flex;
+    font-weight: 700;
+    width: 100%;
+    padding-bottom: 8px;
+    color: black;
+}
+
+.menuProfile_form_input::placeholder{
+    color: gray;
+    opacity: 1;
+}
+
+.menuProfile_form_input{
+    appearance: none;
+    background-image: none;
+    border: 0px none;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-radius: 4px;
+    padding: 14px;
+    background-color: var(--background-base,#ffffff);
+    box-shadow: inset 0 0 0 1px var(--essential-subdued,#868686);
+    color: var(--text-base,#000000);
+}
+
+.menuProfile_form_input:hover, .menuProfile_form_select_options:hover {
+    border: 1px solid black;
+}
+
+.menuProfile_form_input:disabled {
+    box-shadow: inset 0 0 0 1px var(--essential-subdued,#868686);
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.menuProfile_form_input:disabled:hover {
+    border: 0px;
+}
+
+.menuProfile_form_select{
+    position: relative;
+    width: 100%;
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+}
+
+.menuProfile_form_select_options{
+    background-image: none;
+    border: 0px none;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    appearance: none;
+    text-indent: 0.01px;
+    border-radius: 4px;
+    padding: 14px 44px 14px 14px;
+    background-color: #ffffff;
+    box-shadow: inset 0 0 0 1px #868686;
+    color: #000000;
+}
+
+.menuProfile_form_select > svg{
+    color: #868686 !important;
+    pointer-events: none;
+    position: absolute;
+    right: 14px;
+    stroke-width: 0.8pt;
+    height: 16px !important;
+    width: 16px !important;
+}
+
+
+
+
+
+.menuProfile_form_btn{
+    display: block;
+    text-align: right;
+}
+
+.menuProfile_form_btn_cancel::after{
+    width: calc(100% - 96px);
+    content: "";
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    transition: border-color 200ms ease-in 0s;
+    box-sizing: border-box;
+    bottom: 14px;
+    border-bottom: 3px solid transparent;
+}
+
+.menuProfile_form_btn_cancel{
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 0px none;
+    border-radius: 500px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    transition-duration: 33ms;
+    transition-property: background-color, border-color, color, box-shadow, filter, transform;
+    user-select: none;
+    vertical-align: middle;
+    transform: translate3d(0px, 0px, 0px);
+    color: var(--text-subdued,#575757);
+    padding: 17px 48px;
+    position: relative;
+}
+
+.menuProfile_form_submit{
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 0px none;
+    border-radius: 500px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    transition-duration: 33ms;
+    transition-property: background-color, border-color, color, box-shadow, filter, transform;
+    user-select: none;
+    vertical-align: middle;
+    transform: translate3d(0px, 0px, 0px);
+    padding: 0px;
+    cursor: pointer;
+}
+
+.menuProfile_form_submit:hover{
+    transform: scale(1.04);
+}
+
+.menuProfile_form_submit_text{
+    color: white !important;
+    border-radius: 500px;
+    font-size: inherit;
+    padding: 17px 48px;
+    transition: 0.5s !important;
+    background-image: linear-gradient(to right, #D31027 0%, #EA384D  51%, #D31027  100%);
+    transition: 0.5s !important;
+    background-size: 200% auto;
+}
+
+.menuProfile_form_submit_text:hover {
+    background-position: 100%;
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -8,6 +8,7 @@
     font-weight: 600 !important;
     font-size: 22px !important;
     line-height: 26px !important;
+    margin-bottom: 40px;
 }
 
 .roomReview_star > h2{
@@ -17,4 +18,78 @@
     line-height: inherit !important;
     margin: 0px !important;
     padding: 0px !important;
+}
+
+.aaa{
+    display: block !important;
+    margin-bottom: 0px !important;
+}
+
+.bbb{
+    margin-left: -8px !important;
+    margin-right: -8px !important;
+    width: calc(100% + 16px) !important;
+    -moz-box-pack: start !important;
+    -moz-box-align: stretch !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+}
+
+.box_comment{
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    width: 41.6667% !important;
+    margin-right: 8.33333% !important;
+    position: relative !important;
+    margin-left: 0% !important;
+    margin-bottom: 40px !important;
+}
+
+.commentator{
+    margin-bottom: 16px !important;
+    -moz-box-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.commentator_avatar{
+    display: block !important;
+    position: relative !important;
+}
+
+.commentator_img{
+    background-color: black !important;
+    color: white !important;
+    height: 56px !important;
+    width: 56px !important;
+}
+
+.commentator_info{
+    color: rgb(34, 34, 34) !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    margin-left: 12px !important;
+}
+
+.comment_time{
+    color: rgb(113, 113, 113) !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+
+    -moz-box-align: baseline !important;
+    display: flex !important;
+    align-items: baseline !important;
+}
+
+.comment_text{
+    color: #222222 !important;
+    font-weight: 400 !important;
+    font-size: 16 !important;
+    line-height: 24px !important;
+    word-break: break-word !important;
+    text-align:justify;
 }

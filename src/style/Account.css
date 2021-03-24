@@ -1,0 +1,122 @@
+.account_page{
+    width: 1170px;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+}
+
+.account_container{
+    transition: opacity 0.2s ease-in-out;
+    display: flex;
+    background-image: linear-gradient(to right, #242424 0%, #bebebe 100%);
+    background-repeat: repeat-x;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.2);
+}
+
+.menuLeft{
+    width: auto;
+    visibility: visible;
+    flex-basis: 25%;
+    min-height: 100%;
+    display: block;
+}
+
+.menuLeft_container{
+    min-height: 868px;
+}
+
+.account_avatar{
+    background-color: black !important;
+    color: white !important;
+    height: 64px !important;
+    width: 64px !important;
+    margin: 30px auto;
+    display: block;
+}
+
+.menuLeft_list{
+    font-size: 16px;
+    list-style: none;
+    position: relative;
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+    border-top-color: rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    padding: 0;
+    list-style: none;
+}
+
+.menuLeft_menuItem:hover::before, .menuLeft_menuItem.menu_active::before{
+    background-color: red;
+}
+
+.menuLeft_menuItem::before{
+    background-color: transparent;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: 5px;
+}
+
+.menuLeft_menuItem{
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.005);
+        border-bottom-color: rgba(0, 0, 0, 0.004);
+    border-top: 1px solid rgba(0, 0, 0, 0.025);
+        border-top-color: rgba(0, 0, 0, 0.024);
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    border-top-color: rgba(255, 255, 255, 0.05);
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.menu_active .menuLeft_menuLink{
+    fill: #ffffff;
+    color: #f8f8f8;
+}
+
+.menuLeft_menuLink{
+    text-decoration: none;
+    display: block;
+    position: relative;
+    fill: #c1c3c6;
+    padding: 15px 15px 15px 30px;
+        padding-right: 15px;
+        padding-left: 75px;
+    color: #919496;
+    border: none;
+    border-radius: 0;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+.menuLeft_menuLink > svg{
+    display: block;
+    width: 1.3em;
+    height: 1.3em;
+    position: absolute;
+    top: 15px;
+    left: 30px;
+
+}
+
+/* Phần chung của các Menu */
+.menuOverview, .menuProfile, .menuFavorite, .menuBooking, .menuHistoryBooking{
+    background-color: white !important;
+    padding: 48px;
+    flex: 1;
+}
+
+.menuOverview_container, .menuProfile_container, .menuFavorite_container, .menuBooking_container, .menuHistoryBooking_container{
+    margin: 0px;
+}
+
+.menuOverview_title, .menuProfile_title, .menuFavorite_title, .menuBooking_title, .menuHistoryBooking_title{
+    font-size: 48px;
+    line-height: 56px;
+    padding: 0px 0px 0.67em;
+    letter-spacing: -1px;
+}

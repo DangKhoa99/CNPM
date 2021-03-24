@@ -58,7 +58,7 @@
 
 .header_menu {
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(5, auto);
   grid-gap: 10px;
   list-style: none;
   text-align: center;
@@ -93,6 +93,101 @@
 
 .header_links:hover.active {
   border-bottom: 4px solid black;
+}
+
+/* Avatar */
+.header_avatar {
+  color: white;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  height: 100%;
+  cursor: pointer !important;
+  border: medium none !important;
+  background: transparent none repeat scroll 0% 0% !important;
+}
+
+.header_avatar.active {
+  color: black;
+}
+
+.header_avatar > span{
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.header_avatar > svg{
+  fill: currentColor !important;
+  width: 12px;
+  height: 12px;
+}
+
+.reverse_svg{
+  transform: scaleY(-1)
+}
+
+.avatar_header{
+  background-color: black !important;
+  color: white !important;
+  height: 50px !important;
+  width: 50px !important;
+}
+
+.profile_menu{
+  right: 0px;
+  margin-top: -8px;
+  display: block;
+  position: absolute;
+  top: 100%;
+  width: 25%;
+}
+
+.profile_menu.close{
+  display: none;
+}
+
+.profile_menu_lists::before{
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  right: 7px;
+  border-bottom: 16px solid #fff;
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -12px;
+}
+
+.profile_menu_lists {
+  margin: 2px 0 0;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px 10px;
+  list-style: none;
+  text-align: left;
+}
+
+.profile_menu_list{
+  padding: 8px 16px;
+}
+
+.profile_menu_list > a{
+  text-decoration: none;
+  color: black;
+}
+
+.profile_menu_list > a:hover{
+  cursor: pointer;
+  color: red !important;
+}
+
+.log_out{
+  color: #919496 !important;
 }
 
 .header_bar {
@@ -217,7 +312,7 @@
   overflow: visible;
 }
 
-/* @media screen and (max-width: 1350px) {
+@media screen and (max-width: 1350px) {
   .header_btn_signIn{
     padding: 8px 4px !important;
   }
@@ -342,4 +437,4 @@
   .header_search > .input_search.active {
     width: 150px;
   }
-} */
+}
