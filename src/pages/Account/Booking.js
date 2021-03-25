@@ -8,7 +8,7 @@ function Booking() {
     document.title = "Khách sạn đang đặt"
     return (
         <div className="account">
-            <Header />
+            {/* <Header /> */}
             <div className="account_page">
                 <div className="account_container">
                     <MenuLeft markPage="booking"/>

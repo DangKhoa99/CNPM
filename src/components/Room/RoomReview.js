@@ -18,7 +18,7 @@ function RoomReview() {
                 </div>
 
                 <div className="aaa">
-                {/* comment_section - phần bình luận */}
+                    {/* comment_section - phần bình luận */}
                     <div className="bbb"> 
 
                         <div className="box_comment">
@@ -96,6 +96,12 @@ function RoomReview() {
                     
                     </div>
                 </div>
+
+                <div className="add_comment">
+                    <button className="btn_add_cmt">Thêm nhận xét</button>
+                </div>
+
+
             </div>
         </div>
     )

@@ -32,7 +32,7 @@
 
 .footer_links {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   display: flex;
   justify-content: center;
 }
@@ -47,7 +47,7 @@
   /* align-items: flex-start; */
   margin: 16px;
   text-align: center;
-  width: 300px;
+  width: 320px;
   box-sizing: border-box;
 }
 
@@ -69,7 +69,7 @@
 
 .social_media {
   border-top: 1px solid rgb(221, 221, 221) !important;
-  max-width: 1200px;
+  max-width: 1210px;
   width: 100%;
 }
 
@@ -77,8 +77,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 98%;
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1500px;
   margin: 40px auto 0 auto;
 }
 
@@ -94,8 +94,8 @@
 }
 
 .footer_logo > svg{
-  width: 102px;
-  height: 32px;
+  width: 150px;
+  height: 104px;
   fill: currentColor;
   cursor: default;
 }

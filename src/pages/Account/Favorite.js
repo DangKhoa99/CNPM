@@ -8,7 +8,7 @@ function Favorite() {
     document.title = "Khách sạn yêu thích"
     return (
         <div className="account">
-            <Header />
+            {/* <Header /> */}
             <div className="account_page">
                 <div className="account_container">
                     <MenuLeft markPage="favorite"/>

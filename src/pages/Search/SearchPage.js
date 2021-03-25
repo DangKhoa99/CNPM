@@ -1,11 +1,38 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import "../../style/SearchPage.css"
 import SearchCard from "../../components/Search/SearchCard"
 import { Button } from '@material-ui/core'
 import Header from '../../components/Header'
 
 function SearchPage() {
-    document.title = "Tìm kiếm"
+    
+
+    const [pageURL, setPageURL] = useState("");
+    useEffect(() => {
+        if(window.location.href.split("=").pop() == ""){
+            setPageURL("Khám phá");
+        }
+        else{
+            setPageURL(window.location.href.split("=").pop());
+        }
+        
+    })
+    
+    const place = pageURL.split("-").join(" ");
+
+    function capitalize(str) {
+        const arrOfWords = str.split(" ");
+        const arrOfWordsCased = [];
+        
+        for (let i = 0; i < arrOfWords.length; i++) {
+            const word = arrOfWords[i];
+            arrOfWordsCased.push(word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+        }
+        
+        return arrOfWordsCased.join(" ");
+    }
+
+    document.title = capitalize(place)
 
     const [data, setData] = useState([
         {
@@ -53,10 +80,10 @@ function SearchPage() {
 
     return (
         <div className="searchPage">
-            <Header />
+            {/* <Header /> */}
             <div className="searchPage__info">
                 <p>Hơn 300 chỗ ở</p>
-                <h1>Khám phá</h1>
+                <h1>Khách sạn tại {capitalize(place)}</h1>
                 {/* <Button variant="outlined">
                     Cancellation Flexibility
                 </Button>

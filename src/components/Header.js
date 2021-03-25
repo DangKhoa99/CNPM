@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import '../style/Header.css'
 import { Link, useLocation } from 'react-router-dom'
 import {Button} from "@material-ui/core"
-import {ReactComponent as LogoAirbnb} from "../icons/logoAirbnb.svg"
-import {ReactComponent as Logo} from "../icons/logoAirbn.svg"
+// import {ReactComponent as LogoAirbnb} from "../icons/logoAirbnb.svg"
+// import {ReactComponent as Logo} from "../icons/logoAirbn.svg"
+import {ReactComponent as LogoRoyalStay} from "../icons/logoRoyalStay.svg"
+import {ReactComponent as Logo} from "../icons/logo.svg"
 import Aos from "aos"
 import "aos/dist/aos.css"
 
@@ -54,6 +56,8 @@ function Header() {
     }
   }
 
+  console.log("Test Header: " + window.location.href)
+
   // Bấm vào logo để lên đầu trang
   const scrollToTop = () =>{
     window.scrollTo({
@@ -90,9 +94,9 @@ function Header() {
   return (
       <nav className={colorHeader ? 'header active' : 'header'}>
         <div className='header_container'>
-          <Link to='/' className={colorHeader ? 'header_logo active' : 'header_logo'} onClick={() => {closeMobileMenu(); scrollToTop();}}>
-              {buttonSignIn ? <LogoAirbnb /> : <Logo />}
-          </Link>
+          <a href='/' className={colorHeader ? 'header_logo active' : 'header_logo'} onClick={() => {closeMobileMenu(); scrollToTop();}}>
+              {buttonSignIn ? <LogoRoyalStay /> : <Logo />}
+          </a>
 
           <div className={colorHeader ? "header_search active" : "header_search"}>
             <input className={colorHeader ? "input_search active" : "input_search"} type="text" placeholder="Bạn sắp đi đâu?"/>

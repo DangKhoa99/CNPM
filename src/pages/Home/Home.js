@@ -60,7 +60,7 @@ function Home() {
 
   return (
     <div className='home'>
-      <Header />
+      {/* <Header /> */}
       <Banner />
 
       <div className="home__section">

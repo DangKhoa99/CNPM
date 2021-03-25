@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-// import Header from './components/Header'
+import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home/Home'
 import SearchPage from './pages/Search/SearchPage'
@@ -21,7 +21,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <Header /> */}
+        <Header />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/search-page' component={SearchPage} /> 

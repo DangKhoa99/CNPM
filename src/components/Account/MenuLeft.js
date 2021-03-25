@@ -49,7 +49,23 @@ function MenuLeft({markPage}) {
     return (
         <div className="menuLeft">
             <div className="menuLeft_container">
-                <Avatar className="account_avatar" alt="dangkhoa99" src="/images/Khoa.jpg"/>
+                <div className="account_avatar_container">
+                    <Avatar className="account_avatar" alt="dangkhoa99" src="/images/Khoa.jpg"/>
+                
+                    <div className="account_avatar_edit">
+                        <button className="account_avatar_edit_btn">
+                            <div className="account_avatar_icon_edit">
+                                <svg viewBox="0 0 48 48">
+                                    <path d="M33.402 3.006L8.852 31.751l-2.337 12.61 12.09-4.281 24.552-28.746-9.755-8.328zM9.112 41.32l1.543-8.327 6.44 5.5-7.983 2.827zm9.418-4.231l-6.712-5.732L33.625 5.825l6.711 5.731L18.53 37.089z"/>
+                                </svg>
+                                <span>Chọn ảnh</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div className="account_username">dangkhoa99</div>
+
                 <ul className="menuLeft_list">
                     {data.map(item => {
                         if(item.id === markPage) 

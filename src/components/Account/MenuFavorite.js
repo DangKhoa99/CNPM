@@ -17,7 +17,7 @@ function MenuFavorite() {
                         </div>
                         <div className="menuFavorite_infoBottom">
                             <div className="menuFavorite_price">
-                                <h2>520.000 VND</h2><p>/đêm</p> 
+                                <h2>520.000 VND</h2><p> /đêm</p> 
                             </div>
                         </div>
                     </div>

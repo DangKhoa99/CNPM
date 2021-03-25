@@ -10,7 +10,7 @@ function Room() {
 
     return (
         <div className="room">
-            <Header />
+            {/* <Header /> */}
 
             <div className="room__container">
                 <RoomHeader

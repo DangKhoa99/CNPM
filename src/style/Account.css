@@ -1,7 +1,9 @@
 .account_page{
-    width: 1170px;
+    width: 1200px;
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
     position: relative;
 }
 
@@ -25,14 +27,104 @@
     min-height: 868px;
 }
 
+.account_avatar_container{
+    position: relative;
+
+    display: flex;
+    height: inherit;
+}
+
 .account_avatar{
     background-color: black !important;
     color: white !important;
-    height: 64px !important;
-    width: 64px !important;
+    height: 232px !important;
+    width: 232px !important;
     margin: 30px auto;
     display: block;
 }
+
+
+.account_avatar_edit{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 232px !important;
+    width: 232px !important;
+    margin: 30px auto;
+}
+
+.account_avatar_edit_btn{
+    border-radius: 50%;
+    background-color: rgba(0,0,0,.7);
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    opacity: 0;
+    border: none;
+    padding: 0;
+
+}
+
+.account_avatar_edit_btn:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.account_avatar_icon_edit{
+    transition: opacity .2s;
+    margin-top: 16px;
+    margin: 0;
+    margin-top: 0px;
+    padding: 0;
+    border: 0;
+}
+
+.account_avatar_icon_edit > svg{
+    fill: currentcolor;
+    height: 48px;
+    width: 48px;
+}
+
+.account_avatar_icon_edit > span{
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: normal;
+    text-transform: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: #fff;
+    text-align: center;
+}
+
+.account_username{
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
 
 .menuLeft_list{
     font-size: 16px;

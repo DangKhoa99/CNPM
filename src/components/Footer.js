@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import '../style/Footer.css'
 import { Link } from 'react-router-dom'
 import {Button} from "@material-ui/core"
-import {ReactComponent as LogoAirbnb} from "../icons/logoAirbnb.svg"
+import {ReactComponent as LogoRoyalStay} from "../icons/logoRoyalStay.svg"
 
 function Footer() {
   const [data, setData] = useState([
@@ -74,29 +74,29 @@ function Footer() {
         <section class='social_media'>
           <div class='social_media_wrap'>
             <div class='footer_logo'>
-              <LogoAirbnb />
+              <LogoRoyalStay />
             </div>
 
-            <small class='website_rights'>© 2021 Airbnb Clone</small>
+            <small class='website_rights'>© 2021 RoyalStay</small>
 
             <div class='social_icons'>
-              <a href="https://www.facebook.com/airbnb" class="social_icon_link facebook" target="_blank" title="Facebook">
+              <a href="https://www.facebook.com/..." class="social_icon_link facebook" target="_blank" title="Facebook">
                 <i class='fab fa-facebook-f' />
               </a>
 
-              <a href="https://www.instagram.com/airbnb" class="social_icon_link instagram" target="_blank" title="Instagram">
+              <a href="https://www.instagram.com/..." class="social_icon_link instagram" target="_blank" title="Instagram">
                 <i class='fab fa-instagram' />
               </a>
 
-              <a href="https://www.youtube.com/airbnb" class="social_icon_link youtube" target="_blank" title="Youtube">
+              <a href="https://www.youtube.com/..." class="social_icon_link youtube" target="_blank" title="Youtube">
                 <i class='fab fa-youtube' />
               </a>
 
-              <a href="https://twitter.com/airbnb" class="social_icon_link twitter" target="_blank" title="Twitter">
+              <a href="https://twitter.com/..." class="social_icon_link twitter" target="_blank" title="Twitter">
                 <i class='fab fa-twitter' />
               </a>
 
-              <a href="https://www.linkedin.com/company/airbnb" class="social_icon_link linkedin" target="_blank" title="LinkedIn">
+              <a href="https://www.linkedin.com/company/..." class="social_icon_link linkedin" target="_blank" title="LinkedIn">
                 <i class='fab fa-linkedin' />
               </a>
             </div>
