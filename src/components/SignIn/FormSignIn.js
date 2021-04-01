@@ -24,40 +24,54 @@ function FormSignIn({ submitForm }) {
     }
 
     return (
-        <div className='form_content_input signIn_left'>
-            <form onSubmit={handleSubmit} className='form' noValidate>
-                <h1>ĐĂNG NHẬP</h1>
+        <div className="loginRegister">
+            <div className="cardLoginRegister">
+                <div className="formLoginRegister">
+                    <div className="formLoginRegister_container">
+                        <header>
+                            <h1>Đăng nhập vào RoyalStay</h1>
+                        </header>
+                        <section>
 
-                <div className='form-inputs'>
-                    <label className='form-label'>Tài khoản</label>
-                    <input
-                        className='form-input'
-                        type='text'
-                        name='username'
-                        placeholder='Nhập tài khoản'
-                        value={values.username}
-                        onChange={handleChange}/>
-                    {errors.username && <p>{errors.username}</p>}
-                </div>
+                            <form onSubmit={handleSubmit} noValidate>
+                                <div className="input_row">
+                                    <input
+                                        className='form_input'
+                                        type='text'
+                                        name='username'
+                                        placeholder='Nhập tài khoản'
+                                        value={values.username}
+                                        onChange={handleChange}/>
+                                        {errors.username && <p>{errors.username}</p>}
+                                </div>
 
-                <div className='form-inputs'>
-                    <label className='form-label'>Mật khẩu</label>
-                    <div className="eye">
-                        <input
-                            ref={password}
-                            className='form-input'
-                            type='password'
-                            name='password'
-                            placeholder='Nhập mật khẩu'
-                            value={values.password}
-                            onChange={handleChange}/>
-                        {showPassword ? <i onClick={changeTypePassword}>{Eye}</i> : <i onClick={changeTypePassword}>{EyeSlash}</i>}
+                                <div className="input_row">
+                                    <div className="eye">
+                                        <input
+                                            ref={password}
+                                            className='form_input'
+                                            type='password'
+                                            name='password'
+                                            placeholder='Nhập mật khẩu'
+                                            value={values.password}
+                                            onChange={handleChange}/>
+                                            {showPassword ? <i onClick={changeTypePassword}>{Eye}</i> : <i onClick={changeTypePassword}>{EyeSlash}</i>}
+                                        </div>
+                                        {errors.password && <p>{errors.password}</p>}
+                                </div>
+                                
+
+                                <button className="loginRegister_submit_btn" type="submit">Đăng nhập</button>
+
+                                <div className="loginRegister_subText">
+                                    Bạn chưa có tài khoản?
+                                    <a href="/sign-up"> Đăng ký</a>
+                                </div>
+                            </form>
+                        </section>
                     </div>
-                    {errors.password && <p>{errors.password}</p>}
                 </div>
-
-                <button className='form_input_btn' type='submit'>ĐĂNG NHẬP</button>
-            </form>
+            </div>
         </div>
     )
 }

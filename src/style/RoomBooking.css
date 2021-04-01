@@ -71,26 +71,52 @@
 }
 
 .roomBooking_btn_remove{
-    cursor: pointer !important;
-    margin: 0px -8px !important;
-    font-size: 14px !important;
-    line-height: 18px !important;
-    font-weight: 600 !important;
-    border-radius: 8px !important;
-    border: medium none !important;
-    background: transparent none repeat scroll 0% 0% !important;
-    padding: 8px;
-    color: rgb(34, 34, 34) !important;
-    text-decoration: underline !important;
-    -moz-box-align: center !important;
-    display: flex !important;
+    width: 100px;
+    height: 40px;
+    background: none;
+    border: 4px solid;
+    color: red;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+    outline: none;
 }
 
-.roomBooking_btn_remove:hover{
-    border: medium none !important;
-    background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
-    color: rgb(0, 0, 0) !important;
+.roomBooking_btn_remove::before, .roomBooking_btn_remove::after{
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 4px;
+    background: white;
+    transform: skewX(50deg);
+    transition: .4s linear;
 }
+  
+.roomBooking_btn_remove::before{
+    top: -4px;
+    left: 10%;
+}
+  
+.roomBooking_btn_remove::after{
+    bottom: -4px;
+    right: 10%;
+}
+  
+.roomBooking_btn_remove:hover::before{
+    left: 80%;
+}
+
+.roomBooking_btn_remove:hover::after{
+    right: 80%;
+}
+
+
+
+
+
+
 
 /* .roomBooking_stars{
     align-items: center;

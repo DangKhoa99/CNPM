@@ -29,7 +29,7 @@
 
 .account_avatar_container{
     position: relative;
-
+    outline: transparent !important;
     display: flex;
     height: inherit;
 }
@@ -41,6 +41,7 @@
     width: 232px !important;
     margin: 30px auto;
     display: block;
+    outline: transparent !important;
 }
 
 
@@ -56,6 +57,7 @@
     height: 232px !important;
     width: 232px !important;
     margin: 30px auto;
+    outline: transparent !important;
 }
 
 .account_avatar_edit_btn{
@@ -73,7 +75,7 @@
     opacity: 0;
     border: none;
     padding: 0;
-
+    outline: transparent !important;
 }
 
 .account_avatar_edit_btn:hover{

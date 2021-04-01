@@ -23,6 +23,7 @@
   background-repeat: repeat;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: text 0.5s 1;
 }
 
 .banner_container > p {
@@ -33,11 +34,18 @@
   font-family: 'Lobster';
 }
 
-.banner_btn {
-  margin-top: 32px;
+@keyframes text{
+  0%{
+    letter-spacing: 8px;
+    margin-bottom: -40px;
+  }
 }
 
 
+
+.banner_btn {
+  margin-top: 32px;
+}
 
 .banner_btn button{
   background-color: #ff7779;

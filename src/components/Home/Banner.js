@@ -23,24 +23,21 @@ function Banner() {
   return (
     <div className='banner_container' style={myStyleBackground} ref={myRef}>
       <h1>TRẢI NGHIỆM KỲ NGHỈ TUYỆT VỜI</h1>
-
       <p>Trải nghiệm trọn vẹn - Giá cả phải chăng</p>
       
       <div className='banner_btn'>
-        {/* <Link> */}
-          <Button 
-            variant="outlined"
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-            onClick={scrollToElement}
-           >
-            KHÁM PHÁ 
-            {!inHover &&
-            <i className='fas fa-chevron-right' />}
-            {inHover &&
-            <i class="fas fa-arrow-right"></i>}
-          </Button>
-        {/* </Link> */}
+        <Button 
+          variant="outlined"
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+          onClick={scrollToElement}>
+          KHÁM PHÁ 
+          {!inHover &&
+          <i className='fas fa-chevron-right' />}
+          {inHover &&
+          <i class="fas fa-arrow-right"></i>}
+        </Button>
+
       
       </div>
     </div>

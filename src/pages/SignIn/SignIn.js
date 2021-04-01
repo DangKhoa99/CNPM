@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import Header from '../../components/Header'
 import "../../style/LoginRegister.css"
 import FormSignIn from '../../components/SignIn/FormSignIn'
 import Home from "../Home/Home"
@@ -15,31 +14,14 @@ function SignIn() {
       setIsSubmitted(true);
     }
 
-    const myStyle={
-        background: `url('${process.env.PUBLIC_URL}/images/backgroundSignIn.jpg') center center/cover no-repeat`
-    }
-
     return (
         <div className="signIn">
-            {/* <Header /> */}
-            <div className="signIn_background background_form" style={myStyle}>
-                <div className='form_container'>
-                    {!isSubmitted ? (
-                        <FormSignIn submitForm={submitForm} />
-                    ) : (
-                        // <Link to="/home"/>
-                        <Home/>
-                    )}
-                    <div className='form_content signIn_right'>
-                        <h1 className='form_content_header'>Chào bạn!</h1>
-                        <p>Đăng ký thông tin cá nhân và bắt đầu cuộc hành trình với chúng tôi</p>
-                        <Button className="form_btn" href='/sign-up'>ĐĂNG KÝ</Button>
-                        <a className='pageHome' href='/' aria-label="Trang chủ">
-                            <i class="fas fa-home"/>
-                        </a>
-                    </div>     
-                </div>
-            </div>
+            {!isSubmitted ? (
+                <FormSignIn submitForm={submitForm} />
+            ) : (
+                // <Link to="/home"/>
+                <Home/>
+            )}
         </div>
     )
 }

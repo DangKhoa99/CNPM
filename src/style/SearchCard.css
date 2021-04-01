@@ -27,12 +27,75 @@
     color: black !important;
 }
 
-.searchCard_heart{
+/* .searchCard_heart{
     position: absolute;
     top: 20px;
     right: 40px;
     color: black !important;
+} */
+
+
+
+
+/* .roomHeader_heading_description_right{
+    display: inline-flex;
+} */
+
+.searchCard_btn{
+    cursor: not-allowed;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    cursor: pointer !important;
+    margin: 0px -8px !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
+    border: medium none !important;
+    background: transparent none repeat scroll 0% 0% !important;
+    color: rgb(34, 34, 34) !important;
+    text-decoration: underline !important;
+    -moz-box-align: center !important;
+    display: flex !important;
+    outline: none !important;
 }
+
+.searchCard_btn:hover{
+    border: medium none !important;
+    background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
+    color: rgb(0, 0, 0) !important;
+}
+
+.searchCard_heart{
+    margin-right: 16px !important;
+}
+
+.searchCard_heart_svg{
+    display: block;
+    fill: none;
+    height: 8px !important;
+    width: 8px !important;
+    stroke: currentcolor;
+    stroke-width: 2px;
+    overflow: visible;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .searchCard_infoTop{
     width: 40vw;

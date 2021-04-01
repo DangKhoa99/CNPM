@@ -13,6 +13,8 @@ import Profile from './pages/Account/Profile'
 import Favorite from './pages/Account/Favorite'
 import Booking from './pages/Account/Booking'
 import HistoryBooking from './pages/Account/HistoryBooking'
+
+
 //SearchPage->SearchResult
 //rooms->itemDetail/:id
 // use Redux Provider

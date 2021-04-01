@@ -99,16 +99,12 @@ function Header() {
           </a>
 
           <div className={colorHeader ? "header_search active" : "header_search"}>
-            <input className={colorHeader ? "input_search active" : "input_search"} type="text" placeholder="Bạn sắp đi đâu?"/>
-            <Button href="/search-page?result=">
-              <div class="search_icon">
-                <svg viewBox="0 0 32 32">
-                  <path d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"/>
-                </svg>
-              </div>
-            </Button>
+            <input type="text" name="" className={colorHeader ? "input_search active" : "input_search"} placeholder="Bạn sắp đi đâu?"/>
+            <a href="/search-page?result=" className={colorHeader ? "header_search_btn active" : "header_search_btn"}>
+              <i class="fas fa-search"></i>
+            </a>
           </div>
-
+          
           {/* Mobile Menu */}
           <div className='menu_icon' onClick={handleClick}>
             <i className={click ? colorHeader ? 'fas fa-times headerMenuIcon_active' : 'fas fa-times headerMenuIcon' : colorHeader ? 'fas fa-bars headerMenuIcon_active' : 'fas fa-bars headerMenuIcon'} />

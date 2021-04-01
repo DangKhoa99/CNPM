@@ -141,9 +141,10 @@
     user-select: none;
     vertical-align: middle;
     transform: translate3d(0px, 0px, 0px);
-    color: var(--text-subdued,#575757);
+    color: #575757;
     padding: 17px 48px;
     position: relative;
+    outline: none;
 }
 
 .menuProfile_form_submit{
@@ -167,6 +168,7 @@
     transform: translate3d(0px, 0px, 0px);
     padding: 0px;
     cursor: pointer;
+    outline: none;
 }
 
 .menuProfile_form_submit:hover{

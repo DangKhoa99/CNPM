@@ -20,6 +20,145 @@
     padding: 0px !important;
 }
 
+
+
+.roomReview_review_input{
+    margin-bottom: 40px;
+}
+
+.comment_stars_text{
+    display: inline;
+    margin-left: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+
+
+.comment_input{
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    /* line-height: 20px !important; */
+
+    /* -moz-box-align: baseline !important;
+    display: flex !important;
+    align-items: baseline !important; */
+
+    width: 600px;
+    /* margin: auto; */
+    /* padding: 0 20px; */
+}
+
+.message{
+    background: none;
+    border:none;
+    outline: none;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    color: black;
+    padding: 10px 6px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.message:focus{
+    border-bottom: 2px solid black;
+}
+
+.message{
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 30px;
+    max-height: 300px;
+}
+
+.comment_input_btn{
+    display: block;
+    text-align: right;
+}
+
+.comment_btn_submit{
+    background: none;
+    color: red;
+    border: 1px solid red;
+    padding: 12px 40px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 14px;
+    transition: 0.4s linear;
+    cursor: pointer;
+    align-items: center;
+    font-weight: 600;
+    outline: none;
+}
+
+.comment_btn_submit:hover{
+    background: red;
+    color: #fff;
+}
+
+.comment_btn_cancel{
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 0px none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    letter-spacing: 2px;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    transition-duration: 33ms;
+    transition-property: background-color, border-color, color, box-shadow, filter, transform;
+    user-select: none;
+    vertical-align: middle;
+    transform: translate3d(0px, 0px, 0px);
+    color: #575757;
+    padding: 12px 40px;
+    margin-right: 20px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+.comment_btn_cancel:hover{
+    background-color: #e7e7e7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .aaa{
     display: block !important;
     margin-bottom: 0px !important;
@@ -127,3 +266,41 @@
     background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
     color: rgb(34, 34, 34) !important;
 }
+
+/* .rating_stars{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    direction: rtl;
+}
+
+.rating_stars a{
+    font-size: 40px;
+    color: #313131;
+    transition: 0.3s all;
+}
+
+.rating_stars a:hover{
+    color: #f1c40f;
+}
+
+.rating_star_1:hover ~ a {
+    color: #f1c40f;
+}
+
+.rating_star_2:hover ~ a {
+    color: #f1c40f;
+}
+
+.rating_star_3:hover ~ a {
+    color: #f1c40f;
+}
+
+.rating_star_4:hover ~ a {
+    color: #f1c40f;
+} */
+
+/* .rating_star_5 ~ a {
+    color: #f1c40f;
+} */

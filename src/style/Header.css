@@ -106,6 +106,7 @@
   cursor: pointer !important;
   border: medium none !important;
   background: transparent none repeat scroll 0% 0% !important;
+  outline: transparent !important;
 }
 
 .header_avatar.active {
@@ -143,6 +144,7 @@
   position: absolute;
   top: 100%;
   width: 25%;
+  transition: all 0.5s;
 }
 
 .profile_menu.close{
@@ -251,66 +253,92 @@
   color: black !important;
 }
 
-.header_search{
+.header_search {
+  border-radius: 40px;
   display: flex;
   flex: 1;
   align-items: center;
-  /* max-width: fit-content; */
+  max-width: fit-content;
   padding: 10px;
-  height: 50px;
-  border: 1px solid lightgray;
-  border-radius: 999px; 
+  height: 60px;
   margin-left: 100px;
+
+  border: 1px solid white;
 }
 
-.header_search:hover{
-  box-shadow: 0px 6px 18px -9px rgb(247, 247, 247);
+.header_search.active {
+  border: 1px solid black;
+}
+
+/* .header_search:hover{
+  border: 1px solid white;
 }
 
 .header_search:hover.active{
-  box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
+  border: 1px solid black;
 }
-
-.header_search > .input_search {
-  background-color: transparent;
-  color: white;
+ 
+.header_search:hover > .input_search {
+  width: 240px;
+  padding: 0 6px;
+}
+ 
+.header_search:hover > .header_search_btn {
+  background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%) repeat scroll 0% 0% !important;
+  color: white !important;
+} */
+ 
+.header_search_btn {
+  color: white !important;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%) repeat scroll 0% 0% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  cursor: pointer;
+  text-decoration: none;
+}
+ 
+.header_search_btn > i {
+  font-size: 16px;
+}
+ 
+.input_search {
   border: none;
-  padding: 10px;
-  outline-width: 0;
-  width: 250px;
-  font-size: 14px;
-  font-weight: 600;
+  background: none;
+  outline: none;
+  float: left;
+  /* padding: 0; */
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  /* width: 0px; */
+  font-weight: bold;
+
+  width: 240px;
+  padding: 0 6px;
 }
 
-.header_search > .input_search.active {
+.input_search.active {
   color: black;
 }
 
-.header_search > button{
-  color: rgb(227, 28, 95) 50% !important;
-  min-width: 0px !important;
-}
 
-.header_search > button:hover{
-  background-color: transparent!important;
-}
 
-.header_search .search_icon{
-  color: white !important;
-  border-radius: 50% !important;
-  background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%) repeat scroll 0% 0% !important;
-  padding: 10px !important;
-}
 
-.header_search .search_icon > svg{
-  display: block;
-  fill: none;
-  height: 12px;
-  width: 12px;
-  stroke: currentColor;
-  stroke-width: 5.333333333333333;
-  overflow: visible;
-}
+
+
+
+
+
+
+
+
 
 @media screen and (max-width: 1350px) {
   .header_btn_signIn{
@@ -383,7 +411,13 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(25%, 50%);
+    transform: translate(25%, 30%);
+  }
+
+  .header_logo > svg{
+    width: 50px;
+    height: 50px;
+    fill: currentColor;
   }
 
   .menu_icon {
@@ -391,7 +425,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    transform: translate(-100%, 60%);
+    transform: translate(-100%, 70%);
     font-size: 1.8rem;
     cursor: pointer;
   }
@@ -426,15 +460,35 @@
     transition: 250ms;
   }
 
+/* Phần search */
+  .header_search, .header_search.active {
+    border: 0px;
+  }
+  
+  .header_search:hover{
+    border: 1px solid white !important;
+  }
+  
+  .header_search:hover.active{
+    border: 1px solid black !important;
+  }
+   
+  .header_search:hover > .input_search {
+    width: 240px;
+    padding: 0 6px;
+  }
+   
+  .header_search:hover > .header_search_btn {
+    background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%) repeat scroll 0% 0% !important;
+    color: white !important;
+  }
+   
+  .input_search {
+    padding: 0;
+    width: 0px;
+  }
+
   .header_search{
     margin-left: 0px;
-  }
-
-  .header_search > .input_search {
-    width: 150px;
-  }
-
-  .header_search > .input_search.active {
-    width: 150px;
   }
 }
