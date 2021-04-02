@@ -122,7 +122,7 @@ function RoomBooking() {
                         
 
                         <div className="roomBooking_box_layout_body_row">
-                            <form className="form_booking" action="/"> {/* method="POST"> */}
+                            <form className="form_booking" action="/booking"> {/* method="POST"> */}
                                 {/* Check in , check out, room type, check log in, ... */}
                                 <button className='form_booking_btn' type='submit'>Đặt phòng</button>
                             </form>

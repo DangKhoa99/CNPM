@@ -13,7 +13,7 @@ import Profile from './pages/Account/Profile'
 import Favorite from './pages/Account/Favorite'
 import Booking from './pages/Account/Booking'
 import HistoryBooking from './pages/Account/HistoryBooking'
-
+import Book from './pages/Booking/Booking'
 
 //SearchPage->SearchResult
 //rooms->itemDetail/:id
@@ -30,11 +30,14 @@ function App() {
           <Route path='/sign-up' component={SignUp} />
           <Route path='/sign-in' component={SignIn} />
           <Route path='/room-detail' component={Room} />
+          <Route path='/booking' component={Book} />
+          
           <Route path='/account/overview/' component={Overview} />
           <Route path='/account/profile/' component={Profile} />
           <Route path='/account/favorite/' component={Favorite} />
           <Route path='/account/booking/' component={Booking} />
           <Route path='/account/history-booking/' component={HistoryBooking} />
+          
         </Switch>
       </div>
       <Footer />

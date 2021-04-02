@@ -1,0 +1,377 @@
+.bookingBody{
+    max-width: 1080px !important;
+    padding: 0px 80px !important;
+    -moz-box-pack: start !important;
+    -moz-box-align: stretch !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.bookingBody_container{
+    position: relative !important;
+    width: 100% !important;
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+}
+
+.bookingBody_components{
+    text-align: center;
+}
+
+.bookingBody_components:before, .bookingBody_components:after{
+    display: flex !important;
+    content: "" !important;
+}
+
+.bookingBody_component{
+    margin-top: 24px;
+    font-size: 22px !important;
+    line-height: 26px !important;
+    font-weight: 700 !important;}
+
+.bookingBody_component > h2{
+    color: inherit !important;
+    font-size: 25px !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.bookingBody_component_block{
+    -moz-box-align: baseline !important;
+    -moz-box-pack: justify !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+    }
+
+.bookingBody_component_block > h3{
+    font-weight: 700 !important;
+    color: inherit !important;
+    font-size: 18px !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.bookingBody_component_block > h4{
+    font-weight: 500 !important;
+    color: inherit !important;
+    font-size: 15px !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.bookingBody_component_day_block_subText{
+    margin-top: 8px !important;
+    color: rgb(113, 113, 113) !important;
+    white-space: pre-wrap !important;
+    font-size: 16px !important;
+}
+
+.bookingBody_component_btn_edit{
+    font-size: 18px !important;
+    font-family: inherit !important;
+    font-style: inherit !important;
+    font-variant: inherit !important;
+    line-height: inherit !important;
+    appearance: none !important;
+    background: transparent none repeat scroll 0% 0% !important;
+    border: 0px none !important;
+    cursor: pointer !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    user-select: auto !important;
+    color: rgb(34, 34, 34) !important;
+    text-decoration: underline !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    outline: currentcolor none medium !important;
+}
+
+.bookingBody_components_line{
+    margin: 30px 0px;
+    border-top: 1px solid  rgb(221, 221, 221);
+}
+
+.bookingBody_hotel{
+    padding: 16px 0px !important;
+    display: flex !important;
+    justify-content: center;
+}
+
+.bookingBody_hotel_img{
+    width: 500px !important;
+    height: 300px !important;
+    overflow: hidden !important;
+    border-radius: 8px !important;
+}
+
+.bookingBody_img{
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+    display: inline-block;
+    vertical-align: bottom;
+    height: 100%;
+    width: 100%;
+    min-height: 1px;
+}
+
+.bookingBody_img > img{
+    object-fit: cover;
+    vertical-align: bottom;
+    height: 100% !important;
+    width: 100% !important;
+    position: static !important;
+}
+
+.bookingBody_hotel_name{
+    color: inherit !important;
+    font-size: 18px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    word-break: break-word !important;
+}
+
+.pay_type {
+    padding-left: 25px;
+    -moz-box-align: center;
+    align-items: center;
+    display: flex;
+    padding-bottom: 7px;
+    position: relative;
+    min-height: 32px;
+    cursor: pointer;
+}
+
+.pay_type.disable_radio {
+    text-decoration-line: line-through !important;
+    cursor: default !important;
+}
+
+.pay_type input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.check_mark_pay {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: transparent none repeat scroll 0% 0%;
+    border-radius: 50%;
+    border: 1px solid rgb(179, 179, 179);
+    
+}
+
+.pay_type:hover input ~ .check_mark_pay {
+    border-color: red;
+}
+
+.pay_type input:checked ~ .check_mark_pay {
+    background: red none repeat scroll 0% 0%;
+    border-width: 0px;
+}
+  
+.check_mark_pay:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+.pay_type input:checked ~ .check_mark_pay:after {
+    display: block;
+}
+  
+.pay_type .check_mark_pay:after {
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    content: "";
+    height: 0.5em;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.5em;
+}
+
+.pay_type input:disabled ~ .check_mark_pay{
+    background: silver;
+    border-color: silver;
+}
+
+.bookingBody_component_privacy{
+    margin: 8px !important;
+    line-height: 16px !important;
+    font-size: 12px !important;
+}
+
+.booking_btn_confirm {
+    margin-top: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s !important;
+    background-size: 200% auto;
+    color: white !important;            
+    border-radius: 10px !important;
+    background-image: linear-gradient(to right, #D31027 0%, #EA384D  51%, #D31027  100%);
+    height: 50px;
+    outline: none;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.booking_btn_confirm:hover {
+    background-position: 100%;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Edit loại phòng */
+.bookingBody_component_edit_typeRoom{
+    display: none;
+    padding: 10px 0px !important;
+    text-align: left !important;
+}
+
+.bookingBody_component_edit_typeRoom.active{
+    display: block;
+}
+
+.bookingBody_component_edit_typeRoom > p{
+    font-size: 18px !important;
+    font-weight: 600 !important;
+}
+
+.bookingBody_component_edit_room_type {
+    width:25%;
+    padding-left: 25px;
+    -moz-box-align: center;
+    align-items: center;
+    display: flex;
+    padding-bottom: 7px;
+    position: relative;
+    min-height: 32px;
+    cursor: pointer;
+    font-size: 15px !important;
+}
+
+.bookingBody_component_edit_room_type input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.check_mark_typeRoom {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: transparent none repeat scroll 0% 0%;
+    border-radius: 50%;
+    border: 1px solid rgb(179, 179, 179);
+}
+
+.bookingBody_component_edit_room_type:hover input ~ .check_mark_typeRoom {
+    border-color: red;
+}
+
+.bookingBody_component_edit_room_type input:checked ~ .check_mark_typeRoom {
+    background: red none repeat scroll 0% 0%;
+    border-width: 0px;
+}
+  
+.check_mark_typeRoom:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+.bookingBody_component_edit_room_type input:checked ~ .check_mark_typeRoom:after {
+    display: block;
+}
+  
+.bookingBody_component_edit_room_type .check_mark_typeRoom:after {
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    content: "";
+    height: 0.5em;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.5em;
+}
+
+.booking_btn_confirm_edit{
+    margin-top: 10px;
+    padding: 5px 25px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s !important;
+    background-size: 200% auto;
+    color: white !important;            
+    border-radius: 10px !important;
+    background-image: linear-gradient(to right, #D31027 0%, #EA384D  51%, #D31027  100%);
+    height: 40px;
+    outline: none;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.booking_btn_confirm_edit:hover {
+    background-position: 100%;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Edit ngày */
+.bookingBody_component_edit_date{
+    width: 50% !important;
+    position: relative !important;
+    display: none;
+}
+
+.bookingBody_component_edit_date.active{
+    display: block;
+}
+
+.bookingBody_component_edit_date > p{
+    padding-top: 8px !important;
+    font-size: 14px;
+    font-weight: 400 !important;
+    height: 36px !important;
+    color: rgb(113, 113, 113) !important;
+}
+
+.bookingBody_component_edit_date > h2{
+    padding-top: 8px !important;
+    color: black !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+}
+
+.nice-dates-grid{
+    height: 342px !important;
+}
+
+.nice-dates-day{
+    height: 50px !important;
+}

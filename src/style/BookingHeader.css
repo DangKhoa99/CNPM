@@ -1,0 +1,89 @@
+.bookingHeader_container{
+    max-width: none !important;
+    padding: 0px 80px !important;
+    -moz-box-pack: start !important;
+    -moz-box-align: stretch !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.bookingHeader_block{
+    max-width: 1128px;
+    height: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+    -moz-box-align: center !important;
+    -moz-box-direction: normal !important;
+    -moz-box-orient: horizontal !important;
+    padding-top: 64px !important;
+    display: flex !important;
+    padding-bottom: 16px !important;
+    flex-direction: row !important;
+    align-items: center !important;
+}
+
+.bookingHeader_back{
+    padding-left: 24px !important;
+    padding-right: 32px !important;
+    margin-left: -24px !important;
+}
+
+.bookingHeader_icon::before {
+    transform: translate(-50%, -50%) !important;
+    width: 48px !important;
+    left: 50% !important;
+    top: 50% !important;
+    position: absolute !important;
+    display: block !important;
+    content: "" !important;
+    border-radius: 50% !important;
+    height: 48px !important;
+    ;
+}
+
+.bookingHeader_icon:hover::before{
+    background: rgba(247, 247, 247, 0.5) !important
+}
+
+.bookingHeader_icon{
+    appearance: none !important;
+    display: inline-block !important;
+    border-radius: 50% !important;
+    border: medium none !important;
+    outline: currentcolor none medium !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    color: rgb(34, 34, 34) !important;
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+    position: relative !important;
+    background: transparent none repeat scroll 0% 0% !important;
+    transition: -ms-transform 0.25s ease 0s, transform 0.25s ease 0s, transform 0.25s ease 0s !important;
+    font-size: 100%;
+}
+
+.bookingHeader_icon:hover{
+    color: rgb(34, 34, 34) !important;
+}
+
+.bookingHeader_icon > svg{
+    display: block;
+    fill: none;
+    height: 16px;
+    width: 16px;
+    stroke: currentcolor;
+    stroke-width: 3px;
+    overflow: visible;
+}
+
+.bookingHeader_text{
+    font-size: 32px !important;
+    line-height: 36px !important;
+    font-weight: 700 !important;
+}

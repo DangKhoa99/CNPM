@@ -25,9 +25,7 @@
 } */
 
 .roomBody_line{
-    border-top-width: 1px !important;
-    border-top-style: solid !important;
-    border-top-color: rgb(221, 221, 221);
+    border-top: 1px solid  rgb(221, 221, 221);
 }
 
 /* Phần mô tả */

@@ -259,6 +259,7 @@
 }
 
 .room_type {
+    width:25%;
     padding-left: 25px;
     -moz-box-align: center;
     align-items: center;
@@ -266,6 +267,7 @@
     padding-bottom: 7px;
     position: relative;
     min-height: 32px;
+    cursor: pointer;
 }
 
 .room_type input {
