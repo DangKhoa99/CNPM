@@ -1,7 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "../../style/RoomHeader.css"
 import StarIcon from "@material-ui/icons/Star"
 import {ReactComponent as Heart} from "../../icons/iconHeart.svg"
+import {ReactComponent as RedHeart} from "../../icons/iconRedHeart.svg"
+
+
+import { store } from 'react-notifications-component'
 
 function RoomHeader({
     name,
@@ -10,18 +14,50 @@ function RoomHeader({
     img3,
     img4,
     img5,
+    reference,
+    click
 }) {
+    const [clickFavorite, setClickFavorite] = useState(false);
+
+    const handleClickFavorite = () => setClickFavorite(!clickFavorite);
+
+    let saveFavorite = "Lưu";
+    if(clickFavorite == true){
+        saveFavorite = "Đã lưu";
+    }
+
+    const notification_saveFavorite = {
+        title: ' RoyalStay - Thông báo',
+        message: 'Đã lưu khách sạn `' + name + '`',
+        type: 'success',                         // 'default', 'success', 'info', 'warning'
+        container: 'bottom-left',                // where to position the notifications
+        dismiss: {
+            duration: 2000
+        }
+    };
+
+    const notification_notSaveFavorite = {
+        title: 'RoyalStay - Thông báo',
+        message: 'Bỏ lưu khách sạn `' + name + '`',
+        type: 'danger',
+        container: 'bottom-left',
+        dismiss: {
+            duration: 2000
+        }
+    };
+    
     return (
-        <div className="roomHeader">
+        <div className="roomHeader" ref={reference}>
             <div className="roomHeader_container">
+                
                 <div className="roomHeader_heading">
                     <section>
                         <div className="roomHeader_heading_name">
-                            <h1>{name}</h1>
+                            <h1>Khách sạn {name}</h1>
                         </div>
                         <div className="roomHeader_heading_description">
                             <div className="roomHeader_heading_description_left">
-                                <span className="roomHeader_heading_stars">
+                                <span className="roomHeader_heading_stars" onClick={click}>
                                     <StarIcon className="roomHeader_heading_star"/>
                                     <strong>4.9 (41)</strong>
                                 </span>
@@ -30,11 +66,17 @@ function RoomHeader({
                             </div>
                             
                             <div className="roomHeader_heading_description_right">
-                                <button className="roomHeader_heading_btn">
+                                <button 
+                                    className="roomHeader_heading_btn" 
+                                    onClick={() => {
+                                        handleClickFavorite(); 
+                                        clickFavorite ? store.addNotification(notification_notSaveFavorite) : store.addNotification(notification_saveFavorite)
+                                    }}
+                                >
                                     <span className="roomHeader_heading_heart">
-                                        <Heart className="roomHeader_heading_heart_svg"/>
+                                        {clickFavorite ? <RedHeart className="roomHeader_heading_redHeart_svg" /> : <Heart className="roomHeader_heading_heart_svg" />}
                                     </span>
-                                    Lưu
+                                    {saveFavorite}
                                 </button>
                             </div>
                         </div>

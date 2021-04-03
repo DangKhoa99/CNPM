@@ -1,35 +1,47 @@
 import React, { useState, useEffect } from 'react'
 import '../style/Header.css'
-import { Link, useLocation } from 'react-router-dom'
-import {Button} from "@material-ui/core"
-// import {ReactComponent as LogoAirbnb} from "../icons/logoAirbnb.svg"
-// import {ReactComponent as Logo} from "../icons/logoAirbn.svg"
+import { useLocation } from 'react-router-dom'
 import {ReactComponent as LogoRoyalStay} from "../icons/logoRoyalStay.svg"
 import {ReactComponent as Logo} from "../icons/logo.svg"
 import Aos from "aos"
 import "aos/dist/aos.css"
-
+import {ReactComponent as IconLocation} from "../icons/iconBooking.svg"
 import {Avatar} from "@material-ui/core"
-// import {animateScroll as scroll} from "react-scroll"
 
-// Thanh header của website
 function Header() {
   // vị trí địa chỉ trình duyệt hiện tại
   const location = useLocation();
-  // console.log(location.pathname);
+  console.log(location.pathname);
 
-  const [click, setClick] = useState(false);
-  const [profileMenu, setProfileMenu] = useState(false);
   const [buttonSignIn, setButtonSignIn] = useState(true);
   const [colorHeader, setColorHeader] = useState(true);
 
-  // Nhấp để mở menu khi Responsive
-  const handleClick = () => setClick(!click);
+  const [menuMobile, setMenuMobile] = useState(false);
+  const [menuProfile, setMenuProfile] = useState(false);
+  const [menuSearchSuggestion, setMenuSearchSuggestion] = useState(false);
+  const [menuSearchSuggestionsClick, setMenuSearchSuggestionsClick] = useState(false);
 
-  const openProfileMenu = () => setProfileMenu(!profileMenu);
+  // menuMobile
+  const openMenuMobile = () => setMenuMobile(!menuMobile);
+
+  // profileMenu
+  const openMenuProfile = () => setMenuProfile(!menuProfile);
+
+  // searchSuggestion
+  const openMenuSearchSuggestion = () => setMenuSearchSuggestion(true);
+  const closeMenuSearchSuggestion = () => {
+    if(menuSearchSuggestionsClick == false){
+      setMenuSearchSuggestion(false);
+    }
+  }
+  
+  // menuSearchSuggestionsClick
+  const handleMenuSearchSuggestionsClick = (e) => {
+    setMenuSearchSuggestionsClick(true);
+  }
 
   // Nhấp để đóng menu khi Responsive
-  const closeMobileMenu = () => setClick(false);
+  const closeMobileMenu = () => setMenuMobile(false);
 
   // Hiện nút Đăng ký khi Responsive
   const showButton = () => {
@@ -89,32 +101,109 @@ function Header() {
   // Hiện nút Đăng ký khi Responsive
   window.addEventListener('resize', showButton);
 
-
-
   return (
       <nav className={colorHeader ? 'header active' : 'header'}>
         <div className='header_container'>
-          <a href='/' className={colorHeader ? 'header_logo active' : 'header_logo'} onClick={() => {closeMobileMenu(); scrollToTop();}}>
-              {buttonSignIn ? <LogoRoyalStay /> : <Logo />}
+
+          {/* Logo */}
+          <a 
+            href='/' 
+            className={colorHeader ? 'header_logo active' : 'header_logo'} 
+            onClick={() => {closeMobileMenu(); scrollToTop();}}
+          >
+            {buttonSignIn ? <LogoRoyalStay /> : <Logo />}
           </a>
 
-          <div className={colorHeader ? "header_search active" : "header_search"}>
-            <input type="text" name="" className={colorHeader ? "input_search active" : "input_search"} placeholder="Bạn sắp đi đâu?"/>
-            <a href="/search-page?result=" className={colorHeader ? "header_search_btn active" : "header_search_btn"}>
+          {/* Search Bar */}
+          <div 
+            className={colorHeader ? "header_search active" : "header_search"} 
+            onClick={openMenuSearchSuggestion} 
+            onBlur={closeMenuSearchSuggestion}
+          >
+            <form action="/search-page">
+              <input 
+                type="text" 
+                name="result" 
+                className={colorHeader ? "input_search active" : "input_search"} 
+                placeholder="Bạn sắp đi đâu?" 
+                spellCheck="false"
+                autocomplete="off"
+              />
+            </form>
+            <a 
+              href="/search-page?result=" 
+              className={colorHeader ? "header_search_btn active" : "header_search_btn"}
+            >
               <i class="fas fa-search"></i>
             </a>
+
+            {/* Menu Search Suggestion */}
+            <div 
+              className={menuSearchSuggestion ? "search_suggestions" : "search_suggestions close"} 
+              onMouseDown={handleMenuSearchSuggestionsClick}
+            >
+              <ul className="search_suggestions_lists">
+                <li className="search_suggestions_item">       
+                    <a 
+                      className="search_suggestions_link" 
+                      href="/search-page?result=Hồ+Chí+Minh"
+                    >
+                      Hồ Chí Minh
+                      <IconLocation />
+                    </a>
+                </li>
+
+                <li className="search_suggestions_item">
+                  <a 
+                    className="search_suggestions_link" 
+                    href="/search-page?result=Đà+Nẵng"
+                  >
+                    Đà Nẵng
+                    <IconLocation />
+                  </a>
+                </li>
+
+                <li className="search_suggestions_item">
+                  <a 
+                    className="search_suggestions_link" 
+                    href="/search-page?result=Hà+Nội"
+                  >
+                    Hà Nội
+                    <IconLocation />
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
           
           {/* Mobile Menu */}
-          <div className='menu_icon' onClick={handleClick}>
-            <i className={click ? colorHeader ? 'fas fa-times headerMenuIcon_active' : 'fas fa-times headerMenuIcon' : colorHeader ? 'fas fa-bars headerMenuIcon_active' : 'fas fa-bars headerMenuIcon'} />
+          <div 
+            className='menu_icon' 
+            onClick={openMenuMobile}
+          >
+            <i 
+              className={menuMobile ? 
+                colorHeader ? 'fas fa-times headerMenuIcon_active' : 'fas fa-times headerMenuIcon' 
+                : 
+                colorHeader ? 'fas fa-bars headerMenuIcon_active' : 'fas fa-bars headerMenuIcon'} 
+            />
           </div>
 
-          <ul className={click ? colorHeader ? 'header_menu active scroll' : 'header_menu active' : 'header_menu'} data-aos={click ? "" : "fade-left"}>
+          {/* Trang chủ - Đăng ký - Đăng nhập - Avatar */}
+          <ul 
+            className={menuMobile ? 
+              colorHeader ? 'header_menu active scroll' : 'header_menu active' 
+              :
+              'header_menu'} 
+            data-aos={menuMobile ? "" : "fade-left"}
+          >
             <li className='header_item'>
-              <a href='/' className={colorHeader ? 'header_links active' : 'header_links'} onClick={closeMobileMenu}> 
+              <a 
+                href='/' 
+                className={colorHeader ? 'header_links active' : 'header_links'} 
+                onClick={closeMobileMenu}
+              > 
                 <div>Trang chủ</div>
-                
               </a>
             </li>
 
@@ -123,36 +212,58 @@ function Header() {
             </li>
 
             <li className='header_item'>
-              <a href='/sign-up' className={colorHeader ? 'header_links active' : 'header_links'} onClick={closeMobileMenu}> 
-                Đăng ký
-              </a>
-            </li>
-
-            <li className='header_item'>
-              <a href='/sign-in' className={colorHeader ? 'header_links active' : 'header_links'} onClick={closeMobileMenu}> 
+              <a 
+                href='/sign-in' 
+                className={colorHeader ? 'header_links active' : 'header_links'} 
+                onClick={closeMobileMenu}
+              > 
                 Đăng nhập
               </a>
             </li>
 
             <li className='header_item'>
-              <button className={colorHeader ? 'header_avatar active' : 'header_avatar'} onClick={openProfileMenu}>
-                <Avatar className="avatar_header" alt="dangkhoa99" src="/images/Khoa.jpg"/>
+              <a 
+                href='/sign-up' 
+                className={colorHeader ? 'header_links register active' : 'header_links register'} 
+                onClick={closeMobileMenu}
+              > 
+                Đăng ký
+              </a>
+            </li>
+
+            {/* Avatar */}
+            <li className='header_item'>
+              <button 
+                className={colorHeader ? 'header_avatar active' : 'header_avatar'} 
+                onClick={openMenuProfile}
+              >
+                <Avatar 
+                  className="avatar_header" 
+                  alt="dangkhoa99" 
+                  src="/images/Khoa.jpg"
+                />
+
                 <span>Hồ sơ</span>
-                <svg viewBox="0 0 1024 1024" className={profileMenu ? "reverse_svg" : ""}>
+
+                <svg 
+                  viewBox="0 0 1024 1024" 
+                  className={menuProfile ? "reverse_svg" : ""}
+                >
                   <path d="M476.455 806.696L95.291 425.532Q80.67 410.911 80.67 390.239t14.621-34.789 35.293-14.117 34.789 14.117L508.219 698.8l349.4-349.4q14.621-14.117 35.293-14.117t34.789 14.117 14.117 34.789-14.117 34.789L546.537 800.142q-19.159 19.159-38.318 19.159t-31.764-12.605z"/>
                 </svg>
               </button>
 
-              <div className={profileMenu ? "profile_menu" : "profile_menu close"}>
+              {/* Menu hồ sơ */}
+              <div className={menuProfile ? "profile_menu" : "profile_menu close"}>
                 <ul className="profile_menu_lists">
                   <li className="profile_menu_list">
                     <a href="/account/overview/">Tài khoản</a>
                   </li>
+
                   <li className="profile_menu_list">
                     <a className="log_out" href="#">Đăng xuất</a>
                   </li>
                 </ul>
-
               </div>
             </li>
 

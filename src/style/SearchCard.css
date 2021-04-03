@@ -8,11 +8,16 @@
     cursor: pointer;
 }
 
+.searchCard_links{
+    display: flex;
+    text-decoration: none;
+}
+
 .searchCard:hover{
     opacity: 0.8;
 }
 
-.searchCard > img{
+.searchCard_img_hotel{
     height: 200px;
     width: 350px;
     border-radius: 10px;
@@ -25,21 +30,8 @@
     justify-content: space-between;
     padding-left: 20px;
     color: black !important;
+    width: 100%;
 }
-
-/* .searchCard_heart{
-    position: absolute;
-    top: 20px;
-    right: 40px;
-    color: black !important;
-} */
-
-
-
-
-/* .roomHeader_heading_description_right{
-    display: inline-flex;
-} */
 
 .searchCard_btn{
     cursor: not-allowed;
@@ -74,7 +66,6 @@
 
 .searchCard_heart_svg{
     display: block;
-    fill: none;
     height: 8px !important;
     width: 8px !important;
     stroke: currentcolor;
@@ -82,23 +73,18 @@
     overflow: visible;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.searchCard_redHeart_svg{
+    display: block;
+    fill: rgb(255, 56, 92);
+    height: 16px;
+    width: 16px;
+    stroke: rgb(255, 56, 92);
+    stroke-width: 2px;
+    overflow: visible;
+}
 
 .searchCard_infoTop{
-    width: 40vw;
+    width: 70vw;
 }
 
 .searchCard_infoTop > h3{

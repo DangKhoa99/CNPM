@@ -42,6 +42,7 @@ function FormSignUp({ submitForm }){
                                         type='text'
                                         name='fullName'
                                         placeholder='Nhập họ tên'
+                                        autoComplete="off"
                                         value={values.fullName}
                                         onChange={handleChange}/>
                                     {errors.fullName && <p>{errors.fullName}</p>}
@@ -53,6 +54,7 @@ function FormSignUp({ submitForm }){
                                         type='text'
                                         name='username'
                                         placeholder='Nhập tài khoản'
+                                        autoComplete="off"
                                         value={values.username}
                                         onChange={handleChange}/>
                                     {errors.username && <p>{errors.username}</p>}
@@ -64,6 +66,7 @@ function FormSignUp({ submitForm }){
                                         type='email'
                                         name='email'
                                         placeholder='Nhập Email'
+                                        autoComplete="off"
                                         value={values.email}
                                         onChange={handleChange}/>
                                     {errors.email && <p>{errors.email}</p>}

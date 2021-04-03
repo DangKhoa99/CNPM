@@ -15,6 +15,9 @@ import Booking from './pages/Account/Booking'
 import HistoryBooking from './pages/Account/HistoryBooking'
 import Book from './pages/Booking/Booking'
 
+import ReactNotifications from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css'
+
 //SearchPage->SearchResult
 //rooms->itemDetail/:id
 // use Redux Provider
@@ -23,7 +26,9 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <ReactNotifications />
         <Header />
+        
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/search-page' component={SearchPage} /> 

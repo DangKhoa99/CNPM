@@ -99,8 +99,8 @@ header > h1{
 }
 
 .form_input:focus{
-  border-color: #0a84ff;
-  box-shadow: 0 0 0 3px rgba(10,132,255,.3);
+  border-color: #1ed760;
+  box-shadow: 0 0 0 1px #1db954;
 }
 
 /* .loginRegister_submit_btn{
@@ -136,7 +136,7 @@ header > h1{
   height: 48px;
   background: none;
   border: 4px solid;
-  color: #0060df;
+  color: #1ed760;
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
@@ -185,7 +185,7 @@ header > h1{
 }
 
 .loginRegister_subText > a:hover{
-  color: #8497d4;
+  color: #1ed760;
 }
 
 .eye{
@@ -200,7 +200,7 @@ header > h1{
   right: 5%;
   transition: 0.25s;
   color:black !important;
-  z-index: 999;
+  z-index: 500;
 }
 
 .eye > i:hover {

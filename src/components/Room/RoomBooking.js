@@ -51,83 +51,85 @@ function RoomBooking() {
                         
                     </div>
 
-                    <div className="roomBooking_box_layout_body">
-                        <div className="roomBooking_box_layout_body_row">
-                            <div className="roomBooking_box_layout_body_row_a">
-                                <h2>{startDate, endDate ? 'Số đêm: ' + calDate(startDate, endDate) : startDate ? 'Chọn ngày trả phòng' : 'Chọn ngày nhận phòng'}</h2>
-                                <p>{startDate, endDate ? format(startDate, 'dd MMM yyyy', { locale: vi }) + ' - ' + format(endDate, 'dd MMM yyyy', { locale: vi }) : 'Thêm ngày đi để biết giá chính xác'}</p>
-                                <DateRangePicker
-                                    startDate={startDate}
-                                    endDate={endDate}
-                                    onStartDateChange={setStartDate}
-                                    onEndDateChange={setEndDate}
-                                    minimumDate={new Date()}
-                                    minimumLength={0}
-                                    format='dd/MM/yyyy'
-                                    locale={vi}
-                                    modifiers={modifiers}
-                                    modifiersClassNames={modifiersClassNames}
-                                >
-                                    {({ startDateInputProps, endDateInputProps, focus }) => (
-                                    <div className='date-range'>
-                                        <div className="check_in">
-                                            <label>NHẬN PHÒNG</label>
-                                            <input
-                                                readOnly
-                                                className={'input' + (focus === START_DATE ? ' -focused' : '')}
-                                                {...startDateInputProps}
-                                                placeholder='Chọn ngày'
-                                            />
+                    <form className="form_booking" action="/booking"> {/* method="POST"> */}
+                        {/* Check in , check out, room type, check log in, ... */}
+                        <div className="roomBooking_box_layout_body">
+                            <div className="roomBooking_box_layout_body_row">
+                                <div className="roomBooking_box_layout_body_row_a">
+                                    <h2>{startDate, endDate ? 'Số đêm: ' + calDate(startDate, endDate) : startDate ? 'Chọn ngày trả phòng' : 'Chọn ngày nhận phòng'}</h2>
+                                    <p>{startDate, endDate ? format(startDate, 'dd MMM yyyy', { locale: vi }) + ' - ' + format(endDate, 'dd MMM yyyy', { locale: vi }) : 'Thêm ngày đi để biết giá chính xác'}</p>
+                                    <DateRangePicker
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        onStartDateChange={setStartDate}
+                                        onEndDateChange={setEndDate}
+                                        minimumDate={new Date()}
+                                        minimumLength={0}
+                                        format='dd/MM/yyyy'
+                                        locale={vi}
+                                        modifiers={modifiers}
+                                        modifiersClassNames={modifiersClassNames}
+                                    >
+                                        {({ startDateInputProps, endDateInputProps, focus }) => (
+                                        <div className='date-range'>
+                                            <div className="check_in">
+                                                <label>NHẬN PHÒNG</label>
+                                                <input
+                                                    readOnly
+                                                    className={'input' + (focus === START_DATE ? ' -focused' : '')}
+                                                    {...startDateInputProps}
+                                                    placeholder='Chọn ngày'
+                                                />
+                                            </div>
+                                            <span class="date-range_arrow"></span>
+                                            <div className="check_out">
+                                                <label>TRẢ PHÒNG</label>
+                                                <input
+                                                    readOnly
+                                                    className={'input' + (focus === END_DATE ? ' -focused' : '')}
+                                                    {...endDateInputProps}
+                                                    placeholder='Chọn ngày'
+                                                />
+                                            </div>
                                         </div>
-                                        <span class="date-range_arrow"></span>
-                                        <div className="check_out">
-                                            <label>TRẢ PHÒNG</label>
-                                            <input
-                                                readOnly
-                                                className={'input' + (focus === END_DATE ? ' -focused' : '')}
-                                                {...endDateInputProps}
-                                                placeholder='Chọn ngày'
-                                            />
-                                        </div>
-                                    </div>
-                                    )}
-                                </DateRangePicker>
+                                        )}
+                                    </DateRangePicker>
+                                </div>
+                            </div>
+
+                            <div className="roomBooking_box_layout_body_row">
+                                <div className="roomBooking_box_layout_body_b">
+                                    <p>Chọn loại phòng:</p>
+                                    
+                                    <label class="room_type">
+                                        <input type="radio" id="small" name="room_type" value="small"/>
+                                        <span class="check_mark"></span>
+                                        Nhỏ
+                                    </label>
+                                    
+                                    <label class="room_type">
+                                        <input type="radio" id="medium" name="room_type" value="medium"/>
+                                        <span class="check_mark"></span>
+                                        Vừa
+                                    </label>
+                                    
+                                    <label class="room_type">
+                                        <input type="radio" id="big" name="room_type" value="big"/>
+                                        <span class="check_mark"></span>
+                                        Lớn
+                                    </label>
+                                </div>
+                            </div>
+
+                            
+
+                            <div className="roomBooking_box_layout_body_row">
+                            
+                                    <button className='form_booking_btn' type='submit'>Đặt phòng</button>
+                                
                             </div>
                         </div>
-
-                        <div className="roomBooking_box_layout_body_row">
-                            <div className="roomBooking_box_layout_body_b">
-                                <p>Chọn loại phòng:</p>
-                                
-                                <label class="room_type">
-                                    <input type="radio" id="small" name="room_type" value="small"/>
-                                    <span class="check_mark"></span>
-                                    Nhỏ
-                                </label>
-                                
-                                <label class="room_type">
-                                    <input type="radio" id="medium" name="room_type" value="medium"/>
-                                    <span class="check_mark"></span>
-                                    Vừa
-                                </label>
-                                
-                                <label class="room_type">
-                                    <input type="radio" id="big" name="room_type" value="big"/>
-                                    <span class="check_mark"></span>
-                                    Lớn
-                                </label>
-                            </div>
-                        </div>
-
-                        
-
-                        <div className="roomBooking_box_layout_body_row">
-                            <form className="form_booking" action="/booking"> {/* method="POST"> */}
-                                {/* Check in , check out, room type, check log in, ... */}
-                                <button className='form_booking_btn' type='submit'>Đặt phòng</button>
-                            </form>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

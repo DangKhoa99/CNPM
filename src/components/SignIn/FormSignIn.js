@@ -40,6 +40,7 @@ function FormSignIn({ submitForm }) {
                                         type='text'
                                         name='username'
                                         placeholder='Nhập tài khoản'
+                                        autoComplete="off"
                                         value={values.username}
                                         onChange={handleChange}/>
                                         {errors.username && <p>{errors.username}</p>}

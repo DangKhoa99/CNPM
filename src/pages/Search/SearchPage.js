@@ -10,15 +10,17 @@ function SearchPage() {
     const [pageURL, setPageURL] = useState("");
     useEffect(() => {
         if(window.location.href.split("=").pop() == ""){
-            setPageURL("Khám phá");
+            setPageURL("Vui lòng chọn địa điểm");
         }
         else{
-            setPageURL(window.location.href.split("=").pop());
+            setPageURL(decodeURIComponent(window.location.href.split("=").pop()));
         }
         
     })
     
-    const place = pageURL.split("-").join(" ");
+    console.log("aaaa", decodeURIComponent(window.location.href.split("=").pop()));
+
+    const place = pageURL.split("+").join(" ");
 
     function capitalize(str) {
         const arrOfWords = str.split(" ");
@@ -52,7 +54,7 @@ function SearchPage() {
             title: "CCC",
             description: "2 khách · 2 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí",
             stars: "4.74 (27)",
-            price: "$14",
+            price: "$90",
             total: "Tổng $200",
         },
         {
@@ -62,7 +64,7 @@ function SearchPage() {
             title: "AAA",
             description: "2 khách · 1 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí",
             stars: "4.74 (27)",
-            price: "$14",
+            price: "$148",
             total: "Tổng $200",
         },
         {
@@ -72,7 +74,7 @@ function SearchPage() {
             title: "BBB",
             description: "2 khách · 1 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí",
             stars: "4.74 (27)",
-            price: "$14",
+            price: "$12",
             total: "Tổng $200",
         },
     ])
@@ -81,9 +83,50 @@ function SearchPage() {
     return (
         <div className="searchPage">
             {/* <Header /> */}
-            <div className="searchPage__info">
-                <p>Hơn 300 chỗ ở</p>
-                <h1>Khách sạn tại {capitalize(place)}</h1>
+            <div className="searchPage_info">
+                {/* <p>Hơn 300 chỗ ở</p> */}
+                <h1>{"Khách sạn tại " + capitalize(place)}</h1>
+                <h2>Bộ lọc:</h2>
+
+                <div className="bookingBody_component_edit_typeRoom active">
+                    <p>· Giá:</p>
+                            
+                    <form>
+                        <label class="bookingBody_component_edit_room_type">
+                            <input 
+                                type="radio" 
+                                id="decrease" 
+                                name="price" 
+                                value="decrease"
+                            />
+                            <span class="check_mark_typeRoom"></span>
+                            Giảm dần
+                        </label>
+                                
+                        <label class="bookingBody_component_edit_room_type">
+                            <input 
+                                type="radio" 
+                                id="increase" 
+                                name="price" 
+                                value="increase"
+                            />
+                            <span class="check_mark_typeRoom"></span>
+                            Tăng dần
+                        </label>
+
+                        <button className="booking_btn_confirm_edit" type="submit">
+                            Lọc
+                        </button>
+                    </form>
+                </div> 
+
+
+
+
+
+                {/* <button className="searchPage_filter_hotel">
+                    Giá
+                </button> */}
                 {/* <Button variant="outlined">
                     Cancellation Flexibility
                 </Button>
@@ -102,17 +145,16 @@ function SearchPage() {
             </div>
 
             {data.map(d => {
-                return  <a href={'/room-detail?id=' + d.id} className="searchPage__link" target="_blank">
-                            <SearchCard 
-                                img={d.img}
-                                location={d.location}
-                                title={d.title}
-                                description={d.description}
-                                star={d.stars}
-                                price={d.price}
-                                total={d.total}
-                            />
-                        </a>
+                return  <SearchCard 
+                            id={d.id}
+                            img={d.img}
+                            location={d.location}
+                            title={d.title}
+                            description={d.description}
+                            star={d.stars}
+                            price={d.price}
+                            total={d.total}
+                        />
             })}
         </div>
     )

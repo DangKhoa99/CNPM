@@ -4,7 +4,7 @@ import StarIcon from "@material-ui/icons/Star"
 import {Avatar, styled} from "@material-ui/core"
 import StarRatings from "react-star-ratings"
 
-function RoomReview() {
+function RoomReview({reference}) {
     const [rating, setRating] = useState(0);
 
     function changeRating(newRating){
@@ -36,9 +36,13 @@ function RoomReview() {
         }
     }
 
+    const submitComment = (e) => {
+        e.preventDefault();
+    }
+
     return (
         <div className="roomReview">
-            <div className="roomBody_line"></div>
+            <div className="roomBody_line" ref={reference}></div>
             <div className="roomReview_container">
                 <div className="roomReview_star">
                     <h2>
@@ -78,15 +82,22 @@ function RoomReview() {
                     </div>
 
                     <div className="comment_input">
-                        <textarea rows="1" placeholder="Nhập nhận xét của bạn" className="message"></textarea>
+                        <form onSubmit = {submitComment}>
+                            <textarea 
+                                name="my_comment" 
+                                rows="1" 
+                                placeholder="Nhập nhận xét của bạn" 
+                                className="message"
+                                // value={}
+                                // onChange={}
+                            />
 
-                        <div className="comment_input_btn">
-                            <button className="comment_btn_cancel" onClick={removeReviewInput}>Hủy</button>
+                            <div className="comment_input_btn">
+                                <button className="comment_btn_cancel" onClick={removeReviewInput}>Hủy</button>
 
-                            <button className="comment_btn_submit" type="submit">Gửi</button>
-                        </div>
-
-                        
+                                <button className="comment_btn_submit" type="submit">Gửi</button>
+                            </div>
+                        </form>                        
                     </div>
                 </div>
 
@@ -122,9 +133,6 @@ function RoomReview() {
                                 </span>
                             </div>
                         </div>
-
-
-
 
                         <div className="box_comment">
                             <div className="commentator">
@@ -171,27 +179,8 @@ function RoomReview() {
                                 </span>
                             </div>
                         </div>
-
-                    
                     </div>
                 </div>
-
-                {/* <div className="add_comment">
-                    <button className="btn_add_cmt">Thêm nhận xét</button>
-                </div> */}
-
-
-                {/* <div className="rating_stars">
-                    <a class="rating_star_1 fas fa-star"></a>
-                    <a class="rating_star_2 fas fa-star"></a>
-                    <a class="rating_star_3 fas fa-star"></a>
-                    <a class="rating_star_4 fas fa-star"></a>
-                    <a class="rating_star_5"><i class="fas fa-star"></i></a>
-
-                </div> */}
-
-                
-
             </div>
         </div>
     )

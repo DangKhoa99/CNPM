@@ -26,6 +26,7 @@
 .roomHeader_heading_stars{
     align-items: center;
     display: inline-flex;
+    cursor: pointer;
 }
 
 .roomHeader_heading_star{
@@ -79,10 +80,19 @@
 
 .roomHeader_heading_heart_svg{
     display: block;
-    fill: none;
     height: 8px !important;
     width: 8px !important;
     stroke: currentcolor;
+    stroke-width: 2px;
+    overflow: visible;
+}
+
+.roomHeader_heading_redHeart_svg{
+    display: block;
+    fill: rgb(255, 56, 92);
+    height: 16px;
+    width: 16px;
+    stroke: rgb(255, 56, 92);
     stroke-width: 2px;
     overflow: visible;
 }
