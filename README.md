@@ -16,8 +16,6 @@ Bước 3: Sau đó chạy project
 ### `npm start`
 
 # Công nghệ sử dụng trong Project
-<img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-horizontal.svg"> 
-<img src="https://www.vectorlogo.zone/logos/npmjs/npmjs-ar21.svg"> 
-<img src="https://www.vectorlogo.zone/logos/reactjs/reactjs-ar21.svg"> 
-<img src="https://www.vectorlogo.zone/logos/expressjs/expressjs-ar21.svg"> 
-<img src="https://www.vectorlogo.zone/logos/mongodb/mongodb-ar21.svg">
+<img target="_blank" src="https://www.vectorlogo.zone/logos/npmjs/npmjs-icon.svg" width="150"> 
+
+<img target="_blank" src="https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg" width="200">  <img target="_blank" src="https://www.vectorlogo.zone/logos/expressjs/expressjs-icon.svg" width="200">    <img target="_blank" src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" width="200">   <img target="_blank" src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg" width="200">

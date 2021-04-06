@@ -1,8 +1,8 @@
 import React from 'react'
-import "../../style/Account.css"
+import "../../style/MenuAccount.css"
 import Header from '../../components/Header'
-import MenuLeft from "../../components/Account/MenuLeft"
-import MenuHistoryBooking from "../../components/Account/MenuHistoryBooking"
+import MenuLeft from "../../components/MenuAccount/MenuLeft"
+import MenuHistoryBooking from "../../components/MenuAccount/MenuHistoryBooking"
 
 function HistoryBooking() {
     document.title = "Lịch sử đặt khách sạn"

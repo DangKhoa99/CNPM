@@ -76,14 +76,28 @@ function RoomBody() {
         },
     ]);
 
+    // Show more
+    const text = "King Fisher được thành lập nhằm mang đến một không gian lưu trú và làm việc tại TP.HCM cho các doanh nhân hoặc doanh nhân cần sự thoải mái và tiện lợi trong những chuyến công tác ngắn ngày. công viên nhỏ và bên cạnh sở thú và vườn bách thảo lớn nhất của thành phố. Mặt tiền của tòa nhà hướng trọn ra dòng kênh Thị Nghè trong xanh chảy và hiện là điểm du lịch với bến du thuyền nhỏ chỉ cách đó vài bước chân.";
+    const [isReadMore, setIsReadMore] = useState(true);
+    const toggleReadMore = () => {
+        setIsReadMore(!isReadMore);
+    };
+
+
+
     return (
         <div className="roomBody">
             <div className="roomBody_container_left">
                 <div className="roomBody_description">
                     <h2>Mô tả</h2>
                     <div className="roomBody_description_paragraph">
-                        <span>Đây là BIỆT THỰ RIÊNG TƯ của bạn có diện tích 150m2 bao gồm hồ bơi, sân vườn có tường rào bao quanh tạo không gian riêng tư và lãng mạn tuyệt đối, không thể nhìn thấy từ bên ngoài.</span>
+                        <span>{isReadMore ? text.slice(0, 150) + "..." : text}</span>
+                        
                     </div>
+                    <button onClick={toggleReadMore} className="readMore">
+                            {isReadMore ? "Xem thêm" : " Ẩn bớt"}
+                    </button> 
+
                 </div>
 
                 <div className="roomBody_line"></div>

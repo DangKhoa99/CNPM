@@ -1,8 +1,8 @@
 import React from 'react'
-import "../../style/Account.css"
+import "../../style/MenuAccount.css"
 import Header from '../../components/Header'
-import MenuLeft from "../../components/Account/MenuLeft"
-import MenuFavorite from "../../components/Account/MenuFavorite"
+import MenuLeft from "../../components/MenuAccount/MenuLeft"
+import MenuFavorite from "../../components/MenuAccount/MenuFavorite"
 
 function Favorite() {
     document.title = "Khách sạn yêu thích"

@@ -28,8 +28,8 @@ function SearchCard({
     const notification_saveFavorite = {
         title: ' RoyalStay - Thông báo',
         message: 'Đã lưu khách sạn `' + title + '`',
-        type: 'success',                         // 'default', 'success', 'info', 'warning'
-        container: 'bottom-left',                // where to position the notifications
+        type: 'success',
+        container: 'bottom-left',
         dismiss: {
             duration: 2000
         }
@@ -80,7 +80,7 @@ function SearchCard({
                             </p>
                         </div>
                         <div className="searchCard_price">
-                            <h2>{price}</h2> <p> /đêm</p> 
+                            <h2>${price}</h2> <p> /đêm</p> 
                         </div>
                     </div>
                 </div>
