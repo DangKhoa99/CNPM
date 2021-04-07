@@ -18,7 +18,7 @@ function SignUp() {
 
   const notification_saveFavorite = {
     title: ' RoyalStay - Thông báo',
-    message: 'Đã lưu',
+    message: 'Đăng ký thành công',
     type: 'success',
     container: 'bottom-left',
     dismiss: {
@@ -34,8 +34,9 @@ function SignUp() {
       ) 
       :
       (
-        <Redirect to="/" />
-        // store.addNotification(notification_saveFavorite)
+        <Redirect to="/sign-in">
+          {/* {store.addNotification(notification_saveFavorite)} */}
+        </Redirect>
       )}
     </div>
   )

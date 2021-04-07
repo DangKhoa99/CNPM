@@ -64,7 +64,6 @@ function RoomHeader({
             thumbnailHeight: 130,
             caption: "Image 2"
         },
-
         {
             src: img3,
             thumbnail: img3,
@@ -72,7 +71,6 @@ function RoomHeader({
             thumbnailHeight: 130,
             caption: "Image 3"
         },
-
         {
             src: img4,
             thumbnail: img4,
@@ -80,7 +78,6 @@ function RoomHeader({
             thumbnailHeight: 130,
             caption: "Image 4"
         },
-
         {
             src: img5,
             thumbnail: img5,
@@ -88,7 +85,6 @@ function RoomHeader({
             thumbnailHeight: 130,
             caption: "Image 5"
         },
-
         {
             src: "https://a0.muscache.com/im/pictures/1c643462-30e3-4752-b161-4e2f23964d68.jpg?im_w=720",
             thumbnail: "https://a0.muscache.com/im/pictures/1c643462-30e3-4752-b161-4e2f23964d68.jpg?im_w=720",
@@ -96,7 +92,6 @@ function RoomHeader({
             thumbnailHeight: 130,
             caption: "Image 6"
         },
-
         {
             src: "https://a0.muscache.com/im/pictures/c525dfc4-6248-42a4-a75a-f159a7742268.jpg?im_w=720",
             thumbnail: "https://a0.muscache.com/im/pictures/c525dfc4-6248-42a4-a75a-f159a7742268.jpg?im_w=720",

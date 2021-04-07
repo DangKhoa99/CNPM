@@ -6,13 +6,13 @@ import Header from '../../components/Header'
 
 function SearchPage() {
     const [pageURL, setPageURL] = useState("");
-    const [filterPrice, setFilterPrice] = useState(true); // false: giảm - true: tăng
+    const [filterPrice, setFilterPrice] = useState(false); // false: giảm - true: tăng
 
     const handleClickFilterPrice = () => setFilterPrice(!filterPrice);
 
-    let price = "Tăng dần";
-    if(filterPrice == false){
-        price = "Giảm dần";
+    let price = "Giảm dần";
+    if(filterPrice == true){
+        price = "Tăng dần";
     }
 
     useEffect(() => {
@@ -93,7 +93,7 @@ function SearchPage() {
                 </button>
             </div>
 
-            {!filterPrice ?
+            {filterPrice ?
                 data.sort((a, b) => (a.price - b.price)) 
                 .map(d => {
                     return  <SearchCard 

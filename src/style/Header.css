@@ -11,6 +11,10 @@
   /* background: rgba(0, 0, 0, 0.6) !important; */
 }
 
+.header.hideHeader{
+  display: none;
+}
+
 /* .form-label::after {
   content: '*';
   margin-left: 2px;
