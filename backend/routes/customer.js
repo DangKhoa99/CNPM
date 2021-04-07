@@ -2,22 +2,6 @@ const router = require('express').Router();
 let Customer = require('../models/customer.model');
 let Hotel = require('../models/hotel.model');
 
-// check if a customer in DB
-function isCustomerInDB(customerId){
-    let couter = Customer.find(new ObjectId(customerId)).count();
-    if(couter == 0)
-        return false
-    return true
-};
-
-// check if a hotel in DB
-function isHotelInDB(hotelId){
-    // let counter = Hotel.findbyId(hotelId).count();
-    // if(couter == 0)
-    //     return false
-    return true
-};
-
 //Query all customers in DB
 router.route('/').get((req, res) => {
     Customer.find()
@@ -62,20 +46,34 @@ router.route('/add').post((req, res) => {
 router.route('/favorite/add').post((req, res) =>{
     const hotelId = req.body.hotelId;
     const customerId = req.body.customerId;
-    if(isHotelInDB(hotelId)){
-        if(isCustomerInDB(customerId)){
-            let prev_favorite = Customer.findById(customerId).favorite;
-            console.log(prev_favorite)
-            // prev_favorite.push(hotelId);
-            // Customer.findByIdAndUpdate(customerId, {favorite: prev_favorite});
-            // res.json('Favorite hotel added!');
-        }
-        res.json('This customer is not avaiable');
-    }
-    res.json('This hotel is not available');
+    
+    Customer.findById(customerId)
+    .then(customer => {
+
+        customer.favorite.push(hotelId);
+
+        customer.save()
+        .then(() => res.json('Favorite hotel added'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
-
 //Remove favorite hotel
+router.route('/favorite/delete').post((req, res) =>{
+    const hotelId = req.body.hotelId;
+    const customerId = req.body.customerId;
+    
+    Customer.findById(customerId)
+    .then(customer => {
+        if(customer.favorite.includes(hotelId))
+            customer.favorite.remove(hotelId);
+
+        customer.save()
+        .then(() => res.json('Favorite hotel removed'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;
