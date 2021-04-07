@@ -8,7 +8,7 @@ import {ReactComponent as RedHeart} from "../../icons/iconRedHeart.svg"
 import { store } from 'react-notifications-component'
 
 function SearchCard({
-    // id,
+    id,
     img,
     address,
     name,
@@ -47,7 +47,7 @@ function SearchCard({
 
     return (
         <div className="searchCard">
-            <a href={'/room-detail?id=' + name} target="_blank">
+            <a href={'/room-detail?id=' + id} target="_blank">
                 <img className="searchCard_img_hotel" src={img[0]} alt=""/>
             </a>
 
@@ -64,7 +64,7 @@ function SearchCard({
                 {saveFavorite}
             </button>
 
-            <a className="searchCard_links" href={'/room-detail?id=' + name} target="_blank">
+            <a className="searchCard_links" href={'/room-detail?id=' + id} target="_blank">
                 <div className="searchCard_info">
                     <div className="searchCard_infoTop">
                         <p>{address}</p>

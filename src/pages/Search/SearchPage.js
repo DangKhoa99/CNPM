@@ -98,8 +98,8 @@ function SearchPage() {
                 data.sort((a, b) => (a.price - b.price)) 
                 .map(item => {
                     return  <SearchCard 
-                                // id={item.id}
-                                img={item.imangeLink}
+                                id={item._id}
+                                img={item.imageLink}
                                 address={item.address}
                                 name={item.name}
                                 description={item.tien_ich
@@ -114,8 +114,8 @@ function SearchPage() {
                 data.sort((a, b) => (b.price - a.price))
                 .map(item => {
                     return  <SearchCard 
-                                // id={item.id}
-                                img={item.imangeLink}
+                                id={item._id}
+                                img={item.imageLink}
                                 address={item.address}
                                 name={item.name}
                                 description={item.tien_ich
