@@ -8,10 +8,10 @@ import {ReactComponent as RedHeart} from "../../icons/iconRedHeart.svg"
 import { store } from 'react-notifications-component'
 
 function SearchCard({
-    id,
+    // id,
     img,
-    location,
-    title,
+    address,
+    name,
     description,
     star,
     price,
@@ -27,7 +27,7 @@ function SearchCard({
 
     const notification_saveFavorite = {
         title: ' RoyalStay - Thông báo',
-        message: 'Đã lưu khách sạn `' + title + '`',
+        message: 'Đã lưu khách sạn `' + name + '`',
         type: 'success',
         container: 'bottom-left',
         dismiss: {
@@ -37,7 +37,7 @@ function SearchCard({
 
     const notification_notSaveFavorite = {
         title: 'RoyalStay - Thông báo',
-        message: 'Bỏ lưu khách sạn `' + title + '`',
+        message: 'Bỏ lưu khách sạn `' + name + '`',
         type: 'danger',
         container: 'bottom-left',
         dismiss: {
@@ -47,8 +47,8 @@ function SearchCard({
 
     return (
         <div className="searchCard">
-            <a href={'/room-detail?id=' + id} target="_blank">
-                <img className="searchCard_img_hotel" src={img} alt=""/>
+            <a href={'/room-detail?id=' + name} target="_blank">
+                <img className="searchCard_img_hotel" src={img[0]} alt=""/>
             </a>
 
             <button 
@@ -64,11 +64,11 @@ function SearchCard({
                 {saveFavorite}
             </button>
 
-            <a className="searchCard_links" href={'/room-detail?id=' + id} target="_blank">
+            <a className="searchCard_links" href={'/room-detail?id=' + name} target="_blank">
                 <div className="searchCard_info">
                     <div className="searchCard_infoTop">
-                        <p>{location}</p>
-                        <h3>{title}</h3>
+                        <p>{address}</p>
+                        <h3>{name}</h3>
                         <p>________</p>
                         <p>{description}</p>
                     </div>

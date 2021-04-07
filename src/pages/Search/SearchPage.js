@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import "../../style/SearchPage.css"
 import SearchCard from "../../components/Search/SearchCard"
+import LoadingScreen from "../../components/LoadingScreen"
 import { Button } from '@material-ui/core'
 import Header from '../../components/Header'
+import axios from 'axios'
 
 function SearchPage() {
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [pageURL, setPageURL] = useState("");
     const [filterPrice, setFilterPrice] = useState(false); // false: giảm - true: tăng
 
@@ -15,16 +19,23 @@ function SearchPage() {
         price = "Tăng dần";
     }
 
-    useEffect(() => {
+    useEffect(() => {        
+        const fetchData = async () => {
+            setIsLoading(true);
+            const result = await axios('http://localhost:5000/hotel/')
+            setData(result.data);
+            setIsLoading(false);
+        };
+
+        fetchData();
+
         if(window.location.href.split("=").pop() == ""){
             setPageURL("Vui lòng chọn địa điểm");
         }
         else{
             setPageURL(decodeURIComponent(window.location.href.split("=").pop()));
         }
-    })
-    
-    // console.log("aaaa", decodeURIComponent(window.location.href.split("=").pop()));
+    },[])
 
     const place = pageURL.split("+").join(" ");
 
@@ -36,50 +47,25 @@ function SearchPage() {
             const word = arrOfWords[i];
             arrOfWordsCased.push(word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
         }
-        
         return arrOfWordsCased.join(" ");
     }
 
     document.title = capitalize(place)
+    // console.log(data.map(d => {return d.name}));
+    // Phân trang
+    // const [paging, setPaging] = useState({
+    //     cards: [data.map(d => {return d.name})],
+    //     currentPage: 1,
+    //     cardsPerPage: 10
+    // });
 
-    const [data, setData] = useState([
-        {
-            id: 1,
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
-            location: "Phòng riêng tại Quận 3",
-            title: "Tiamy Housie T4",
-            description: "2 khách · 1 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí",
-            stars: "4.74 (27)",
-            price: 14,
-        },
-        {
-            id: 2,
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
-            location: "Phòng riêng tại Quận 2",
-            title: "CCC",
-            description: "2 khách · 2 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí",
-            stars: "4.74 (27)",
-            price: 90,
-        },
-        {
-            id: 3,
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
-            location: "Phòng riêng tại Quận 1",
-            title: "AAA",
-            description: "2 khách · 1 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí",
-            stars: "4.74 (27)",
-            price: 148,
-        },
-        {
-            id: 4,
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU",
-            location: "Phòng riêng tại Quận 9",
-            title: "BBB",
-            description: "2 khách · 1 giường · 1 phòng tắm · Wifi · Bếp · Chỗ đậu xe miễn phí",
-            stars: "4.74 (27)",
-            price: 12,
-        },
-    ])
+    // const handleClickNumberPaging = (e) => {
+    //     setPaging({currentPage: Number(e.target.id)});
+    // }
+
+    // const indexOfLastCard = paging.currentPage * paging.cardsPerPage;
+    // const indexOfFirstCard = indexOfLastCard - paging.cardsPerPage;
+    // const currentCards = paging.cards.slice(indexOfFirstCard, indexOfLastCard);
 
     return (
         <div className="searchPage">
@@ -93,34 +79,6 @@ function SearchPage() {
                 </button>
             </div>
 
-            {filterPrice ?
-                data.sort((a, b) => (a.price - b.price)) 
-                .map(d => {
-                    return  <SearchCard 
-                                id={d.id}
-                                img={d.img}
-                                location={d.location}
-                                title={d.title}
-                                description={d.description}
-                                star={d.stars}
-                                price={d.price}
-                            />
-                })
-                : 
-                data.sort((a, b) => (b.price - a.price))
-                .map(d => {
-                    return  <SearchCard 
-                                id={d.id}
-                                img={d.img}
-                                location={d.location}
-                                title={d.title}
-                                description={d.description}
-                                star={d.stars}
-                                price={d.price}
-                            />
-                })
-            }
-
             {/* Filter theo khoảng giá trị */}
             {/* {data.filter(data => data.price < 50).map(d => {
                 return  <SearchCard 
@@ -133,6 +91,56 @@ function SearchPage() {
                             price={d.price}
                         />
             })} */}
+
+            {isLoading ? <LoadingScreen/>
+            :
+            filterPrice ?
+                data.sort((a, b) => (a.price - b.price)) 
+                .map(item => {
+                    return  <SearchCard 
+                                // id={item.id}
+                                img={item.imangeLink}
+                                address={item.address}
+                                name={item.name}
+                                description={item.tien_ich
+                                    .map(ttt => {
+                                    return ttt + " · " 
+                                })}
+                                star={0}
+                                price={item.price}
+                            />
+                })
+                : 
+                data.sort((a, b) => (b.price - a.price))
+                .map(item => {
+                    return  <SearchCard 
+                                // id={item.id}
+                                img={item.imangeLink}
+                                address={item.address}
+                                name={item.name}
+                                description={item.tien_ich
+                                    .map(ttt => {
+                                    return ttt + " · " 
+                                })}
+                                star={0}
+                                price={item.price}
+                            />
+                })
+            // data.map(item => {
+            //     return  <SearchCard 
+            //                 // id={item.id}
+            //                 img={item.imangeLink}
+            //                 address={item.address}
+            //                 name={item.name}
+            //                 description={item.tien_ich
+            //                     .map(ttt => {
+            //                     return ttt + " · " 
+            //                 })}
+            //                 star={0}
+            //                 price={item.price}
+            //             />
+            // })
+        }
         </div>
     )
 }

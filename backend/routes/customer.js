@@ -1,22 +1,7 @@
 const router = require('express').Router();
-let Customer = require('../models/customer.model');
+let {Customer, Booking} = require('../models/customer.model');
 let Hotel = require('../models/hotel.model');
-
-// check if a customer in DB
-function isCustomerInDB(customerId){
-    let couter = Customer.find(new ObjectId(customerId)).count();
-    if(couter == 0)
-        return false
-    return true
-};
-
-// check if a hotel in DB
-function isHotelInDB(hotelId){
-    // let counter = Hotel.findbyId(hotelId).count();
-    // if(couter == 0)
-    //     return false
-    return true
-};
+let ObjectID = require('mongodb').ObjectID;
 
 //Query all customers in DB
 router.route('/').get((req, res) => {
@@ -58,24 +43,108 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//Get favorite list of 1 customer
+router.route('/favorite').post((req, res) => {
+    const customerId = req.body.customerId;
+    Customer.findById(customerId)
+    .then(customer => {
+        res.json(res.json(customer.favorite));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 //Add favorite hotel
 router.route('/favorite/add').post((req, res) =>{
     const hotelId = req.body.hotelId;
     const customerId = req.body.customerId;
-    if(isHotelInDB(hotelId)){
-        if(isCustomerInDB(customerId)){
-            let prev_favorite = Customer.findById(customerId).favorite;
-            console.log(prev_favorite)
-            // prev_favorite.push(hotelId);
-            // Customer.findByIdAndUpdate(customerId, {favorite: prev_favorite});
-            // res.json('Favorite hotel added!');
-        }
-        res.json('This customer is not avaiable');
-    }
-    res.json('This hotel is not available');
+    
+    Customer.findById(customerId)
+    .then(customer => {
+
+        customer.favorite.push(hotelId);
+
+        customer.save()
+        .then(() => res.json('Favorite hotel added'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//Remove favorite hotel
+router.route('/favorite/delete').post((req, res) =>{
+    const hotelId = req.body.hotelId;
+    const customerId = req.body.customerId;
+    
+    Customer.findById(customerId)
+    .then(customer => {
+        if(customer.favorite.includes(hotelId))
+            customer.favorite.remove(hotelId);
+
+        customer.save()
+        .then(() => res.json('Favorite hotel removed'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//Get booking list of 1 customer
+router.route('/booking').post((req, res) => {
+    const customerId = req.body.customerId;
+    Customer.findById(customerId)
+    .then(customer => {
+        res.json(res.json(customer.booking));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//Add booking of 1 customer
+router.route('/booking/add').post((req, res) =>{
+    const customerId = req.body.customerId;
+    
+    Customer.findById(customerId)
+    .then(customer => {
+
+        const hotelId = req.body.hotelId;
+        const checkIn = Date.parse(req.body.checkIn);
+        const checkOut = Date.parse(req.body.checkOut);
+        const roomType = req.body.roomType;
+
+        const newBooking = new Booking({
+            hotelId,
+            checkIn,
+            checkOut,
+            roomType
+        });
+
+        customer.booking.push(newBooking);
+
+        customer.save()
+        .then(() => res.json('Booking hotel added'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 
-//Remove favorite hotel
+//Cancel a booking of 1 customer
+router.route('/booking/cancel').post((req, res) =>{
+    const bookingId = req.body.bookingId;
+    const customerId = req.body.customerId;
+    
+    Customer.findById(customerId)
+    .then(customer => {
+        
+        for(i in customer.booking){
+            if(customer.booking[i]["_id"] == bookingId){
+                customer.booking[i]["status"] = "Cancel";
+            }
+        }
+
+        customer.save()
+        .then(() => res.json('Cancelled booking'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;

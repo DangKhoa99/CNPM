@@ -3,11 +3,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookingSchema = new Schema({
-    check_in: {
+    hotelId: {
+        type: String,
+        required: true
+    },
+    checkIn: {
         type: Date,
         required: true
     },
-    check_out: {
+    checkOut: {
         type: Date,
         required: true
     },
@@ -17,9 +21,22 @@ const bookingSchema = new Schema({
     },
     status: {
         type: String,
-        required: true
+        default: "Pending"
     }
 });
+
+// bookingSchema.pre("find", function(next){
+//     if(this.status.localeCompare("Cancel") == 1){
+//         var today = new Date();
+//         if(today < this.check_in)
+//             this.status = "Pending";
+//         else if (today >= this.check_in && today <= this.check_out)
+//             this.status = "Currently staying";
+//         else if (today > this.check_out)
+//             this.status = "Stayed";
+//         next();
+//     }
+// });
 
 const customerSchema = new Schema({
     username: {
@@ -67,5 +84,6 @@ const customerSchema = new Schema({
 });
 
 const Customer = mongoose.model('Customer', customerSchema);
+const Booking = mongoose.model('Booking', bookingSchema);
 
-module.exports = Customer;
+module.exports = {Customer, Booking};
