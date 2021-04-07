@@ -1,6 +1,7 @@
 const router = require('express').Router();
-let Customer = require('../models/customer.model');
+let {Customer, Booking} = require('../models/customer.model');
 let Hotel = require('../models/hotel.model');
+let ObjectID = require('mongodb').ObjectID;
 
 //Query all customers in DB
 router.route('/').get((req, res) => {
@@ -81,6 +82,66 @@ router.route('/favorite/delete').post((req, res) =>{
 
         customer.save()
         .then(() => res.json('Favorite hotel removed'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//Get booking list of 1 customer
+router.route('/booking').post((req, res) => {
+    const customerId = req.body.customerId;
+    Customer.findById(customerId)
+    .then(customer => {
+        res.json(res.json(customer.booking));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//Add booking of 1 customer
+router.route('/booking/add').post((req, res) =>{
+    const customerId = req.body.customerId;
+    
+    Customer.findById(customerId)
+    .then(customer => {
+
+        const hotelId = req.body.hotelId;
+        const checkIn = Date.parse(req.body.checkIn);
+        const checkOut = Date.parse(req.body.checkOut);
+        const roomType = req.body.roomType;
+
+        const newBooking = new Booking({
+            hotelId,
+            checkIn,
+            checkOut,
+            roomType
+        });
+
+        customer.booking.push(newBooking);
+
+        customer.save()
+        .then(() => res.json('Booking hotel added'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+//Cancel a booking of 1 customer
+router.route('/booking/cancel').post((req, res) =>{
+    const bookingId = req.body.bookingId;
+    const customerId = req.body.customerId;
+    
+    Customer.findById(customerId)
+    .then(customer => {
+        
+        for(i in customer.booking){
+            if(customer.booking[i]["_id"] == bookingId){
+                customer.booking[i]["status"] = "Cancel";
+            }
+        }
+
+        customer.save()
+        .then(() => res.json('Cancelled booking'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
