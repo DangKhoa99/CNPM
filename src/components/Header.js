@@ -16,6 +16,8 @@ function Header() {
   const [buttonSignIn, setButtonSignIn] = useState(true);
   const [colorHeader, setColorHeader] = useState(true);
 
+  // const [hideHeader, setHideHeader] = useState(false);
+
   const [menuMobile, setMenuMobile] = useState(false);
   const [menuProfile, setMenuProfile] = useState(false);
   const [menuSearchSuggestion, setMenuSearchSuggestion] = useState(false);
@@ -77,6 +79,15 @@ function Header() {
       behavior: "smooth"
     })
   }
+  
+  // const handleHideHeader = () =>{
+  //   if(location.pathname == "/404"){
+  //     setHideHeader(true);
+  //   }
+  //   else{
+  //     setHideHeader(false);
+  //   }
+  // }
 
   
   useEffect(() => {
@@ -87,6 +98,7 @@ function Header() {
     Aos.refresh();
     showButton();
     changeBackground();
+    // handleHideHeader();
 
     // Chỉ đổi màu thanh Header khi scroll ở Trang chủ
     if(location.pathname != "/"){
@@ -102,7 +114,9 @@ function Header() {
   window.addEventListener('resize', showButton);
 
   return (
-      <nav className={colorHeader ? 'header active' : 'header'}>
+      <nav className={
+        // hideHeader ? 'header hideHeader' : 
+      colorHeader ? 'header active' : 'header'}>
         <div className='header_container'>
 
           {/* Logo */}

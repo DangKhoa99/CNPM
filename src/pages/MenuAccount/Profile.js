@@ -1,8 +1,8 @@
 import React from 'react'
-import "../../style/Account.css"
+import "../../style/MenuAccount.css"
 import Header from '../../components/Header'
-import MenuLeft from "../../components/Account/MenuLeft"
-import MenuProfile from "../../components/Account/MenuProfile"
+import MenuLeft from "../../components/MenuAccount/MenuLeft"
+import MenuProfile from "../../components/MenuAccount/MenuProfile"
 
 function Profile() {
     document.title = "Chỉnh sửa hồ sơ"

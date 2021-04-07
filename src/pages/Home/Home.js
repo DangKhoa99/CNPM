@@ -40,7 +40,7 @@ function Home() {
       // src: DaLat,
       src: "images/DaLat.jpg",
       txt: "Đà Lạt",
-      link: "dà+lạt",
+      link: "đà+lạt",
     },
     {
       // src: Sapa,
@@ -55,17 +55,17 @@ function Home() {
       {/* <Header /> */}
       <Banner />
 
-      <div className="home__section">
-        <div className="home__heading">
+      <div className="home_section">
+        <div className="home_heading">
           <h1>ĐIỂM ĐẾN YÊU THÍCH</h1>
         </div>
 
-        <div className="home__destination">
+        <div className="home_destination">
           {data.map(d => {
-            return  <div className="home__destination__cell">
-                      <a href={'/search-page?result=' + d.link} className="home__link" target="_blank">
-                        <img src={d.src} alt={d.txt} className="home__destination__cell__img"/>
-                        <div className="home__destination__cell__text">{d.txt}</div>
+            return  <div className="home_destination_cell">
+                      <a href={'/search-page?result=' + d.link} className="home_link" target="_blank">
+                        <img src={d.src} alt={d.txt} className="home_destination_cell_img"/>
+                        <div className="home_destination_cell_text">{d.txt}</div>
                       </a>
                     </div>
           })}

@@ -52,6 +52,34 @@
     text-align:justify;
 }
 
+.readMore{
+    margin-top: 24px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    width: auto !important;
+    touch-action: manipulation !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    outline: currentcolor none medium !important;
+    padding: 13px 23px !important;
+    transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, transform 0.1s ease 0s, transform 0.1s ease 0s !important;
+    border-color: rgb(34, 34, 34) !important;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% !important;
+    color: rgb(34, 34, 34) !important;
+}
+
+.readMore:hover{
+    border-color: rgb(0, 0, 0) !important;
+    background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
+    color: rgb(34, 34, 34) !important; 
+}
+
 /* Phần Loại phòng */
 .roomBody_rooms_options{
     position: relative !important;

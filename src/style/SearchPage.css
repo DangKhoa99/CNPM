@@ -1,5 +1,5 @@
 .searchPage{
-    padding-bottom: 50px;
+    padding-bottom: 100px;
 }
 
 .searchPage_info{
@@ -30,111 +30,13 @@
     border-radius: 30px !important;
     color: rgb(34, 34, 34) !important;
     position: relative !important;
-    padding: 8px 16px !important;
+    padding: 8px 32px !important;
     font-size: 12px !important;
     line-height: 16px !important;
+    font-weight: 600;
 }
 
 .searchPage_filter_hotel:hover{
     border-color: rgb(34, 34, 34) !important;
 }
 
-/* Filter */
-.bookingBody_component_edit_typeRoom{
-    display: none;
-    padding: 10px 0px !important;
-    text-align: left !important;
-}
-
-.bookingBody_component_edit_typeRoom.active{
-    display: block;
-}
-
-.bookingBody_component_edit_typeRoom > p{
-    font-size: 18px !important;
-    font-weight: 600 !important;
-}
-
-.bookingBody_component_edit_room_type {
-    width:25%;
-    padding-left: 25px;
-    -moz-box-align: center;
-    align-items: center;
-    display: flex;
-    padding-bottom: 7px;
-    position: relative;
-    min-height: 32px;
-    cursor: pointer;
-    font-size: 15px !important;
-}
-
-.bookingBody_component_edit_room_type input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.check_mark_typeRoom {
-    position: absolute;
-    top: 4px;
-    left: 0;
-    height: 16px;
-    width: 16px;
-    background-color: transparent none repeat scroll 0% 0%;
-    border-radius: 50%;
-    border: 1px solid rgb(179, 179, 179);
-}
-
-.bookingBody_component_edit_room_type:hover input ~ .check_mark_typeRoom {
-    border-color: red;
-}
-
-.bookingBody_component_edit_room_type input:checked ~ .check_mark_typeRoom {
-    background: red none repeat scroll 0% 0%;
-    border-width: 0px;
-}
-  
-.check_mark_typeRoom:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-  
-.bookingBody_component_edit_room_type input:checked ~ .check_mark_typeRoom:after {
-    display: block;
-}
-  
-.bookingBody_component_edit_room_type .check_mark_typeRoom:after {
-    background-color: rgb(255, 255, 255);
-    border-radius: 50%;
-    content: "";
-    height: 0.5em;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 0.5em;
-}
-
-.booking_btn_confirm_edit{
-    margin-top: 10px;
-    padding: 5px 25px;
-    text-align: center;
-    text-transform: uppercase;
-    transition: 0.5s !important;
-    background-size: 200% auto;
-    color: white !important;            
-    border-radius: 10px !important;
-    background-image: linear-gradient(to right, #D31027 0%, #EA384D  51%, #D31027  100%);
-    height: 40px;
-    outline: none;
-    border: none;
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.booking_btn_confirm_edit:hover {
-    background-position: 100%;
-    text-decoration: none;
-    cursor: pointer;
-}

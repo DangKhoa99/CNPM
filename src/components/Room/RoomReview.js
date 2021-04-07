@@ -11,10 +11,6 @@ function RoomReview({reference}) {
         setRating(newRating);
     }
 
-    function removeReviewInput(){
-        setRating(0);
-    }
-
     function textStar(rating){
         if(rating == 0){
             return "Đánh giá...";
@@ -34,6 +30,18 @@ function RoomReview({reference}) {
         else if(rating == 5){
             return "Rất thích";
         }
+    }
+
+    const [commentTxt, setCommentTxt] = useState("");
+
+    const handleChangeCommentTxt = (e) => {
+        let value = e.target.value;
+        setCommentTxt(value);
+    }
+
+    function removeReviewInput(){
+        setRating(0);
+        setCommentTxt("");
     }
 
     const submitComment = (e) => {
@@ -60,7 +68,7 @@ function RoomReview({reference}) {
                         </div>
 
                         <div className="commentator_info">
-                            dangkhoa99
+                            dangkhoa99 - <i style={{fontWeight: '400', fontSize: '14px'}}>tháng {(new Date().getMonth())} năm {(new Date().getFullYear())}</i>
 
                             <div className="comment_stars">
                                 <StarRatings
@@ -88,8 +96,8 @@ function RoomReview({reference}) {
                                 rows="1" 
                                 placeholder="Nhập nhận xét của bạn" 
                                 className="message"
-                                // value={}
-                                // onChange={}
+                                value={commentTxt}
+                                onChange={handleChangeCommentTxt}
                             />
 
                             <div className="comment_input_btn">
@@ -118,11 +126,16 @@ function RoomReview({reference}) {
                                 </div>
 
                                 <div className="commentator_info">
-                                    dangkhoa99 (username)
+                                    dangkhoa99
                                     <div className="comment_time">
                                         <div>tháng 3 năm 2021</div>
                                     </div>
                                 </div>
+
+                                {/* <div className="commentator_edit">
+                                    Edit
+                                </div> */}
+                                
                             </div>
 
                             <div>
@@ -141,7 +154,7 @@ function RoomReview({reference}) {
                                 </div>
 
                                 <div className="commentator_info">
-                                    thanhdo (username)
+                                    thanhdo
                                     <div className="comment_time">
                                         <div>tháng 2 năm 2021</div>
                                     </div>
@@ -164,7 +177,7 @@ function RoomReview({reference}) {
                                 </div>
 
                                 <div className="commentator_info">
-                                    ductai (username)
+                                    ductai
                                     <div className="comment_time">
                                         <div>tháng 3 năm 2021</div>
                                     </div>

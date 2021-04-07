@@ -1,8 +1,8 @@
 import React from 'react'
-import "../../style/Account.css"
+import "../../style/MenuAccount.css"
 import Header from '../../components/Header'
-import MenuLeft from "../../components/Account/MenuLeft"
-import MenuBooking from "../../components/Account/MenuBooking"
+import MenuLeft from "../../components/MenuAccount/MenuLeft"
+import MenuBooking from "../../components/MenuAccount/MenuBooking"
 
 function Booking() {
     document.title = "Khách sạn đang đặt"

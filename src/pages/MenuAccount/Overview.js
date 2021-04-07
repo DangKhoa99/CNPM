@@ -1,8 +1,8 @@
 import React from 'react'
-import "../../style/Account.css"
+import "../../style/MenuAccount.css"
 import Header from '../../components/Header'
-import MenuLeft from "../../components/Account/MenuLeft"
-import MenuOverview from "../../components/Account/MenuOverview"
+import MenuLeft from "../../components/MenuAccount/MenuLeft"
+import MenuOverview from "../../components/MenuAccount/MenuOverview"
 
 function Overview() {
     document.title = "Tổng quan về tài khoản"
