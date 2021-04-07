@@ -42,6 +42,16 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//Get favorite list of 1 customer
+router.route('/favorite').post((req, res) => {
+    const customerId = req.body.customerId;
+    Customer.findById(customerId)
+    .then(customer => {
+        res.json(res.json(customer.favorite));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 //Add favorite hotel
 router.route('/favorite/add').post((req, res) =>{
     const hotelId = req.body.hotelId;
