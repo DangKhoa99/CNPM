@@ -1,13 +1,20 @@
 const router = require('express').Router();
 let {Customer, Booking} = require('../models/customer.model');
 let Hotel = require('../models/hotel.model');
-let ObjectID = require('mongodb').ObjectID;
 
 //Query all customers in DB
 router.route('/').get((req, res) => {
     Customer.find()
         .then(customers => res.json(customers))
         .catch(err => res.status(400).json('Error ' + err));
+});
+
+// Get a customer by customerId
+router.route("/").post((req, res) => {
+    const customerId = req.body.customerId;
+    Customer.findById(customerId)
+    .then(customer => res.json(customer))
+    .catch(err => res.status(400).json('Error ' + err));
 });
 
 //Add 1 customer to DB
@@ -92,7 +99,7 @@ router.route('/booking').post((req, res) => {
     const customerId = req.body.customerId;
     Customer.findById(customerId)
     .then(customer => {
-        res.json(res.json(customer.booking));
+        res.json(customer.booking);
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });

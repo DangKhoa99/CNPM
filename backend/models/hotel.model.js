@@ -65,5 +65,6 @@ const hotelSchema = new Schema({
 });
 
 const Hotel = mongoose.model('Hotel', hotelSchema);
+const Review = mongoose.model('Review', reviewSchema);
 
-module.exports = Hotel;
+module.exports = {Hotel, Review};
