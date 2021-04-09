@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('../../node_modules/express').Router();
 let {Hotel, Review} = require('../models/hotel.model');
 
 //Query all hotels in DB

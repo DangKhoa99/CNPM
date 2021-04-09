@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('../../node_modules/express').Router();
 let {Customer, Booking} = require('../models/customer.model');
 let Hotel = require('../models/hotel.model');
 
