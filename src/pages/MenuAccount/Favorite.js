@@ -5,7 +5,7 @@ import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuFavorite from "../../components/MenuAccount/MenuFavorite"
 
 function Favorite() {
-    document.title = "Khách sạn yêu thích"
+    document.title = "Khách sạn yêu thích | RoyalStay"
     return (
         <div className="account">
             {/* <Header /> */}

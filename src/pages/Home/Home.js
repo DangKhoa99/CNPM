@@ -3,7 +3,7 @@ import "../../style/Home.css"
 import Banner from '../../components/Home/Banner'
 
 function Home() {
-  document.title = "Trang chủ"
+  document.title = "Trang chủ | RoyalStay"
 
   const [data, setData] = useState([
     {

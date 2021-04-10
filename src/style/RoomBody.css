@@ -107,6 +107,10 @@
     flex: 0 0 auto !important;
 }
 
+.roomBody_rooms_roomType.disable{
+    display: none !important;
+}
+
 .roomBody_rooms_roomType_space{
     padding-left: 8px !important;
     padding-right: 8px !important;

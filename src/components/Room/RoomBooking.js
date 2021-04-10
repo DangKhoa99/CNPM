@@ -7,7 +7,12 @@ import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 
 
-function RoomBooking() {
+function RoomBooking({
+    smallRoom,
+    mediumRoom,
+    largeRoom,
+    quantity,
+}) {
     // DATE RANGE PICKER
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
@@ -99,21 +104,27 @@ function RoomBooking() {
 
                             <div className="roomBooking_box_layout_body_row">
                                 <div className="roomBooking_box_layout_body_b">
+                                    <p>Số lượng phòng trống: <i style={{fontWeight: "500"}}>{quantity}</i></p> 
+                                </div>
+                            </div>
+
+                            <div className="roomBooking_box_layout_body_row">
+                                <div className="roomBooking_box_layout_body_b">
                                     <p>Chọn loại phòng:</p>
                                     
-                                    <label class="room_type">
+                                    <label class={smallRoom ? "room_type" : "room_type disable"}>
                                         <input type="radio" id="small" name="room_type" value="small"/>
                                         <span class="check_mark"></span>
                                         Nhỏ
                                     </label>
                                     
-                                    <label class="room_type">
+                                    <label class={mediumRoom ? "room_type" : "room_type disable"}>
                                         <input type="radio" id="medium" name="room_type" value="medium"/>
                                         <span class="check_mark"></span>
                                         Vừa
                                     </label>
                                     
-                                    <label class="room_type">
+                                    <label class={largeRoom ? "room_type" : "room_type disable"}>
                                         <input type="radio" id="big" name="room_type" value="big"/>
                                         <span class="check_mark"></span>
                                         Lớn

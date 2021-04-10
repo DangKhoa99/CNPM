@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef,  useCallback} from 'react'
 import "../../style/Room.css"
 import Header from "../../components/Header"
 import RoomHeader from "../../components/Room/RoomHeader"
@@ -9,7 +9,7 @@ import LoadingScreen from "../../components/LoadingScreen"
 import axios from 'axios'
 
 function Room() {
-    document.title = "Chi tiết phòng";
+    document.title = "Chi tiết phòng | RoyalStay";
 
     const scrollToElement = (ref) => {
         window.scrollTo({
@@ -28,31 +28,30 @@ function Room() {
     const getID = window.location.href.split("=").pop();
     const _id = {"hotelId": getID};
 
+    const loadDetailRoomFromServer = useCallback(async () =>{
+        setIsLoading(true);
+        const result = await axios.post("http://localhost:5000/hotel/", _id)
+        // await axios.post("http://localhost:5000/hotel/", _id)
+        //     .then(response => {
+        //         setData(response.data);
+        //         setIsLoading(false);
+        //     })
+        setData(result.data);
+        setIsLoading(false);
+    },[getID]); // every time id changed, new data will be loaded
+
     useEffect(() => {
-        const fetchData = async () =>{
-            setIsLoading(true);
-            await axios.post("http://localhost:5000/hotel/", _id)
-                .then(response => {
-                    setData(response.data);
-                    setIsLoading(false);
-                })
-        };
-        fetchData();
-        // console.log("data in use", data);
-    },[])
+        loadDetailRoomFromServer()
+    },[loadDetailRoomFromServer])// useEffect will run once and when id changes
 
-    if(!data) return null
-
+    if(!data) return null //first render, when useEffect did't triggered yet we will return null
 
     const arrImage=[]
-
     for (var key in data.imageLink) {
         var obj = data.imageLink[key];
         arrImage.push(obj);
-        // console.log("obj : ", typeof(obj));
     }
 
-    // console.log("arrImage", arrImage[0]);
     return (
         <div className="room">
             <div className="room__container">
@@ -65,13 +64,15 @@ function Room() {
                     reference={roomHeader}
                     click={() => scrollToElement(roomReview)}
                 />
-            }
-  
+                }
+                {isLoading ? <LoadingScreen/>
+                :
                 <RoomBody 
                     description={data.bio}
                     roomType={data.room.roomType}
+                    quantity={data.room.quantity}
                 />
-            
+                }
             
 
                 <RoomReview reference={roomReview}/>
