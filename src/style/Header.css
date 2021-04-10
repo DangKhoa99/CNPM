@@ -11,9 +11,9 @@
   /* background: rgba(0, 0, 0, 0.6) !important; */
 }
 
-.header.hideHeader{
+/* .header.hideHeader{
   display: none;
-}
+} */
 
 /* .form-label::after {
   content: '*';
@@ -46,7 +46,7 @@
 }
 
 .header_logo.active {
-  color: red;
+  color: #B22222;
 }
 
 .header_logo > svg{

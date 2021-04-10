@@ -11,11 +11,8 @@ import { store } from 'react-notifications-component'
 
 function RoomHeader({
     name,
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
+    img,
+    address,
     reference,
     click
 }) {
@@ -48,56 +45,44 @@ function RoomHeader({
         }
     };
 
+    // const img1 = img[0];
+
     const IMAGES =
     [
         {
-            src: img1,
-            thumbnail: img1,
+            src: img[0],
+            thumbnail: img[0],
             thumbnailWidth: 200,
             thumbnailHeight: 130,
             caption: "Image 1"
         },
         {
-            src: img2,
-            thumbnail: img2,
+            src: img[1],
+            thumbnail: img[1],
             thumbnailWidth: 200,
             thumbnailHeight: 130,
             caption: "Image 2"
         },
         {
-            src: img3,
-            thumbnail: img3,
+            src: img[2],
+            thumbnail: img[2],
             thumbnailWidth: 200,
             thumbnailHeight: 130,
             caption: "Image 3"
         },
         {
-            src: img4,
-            thumbnail: img4,
+            src: img[3],
+            thumbnail: img[3],
             thumbnailWidth: 200,
             thumbnailHeight: 130,
             caption: "Image 4"
         },
         {
-            src: img5,
-            thumbnail: img5,
+            src: img[4],
+            thumbnail: img[4],
             thumbnailWidth: 200,
             thumbnailHeight: 130,
             caption: "Image 5"
-        },
-        {
-            src: "https://a0.muscache.com/im/pictures/1c643462-30e3-4752-b161-4e2f23964d68.jpg?im_w=720",
-            thumbnail: "https://a0.muscache.com/im/pictures/1c643462-30e3-4752-b161-4e2f23964d68.jpg?im_w=720",
-            thumbnailWidth: 200,
-            thumbnailHeight: 130,
-            caption: "Image 6"
-        },
-        {
-            src: "https://a0.muscache.com/im/pictures/c525dfc4-6248-42a4-a75a-f159a7742268.jpg?im_w=720",
-            thumbnail: "https://a0.muscache.com/im/pictures/c525dfc4-6248-42a4-a75a-f159a7742268.jpg?im_w=720",
-            thumbnailWidth: 200,
-            thumbnailHeight: 130,
-            caption: "Image 7"
         },
     ];
     
@@ -116,7 +101,7 @@ function RoomHeader({
                                     <strong>4.9 (41)</strong>
                                 </span>
                                 <span className="roomHeader_heading_dot">·</span>
-                                <span className="roomHeader_heading_place">Hồ Chí Minh, Việt Nam</span>
+                                <span className="roomHeader_heading_place">{address}</span>
                             </div>
                             
                             <div className="roomHeader_heading_description_right">

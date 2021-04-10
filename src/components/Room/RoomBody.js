@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 import "../../style/RoomBody.css"
 import StarIcon from "@material-ui/icons/Star"
 import {ReactComponent as Wifi} from "../../icons/iconWifi.svg"
@@ -24,7 +24,37 @@ import {ReactComponent as NoPets} from "../../icons/iconNoPets.svg"
 
 import RoomBooking from "./RoomBooking"
 
-function RoomBody() {
+function RoomBody({
+    description,
+    roomType,
+}) {
+    const myRef = useRef(null);
+
+    const [small, setSmall] = useState(false);
+    const [medium, setMedium] = useState(false);
+    const [large, setLarge] = useState(false);
+
+    // for (var i in roomType) {
+    //     if(roomType[i] == "Small")
+    //         setSmall(true);
+    //     else if(roomType[i] == "Medium")
+    //         setMedium(true);
+    //     else if(roomType[i] == "Large")
+    //         setLarge(true);
+    // }
+
+
+    console.log("roomType", roomType[0]);
+
+    const scrollToElement = () =>{
+        if(!isReadMore){
+                window.scrollTo({
+                behavior: "smooth",
+                top: 0
+            });
+        }
+      }
+
     const [amenities, setAmenities] = useState([
         {
           symbol: <Wifi />,
@@ -77,7 +107,6 @@ function RoomBody() {
     ]);
 
     // Show more
-    const text = "King Fisher được thành lập nhằm mang đến một không gian lưu trú và làm việc tại TP.HCM cho các doanh nhân hoặc doanh nhân cần sự thoải mái và tiện lợi trong những chuyến công tác ngắn ngày. công viên nhỏ và bên cạnh sở thú và vườn bách thảo lớn nhất của thành phố. Mặt tiền của tòa nhà hướng trọn ra dòng kênh Thị Nghè trong xanh chảy và hiện là điểm du lịch với bến du thuyền nhỏ chỉ cách đó vài bước chân.";
     const [isReadMore, setIsReadMore] = useState(true);
     const toggleReadMore = () => {
         setIsReadMore(!isReadMore);
@@ -88,13 +117,13 @@ function RoomBody() {
     return (
         <div className="roomBody">
             <div className="roomBody_container_left">
-                <div className="roomBody_description">
+                <div className="roomBody_description"  ref={myRef}>
                     <h2>Mô tả</h2>
                     <div className="roomBody_description_paragraph">
-                        <span>{isReadMore ? text.slice(0, 150) + "..." : text}</span>
+                        <span >{isReadMore ? description.slice(0, 150) + "..." : description}</span>
                         
                     </div>
-                    <button onClick={toggleReadMore} className="readMore">
+                    <button onClick={() => {toggleReadMore(); scrollToElement();}} className="readMore">
                             {isReadMore ? "Xem thêm" : " Ẩn bớt"}
                     </button> 
 
