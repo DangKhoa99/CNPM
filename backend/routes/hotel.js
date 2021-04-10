@@ -16,6 +16,13 @@ router.route("/").post((req, res) => {
     .catch(err => res.status(400).json('Error ' + err));
 });
 
+// router.route("/:id").get((req, res) => {
+//     const hotelId = req.params.id;
+//     Hotel.findById(hotelId)
+//     .then(hotel => res.json(hotel))
+//     .catch(err => res.status(400).json('Error ' + err));
+// });
+
 //Add 1 hotel to DB
 router.route('/add').post((req, res) =>{
     const name = req.body.name;

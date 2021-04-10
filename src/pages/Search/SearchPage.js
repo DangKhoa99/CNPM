@@ -19,15 +19,24 @@ function SearchPage() {
         price = "Tăng dần";
     }
 
-    useEffect(() => {        
+    useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
-            const result = await axios('http://localhost:5000/hotel/')
-            setData(result.data);
-            setIsLoading(false);
+            // const result = await axios.get('http://localhost:5000/hotel/')
+            await axios.get('http://localhost:5000/hotel/')
+            .then(response => {
+                if(response.data.length > 0){
+                    setData(response.data);
+                    setIsLoading(false);
+                }
+            })
+            // setData(result.data);
+            // setIsLoading(false);
         };
 
         fetchData();
+
+        console.log("data use effect", data);
 
         if(window.location.href.split("=").pop() == ""){
             setPageURL("Vui lòng chọn địa điểm");
@@ -36,6 +45,8 @@ function SearchPage() {
             setPageURL(decodeURIComponent(window.location.href.split("=").pop()));
         }
     },[])
+
+    console.log("aaaaa", data);
 
     const place = pageURL.split("+").join(" ");
 

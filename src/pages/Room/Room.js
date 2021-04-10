@@ -1,9 +1,12 @@
-import React, {useRef} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import "../../style/Room.css"
 import Header from "../../components/Header"
 import RoomHeader from "../../components/Room/RoomHeader"
 import RoomBody from "../../components/Room/RoomBody"
 import RoomReview from "../../components/Room/RoomReview"
+import LoadingScreen from "../../components/LoadingScreen"
+
+import axios from 'axios'
 
 function Room() {
     document.title = "Chi tiết phòng";
@@ -18,26 +21,63 @@ function Room() {
     const roomHeader = useRef();
     const roomReview = useRef();
 
+    const [data, setData] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const getID = window.location.href.split("=").pop();
+    const _id = {"hotelId": getID};
+
+    useEffect(() => {
+        const fetchData = async () =>{
+            setIsLoading(true);
+            await axios.post("http://localhost:5000/hotel/", _id)
+                .then(response => {
+                    setData(response.data);
+                    setIsLoading(false);
+                })
+        };
+        fetchData();
+        // console.log("data in use", data);
+    },[])
+
+    if(!data) return null
+
+
+    const arrImage=[]
+
+    for (var key in data.imageLink) {
+        var obj = data.imageLink[key];
+        arrImage.push(obj);
+        // console.log("obj : ", typeof(obj));
+    }
+
+    // console.log("arrImage", arrImage[0]);
     return (
         <div className="room">
-            {/* <Header /> */}
-
             <div className="room__container">
+                {isLoading ? <LoadingScreen/>
+                :
                 <RoomHeader
-                    name="King Fisher"
-                    img1="https://a0.muscache.com/im/pictures/57df2556-0385-408e-968c-80cc744a96b1.jpg?im_w=720"
-                    img2="https://a0.muscache.com/im/pictures/0c30fe8e-c29b-4f73-a53e-5421f1b68e9e.jpg?im_w=720"
-                    img3="https://a0.muscache.com/im/pictures/bda44d94-fe2f-47ad-abf5-14df4ce4e255.jpg?im_w=720"
-                    img4="https://a0.muscache.com/im/pictures/b3b360fa-2556-4c2c-83f9-8c7337b24f1a.jpg?im_w=720"
-                    img5="https://a0.muscache.com/im/pictures/5894f335-dbe8-4f2e-8841-b415d8eb1990.jpg?im_w=720"
+                    name={data.name}
+                    img={arrImage}
+                    address={data.address}
                     reference={roomHeader}
                     click={() => scrollToElement(roomReview)}
                 />
-
-                <RoomBody />
+            }
+  
+                <RoomBody 
+                    description={data.bio}
+                    roomType={data.room.roomType}
+                />
+            
+            
 
                 <RoomReview reference={roomReview}/>
 
+            
+            
             </div>
             
         </div>
