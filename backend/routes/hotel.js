@@ -1,5 +1,7 @@
 const router = require('../../node_modules/express').Router();
 let {Hotel, Review} = require('../models/hotel.model');
+const verify = require('./verifyToken');
+
 
 //Query all hotels in DB
 router.route('/').get((req, res) => {
@@ -15,6 +17,13 @@ router.route("/").post((req, res) => {
     .then(hotel => res.json(hotel))
     .catch(err => res.status(400).json('Error ' + err));
 });
+
+// router.route("/:id").get((req, res) => {
+//     const hotelId = req.params.id;
+//     Hotel.findById(hotelId)
+//     .then(hotel => res.json(hotel))
+//     .catch(err => res.status(400).json('Error ' + err));
+// });
 
 //Add 1 hotel to DB
 router.route('/add').post((req, res) =>{
@@ -54,7 +63,7 @@ router.route('/review').post((req, res) => {
 });
 
 //Add a review to hotel
-router.route('/review/add').post((req, res) =>{
+router.route('/review/add').post(verify, (req, res) =>{
     const hotelId = req.body.hotelId;
     
     Hotel.findById(hotelId)
@@ -80,7 +89,7 @@ router.route('/review/add').post((req, res) =>{
 });
 
 //Edit review to hotel
-router.route('/review/edit').post((req, res) =>{
+router.route('/review/edit').post(verify, (req, res) =>{
     const hotelId = req.body.hotelId;
     const reviewId = req.body.reviewId;
     

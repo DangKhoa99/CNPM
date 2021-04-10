@@ -1,6 +1,8 @@
 const router = require('../../node_modules/express').Router();
+const verify = require('./verifyToken');
 let {Customer, Booking} = require('../models/customer.model');
 let Hotel = require('../models/hotel.model');
+
 
 //Query all customers in DB
 router.route('/').get((req, res) => {
@@ -9,8 +11,8 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error ' + err));
 });
 
-// Get a customer by customerId
-router.route("/").post((req, res) => {
+// Get a customer by customerId | token require
+router.route("/").post(verify, (req, res) => {
     const customerId = req.body.customerId;
     Customer.findById(customerId)
     .then(customer => res.json(customer))
@@ -50,8 +52,8 @@ router.route('/add').post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//Get favorite list of 1 customer
-router.route('/favorite').post((req, res) => {
+//Get favorite list of 1 customer | token require
+router.route('/favorite').post(verify, (req, res) => {
     const customerId = req.body.customerId;
     Customer.findById(customerId)
     .then(customer => {
@@ -60,8 +62,8 @@ router.route('/favorite').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//Add favorite hotel
-router.route('/favorite/add').post((req, res) =>{
+//Add favorite hotel | token require
+router.route('/favorite/add').post(verify, (req, res) =>{
     const hotelId = req.body.hotelId;
     const customerId = req.body.customerId;
     
@@ -77,8 +79,8 @@ router.route('/favorite/add').post((req, res) =>{
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//Remove favorite hotel
-router.route('/favorite/delete').post((req, res) =>{
+//Remove favorite hotel | token require
+router.route('/favorite/delete').post(verify, (req, res) =>{
     const hotelId = req.body.hotelId;
     const customerId = req.body.customerId;
     
@@ -94,8 +96,8 @@ router.route('/favorite/delete').post((req, res) =>{
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//Get booking list of 1 customer
-router.route('/booking').post((req, res) => {
+//Get booking list of 1 customer | token require
+router.route('/booking').post(verify, (req, res) => {
     const customerId = req.body.customerId;
     Customer.findById(customerId)
     .then(customer => {
@@ -104,8 +106,8 @@ router.route('/booking').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//Add booking of 1 customer
-router.route('/booking/add').post((req, res) =>{
+//Add booking of 1 customer | token require
+router.route('/booking/add').post(verify, (req, res) =>{
     const customerId = req.body.customerId;
     
     Customer.findById(customerId)
@@ -133,8 +135,8 @@ router.route('/booking/add').post((req, res) =>{
 });
 
 
-//Cancel a booking of 1 customer
-router.route('/booking/cancel').post((req, res) =>{
+//Cancel a booking of 1 customer | token require
+router.route('/booking/cancel').post(verify, (req, res) =>{
     const bookingId = req.body.bookingId;
     const customerId = req.body.customerId;
     

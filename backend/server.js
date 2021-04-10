@@ -26,9 +26,11 @@ connection.once('open', () => {
 
 const hotelRouter = require('./routes/hotel');
 const customerRouter = require('./routes/customer');
+const userAuth = require('./routes/userAuth');
 
 app.use('/hotel', hotelRouter);
 app.use('/customer', customerRouter);
+app.use('/auth', userAuth)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
