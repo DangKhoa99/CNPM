@@ -2,6 +2,7 @@ const bcrypt = require('../../node_modules/bcrypt');
 const router = require('../../node_modules/express').Router();
 let {Customer, Booking} = require('../models/customer.model');
 const jwt = require('../../node_modules/jsonwebtoken');
+const Token = require('../models/token.model');
 
 router.route('/register').post( async (req, res) => {
 
@@ -45,7 +46,28 @@ router.route('/login').post( async (req, res) => {
 
     //Create and assign a token
     const token = jwt.sign({_id: user._id, isAdmin: user.isAdmin}, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send(token);
+    
+    //Save token to database
+    const newToken = new Token({
+        userId: user._id,
+        tokenString: token
+    });
+
+    newToken.save()
+    .then(() => res.header('auth-token', token).send(token))
+    .catch(err => res.status(400).json('Error: ' + err)) 
 });
+
+router.route('/logout').post(async (req, res) => {
+    const token = req.header('auth-token');
+    const tokenCheck = await Token.findOne({ tokenString: token });
+    if(tokenCheck){
+        Token.findOneAndDelete({tokenString: token})
+        .then(() => res.send("Logout successfully"))
+        .catch(err => res.status(400).json('Error: ' + err));
+    } else{
+        res.send('Already logout');
+    }
+})
 
 module.exports = router;
