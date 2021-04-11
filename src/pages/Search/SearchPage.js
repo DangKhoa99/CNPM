@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import "../../style/SearchPage.css"
 import SearchCard from "../../components/Search/SearchCard"
 import LoadingScreen from "../../components/LoadingScreen"
-import { Button } from '@material-ui/core'
-import Header from '../../components/Header'
 import axios from 'axios'
 
 function SearchPage() {

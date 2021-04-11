@@ -1,7 +1,6 @@
-// const express = require('express');
-const express = require('../node_modules/express');
-const cors = require('../node_modules/cors');
-const mongoose = require('../node_modules/mongoose');
+const express = require('../../node_modules/express');
+const cors = require('../../node_modules/cors');
+const mongoose = require('mongoose');
 
 
 mongoose.set('useNewUrlParser', true);

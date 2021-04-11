@@ -1,8 +1,8 @@
 const bcrypt = require('../../node_modules/bcrypt');
 const router = require('../../node_modules/express').Router();
-let {Customer, Booking} = require('../models/customer.model');
+let {Customer, Booking} = require('../models/Customer.model');
 const jwt = require('../../node_modules/jsonwebtoken');
-const Token = require('../models/token.model');
+const Token = require('../models/Token.model');
 
 router.route('/register').post( async (req, res) => {
 

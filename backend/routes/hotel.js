@@ -1,6 +1,6 @@
 const router = require('../../node_modules/express').Router();
-let {Hotel, Review} = require('../models/hotel.model');
-const verify = require('./verifyToken');
+let {Hotel, Review} = require('../models/Hotel.model');
+const verify = require('./VerifyToken');
 
 
 //Query all hotels in DB

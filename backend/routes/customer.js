@@ -1,7 +1,7 @@
 const router = require('../../node_modules/express').Router();
-const verify = require('./verifyToken');
-let {Customer, Booking} = require('../models/customer.model');
-let Hotel = require('../models/hotel.model');
+const verify = require('./VerifyToken');
+let {Customer, Booking} = require('../models/Customer.model');
+let Hotel = require('../models/Hotel.model');
 
 
 //Query all customers in DB

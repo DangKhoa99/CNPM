@@ -2,8 +2,6 @@ import React, { useState, useRef } from 'react'
 import '../../style/Banner.css'
 import {Button} from "@material-ui/core"
 import { Link } from 'react-router-dom'
-// import Background from '/test/img-home.png'
-
 
 function Banner() {
   const [inHover, setHover] = useState(false);
