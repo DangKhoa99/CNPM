@@ -102,11 +102,34 @@ router.route('/favorite/delete').post(verify, (req, res) =>{
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//Logical for updating booking status
+function bookingUpdate(customer){
+    for(i in customer.booking){
+        if(customer.booking[i].status != "Cancel"){                
+            const curDate = new Date();
+            const checkInDate = new Date(customer.booking[i].checkIn);
+            const checkOutDate = new Date(customer.booking[i].checkOut);
+            if(curDate < checkInDate){
+                customer.booking[i].status = "Pending";
+            }
+            else if (curDate >= checkInDate && curDate <= checkOutDate){
+                customer.booking[i].status = "Staying";
+            }
+            else if (curDate > checkOutDate){
+                customer.booking[i].status = "Stayed";
+            }
+        }
+    }
+    customer.save();
+}
+
 //Get booking list of 1 customer | token require
 router.route('/booking').post(verify, (req, res) => {
     const customerId = req.body.customerId;
     Customer.findById(customerId)
     .then(customer => {
+
+        bookingUpdate(customer);
         res.json(customer.booking);
     })
     .catch(err => res.status(400).json('Error: ' + err));
@@ -120,8 +143,8 @@ router.route('/booking/add').post(verify, (req, res) =>{
     .then(customer => {
 
         const hotelId = req.body.hotelId;
-        const checkIn = Date.parse(req.body.checkIn);
-        const checkOut = Date.parse(req.body.checkOut);
+        const checkIn = req.body.checkIn;
+        const checkOut = req.body.checkOut;
         const roomType = req.body.roomType;
 
         const newBooking = new Booking({
