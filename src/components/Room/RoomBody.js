@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import "../../style/RoomBody.css"
 import StarIcon from "@material-ui/icons/Star"
 import {ReactComponent as Wifi} from "../../icons/iconWifi.svg"
@@ -27,6 +27,7 @@ import RoomBooking from "./RoomBooking"
 function RoomBody({
     description,
     roomType,
+    quantity,
 }) {
     const myRef = useRef(null);
 
@@ -34,14 +35,18 @@ function RoomBody({
     const [medium, setMedium] = useState(false);
     const [large, setLarge] = useState(false);
 
-    // for (var i in roomType) {
-    //     if(roomType[i] == "Small")
-    //         setSmall(true);
-    //     else if(roomType[i] == "Medium")
-    //         setMedium(true);
-    //     else if(roomType[i] == "Large")
-    //         setLarge(true);
-    // }
+    useEffect(() => {
+        for (var i in roomType) {
+            if(roomType[i] == "Small")
+                setSmall(true);
+            else if(roomType[i] == "Medium")
+                setMedium(true);
+            else if(roomType[i] == "Large")
+                setLarge(true);
+        }
+    },[roomType])
+
+
 
 
     console.log("roomType", roomType[0]);
@@ -135,7 +140,8 @@ function RoomBody({
                     <h2>Loại phòng</h2>
                     <div className="roomBody_rooms_options">
                         <div className="roomBody_rooms_roomTypes">
-                            <div className="roomBody_rooms_roomType">
+
+                            <div className={small ? "roomBody_rooms_roomType" : "roomBody_rooms_roomType disable"}>
                                 <div className="roomBody_rooms_roomType_space">
                                     <div className="roomBody_rooms_roomType_frame">
                                         <div className="roomBody_rooms_roomType_frame_icons">
@@ -150,7 +156,7 @@ function RoomBody({
                                 </div>
                             </div>
 
-                            <div className="roomBody_rooms_roomType">
+                            <div className={medium ? "roomBody_rooms_roomType" : "roomBody_rooms_roomType disable"}>
                                 <div className="roomBody_rooms_roomType_space">
                                     <div className="roomBody_rooms_roomType_frame">
                                         <div className="roomBody_rooms_roomType_frame_icons">
@@ -169,7 +175,7 @@ function RoomBody({
                                 </div>
                             </div>
 
-                            <div className="roomBody_rooms_roomType">
+                            <div className={large ? "roomBody_rooms_roomType" : "roomBody_rooms_roomType disable"}>
                                 <div className="roomBody_rooms_roomType_space">
                                     <div className="roomBody_rooms_roomType_frame">
                                         <div className="roomBody_rooms_roomType_frame_icons">
@@ -257,7 +263,12 @@ function RoomBody({
             </div>
 
             <div className="roomBody_container_right">
-                <RoomBooking />
+                <RoomBooking
+                    smallRoom={small}
+                    mediumRoom={medium}
+                    largeRoom={large}
+                    quantity={quantity}
+                />
             </div>
         </div>
     )

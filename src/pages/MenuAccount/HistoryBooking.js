@@ -5,7 +5,7 @@ import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuHistoryBooking from "../../components/MenuAccount/MenuHistoryBooking"
 
 function HistoryBooking() {
-    document.title = "Lịch sử đặt khách sạn"
+    document.title = "Lịch sử đặt khách sạn | RoyalStay"
     return (
         <div className="account">
             {/* <Header /> */}

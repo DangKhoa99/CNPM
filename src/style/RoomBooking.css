@@ -270,6 +270,10 @@
     cursor: pointer;
 }
 
+.room_type.disable{
+    display:none !important;
+}
+
 .room_type input {
     position: absolute;
     opacity: 0;

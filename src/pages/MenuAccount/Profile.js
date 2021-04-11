@@ -5,7 +5,7 @@ import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuProfile from "../../components/MenuAccount/MenuProfile"
 
 function Profile() {
-    document.title = "Chỉnh sửa hồ sơ"
+    document.title = "Chỉnh sửa hồ sơ | RoyalStay"
 
     return (
         <div className="account">

@@ -8,7 +8,7 @@ import Home from "../Home/Home"
 import { store } from 'react-notifications-component'
 
 function SignUp() {
-  document.title = "Đăng ký"
+  document.title = "Đăng ký | RoyalStay"
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 

@@ -61,7 +61,7 @@ function SearchPage() {
         return arrOfWordsCased.join(" ");
     }
 
-    document.title = capitalize(place)
+    document.title = capitalize(place) + " | RoyalStay"
     // console.log(data.map(d => {return d.name}));
     // Phân trang
     // const [paging, setPaging] = useState({
@@ -106,7 +106,7 @@ function SearchPage() {
             {isLoading ? <LoadingScreen/>
             :
             filterPrice ?
-                data.sort((a, b) => (a.price - b.price)) 
+                data.sort((a, b) => (a.room.price - b.room.price)) 
                 .map(item => {
                     return  <SearchCard 
                                 id={item._id}
@@ -118,11 +118,11 @@ function SearchPage() {
                                     return ttt + " · " 
                                 })}
                                 star={0}
-                                price={item.price}
+                                price={item.room.price}
                             />
                 })
                 : 
-                data.sort((a, b) => (b.price - a.price))
+                data.sort((a, b) => (b.room.price - a.room.price))
                 .map(item => {
                     return  <SearchCard 
                                 id={item._id}
@@ -134,7 +134,7 @@ function SearchPage() {
                                     return ttt + " · " 
                                 })}
                                 star={0}
-                                price={item.price}
+                                price={item.room.price}
                             />
                 })
             // data.map(item => {

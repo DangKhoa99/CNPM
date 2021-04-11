@@ -2,7 +2,7 @@ import React from 'react'
 import "../../style/ErrorPage.css"
 
 function ErrorPage() {
-    document.title = "404 Page Not Found"
+    document.title = "404 Page Not Found | RoyalStay"
 
     const myStyleBackground={
         background: `url('${process.env.PUBLIC_URL}/images/404.jpg'), #151729`

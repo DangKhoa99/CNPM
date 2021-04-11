@@ -5,7 +5,7 @@ import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuOverview from "../../components/MenuAccount/MenuOverview"
 
 function Overview() {
-    document.title = "Tổng quan về tài khoản"
+    document.title = "Tổng quan về tài khoản | RoyalStay"
     return (
         <div className="account">
             {/* <Header /> */}

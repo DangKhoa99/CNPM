@@ -4,7 +4,9 @@ import StarIcon from "@material-ui/icons/Star"
 import {Avatar, styled} from "@material-ui/core"
 import StarRatings from "react-star-ratings"
 
-function RoomReview({reference}) {
+function RoomReview({
+    reference
+}) {
     const [rating, setRating] = useState(0);
 
     function changeRating(newRating){
