@@ -11,7 +11,9 @@ function RoomBooking({
     smallRoom,
     mediumRoom,
     largeRoom,
+    roomType,
     quantity,
+    price,
 }) {
     // DATE RANGE PICKER
     const [startDate, setStartDate] = useState()
@@ -35,6 +37,12 @@ function RoomBooking({
         return Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
     }
 
+    const [room, setRoom] = useState("Small");
+
+    function onRoomChanged(e) {
+        setRoom(e.currentTarget.value);
+    }
+    
     return (
         <div className="roomBooking">
             <div className="roomBooking_box">
@@ -42,7 +50,7 @@ function RoomBooking({
                     <div className="roomBooking_box_layout_header">
                         {/* <div className="roomBooking_box_layout_header_left"> */}
                         <div className="roomBooking_box_layout_header_defaultPrice">
-                            <span className="roomBooking_defaultPrice">$10</span>
+                            <span className="roomBooking_defaultPrice">${price}</span>
                             <span className="roomBooking_night">/đêm</span>
                         </div>
                         {/* </div> */}
@@ -111,24 +119,55 @@ function RoomBooking({
                             <div className="roomBooking_box_layout_body_row">
                                 <div className="roomBooking_box_layout_body_b">
                                     <p>Chọn loại phòng:</p>
+
+                                    {roomType.map(type => {
+                                        return <label class="room_type">
+                                                    <input 
+                                                        type="radio" 
+                                                        id={type} 
+                                                        name="room_type" 
+                                                        value={type}
+                                                        checked={room === type}
+                                                        onChange={onRoomChanged}
+                                                    />
+                                                    <span class="check_mark"></span>
+                                                    {type}
+                                                </label>
+                                    })}
+
                                     
-                                    <label class={smallRoom ? "room_type" : "room_type disable"}>
-                                        <input type="radio" id="small" name="room_type" value="small"/>
+                                    {/* <label class={smallRoom ? "room_type" : "room_type disable"}>
+                                        <input 
+                                            type="radio" 
+                                            id="small" 
+                                            name="room_type" 
+                                            value="small"
+                                        />
                                         <span class="check_mark"></span>
                                         Nhỏ
                                     </label>
                                     
                                     <label class={mediumRoom ? "room_type" : "room_type disable"}>
-                                        <input type="radio" id="medium" name="room_type" value="medium"/>
+                                        <input 
+                                            type="radio" 
+                                            id="medium" 
+                                            name="room_type" 
+                                            value="medium"
+                                        />
                                         <span class="check_mark"></span>
                                         Vừa
                                     </label>
                                     
                                     <label class={largeRoom ? "room_type" : "room_type disable"}>
-                                        <input type="radio" id="big" name="room_type" value="big"/>
+                                        <input 
+                                            type="radio" 
+                                            id="big" 
+                                            name="room_type" 
+                                            value="big"
+                                        />
                                         <span class="check_mark"></span>
                                         Lớn
-                                    </label>
+                                    </label> */}
                                 </div>
                             </div>
 
