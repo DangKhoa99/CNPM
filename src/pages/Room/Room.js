@@ -9,7 +9,7 @@ import LoadingScreen from "../../components/LoadingScreen"
 import axios from 'axios'
 
 function Room() {
-    document.title = "Chi tiết phòng | RoyalStay";
+    
 
     const scrollToElement = (ref) => {
         window.scrollTo({
@@ -51,6 +51,8 @@ function Room() {
         var obj = data.imageLink[key];
         arrImage.push(obj);
     }
+
+    document.title = data.name + " | RoyalStay";
 
     return (
         <div className="room">

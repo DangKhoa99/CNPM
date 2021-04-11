@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import "../../style/SearchPage.css"
 import SearchCard from "../../components/Search/SearchCard"
 import LoadingScreen from "../../components/LoadingScreen"
-import { Button } from '@material-ui/core'
-import Header from '../../components/Header'
 import axios from 'axios'
 
 function SearchPage() {
     const [data, setData] = useState([]);
+    const [notData, setNotData] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [pageURL, setPageURL] = useState("");
     const [filterPrice, setFilterPrice] = useState(false); // false: giảm - true: tăng
 
     const handleClickFilterPrice = () => setFilterPrice(!filterPrice);
@@ -19,36 +17,68 @@ function SearchPage() {
         price = "Tăng dần";
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true);
-            // const result = await axios.get('http://localhost:5000/hotel/')
-            await axios.get('http://localhost:5000/hotel/')
+    const place = decodeURIComponent(window.location.href.split("=").pop()).split("+").join(" ");
+
+    let placeMap = place;
+    if(capitalize(place) == "Hồ Chí Minh"){
+        placeMap = "HCM"
+    }
+    else if(capitalize(place) == "Hà Nội"){
+        placeMap = "HN"
+    }
+    else if(capitalize(place) == "Đà Nẵng"){
+        placeMap = "ĐN"
+    }
+    else if(capitalize(place) == "Phan Thiết"){
+        placeMap = "PT"
+    }
+    else if(capitalize(place) == "Vũng Tàu"){
+        placeMap = "VT"
+    }
+    else if(capitalize(place) == "Đà Lạt"){
+        placeMap = "ĐL"
+    }
+    else if(capitalize(place) == "Phú Quốc"){
+        placeMap = "PQ"
+    }
+
+    const location = {
+        "location": placeMap,
+    }
+
+    console.log("location", location.location);
+
+    const fetchData = useCallback(async () => {
+        setIsLoading(true);
+        setNotData(false);
+
+        if(capitalize(place) == "Việt Nam"){
+            axios.get('http://localhost:5000/hotel/')
             .then(response => {
                 if(response.data.length > 0){
                     setData(response.data);
                     setIsLoading(false);
                 }
             })
-            // setData(result.data);
-            // setIsLoading(false);
-        };
-
-        fetchData();
-
-        console.log("data use effect", data);
-
-        if(window.location.href.split("=").pop() == ""){
-            setPageURL("Vui lòng chọn địa điểm");
         }
         else{
-            setPageURL(decodeURIComponent(window.location.href.split("=").pop()));
+            axios.post('http://localhost:5000/hotel/location', location)
+            .then(response => {
+                if(response.data.length > 0){
+                    setData(response.data);
+                    setIsLoading(false);
+                }
+                else{
+                    setNotData(true);
+                    setIsLoading(false);
+                }
+            })
         }
-    },[])
+    },[place]);
 
-    console.log("aaaaa", data);
-
-    const place = pageURL.split("+").join(" ");
+    useEffect(() => {
+        fetchData();
+    },[fetchData])
 
     function capitalize(str) {
         const arrOfWords = str.split(" ");
@@ -60,8 +90,13 @@ function SearchPage() {
         }
         return arrOfWordsCased.join(" ");
     }
-
-    document.title = capitalize(place) + " | RoyalStay"
+    if(capitalize(place) == ""){
+        document.title = "Việt Nam | RoyalStay"
+    }
+    else{
+        document.title = capitalize(place) + " | RoyalStay"
+    }
+    
     // console.log(data.map(d => {return d.name}));
     // Phân trang
     // const [paging, setPaging] = useState({
@@ -83,7 +118,12 @@ function SearchPage() {
             {/* <Header /> */}
             <div className="searchPage_info">
                 {/* <p>Hơn 300 chỗ ở</p> */}
-                <h1>{"Khách sạn tại " + capitalize(place)}</h1>
+                <h1>{
+                    capitalize(place) == "" ?
+                    "Khách sạn tại Việt Nam"
+                    :
+                    "Khách sạn tại " + capitalize(place)
+                }</h1>
 
                 <button className="searchPage_filter_hotel" onClick={handleClickFilterPrice}>
                     Giá: {price}
@@ -105,38 +145,39 @@ function SearchPage() {
 
             {isLoading ? <LoadingScreen/>
             :
-            filterPrice ?
-                data.sort((a, b) => (a.room.price - b.room.price)) 
-                .map(item => {
-                    return  <SearchCard 
-                                id={item._id}
-                                img={item.imageLink}
-                                address={item.address}
-                                name={item.name}
-                                description={item.tien_ich
-                                    .map(ttt => {
-                                    return ttt + " · " 
-                                })}
-                                star={0}
-                                price={item.room.price}
-                            />
-                })
-                : 
-                data.sort((a, b) => (b.room.price - a.room.price))
-                .map(item => {
-                    return  <SearchCard 
-                                id={item._id}
-                                img={item.imageLink}
-                                address={item.address}
-                                name={item.name}
-                                description={item.tien_ich
-                                    .map(ttt => {
-                                    return ttt + " · " 
-                                })}
-                                star={0}
-                                price={item.room.price}
-                            />
-                })
+            notData ? <h1 style={{textAlign: "center"}}>Chúng tôi không tìm thấy bất kỳ khách sạn nào nơi bạn muốn đến. Vui lòng chọn nơi khác.</h1> :
+                filterPrice ?
+                    data.sort((a, b) => (a.room.price - b.room.price)) 
+                    .map(item => {
+                        return  <SearchCard 
+                                    id={item._id}
+                                    img={item.imageLink}
+                                    address={item.address}
+                                    name={item.name}
+                                    description={item.tien_ich
+                                        .map(ttt => {
+                                        return ttt + " · " 
+                                    })}
+                                    star={0}
+                                    price={item.room.price}
+                                />
+                    })
+                    : 
+                    data.sort((a, b) => (b.room.price - a.room.price))
+                    .map(item => {
+                        return  <SearchCard 
+                                    id={item._id}
+                                    img={item.imageLink}
+                                    address={item.address}
+                                    name={item.name}
+                                    description={item.tien_ich
+                                        .map(ttt => {
+                                        return ttt + " · " 
+                                    })}
+                                    star={0}
+                                    price={item.room.price}
+                                />
+                    })
             // data.map(item => {
             //     return  <SearchCard 
             //                 // id={item.id}

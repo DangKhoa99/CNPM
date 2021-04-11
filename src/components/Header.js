@@ -7,11 +7,12 @@ import Aos from "aos"
 import "aos/dist/aos.css"
 import {ReactComponent as IconLocation} from "../icons/iconBooking.svg"
 import {Avatar} from "@material-ui/core"
+import axios from 'axios'
 
 function Header() {
   // vị trí địa chỉ trình duyệt hiện tại
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
 
   const [buttonSignIn, setButtonSignIn] = useState(true);
   const [colorHeader, setColorHeader] = useState(true);
@@ -68,7 +69,7 @@ function Header() {
     }
   }
 
-  console.log("Test Header: " + window.location.href)
+  // console.log("Test Header: " + window.location.href)
 
   // Bấm vào logo để lên đầu trang
   const scrollToTop = () =>{
@@ -103,6 +104,25 @@ function Header() {
   // Hiện nút Đăng ký khi Responsive
   window.addEventListener('resize', showButton);
 
+  // Search bar
+  // const [dataSearchLocation, setDataSearchLocation] = useState([]);
+  const [searchLocation, setSearchLocation] = useState("");
+  function onChangeSearchLocation(e){
+    setSearchLocation(e.target.value);
+  } 
+
+  // function searchHotel(e){
+  //   e.preventDefault();
+  //   const location = {
+  //     "location": searchLocation,
+  //   }
+
+  //   axios.post("http://localhost:5000/hotel/location", location)
+  //   .then(response => setDataSearchLocation(response.data));
+  // }  
+  // if(!dataSearchLocation) return null
+  // console.log(dataSearchLocation);
+
   return (
       <nav className={colorHeader ? 'header active' : 'header'}>
         <div className='header_container'>
@@ -122,18 +142,23 @@ function Header() {
             onClick={openMenuSearchSuggestion} 
             onBlur={closeMenuSearchSuggestion}
           >
-            <form action="/search-page">
+            <form 
+            // onSubmit={searchHotel} 
+            action="/search-page">
               <input 
+                // required
                 type="text" 
                 name="result" 
                 className={colorHeader ? "input_search active" : "input_search"} 
                 placeholder="Bạn sắp đi đâu?" 
                 spellCheck="false"
                 autocomplete="off"
+                value={searchLocation}
+                onChange={onChangeSearchLocation}
               />
             </form>
             <a 
-              href="/search-page?result=" 
+              href={"/search-page?result=" + searchLocation}
               className={colorHeader ? "header_search_btn active" : "header_search_btn"}
             >
               <i class="fas fa-search"></i>

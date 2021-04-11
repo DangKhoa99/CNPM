@@ -28,9 +28,10 @@ function RoomBooking({
       highlight: '-highlight'
     }
 
-    function removeDays(){
+    function removeOptional(){
         setStartDate(null);
         setEndDate(null);
+        setRoom(roomType[0]);
     }
 
     function calDate(startDate, endDate){
@@ -43,15 +44,17 @@ function RoomBooking({
         setRoom(e.currentTarget.value);
     }
 
-    const pricePerNight = priceSmallRoom;
-    if (room == "Small"){
-        pricePerNight = priceSmallRoom; 
+    console.log(typeof(roomType[0]))
+
+    let pricePerNight = 0;
+    if (room == "Small"){;
+        pricePerNight = priceSmallRoom;
     }
-    if (room == "Small"){
-        pricePerNight = priceSmallRoom; 
+    else if (room == "Medium"){
+        pricePerNight = priceMediumRoom; 
     }
-    if (room == "Small"){
-        pricePerNight = priceSmallRoom; 
+    else if (room == "Large"){
+        pricePerNight = priceLargeRoom; 
     }
     
     return (
@@ -61,7 +64,7 @@ function RoomBooking({
                     <div className="roomBooking_box_layout_header">
                         {/* <div className="roomBooking_box_layout_header_left"> */}
                         <div className="roomBooking_box_layout_header_defaultPrice">
-                            <span className="roomBooking_defaultPrice">${price}</span>
+                            <span className="roomBooking_defaultPrice">${pricePerNight}</span>
                             <span className="roomBooking_night">/đêm</span>
                         </div>
                         {/* </div> */}
@@ -71,7 +74,7 @@ function RoomBooking({
                                 <StarIcon className="roomFirst_star"/>
                                 <strong>4.9 (41)</strong>
                             </span> */}
-                        <button className="roomBooking_btn_remove" title="Xóa ngày đã chọn" onClick={removeDays}>Xóa ngày</button>
+                        <button className="roomBooking_btn_remove" title="Xóa ngày đã chọn" onClick={removeOptional}>Xóa chọn</button>
                         
                     </div>
 
@@ -132,6 +135,16 @@ function RoomBooking({
                                     <p>Chọn loại phòng:</p>
 
                                     {roomType.map(type => {
+                                        let t = "Nhỏ";
+                                        if(type == "Small"){
+                                            t = "Nhỏ";
+                                        }
+                                        else if(type == "Medium"){
+                                            t = "Vừa"
+                                        }
+                                        else if(type == "Large"){
+                                            t = "Lớn"
+                                        }
                                         return <label class="room_type">
                                                     <input 
                                                         type="radio" 
@@ -142,7 +155,7 @@ function RoomBooking({
                                                         onChange={onRoomChanged}
                                                     />
                                                     <span class="check_mark"></span>
-                                                    {type}
+                                                    {t}
                                                 </label>
                                     })}
 

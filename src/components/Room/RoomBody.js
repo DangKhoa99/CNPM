@@ -38,7 +38,7 @@ function RoomBody({
     
     const priceSmallRoom = price;
     const priceMediumRoom = price + 50;
-    const priceLargeRoom = price +100;
+    const priceLargeRoom = price + 100;
 
     useEffect(() => {
         for (var i in roomType) {
