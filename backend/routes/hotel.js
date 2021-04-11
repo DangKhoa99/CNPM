@@ -115,4 +115,16 @@ router.route('/review/edit').post(verify, (req, res) =>{
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// Search for hotels by location
+// location = [TPHCM, HN, ĐN, PT, VT, ĐL, PQ]
+router.route('/location').post(async (req, res) => {
+    location = req.body.location;
+
+    let query = Hotel.find({address: {$regex: location}});
+    const result = await query.exec();
+
+    if(result) res.send(result);
+    else res.status(400).json("Location not found");
+});
+
 module.exports = router;
