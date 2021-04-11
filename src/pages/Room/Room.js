@@ -30,14 +30,14 @@ function Room() {
 
     const loadDetailRoomFromServer = useCallback(async () =>{
         setIsLoading(true);
-        const result = await axios.post("http://localhost:5000/hotel/", _id)
-        // await axios.post("http://localhost:5000/hotel/", _id)
-        //     .then(response => {
-        //         setData(response.data);
-        //         setIsLoading(false);
-        //     })
-        setData(result.data);
-        setIsLoading(false);
+        // const result = await axios.post("http://localhost:5000/hotel/", _id)
+        await axios.post("http://localhost:5000/hotel/", _id)
+            .then(response => {
+                setData(response.data);
+                setIsLoading(false);
+            })
+        // setData(result.data);
+        // setIsLoading(false);
     },[getID]); // every time id changed, new data will be loaded
 
     useEffect(() => {
@@ -71,6 +71,7 @@ function Room() {
                     description={data.bio}
                     roomType={data.room.roomType}
                     quantity={data.room.quantity}
+                    price={data.room.price}
                 />
                 }
             

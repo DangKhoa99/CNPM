@@ -28,6 +28,7 @@ function RoomBody({
     description,
     roomType,
     quantity,
+    price,
 }) {
     const myRef = useRef(null);
 
@@ -151,7 +152,7 @@ function RoomBody({
                                         </div>
                                         <div className="roomBody_rooms_roomType_frame_title">Phòng nhỏ</div>
                                         <div className="roomBody_rooms_roomType_frame_subTitle">1 giường đôi</div>
-                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: 10$ /đêm</div>
+                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {price}$ /đêm</div>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +171,7 @@ function RoomBody({
                                         </div>
                                         <div className="roomBody_rooms_roomType_frame_title">Phòng vừa</div>
                                         <div className="roomBody_rooms_roomType_frame_subTitle">1 giường đơn + 1 giường đôi</div>
-                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: 30$ /đêm</div>
+                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {price + 50}$ /đêm</div>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +190,7 @@ function RoomBody({
                                         </div>
                                         <div className="roomBody_rooms_roomType_frame_title">Phòng lớn</div>
                                         <div className="roomBody_rooms_roomType_frame_subTitle">2 giường đôi</div>
-                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: 50$ /đêm</div>
+                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {price + 100}$ /đêm</div>
                                     </div>
                                 </div>
                             </div>
@@ -267,7 +268,9 @@ function RoomBody({
                     smallRoom={small}
                     mediumRoom={medium}
                     largeRoom={large}
+                    roomType={roomType}
                     quantity={quantity}
+                    price={price}
                 />
             </div>
         </div>
