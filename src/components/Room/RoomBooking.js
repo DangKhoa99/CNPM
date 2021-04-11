@@ -8,9 +8,9 @@ import 'react-nice-dates/build/style.css'
 
 
 function RoomBooking({
-    smallRoom,
-    mediumRoom,
-    largeRoom,
+    priceSmallRoom,
+    priceMediumRoom,
+    priceLargeRoom,
     roomType,
     quantity,
     price,
@@ -37,10 +37,21 @@ function RoomBooking({
         return Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
     }
 
-    const [room, setRoom] = useState("Small");
+    const [room, setRoom] = useState(roomType[0]);
 
     function onRoomChanged(e) {
         setRoom(e.currentTarget.value);
+    }
+
+    const pricePerNight = priceSmallRoom;
+    if (room == "Small"){
+        pricePerNight = priceSmallRoom; 
+    }
+    if (room == "Small"){
+        pricePerNight = priceSmallRoom; 
+    }
+    if (room == "Small"){
+        pricePerNight = priceSmallRoom; 
     }
     
     return (

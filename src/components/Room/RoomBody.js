@@ -35,15 +35,22 @@ function RoomBody({
     const [small, setSmall] = useState(false);
     const [medium, setMedium] = useState(false);
     const [large, setLarge] = useState(false);
+    
+    const priceSmallRoom = price;
+    const priceMediumRoom = price + 50;
+    const priceLargeRoom = price +100;
 
     useEffect(() => {
         for (var i in roomType) {
-            if(roomType[i] == "Small")
+            if(roomType[i] == "Small"){
                 setSmall(true);
-            else if(roomType[i] == "Medium")
+            }
+            else if(roomType[i] == "Medium"){
                 setMedium(true);
-            else if(roomType[i] == "Large")
+            }
+            else if(roomType[i] == "Large"){
                 setLarge(true);
+            }
         }
     },[roomType])
 
@@ -56,7 +63,7 @@ function RoomBody({
         if(!isReadMore){
                 window.scrollTo({
                 behavior: "smooth",
-                top: 0
+                top: myRef.current.offsetHeight + 400
             });
         }
       }
@@ -123,8 +130,8 @@ function RoomBody({
     return (
         <div className="roomBody">
             <div className="roomBody_container_left">
-                <div className="roomBody_description"  ref={myRef}>
-                    <h2>Mô tả</h2>
+                <div className="roomBody_description">
+                    <h2 ref={myRef}>Mô tả</h2>
                     <div className="roomBody_description_paragraph">
                         <span >{isReadMore ? description.slice(0, 150) + "..." : description}</span>
                         
@@ -152,7 +159,7 @@ function RoomBody({
                                         </div>
                                         <div className="roomBody_rooms_roomType_frame_title">Phòng nhỏ</div>
                                         <div className="roomBody_rooms_roomType_frame_subTitle">1 giường đôi</div>
-                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {price}$ /đêm</div>
+                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {priceSmallRoom}$ /đêm</div>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +178,7 @@ function RoomBody({
                                         </div>
                                         <div className="roomBody_rooms_roomType_frame_title">Phòng vừa</div>
                                         <div className="roomBody_rooms_roomType_frame_subTitle">1 giường đơn + 1 giường đôi</div>
-                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {price + 50}$ /đêm</div>
+                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {priceMediumRoom}$ /đêm</div>
                                     </div>
                                 </div>
                             </div>
@@ -190,7 +197,7 @@ function RoomBody({
                                         </div>
                                         <div className="roomBody_rooms_roomType_frame_title">Phòng lớn</div>
                                         <div className="roomBody_rooms_roomType_frame_subTitle">2 giường đôi</div>
-                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {price + 100}$ /đêm</div>
+                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {priceLargeRoom}$ /đêm</div>
                                     </div>
                                 </div>
                             </div>
@@ -265,9 +272,9 @@ function RoomBody({
 
             <div className="roomBody_container_right">
                 <RoomBooking
-                    smallRoom={small}
-                    mediumRoom={medium}
-                    largeRoom={large}
+                    priceSmallRoom={priceSmallRoom}
+                    priceMediumRoom={priceMediumRoom}
+                    priceLargeRoom={priceLargeRoom}
                     roomType={roomType}
                     quantity={quantity}
                     price={price}
