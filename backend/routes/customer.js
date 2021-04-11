@@ -1,11 +1,12 @@
 const router = require('../../node_modules/express').Router();
-const verify = require('./verifyToken');
+const {verify, adminVerify} = require('./verifyToken');
 let {Customer, Booking} = require('../models/customer.model');
+const bcrypt = require('../../node_modules/bcrypt');
 let Hotel = require('../models/hotel.model');
 
 
-//Query all customers in DB
-router.route('/').get((req, res) => {
+//Query all customers in DB | admin required
+router.route('/').get(adminVerify, (req, res) => {
     Customer.find()
         .then(customers => res.json(customers))
         .catch(err => res.status(400).json('Error ' + err));
@@ -14,15 +15,20 @@ router.route('/').get((req, res) => {
 // Get a customer by customerId | token require
 router.route("/").post(verify, (req, res) => {
     const customerId = req.body.customerId;
-    Customer.findById(customerId)
-    .then(customer => res.json(customer))
-    .catch(err => res.status(400).json('Error ' + err));
+
+    // An user can not access other user profile
+    if(req.user._id != customerId) res.status(401).send('Access Denied');
+    else {
+        Customer.findById(customerId)
+        .then(customer => res.json(customer))
+        .catch(err => res.status(400).json('Error ' + err));    
+    }
 });
 
-//Add 1 customer to DB
-router.route('/add').post((req, res) => {
+//Add 1 customer to DB | admin required
+router.route('/add').post(adminVerify,async (req, res) => {
     const username = req.body.username;
-    const password = req.body.password;
+    const password = await bcrypt.hash(req.body.password, 10);
 
     const name = req.body.name;
     const email = req.body.email;

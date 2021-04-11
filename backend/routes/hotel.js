@@ -1,6 +1,6 @@
 const router = require('../../node_modules/express').Router();
 let {Hotel, Review} = require('../models/hotel.model');
-const verify = require('./verifyToken');
+const {verify, adminVerify} = require('./verifyToken');
 
 
 //Query all hotels in DB
@@ -26,7 +26,7 @@ router.route("/").post((req, res) => {
 // });
 
 //Add 1 hotel to DB
-router.route('/add').post((req, res) =>{
+router.route('/add').post(adminVerify, (req, res) =>{
     const name = req.body.name;
     const email = req.body.email;
     const phone = req.body.phone;
