@@ -17,7 +17,7 @@ router.route("/").post(verify, (req, res) => {
     const customerId = req.body.customerId;
 
     // An user can not access other user profile
-    if(req.user._id != customerId) res.json('Access Denied');
+    if(req.user._id != customerId) res.json('Không tìm thấy trang này');
     else {
         Customer.findById(customerId)
         .then(customer => res.json(customer))
@@ -54,7 +54,7 @@ router.route('/add').post(adminVerify,async (req, res) => {
     });
 
     newCustomer.save()
-        .then(() => res.json('Customer added!'))
+        .then(() => res.json('Thêm khách hàng thành công'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -79,7 +79,7 @@ router.route('/favorite/add').post(verify, (req, res) =>{
         customer.favorite.push(hotelId);
 
         customer.save()
-        .then(() => res.json('Favorite hotel added'))
+        .then(() => res.json('Thêm thành công khách sạn yêu thích'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
@@ -96,7 +96,7 @@ router.route('/favorite/delete').post(verify, (req, res) =>{
             customer.favorite.remove(hotelId);
 
         customer.save()
-        .then(() => res.json('Favorite hotel removed'))
+        .then(() => res.json('Bỏ khách sạn yêu thích thành công'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
@@ -157,7 +157,7 @@ router.route('/booking/add').post(verify, (req, res) =>{
         customer.booking.push(newBooking);
 
         customer.save()
-        .then(() => res.json('Booking hotel added'))
+        .then(() => res.json('Đặt phòng thành công'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
@@ -179,7 +179,7 @@ router.route('/booking/cancel').post(verify, (req, res) =>{
         }
 
         customer.save()
-        .then(() => res.json('Cancelled booking'))
+        .then(() => res.json('Đã hủy đơn đặt phòng'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));

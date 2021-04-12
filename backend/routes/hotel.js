@@ -40,7 +40,7 @@ router.route('/add').post(adminVerify, (req, res) =>{
     });
 
     newHotel.save()
-        .then(() => res.json('Hotel added!'))
+        .then(() => res.json('Thêm khách sạn thành công'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -76,7 +76,7 @@ router.route('/review/add').post(verify, (req, res) =>{
         hotel.review.push(newReview);
 
         hotel.save()
-        .then(() => res.json('Review added'))
+        .then(() => res.json('Thêm đánh giá thành công'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
@@ -103,7 +103,7 @@ router.route('/review/edit').post(verify, (req, res) =>{
         }
 
         hotel.save()
-        .then(() => res.json('Edit successfully'))
+        .then(() => res.json('Chỉnh sửa thành công'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
@@ -118,7 +118,7 @@ router.route('/location').post(async (req, res) => {
     const result = await query.exec();
 
     if(result) res.send(result);
-    else res.json("Location not found");
+    else res.json("Không tìm được địa điểm này");
 });
 
 module.exports = router;

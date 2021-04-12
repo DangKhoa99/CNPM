@@ -10,7 +10,7 @@ router.route('/register').post( async (req, res) => {
 
     //Check if a customer is already in database
     const usernameExist = await Customer.findOne({ username: req.body.username });
-    if(usernameExist) return res.json('This user name is already exists');
+    if(usernameExist) return res.json('Tên tài khoản đã tồn tại');
     
     //Hash password
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -31,7 +31,7 @@ router.route('/register').post( async (req, res) => {
 
     try{
         newCustomer.save();
-        res.json('Create customer successfully');
+        res.json('Tạo tài khoản thành công');
     } catch(err) {
         res.status(400).send(err);
     }    
@@ -40,11 +40,11 @@ router.route('/register').post( async (req, res) => {
 router.route('/login').post( async (req, res) => {
     //Check if username is in database
     const user = await Customer.findOne({ username: req.body.username });
-    if(!user) return responsiveFontSizes.json('Email or password is wrong');
+    if(!user) return responsiveFontSizes.json('Tài khoản hoặc mật khẩu không đúng');
 
     //Check if passwrod is correct
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if(!validPass) return res.json("Email or password is wrong");
+    if(!validPass) return res.json("Tài khoản hoặc mật khẩu không đúng");
 
     //Create and assign a token
     const token = jwt.sign({_id: user._id, isAdmin: user.isAdmin}, process.env.TOKEN_SECRET);
@@ -65,10 +65,10 @@ router.route('/logout').post(async (req, res) => {
     const tokenCheck = await Token.findOne({ tokenString: token });
     if(tokenCheck){
         Token.findOneAndDelete({tokenString: token})
-        .then(() => res.json("Logout successfully"))
+        .then(() => res.json("Đăng xuất thành công"))
         .catch(err => res.status(400).json('Error: ' + err));
     } else{
-        res.json('Already logout');
+        res.json('Đã đăng xuất thành công');
     }
 })
 
