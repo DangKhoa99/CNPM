@@ -1,6 +1,7 @@
 const router = require('../../node_modules/express').Router();
 let {Hotel, Review} = require('../models/hotel.model');
 const {verify, adminVerify} = require('./verifyToken');
+let {Customer, Booking} = require('../models/customer.model');
 
 
 //Query all hotels in DB
@@ -54,30 +55,76 @@ router.route('/review').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//Logical for updating booking status
+function bookingUpdate(customer){
+    for(i in customer.booking){
+        if(customer.booking[i].status != "Cancel"){                
+            const curDate = new Date();
+            const checkInDate = new Date(customer.booking[i].checkIn);
+            const checkOutDate = new Date(customer.booking[i].checkOut);
+            if(curDate < checkInDate){
+                customer.booking[i].status = "Pending";
+            }
+            else if (curDate >= checkInDate && curDate <= checkOutDate){
+                customer.booking[i].status = "Staying";
+            }
+            else if (curDate > checkOutDate){
+                customer.booking[i].status = "Stayed";
+            }
+        }
+    }
+    customer.save();
+}
+
+async function addReviewCheck(hotel, customerId, res){
+    const customerExist = await Customer.findOne({ _id: customerId });
+    if(!customerExist){
+        res.json("Tài khoản không tồn tại");
+        return false;
+    }
+    bookingUpdate(customerExist);
+
+    for(i in hotel.review){
+        if(hotel.review[i].customerID == customerId){
+            res.json("Đã đánh giá khách sạn này trước đó, chỉ có thể chỉnh sửa.");
+            return false;
+        }
+    }
+
+    for(i in customerExist.booking){
+        if(customerExist.booking[i].hotelId == hotel._id && customerExist.booking[i].status == "Stayed") return true;
+    }
+
+    res.json("Chỉ có thể đánh giá khách sạn đã ở");
+    return false;
+}
+
 //Add a review to hotel
 router.route('/review/add').post(verify, (req, res) =>{
     const hotelId = req.body.hotelId;
     
     Hotel.findById(hotelId)
-    .then(hotel => {
+    .then(async hotel => {
 
         const customerId = req.body.customerId;
         const content = req.body.content;
         const score = req.body.score;
 
-        //for(i in hotel.review)
-        
-        const newReview = new Review({
-            "customerID": customerId,
-            "content": content,
-            "score": score
-        });
+        const allowAdd = await addReviewCheck(hotel, customerId, res);
 
-        hotel.review.push(newReview);
-
-        hotel.save()
-        .then(() => res.json('Thêm đánh giá thành công'))
-        .catch(err => res.status(400).json('Error: ' + err));
+        if(allowAdd){
+            const newReview = new Review({
+                "customerID": customerId,
+                "content": content,
+                "score": score
+            });
+    
+            hotel.review.push(newReview);
+    
+            hotel.save()
+            .then(() => res.json('Thêm đánh giá thành công'))
+            .catch(err => res.status(400).json('Error: ' + err));
+        }
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -90,21 +137,26 @@ router.route('/review/edit').post(verify, (req, res) =>{
     Hotel.findById(hotelId)
     .then(hotel => {
 
-        const customerID = req.body.customerId;
-        const content = req.body.content;
-        const score = req.body.score;
-        
-        for(i in hotel.review){
-            if(hotel.review[i]["_id"] == reviewId){
-                hotel.review[i]["customerID"] = customerID;
-                hotel.review[i]["content"] = content;
-                hotel.review[i]["score"] = score;
-            }
+        if(!hotel){
+            res.json("Chỉnh sửa không thành công");
         }
+        else{
+            const customerID = req.body.customerId;
+            const content = req.body.content;
+            const score = req.body.score;
+            
+            for(i in hotel.review){
+                if(hotel.review[i]["_id"] == reviewId){
+                    hotel.review[i]["customerID"] = customerID;
+                    hotel.review[i]["content"] = content;
+                    hotel.review[i]["score"] = score;
+                }
+            }
 
-        hotel.save()
-        .then(() => res.json('Chỉnh sửa thành công'))
-        .catch(err => res.status(400).json('Error: ' + err));
+            hotel.save()
+            .then(() => res.json('Chỉnh sửa thành công'))
+            .catch(err => res.status(400).json('Error: ' + err));
+        }        
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
