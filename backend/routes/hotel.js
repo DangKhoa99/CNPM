@@ -18,14 +18,6 @@ router.route("/").post((req, res) => {
     .catch(err => res.status(400).json('Error ' + err));
 });
 
-// router.route("/:id").get((req, res) => {
-//     const hotelId = req.params.id;
-//     Hotel.findById(hotelId)
-//     .then(hotel => res.json(hotel))
-//     .catch(err => res.status(400).json('Error ' + err));
-// });
-
-//Add 1 hotel to DB
 router.route('/add').post(adminVerify, (req, res) =>{
     const name = req.body.name;
     const email = req.body.email;
@@ -72,6 +64,8 @@ router.route('/review/add').post(verify, (req, res) =>{
         const customerId = req.body.customerId;
         const content = req.body.content;
         const score = req.body.score;
+
+        //for(i in hotel.review)
         
         const newReview = new Review({
             "customerID": customerId,

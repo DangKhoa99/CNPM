@@ -17,7 +17,7 @@ router.route("/").post(verify, (req, res) => {
     const customerId = req.body.customerId;
 
     // An user can not access other user profile
-    if(req.user._id != customerId) res.status(401).send('Access Denied');
+    if(req.user._id != customerId) res.status(401).json('Access Denied');
     else {
         Customer.findById(customerId)
         .then(customer => res.json(customer))

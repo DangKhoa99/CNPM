@@ -1,3 +1,4 @@
+
 const bcrypt = require('../../node_modules/bcrypt');
 const router = require('../../node_modules/express').Router();
 let {Customer, Booking} = require('../models/customer.model');
@@ -8,7 +9,7 @@ router.route('/register').post( async (req, res) => {
 
     //Check if a customer is already in database
     const usernameExist = await Customer.findOne({ username: req.body.username });
-    if(usernameExist) return res.status(400).send('This user name is already exists');
+    if(usernameExist) return res.status(400).json('This user name is already exists');
     
     //Hash password
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -29,7 +30,7 @@ router.route('/register').post( async (req, res) => {
 
     try{
         newCustomer.save();
-        res.send('Create customer successfully');
+        res.json('Create customer successfully');
     } catch(err) {
         res.status(400).send(err);
     }    
@@ -38,11 +39,11 @@ router.route('/register').post( async (req, res) => {
 router.route('/login').post( async (req, res) => {
     //Check if username is in database
     const user = await Customer.findOne({ username: req.body.username });
-    if(!user) return res.status(400).send('Email or password is wrong');
+    if(!user) return res.status(400).json('Email or password is wrong');
 
     //Check if passwrod is correct
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if(!validPass) return res.status(400).send("Email or password is wrong");
+    if(!validPass) return res.status(400).json("Email or password is wrong");
 
     //Create and assign a token
     const token = jwt.sign({_id: user._id, isAdmin: user.isAdmin}, process.env.TOKEN_SECRET);
@@ -54,7 +55,7 @@ router.route('/login').post( async (req, res) => {
     });
 
     newToken.save()
-    .then(() => res.header('auth-token', token).send(token))
+    .then(() => res.header('auth-token', token).json(token))
     .catch(err => res.status(400).json('Error: ' + err)) 
 });
 
@@ -63,10 +64,10 @@ router.route('/logout').post(async (req, res) => {
     const tokenCheck = await Token.findOne({ tokenString: token });
     if(tokenCheck){
         Token.findOneAndDelete({tokenString: token})
-        .then(() => res.send("Logout successfully"))
+        .then(() => res.json("Logout successfully"))
         .catch(err => res.status(400).json('Error: ' + err));
     } else{
-        res.send('Already logout');
+        res.json('Already logout');
     }
 })
 
