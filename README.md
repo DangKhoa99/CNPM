@@ -1,21 +1,64 @@
-# Hướng dẫn cài đặt
+<h1 align="center">Welcome to RoyalStay - Hotel Management 👋</h1>
+<h4 align="center">Software Engineering - Class groups 7 - Group 6</h4>
 
-Bước 1: (Có 2 cách)
-- Cách 1: Mở terminal và gõ hoặc copy bên dưới
 
-### `git clone https://github.com/DangKhoa99/CNPM.git`
+## Languages and technologies
+[![HTML5](https://img.shields.io/badge/-HTML5-black?style=flat-square&logo=html5&logoColor=E34F26)](https://developer.mozilla.org/vi/docs/Web/Guide/HTML/HTML5)
+[![CSS3](https://img.shields.io/badge/-CSS3-black?style=flat-square&logo=css3&logoColor=1572B6)](https://developer.mozilla.org/vi/docs/Learn/Getting_started_with_the_web/CSS_basics)
+[![JavaScript](https://img.shields.io/badge/-JavaScript-black?style=flat-square&logo=javascript)](https://developer.mozilla.org/vi/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
+[![Python](https://img.shields.io/badge/-Python-000?&logo=Python)](https://www.python.org/)
+[![Git](https://img.shields.io/badge/-Git-black?style=flat-square&logo=git)](https://git-scm.com/)
+[![GitLab](https://img.shields.io/badge/-GitLab-black?style=flat-square&logo=gitlab)](https://about.gitlab.com/)
+[![npm](https://img.shields.io/badge/-npm-black?style=flat-square&logo=npm)](https://www.npmjs.com/)
+[![MongoDB](https://img.shields.io/badge/-MongoDB-black?style=flat-square&logo=mongodb)](https://www.mongodb.com/)
+[![ExpressJS](https://img.shields.io/badge/-Express.js-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
+[![React](https://img.shields.io/badge/-React-black?style=flat-square&logo=react)](https://reactjs.org/)
+[![Nodejs](https://img.shields.io/badge/-Nodejs-black?style=flat-square&logo=Node.js)](https://nodejs.org/en/)
 
-- Cách 2: Tải file zip về máy -> Giải nén -> Rồi mở terminal lên
+## 🔥 Clone the repository
 
-Bước 2: cd vào folder trên và gõ hoặc copy bên dưới
+Open your terminal and then type
 
-### `npm install`
+### `$ git clone https://github.com/DangKhoa99/CNPM.git`
 
-Bước 3: Sau đó chạy project
+## ⚡ Installation
 
-### `npm start`
+`cd` into the new folder and type
 
-# Công nghệ sử dụng trong Project
-<img target="_blank" src="https://www.vectorlogo.zone/logos/npmjs/npmjs-icon.svg" width="150"> 
+### `$ npm install`
 
-<img target="_blank" src="https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg" width="200">  <img target="_blank" src="https://www.vectorlogo.zone/logos/expressjs/expressjs-icon.svg" width="200">    <img target="_blank" src="https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" width="200">   <img target="_blank" src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg" width="200">
+## 🚀 How to run
+
+To run the React project
+
+### `$ npm start`
+
+
+## Contributors ✨
+
+Thanks to all the people who contribute.
+
+<table>
+  <tr>
+    <td>
+      <p align="center">
+        <a href="https://github.com/andydam452"><img src="https://avatars.githubusercontent.com/u/44116015?v=4" width="100px;" alt=""/>
+      </p>
+    </td>
+    <td>
+      <p align="center">
+        <a href="https://github.com/thanhdo001121"><img src="https://avatars.githubusercontent.com/u/79702984?v=4" width="100px;" alt=""/>
+      </p>
+    </td>
+    <td>
+      <p align="center">
+        <a href="https://github.com/DangKhoa99"><img src="https://avatars.githubusercontent.com/u/56160839?v=4" width="100px;" alt=""/>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td text-align="center"><a href="https://github.com/andydam452"><b>51800924 · Đàm Đức Tài</b></td>
+    <td text-align="center"><a href="https://github.com/thanhdo001121"><b>51800535 · Đặng Nguyễn Thành Đô</b></td>
+    <td text-align="center"><a href="https://github.com/DangKhoa99"><b>51800882 · Nguyễn Minh Đăng Khoa</b></td>
+  </tr>
+</table>
