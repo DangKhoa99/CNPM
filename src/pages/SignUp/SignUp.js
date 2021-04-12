@@ -9,37 +9,39 @@ import { store } from 'react-notifications-component'
 function SignUp() {
   document.title = "Đăng ký | RoyalStay"
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // const [isSubmitted, setIsSubmitted] = useState(false);
 
-  function submitForm() {
-    setIsSubmitted(true);
-  }
+  // function submitForm() {
+  //   setIsSubmitted(true);
+  // }
 
-  const notification_saveFavorite = {
-    title: ' RoyalStay - Thông báo',
-    message: 'Đăng ký thành công',
-    type: 'success',
-    container: 'bottom-left',
-    dismiss: {
-        duration: 2000
-    }
-  };
+  // const notification_saveFavorite = {
+  //   title: ' RoyalStay - Thông báo',
+  //   message: 'Đăng ký thành công',
+  //   type: 'success',
+  //   container: 'bottom-left',
+  //   dismiss: {
+  //       duration: 2000
+  //   }
+  // };
 
   return (
     <div className="signUp">
-      {!isSubmitted ? 
-      (
-        <FormSignUp submitForm={submitForm} />
-      ) 
+      {/* {!isSubmitted ? 
+      ( */}
+        <FormSignUp 
+        // submitForm={submitForm}
+         />
+      {/* ) 
       :
       (
-        ""
-        // <FormSignUp/>
+        "" */}
+        {/* // <FormSignUp/>
         // <a href="/sign-in" />
         // <Redirect to="/sign-up">
         // store.addNotification(notification_saveFavorite)
-        // </Redirect>
-      )}
+        // </Redirect> */}
+      {/* )} */}
     </div>
   )
 }
