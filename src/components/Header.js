@@ -12,7 +12,7 @@ import axios from 'axios'
 function Header() {
   // vị trí địa chỉ trình duyệt hiện tại
   const location = useLocation();
-  // console.log(location.pathname);
+  console.log("location: ", location.pathname);
 
   const [buttonSignIn, setButtonSignIn] = useState(true);
   const [colorHeader, setColorHeader] = useState(true);
@@ -99,7 +99,7 @@ function Header() {
     else
       window.addEventListener('scroll', changeBackground);
 
-  }, []); 
+  }, [location]); 
 
   // Hiện nút Đăng ký khi Responsive
   window.addEventListener('resize', showButton);
@@ -259,7 +259,7 @@ function Header() {
             </li>
 
             {/* Avatar */}
-            <li className='header_item'>
+            <li className='header_item' style={{display :"none"}}>
               <button 
                 className={colorHeader ? 'header_avatar active' : 'header_avatar'} 
                 onClick={openMenuProfile}

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './App.css'
-import { BrowserRouter as Router, Switch, Route , Redirect} from 'react-router-dom'
+import { Router, Switch, Route , Redirect} from 'react-router-dom'
+import history from './history'
+
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home/Home'
@@ -25,8 +27,13 @@ import 'react-notifications-component/dist/theme.css'
 // use Redux Provider
 
 function App() {
+  // const [token, setToken] = useState();
+  // if(!token){
+  //   return <SignIn setToken={setToken}/>
+  // }
+
   return (
-    <Router>
+    <Router history={history}>
       <div className="App">
         <ReactNotifications />
         <Header />
@@ -36,7 +43,11 @@ function App() {
           <Route path='/search-page' component={SearchPage} /> 
           <Route path='/sign-up' component={SignUp} />
           <Route path='/sign-in' component={SignIn} />
-          <Route path='/room-detail' component={Room} />
+          <Route path='/room-detail' component={Room}>
+            {/* <Route path='?:id' component={Room} />
+            <Route path='*' component={ErrorPage} /> */}
+          </Route>
+
           <Route path='/booking' component={Book} />
           
           <Route path='/account/overview/' component={Overview} />

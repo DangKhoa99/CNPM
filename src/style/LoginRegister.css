@@ -56,9 +56,8 @@ header > h1{
 }
 
 .input_row p {
-  font-size: 12px;
-  font-style: italic;
-  color: red;
+  margin-top: 12px;
+  color: #bf1650;
 }
 
 .input_row{
@@ -102,33 +101,6 @@ header > h1{
   border-color: #1ed760;
   box-shadow: 0 0 0 1px #1db954;
 }
-
-/* .loginRegister_submit_btn{
-  align-items: center;
-  border: 0;
-  border-radius: 6px;
-  color: #0c0c0d;
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 16px;
-  font-weight: 700;
-  height: 48px;
-  justify-content: center;
-  padding: 0 8px;
-  transition-duration: 150ms;
-  transition-property: background-color;
-  user-select: none;
-  width: 100%;
-  text-transform: none;
-  line-height: 1.15;
-  margin: 0 0 20px;
-  background: #0060df;
-  color: #fff;
-}
-
-.loginRegister_submit_btn:hover{
-  background: #003eaa;
-} */
 
 .loginRegister_submit_btn{
   border-radius: 6px;
