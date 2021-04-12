@@ -57,7 +57,7 @@ function RoomBody({
 
 
 
-    console.log("roomType", roomType[0]);
+    // console.log("roomType", roomType[0]);
 
     const scrollToElement = () =>{
         if(!isReadMore){

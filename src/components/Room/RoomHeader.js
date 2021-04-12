@@ -13,6 +13,7 @@ function RoomHeader({
     name,
     img,
     address,
+    review,
     reference,
     click
 }) {
@@ -45,7 +46,14 @@ function RoomHeader({
         }
     };
 
-    // const img1 = img[0];
+    let avgReview = 0;
+    if(review.length > 0){
+        for(var key in review){
+            var obj = review[key];
+            avgReview = avgReview + obj.score;
+        }
+        avgReview = (avgReview / review.length).toFixed(1);
+    }
 
     const IMAGES =
     [
@@ -98,7 +106,7 @@ function RoomHeader({
                             <div className="roomHeader_heading_description_left">
                                 <span className="roomHeader_heading_stars" onClick={click}>
                                     <StarIcon className="roomHeader_heading_star"/>
-                                    <strong>4.9 (41)</strong>
+                                    <strong>{avgReview} ({review.length})</strong>
                                 </span>
                                 <span className="roomHeader_heading_dot">·</span>
                                 <span className="roomHeader_heading_place">{address}</span>

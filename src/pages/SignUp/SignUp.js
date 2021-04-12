@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import "../../style/LoginRegister.css"
 import FormSignUp from '../../components/SignUp/FormSignUp'
-import {Button} from "@material-ui/core"
 import { Redirect } from 'react-router-dom'
 import Home from "../Home/Home"
 
@@ -34,9 +33,12 @@ function SignUp() {
       ) 
       :
       (
-        <Redirect to="/sign-in">
-          {/* {store.addNotification(notification_saveFavorite)} */}
-        </Redirect>
+        ""
+        // <FormSignUp/>
+        // <a href="/sign-in" />
+        // <Redirect to="/sign-up">
+        // store.addNotification(notification_saveFavorite)
+        // </Redirect>
       )}
     </div>
   )

@@ -44,7 +44,7 @@ function RoomBooking({
         setRoom(e.currentTarget.value);
     }
 
-    console.log(typeof(roomType[0]))
+    // console.log(typeof(roomType[0]))
 
     let pricePerNight = 0;
     if (room == "Small"){;

@@ -49,6 +49,7 @@ function Room() {
     const arrImage=[]
     for (var key in data.imageLink) {
         var obj = data.imageLink[key];
+        // console.log(obj)
         arrImage.push(obj);
     }
 
@@ -63,6 +64,7 @@ function Room() {
                     name={data.name}
                     img={arrImage}
                     address={data.address}
+                    review={data.review}
                     reference={roomHeader}
                     click={() => scrollToElement(roomReview)}
                 />
@@ -78,7 +80,10 @@ function Room() {
                 }
             
 
-                <RoomReview reference={roomReview}/>
+                <RoomReview 
+                    reference={roomReview}
+                    review={data.review}
+                />
 
             
             

@@ -1,13 +1,31 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "../../style/RoomReview.css"
 import StarIcon from "@material-ui/icons/Star"
 import {Avatar, styled} from "@material-ui/core"
 import StarRatings from "react-star-ratings"
 
 function RoomReview({
-    reference
+    reference,
+    review
 }) {
     const [rating, setRating] = useState(0);
+
+    let avgReview = 0;
+    // const calAvgReview = () =>{
+    if(review.length > 0){
+        for(var key in review){
+            var obj = review[key];
+            // console.log((obj.score));
+            avgReview = avgReview + obj.score;
+        }
+        avgReview = (avgReview / review.length).toFixed(1);
+    }
+    // }
+
+    // useEffect (() => {
+    //     calAvgReview();
+    // },[])
+    
 
     function changeRating(newRating){
         setRating(newRating);
@@ -58,7 +76,7 @@ function RoomReview({
                     <h2>
                         <span className="roomHeader_heading_stars">
                             <StarIcon className="roomHeader_heading_star"/>
-                            <strong>4.9 (41 đánh giá)</strong>
+                            <strong>{avgReview} ({review.length} đánh giá)</strong>
                         </span>
                     </h2>
                 </div>
@@ -121,7 +139,7 @@ function RoomReview({
                     {/* comment_section - phần bình luận */}
                     <div className="bbb"> 
 
-                        <div className="box_comment">
+                        {/* <div className="box_comment">
                             <div className="commentator">
                                 <div className="commentator_avatar">
                                     <Avatar className="commentator_img" alt="dangkhoa99" src="/images/Khoa.jpg"/>
@@ -134,9 +152,9 @@ function RoomReview({
                                     </div>
                                 </div>
 
-                                {/* <div className="commentator_edit">
+                                <div className="commentator_edit">
                                     Edit
-                                </div> */}
+                                </div>
                                 
                             </div>
 
@@ -147,9 +165,47 @@ function RoomReview({
                                     </div>
                                 </span>
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className="box_comment">
+                        {review.map(reviews => {
+                            return <div className="box_comment">
+                                        <div className="commentator">
+                                            <div className="commentator_avatar">
+                                                <Avatar className="commentator_img" src="">tên</Avatar>
+                                            </div>
+
+                                            <div className="commentator_info">
+                                                {reviews.customerID} - tên
+                                                <div className="comment_time">
+                                                    <div>time - tháng 2 năm 2021</div>
+
+                                                    <div className="comment_stars" style={{marginLeft: "10px"}}>
+                                                        <StarRatings
+                                                            rating={reviews.score}
+                                                            numberOfStars={5}
+                                                            name='rating'
+                                                            starRatedColor="#f1c40f"
+                                                            starEmptyColor="gray"
+                                                            starDimension="14px"
+                                                            svgIconPath="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                                                            svgIconViewBox="0 0 576 512"
+                                                        /> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <span>
+                                                <div className="comment_text">
+                                                    <span>{reviews.content}</span>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                        })}
+
+                        {/* <div className="box_comment">
                             <div className="commentator">
                                 <div className="commentator_avatar">
                                     <Avatar className="commentator_img">D</Avatar>
@@ -192,8 +248,8 @@ function RoomReview({
                                         <span>Chỗ ở cực sạch sẽ, phòng rộng thoáng, ban công to. Các dịch vụ đều rất tốt, mọi người rất tận tình, dễ thương. Thiết kế nhà mang lại cảm giác ấm cúng, không gian hồ bơi đẹp. Cũng không quá xa so với phố cổ, đi bộ tầm 10-15 phút là đến. Có thể bắt taxi vừa tiện vừa nhanh. Buổi sáng còn được chọn món ăn sáng, buổi tối thì không giới hạn giờ giấc đi về. Highly recommend </span>
                                     </div>
                                 </span>
-                            </div>
-                        </div>
+                            </div> */}
+                        {/* </div> */}
                     </div>
                 </div>
             </div>
