@@ -4,12 +4,13 @@ const router = require('../../node_modules/express').Router();
 let {Customer, Booking} = require('../models/customer.model');
 const jwt = require('../../node_modules/jsonwebtoken');
 const Token = require('../models/token.model');
+const { responsiveFontSizes } = require('@material-ui/core');
 
 router.route('/register').post( async (req, res) => {
 
     //Check if a customer is already in database
     const usernameExist = await Customer.findOne({ username: req.body.username });
-    if(usernameExist) return res.status(400).json('This user name is already exists');
+    if(usernameExist) return res.json('This user name is already exists');
     
     //Hash password
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -39,11 +40,11 @@ router.route('/register').post( async (req, res) => {
 router.route('/login').post( async (req, res) => {
     //Check if username is in database
     const user = await Customer.findOne({ username: req.body.username });
-    if(!user) return res.status(400).json('Email or password is wrong');
+    if(!user) return responsiveFontSizes.json('Email or password is wrong');
 
     //Check if passwrod is correct
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if(!validPass) return res.status(400).json("Email or password is wrong");
+    if(!validPass) return res.json("Email or password is wrong");
 
     //Create and assign a token
     const token = jwt.sign({_id: user._id, isAdmin: user.isAdmin}, process.env.TOKEN_SECRET);

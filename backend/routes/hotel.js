@@ -118,7 +118,7 @@ router.route('/location').post(async (req, res) => {
     const result = await query.exec();
 
     if(result) res.send(result);
-    else res.status(400).json("Location not found");
+    else res.json("Location not found");
 });
 
 module.exports = router;
