@@ -8,7 +8,6 @@
   position: sticky;
   top: 0;
   z-index: 999;
-  /* background: rgba(0, 0, 0, 0.6) !important; */
 }
 
 /* .header.hideHeader{
@@ -75,6 +74,10 @@
   height: 80px;
   font-size: 16px;
   font-weight: 600;
+}
+
+.header_item.login{
+  display:none;
 }
 
 .header_links {

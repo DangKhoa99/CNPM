@@ -4,7 +4,6 @@ const router = require('../../node_modules/express').Router();
 let {Customer, Booking} = require('../models/customer.model');
 const jwt = require('../../node_modules/jsonwebtoken');
 const Token = require('../models/token.model');
-const { responsiveFontSizes } = require('@material-ui/core');
 
 router.route('/register').post( async (req, res) => {
 
@@ -40,8 +39,8 @@ router.route('/register').post( async (req, res) => {
 router.route('/login').post( async (req, res) => {
     //Check if username is in database
     const user = await Customer.findOne({ username: req.body.username });
-    if(!user) return responsiveFontSizes.json('Tài khoản hoặc mật khẩu không đúng');
-
+    if(!user) return res.json('Tài khoản hoặc mật khẩu không đúng');
+   
     //Check if passwrod is correct
     const validPass = await bcrypt.compare(req.body.password, user.password);
     if(!validPass) return res.json("Tài khoản hoặc mật khẩu không đúng");

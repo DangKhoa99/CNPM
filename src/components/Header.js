@@ -9,10 +9,34 @@ import {ReactComponent as IconLocation} from "../icons/iconBooking.svg"
 import {Avatar} from "@material-ui/core"
 import axios from 'axios'
 
+// import { useSelector } from 'react-redux'
+// import { tokensSelector } from '../store/reducers/tokensSlice'
+import useToken from '../useToken'
+import { store } from 'react-notifications-component'
+
 function Header() {
+  const { token, setToken } = useToken();
+  console.log("token in HEADER: ", token)
+  // const token = useSelector(tokensSelector);
+  // console.log("header: ", token);
+
+  // if(token != ""){
+  //   console.log("true")
+  // }
+
+  const notificationLogoutSuccess = {
+    title: ' RoyalStay - Thông báo',
+    message: 'Đăng xuất thành công',
+    type: 'success',
+    container: 'bottom-left',
+    dismiss: {
+        duration: 2000
+    }
+};
+
   // vị trí địa chỉ trình duyệt hiện tại
   const location = useLocation();
-  // console.log(location.pathname);
+  console.log("location: ", location.pathname);
 
   const [buttonSignIn, setButtonSignIn] = useState(true);
   const [colorHeader, setColorHeader] = useState(true);
@@ -78,6 +102,30 @@ function Header() {
       behavior: "smooth"
     })
   }
+  console.log("token before logout", token)
+  //log out
+  const handleLogOut = () => {
+    const options = {
+      headers : {
+      'auth-token': token,
+    }
+  };
+    
+    console.log("headers: ", options);
+
+    axios.post('http://localhost:5000/auth/logout',{}, options)
+        .then(response => {
+            console.log("logout: ", response.data);
+    })
+    
+    localStorage.removeItem('token');
+    setToken(null);
+
+    store.addNotification(notificationLogoutSuccess);
+
+    console.log("token: ", token)
+    console.log("log out");
+  }
   
  
 
@@ -99,7 +147,7 @@ function Header() {
     else
       window.addEventListener('scroll', changeBackground);
 
-  }, []); 
+  }, [location]); 
 
   // Hiện nút Đăng ký khi Responsive
   window.addEventListener('resize', showButton);
@@ -152,7 +200,7 @@ function Header() {
                 className={colorHeader ? "input_search active" : "input_search"} 
                 placeholder="Bạn sắp đi đâu?" 
                 spellCheck="false"
-                autocomplete="off"
+                autoComplete="off"
                 value={searchLocation}
                 onChange={onChangeSearchLocation}
               />
@@ -161,7 +209,7 @@ function Header() {
               href={"/search-page?result=" + searchLocation}
               className={colorHeader ? "header_search_btn active" : "header_search_btn"}
             >
-              <i class="fas fa-search"></i>
+              <i className="fas fa-search"></i>
             </a>
 
             {/* Menu Search Suggestion */}
@@ -238,7 +286,8 @@ function Header() {
               <p className={colorHeader ? 'header_bar active' : 'header_bar'}/>
             </li>
 
-            <li className='header_item'>
+            <li className={token ? 'header_item login': 'header_item'}>
+            {/* <li className='header_item'> */}
               <a 
                 href='/sign-in' 
                 className={colorHeader ? 'header_links active' : 'header_links'} 
@@ -248,7 +297,8 @@ function Header() {
               </a>
             </li>
 
-            <li className='header_item'>
+            <li className={token ? 'header_item login': 'header_item'}>
+            {/* <li className='header_item'> */}
               <a 
                 href='/sign-up' 
                 className={colorHeader ? 'header_links register active' : 'header_links register'} 
@@ -259,7 +309,8 @@ function Header() {
             </li>
 
             {/* Avatar */}
-            <li className='header_item'>
+            <li className={token ? 'header_item': 'header_item login'}>
+            {/* <li className='header_item'> */}
               <button 
                 className={colorHeader ? 'header_avatar active' : 'header_avatar'} 
                 onClick={openMenuProfile}
@@ -272,7 +323,7 @@ function Header() {
 
                 <span>Hồ sơ</span>
 
-                <svg 
+                <svg
                   viewBox="0 0 1024 1024" 
                   className={menuProfile ? "reverse_svg" : ""}
                 >
@@ -288,7 +339,10 @@ function Header() {
                   </li>
 
                   <li className="profile_menu_list">
-                    <a className="log_out" href="#">Đăng xuất</a>
+                    <a 
+                    className="log_out" 
+                    // href="/" 
+                    onClick={handleLogOut}>Đăng xuất</a>
                   </li>
                 </ul>
               </div>
