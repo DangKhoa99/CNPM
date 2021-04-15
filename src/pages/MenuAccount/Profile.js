@@ -4,7 +4,16 @@ import Header from '../../components/Header'
 import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuProfile from "../../components/MenuAccount/MenuProfile"
 
+import useToken from '../../useToken'
+import SignIn from '../SignIn/SignIn'
+
 function Profile() {
+
+    const { token, setToken } = useToken();
+
+    if(!token){
+        return <SignIn />
+    }
     document.title = "Chỉnh sửa hồ sơ | RoyalStay"
 
     return (

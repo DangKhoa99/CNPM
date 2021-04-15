@@ -7,9 +7,14 @@ import {ReactComponent as IconFavorite} from "../../icons/iconFavorite.svg"
 import {ReactComponent as IconBooking} from "../../icons/iconBooking.svg"
 import {ReactComponent as IconHistoryBooking} from "../../icons/iconHistoryBooking.svg"
 
-import axios from 'axios';
 
-function MenuLeft({markPage}) {
+
+
+function MenuLeft({
+    markPage,
+}) {
+
+
     const [data, setData] = useState([
         {
             id: "overview",

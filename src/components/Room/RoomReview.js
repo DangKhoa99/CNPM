@@ -4,10 +4,13 @@ import StarIcon from "@material-ui/icons/Star"
 import {Avatar, styled} from "@material-ui/core"
 import StarRatings from "react-star-ratings"
 
+import useToken from '../../useToken'
+
 function RoomReview({
     reference,
     review
 }) {
+    const { token, setToken } = useToken();
     const [rating, setRating] = useState(0);
 
     let avgReview = 0;
@@ -23,7 +26,7 @@ function RoomReview({
     // }
 
     // useEffect (() => {
-    //     calAvgReview();
+        
     // },[])
     
 
@@ -81,6 +84,9 @@ function RoomReview({
                     </h2>
                 </div>
 
+                {!token ? 
+                "Bạn cần đăng nhập để có thể đánh giá khách sạn" 
+                : 
                 <div className="roomReview_review_input"> 
                     <div className="commentator">
                         <div className="commentator_avatar">
@@ -128,13 +134,9 @@ function RoomReview({
                         </form>                        
                     </div>
                 </div>
+                }
 
-
-
-
-
-
-
+            
                 <div className="aaa">
                     {/* comment_section - phần bình luận */}
                     <div className="bbb"> 

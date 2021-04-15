@@ -6,7 +6,15 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form';
 import { store } from 'react-notifications-component'
 
+import useToken from '../../useToken'
+import history from '../../history';
+
 function SignUp() {
+const { token, setToken } = useToken();
+
+if(token){
+    history.push('/');
+}
   document.title = "Đăng ký | RoyalStay"
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import "../../style/LoginRegister.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
@@ -7,7 +7,22 @@ import { useForm } from 'react-hook-form';
 import { store } from 'react-notifications-component'
 import history from '../../history';
 
-function SignIn() {
+import PropTypes from 'prop-types';
+import useToken from '../../useToken'
+import { useLocation } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+function SignIn(
+    // {setToken}
+
+) {
+
+    const { token, setToken } = useToken();
+    const location = useLocation();
+
+    if(token && location.pathname == '/sign-in'){
+        history.push("/")
+    }
+
     document.title = "Đăng nhập | RoyalStay"
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -32,16 +47,16 @@ function SignIn() {
         }
     };
 
-    const onSubmit = (data) => {
+    // useEffect(() => {
+    //     onSubmit();
+    // },[])
+
+    const onSubmit = async (data)  => {
         console.log(data);
 
         const loginAccount = {
             username: data.username,
             password: data.password   
-        }
-
-        const headers = {
-            'auth-token': "",
         }
 
         axios.post('http://localhost:5000/auth/login', loginAccount)
@@ -51,18 +66,50 @@ function SignIn() {
                 store.addNotification(notificationLoginFail);
             }
             else{
-                headers['auth-token'] = response.data;
-                store.addNotification(notificationLoginSuccess);
+                const accessToken = response.data;
 
-                console.log("token", headers)
-                history.push("/");
+                setToken(accessToken);
+               
+                console.log("token 1: ",token);
+            // console.log(setToken(response.data));
+                // store.addNotification(notificationLoginSuccess);
+
+                // setRedirectToReferrer(true)
+
+                // if (redirectToReferrer == true) {
+                //     <Redirect to={from} />
+                // }
+                // dispatch(addToken(response.data))
+                // console.log("token1", token)
+                if(location.pathname == "/sign-in"){
+                    // history.push("/");
+                    window.location ="/";
+                    console.log("token path sign in: ",token)//null
+                    store.addNotification(notificationLoginSuccess);
+                    // window.location.reload();
+
+                }
+                else{
+                    // history.push(from);
+                    window.location.reload();
+                    store.addNotification(notificationLoginSuccess);
+                }
             }
-            
+            // console.log("token2", token)
         })
         .catch(err => {
             console.log("Error: ", err);
         })
+
+        
     }
+
+    
+
+    console.log("token out Submit: ",token);
+
+
+    // console.log("token3", token)
 
     const Eye = <FontAwesomeIcon className="iconEye" icon={faEye} />;
     const EyeSlash = <FontAwesomeIcon className="iconEye" icon ={faEyeSlash}/>;
@@ -150,3 +197,6 @@ function SignIn() {
 }
 
 export default SignIn
+// SignIn.propTypes = {
+//     setToken: PropTypes.func.isRequired
+// };
