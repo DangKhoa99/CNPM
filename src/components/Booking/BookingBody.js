@@ -19,11 +19,6 @@ function BookingBody() {
       highlight: '-highlight'
     }
 
-    function removeDays(){
-        setStartDate(null);
-        setEndDate(null);
-    }
-
     function calDate(startDate, endDate){
         return Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
     }
@@ -34,14 +29,14 @@ function BookingBody() {
 
     const handleClickEditTypeRoom = () => setClickEditTypeRoom(!clickEditTypeRoom);
     const handleClickEditDate = () => setClickEditDate(!clickEditDate);
-
+    
     let editTypeRoom = "Chỉnh sửa";
     let editDate = "Chỉnh sửa";
-    if(clickEditTypeRoom == true){
+    if(clickEditTypeRoom === true){
         editTypeRoom = "Hủy";
     }
 
-    if(clickEditDate == true){
+    if(clickEditDate === true){
         editDate = "Hủy";
     }
 

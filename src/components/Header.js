@@ -200,7 +200,7 @@ function Header() {
                 className={colorHeader ? "input_search active" : "input_search"} 
                 placeholder="Bạn sắp đi đâu?" 
                 spellCheck="false"
-                autocomplete="off"
+                autoComplete="off"
                 value={searchLocation}
                 onChange={onChangeSearchLocation}
               />
@@ -209,7 +209,7 @@ function Header() {
               href={"/search-page?result=" + searchLocation}
               className={colorHeader ? "header_search_btn active" : "header_search_btn"}
             >
-              <i class="fas fa-search"></i>
+              <i className="fas fa-search"></i>
             </a>
 
             {/* Menu Search Suggestion */}
