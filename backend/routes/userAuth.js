@@ -56,7 +56,7 @@ router.route('/login').post( async (req, res) => {
     });
 
     newToken.save()
-    .then(() => res.header('auth-token', token).json(token))
+    .then(() => res.header('auth-token', token).json({"auth-token" : token, "customerId": user._id}))
     .catch(err => res.status(400).json('Error: ' + err)) 
 });
 
@@ -68,7 +68,7 @@ router.route('/logout').post(async (req, res) => {
         .then(() => res.json("Đăng xuất thành công"))
         .catch(err => res.status(400).json('Error: ' + err));
     } else{
-        res.json('Đã đăng xuất thành công');
+        res.json('Đăng xuất thất bại');
     }
 })
 

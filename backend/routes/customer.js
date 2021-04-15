@@ -2,7 +2,7 @@ const router = require('../../node_modules/express').Router();
 const {verify, adminVerify} = require('./verifyToken');
 let {Customer, Booking} = require('../models/customer.model');
 const bcrypt = require('../../node_modules/bcrypt');
-let Hotel = require('../models/hotel.model');
+let {Hotel, Review} = require('../models/hotel.model');
 
 
 //Query all customers in DB | admin required
@@ -117,6 +117,7 @@ function bookingUpdate(customer){
             }
             else if (curDate > checkOutDate){
                 customer.booking[i].status = "Stayed";
+                roomQuantityUpdate(customer.booking[i]["hotelId"], 1);
             }
         }
     }
@@ -135,34 +136,55 @@ router.route('/booking').post(verify, (req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//Add booking of 1 customer | token require
-router.route('/booking/add').post(verify, (req, res) =>{
-    const customerId = req.body.customerId;
-    
-    Customer.findById(customerId)
-    .then(customer => {
-
-        const hotelId = req.body.hotelId;
-        const checkIn = req.body.checkIn;
-        const checkOut = req.body.checkOut;
-        const roomType = req.body.roomType;
-
-        const newBooking = new Booking({
-            hotelId,
-            checkIn,
-            checkOut,
-            roomType
-        });
-
-        customer.booking.push(newBooking);
-
-        customer.save()
-        .then(() => res.json('Đặt phòng thành công'))
-        .catch(err => res.status(400).json('Error: ' + err));
+async function roomQuantityUpdate(hotelId, flag){
+    await Hotel.findById(hotelId)
+    .then(hotel => {
+        hotel.room.quantity += flag
+        hotel.save();
     })
     .catch(err => res.status(400).json('Error: ' + err));
-});
+} 
 
+//Add booking of 1 customer | token require
+router.route('/booking/add').post(verify, async (req, res) =>{
+    const customerId = req.body.customerId;
+    const hotelId = req.body.hotelId;
+    let isHotelAvaiable = true;
+    
+    await Hotel.findById(hotelId)
+    .then(hotel => {
+        if(hotel.room.quantity == 0){
+            isHotelAvaiable = false;
+        }
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+    
+    if(isHotelAvaiable){
+        Customer.findById(customerId)
+        .then(customer => {
+            const checkIn = req.body.checkIn;
+            const checkOut = req.body.checkOut;
+            const roomType = req.body.roomType;
+
+            const newBooking = new Booking({
+                hotelId,
+                checkIn,
+                checkOut,
+                roomType
+            });
+
+            customer.booking.push(newBooking);
+            roomQuantityUpdate(hotelId, -1);
+
+            customer.save()
+            .then(() => res.json('Đặt phòng thành công'))
+            .catch(err => res.status(400).json('Error: ' + err));
+        })
+        .catch(err => res.status(400).json('Error: ' + err));
+    } else {
+        res.json("Khách sạn này không còn phòng trống");
+    }
+});
 
 //Cancel a booking of 1 customer | token require
 router.route('/booking/cancel').post(verify, (req, res) =>{
@@ -175,6 +197,8 @@ router.route('/booking/cancel').post(verify, (req, res) =>{
         for(i in customer.booking){
             if(customer.booking[i]["_id"] == bookingId){
                 customer.booking[i]["status"] = "Cancel";
+                const hotelId = customer.booking[i]["hotelId"];
+                roomQuantityUpdate(hotelId, 1);
             }
         }
 
