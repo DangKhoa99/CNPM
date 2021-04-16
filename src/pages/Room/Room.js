@@ -1,16 +1,14 @@
 import React, {useState, useEffect, useRef,  useCallback} from 'react'
 import "../../style/Room.css"
-import Header from "../../components/Header"
 import RoomHeader from "../../components/Room/RoomHeader"
 import RoomBody from "../../components/Room/RoomBody"
 import RoomReview from "../../components/Room/RoomReview"
 import LoadingScreen from "../../components/LoadingScreen"
 
 import axios from 'axios'
+import useToken from '../../useToken'
 
 function Room() {
-    
-
     const scrollToElement = (ref) => {
         window.scrollTo({
             behavior: "smooth",
@@ -20,40 +18,73 @@ function Room() {
 
     const roomHeader = useRef();
     const roomReview = useRef();
-
     const [data, setData] = useState(null);
-
     const [isLoading, setIsLoading] = useState(false);
-
     const getID = window.location.href.split("=").pop();
-    const _id = {"hotelId": getID};
 
-    const loadDetailRoomFromServer = useCallback(async () =>{
+    const { token, setToken } = useToken();
+    const [dataFavoriteHotelOfCustomer, setDataFavoriteHotelOfCustomer] = useState([]);
+    const getDataFavoriteHotelOfCustomer = async () => {
+        const options = {
+            method: "POST",
+            headers: {
+                "auth-token": token.authToken,
+            },
+            data: {
+                "customerId": token.customerId
+            },
+            url: "http://localhost:5000/customer/favorite"
+        }
+        axios(options)
+        .then(response => {
+            console.log("TEST: ", (response.data))
+            setDataFavoriteHotelOfCustomer(response.data)
+        })
+        .catch(error => console.log(error))
+    };
+
+
+    const loadDetailHotelFromServer = useCallback(async () =>{
         setIsLoading(true);
-        // const result = await axios.post("http://localhost:5000/hotel/", _id)
-        await axios.post("http://localhost:5000/hotel/", _id)
+        const options = {
+            method: "POST",
+            data: {
+                "hotelId": getID
+            },
+            url: "http://localhost:5000/hotel/"
+        }
+        await axios(options)
             .then(response => {
                 setData(response.data);
                 setIsLoading(false);
             })
-        // setData(result.data);
-        // setIsLoading(false);
     },[getID]); // every time id changed, new data will be loaded
 
     useEffect(() => {
-        loadDetailRoomFromServer()
-    },[loadDetailRoomFromServer])// useEffect will run once and when id changes
+        loadDetailHotelFromServer()
+        getDataFavoriteHotelOfCustomer()
+    },[loadDetailHotelFromServer])// useEffect will run once and when id changes
 
     if(!data) return null //first render, when useEffect did't triggered yet we will return null
 
-    const arrImage=[]
+    const arrImage = []
     for (var key in data.imageLink) {
         var obj = data.imageLink[key];
-        // console.log(obj)
         arrImage.push(obj);
     }
 
     document.title = data.name + " | RoyalStay";
+
+    let savedHotel = "false";
+    for(let key in dataFavoriteHotelOfCustomer){
+        console.log("key", dataFavoriteHotelOfCustomer[key]._id)
+        if(dataFavoriteHotelOfCustomer[key]._id == getID){
+            console.log("true");
+            savedHotel = "true";
+        }
+    }
+
+    console.log("asdasd ", dataFavoriteHotelOfCustomer)
 
     return (
         <div className="room">
@@ -61,17 +92,20 @@ function Room() {
                 {isLoading ? <LoadingScreen/>
                 :
                 <RoomHeader
+                    idHotel={getID}
                     name={data.name}
                     img={arrImage}
                     address={data.address}
                     review={data.review}
                     reference={roomHeader}
                     click={() => scrollToElement(roomReview)}
+                    savedHotel={savedHotel}
                 />
                 }
                 {isLoading ? <LoadingScreen/>
                 :
                 <RoomBody 
+                    idHotel={getID}
                     description={data.bio}
                     roomType={data.room.roomType}
                     quantity={data.room.quantity}
@@ -79,16 +113,12 @@ function Room() {
                 />
                 }
             
-
                 <RoomReview 
                     reference={roomReview}
-                    review={data.review}
-                />
-
-            
-            
-            </div>
-            
+                    // review={data.review}
+                    idHotel={getID}
+                />  
+            </div>      
         </div>
     )
 }

@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../style/Footer.css'
 import { Link } from 'react-router-dom'
 import {Button} from "@material-ui/core"
 import {ReactComponent as LogoRoyalStay} from "../icons/logoRoyalStay.svg"
+import { useLocation } from 'react-router-dom'
 
 function Footer() {
+  const location = useLocation();
   const [data, setData] = useState([
     {
       title: "GIỚI THIỆU",
@@ -51,9 +53,24 @@ function Footer() {
     })
   }
 
+  const [hideFooter, setHideFooter] = useState(false);
+
+  const handleHideFooter = () =>{
+    if(location.pathname == "/404"){
+      setHideFooter(true)
+    }
+    else{
+      setHideFooter(false);
+    }
+  }
+
+  useEffect(() => {
+    handleHideFooter();
+  }, [location]); 
+
   return (
     <div className="footer">  
-      <div className='footer_container'>
+      <div className={hideFooter ? "footer_container hideFooter" : "footer_container"}>
         <div className='footer_to_top'>
           <Button className="footer_btn_to_top" title="Lên đầu trang" variant="outlined" onClick={scrollToTop}>
             <i class="fas fa-arrow-up"/>

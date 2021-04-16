@@ -1,25 +1,52 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "../../style/RoomHeader.css"
 import StarIcon from "@material-ui/icons/Star"
 import {ReactComponent as Heart} from "../../icons/iconHeart.svg"
 import {ReactComponent as RedHeart} from "../../icons/iconRedHeart.svg"
-
 import Gallery from 'react-grid-gallery';
-
-
 import { store } from 'react-notifications-component'
 
+import axios from 'axios'
+import useToken from '../../useToken'
+
 function RoomHeader({
+    idHotel,
     name,
     img,
     address,
     review,
     reference,
-    click
+    click,
+    savedHotel
 }) {
+    console.log("ID khách sạn: ", idHotel)
+    const { token, setToken } = useToken();
     const [clickFavorite, setClickFavorite] = useState(false);
 
-    const handleClickFavorite = () => setClickFavorite(!clickFavorite);
+    useEffect(() => {
+        if(savedHotel == "true"){
+            setClickFavorite(true)
+        }
+    },[savedHotel])
+
+    const handleClickFavorite = () => {
+        console.log("Click Favorite", token)
+        if(!token){
+            store.addNotification(notification_requireLogin)
+        }
+        else{
+            setClickFavorite(!clickFavorite);
+
+            if(clickFavorite == true){       
+                removeSaveHotel()
+                store.addNotification(notification_notSaveFavorite);
+            }
+            else{
+                saveHotel()
+                store.addNotification(notification_saveFavorite);
+            }
+        }
+    }
 
     let saveFavorite = "Lưu";
     if(clickFavorite == true){
@@ -46,6 +73,16 @@ function RoomHeader({
         }
     };
 
+    const notification_requireLogin = {
+        title: 'RoyalStay - Thông báo',
+        message: 'Bạn chưa đăng nhập',
+        type: 'danger',
+        container: 'bottom-left',
+        dismiss: {
+            duration: 2000
+        }
+    };
+
     let avgReview = 0;
     if(review.length > 0){
         for(var key in review){
@@ -53,6 +90,45 @@ function RoomHeader({
             avgReview = avgReview + obj.score;
         }
         avgReview = (avgReview / review.length).toFixed(1);
+    }
+
+
+    const saveHotel = async () => {
+        const options = {
+            method: "POST",
+            headers: {
+                "auth-token": token.authToken,
+            },
+            data: {
+                "hotelId": idHotel,
+                "customerId": token.customerId
+            },
+            url: "http://localhost:5000/customer/favorite/add"
+        }
+        axios(options)
+        .then(response => {
+            console.log("Success: ", response.data)
+        })
+        .catch(error => console.log("Error:", error))
+    }
+
+    const removeSaveHotel = async () => {
+        const options = {
+            method: "POST",
+            headers: {
+                "auth-token": token.authToken,
+            },
+            data: {
+                "hotelId": idHotel,
+                "customerId": token.customerId
+            },
+            url: "http://localhost:5000/customer/favorite/delete"
+        }
+        axios(options)
+        .then(response => {
+            console.log("Success: ", response.data)
+        })
+        .catch(error => console.log("Error:", error))
     }
 
     const IMAGES =
@@ -115,10 +191,7 @@ function RoomHeader({
                             <div className="roomHeader_heading_description_right">
                                 <button 
                                     className="roomHeader_heading_btn" 
-                                    onClick={() => {
-                                        handleClickFavorite(); 
-                                        clickFavorite ? store.addNotification(notification_notSaveFavorite) : store.addNotification(notification_saveFavorite)
-                                    }}
+                                    onClick={() => {handleClickFavorite() }}
                                 >
                                     <span className="roomHeader_heading_heart">
                                         {clickFavorite ? <RedHeart className="roomHeader_heading_redHeart_svg" /> : <Heart className="roomHeader_heading_heart_svg" />}
@@ -152,27 +225,6 @@ function RoomHeader({
                             rowHeight={300}
                         />
                     </div>
-                    {/* <div className="roomHeader_gallery">
-                        <figure className="gallery_item gallery_item--1">
-                            <img src={img1} className="gallery_img" alt="Image 1" style={{borderBottomLeftRadius: 12 + 'px', borderTopLeftRadius: 12 + 'px'}}/>
-                        </figure>
-
-                        <figure className="gallery_item gallery_item--2">
-                            <img src={img2} className="gallery_img" alt="Image 2"/>
-                        </figure>
-
-                        <figure className="gallery_item gallery_item--3">
-                            <img src={img3} className="gallery_img" alt="Image 3"/>
-                        </figure>
-
-                        <figure className="gallery_item gallery_item--4">
-                            <img src={img4} className="gallery_img" alt="Image 4" style={{borderTopRightRadius: 12 + 'px'}}/>
-                        </figure>
-
-                        <figure className="gallery_item gallery_item--5">
-                            <img src={img5} className="gallery_img" alt="Image 5" style={{borderBottomRightRadius: 12 + 'px'}}/>
-                        </figure>
-                    </div> */}
                 </div>
             </div>
         </div>

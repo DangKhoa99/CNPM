@@ -1,24 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "../../style/MenuProfile.css"
-import { vi } from 'date-fns/locale'
-import { DatePicker } from 'react-nice-dates'
+// import { vi } from 'date-fns/locale'
+// import { DatePicker } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
-import { Favorite } from '@material-ui/icons'
+// import { Favorite } from '@material-ui/icons'
 
-function MenuProfile() {
-    const [date, setDate] = useState(new Date(2000, 8, 9))
+function MenuProfile({
+    id,
+    fullName,
+    email,
+    username,
+    password,
+    phone,
+    sex,
+    address,
+}) {
+    // const [date, setDate] = useState(new Date(2000, 8, 9))
 
-    const [selectValue, setSelectValue] = useState("MALE");
+    const [selectValue, setSelectValue] = useState(sex);
+    const [changeFullName, setChangeFullName] = useState(fullName);
+    const [changeEmail, setChangeEmail] = useState(email);
+
+    useEffect(() => {
+        setChangeFullName(fullName);
+        setChangeEmail(email);
+    },[fullName])
+
+    const handleChangeFullName = (e) => {
+        let value = e.target.value;
+        setChangeFullName(value);
+    }
+
+    const handleChangeEmail = (e) => {
+        let value = e.target.value;
+        setChangeEmail(value);
+    }
 
     const handleSelectValue = (e) =>{
         let value = e.target.value;
         setSelectValue(value);
     }
 
-    // const handleSubmitForm = (e) => {
-    //     alert(Favorite);
-    //     e.preventDefault();
-    // }
+    const handleSubmitEditProfile = (e) => {
+        e.preventDefault();
+    }
 
     return (
         <div className="menuProfile">
@@ -29,33 +54,71 @@ function MenuProfile() {
                 >
                     <section className="menuProfile_form">
                         <div className="menuProfile_form_row">
+                            <label className="menuProfile_form_label" for="username">Id tài khoản</label>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                className="menuProfile_form_input" 
+                                disabled="true" name="username" 
+                                value={id}
+                            />
+                        </div>
+
+                        <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" for="fullName">Họ và tên</label>
-                            <input type="text" id="fullName" className="menuProfile_form_input" name="fullName" value="Nguyễn Minh Đăng Khoa" />
+                            <input 
+                                type="text" 
+                                id="fullName" 
+                                className="menuProfile_form_input" 
+                                name="fullName" 
+                                value={changeFullName}
+                                onChange={handleChangeFullName}
+                            />
                         </div>
 
                         <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" for="username">Tên tài khoản</label>
-                            <input type="text" id="username" className="menuProfile_form_input" disabled="true" name="username" value="dangkhoa99" />
+                            <input 
+                                type="text" 
+                                id="username" 
+                                className="menuProfile_form_input" 
+                                disabled="true" name="username" 
+                                value={username}
+                            />
                         </div>
 
                         <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" for="password">Mật khẩu</label>
-                            <input type="password" id="password" className="menuProfile_form_input" disabled="true" name="password" value="123456" />
+                            <input 
+                                type="password" 
+                                id="password" 
+                                className="menuProfile_form_input" 
+                                disabled="true" 
+                                name="password" 
+                                value={password}
+                            />
                         </div>
 
                         <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" for="email">Địa chỉ Email</label>
-                            <input type="text" id="email" className="menuProfile_form_input" name="email" value="51800882@student.tdtu.edu.vn" />
+                            <input 
+                                type="email" 
+                                id="text" 
+                                className="menuProfile_form_input" 
+                                name="email"
+                                value={changeEmail}
+                                onChange={handleChangeEmail}
+                            />
                         </div>
 
-                        <div className="menuProfile_form_row">
+                        {/* <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" for="birthDay">Ngày sinh</label>
-                            {/* <input type="text" id="birthDay" className="menuProfile_form_input" name="birthDay" value="09/09/2000" /> */}
+                            <input type="text" id="birthDay" className="menuProfile_form_input" name="birthDay" value="09/09/2000" />
                             <DatePicker 
-                            date={date} 
-                            onDateChange={setDate} 
-                            locale={vi}
-                            format="dd/MM/yyyy"
+                                date={date} 
+                                onDateChange={setDate} 
+                                locale={vi}
+                                format="dd/MM/yyyy"
                             >
                             {({ inputProps, focused }) => (
                                 <input
@@ -66,16 +129,30 @@ function MenuProfile() {
                                 />
                             )}
                             </DatePicker>
-                        </div>
+                        </div> */}
 
                         <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" for="address">Địa chỉ</label>
-                            <input type="text" id="address" className="menuProfile_form_input" name="address" value="19 Nguyễn Hữu Thọ, Tân Hưng, Quận 7, Thành phố Hồ Chí Minh" />
+                            <input 
+                                type="text" 
+                                id="address" 
+                                className="menuProfile_form_input" 
+                                name="address" 
+                                value={address}
+                                // onChange={changeAddress}
+                            />
                         </div>
 
                         <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" for="phone">Số điện thoại</label>
-                            <input type="text" id="phone" className="menuProfile_form_input" name="phone" value="0982876890" />
+                            <input 
+                                type="text" 
+                                id="phone" 
+                                className="menuProfile_form_input" 
+                                name="phone" 
+                                value={phone}
+                                // onChange={changePhone}
+                            />
                         </div>
 
                         <div className="menuProfile_form_row">
@@ -101,7 +178,7 @@ function MenuProfile() {
                     </section>
                     <div className="menuProfile_form_btn">
                         <a className="menuProfile_form_btn_cancel" href="/account/overview">Hủy</a>
-                        <button className="menuProfile_form_submit" type="submit">
+                        <button className="menuProfile_form_submit" type="submit" onClick={handleSubmitEditProfile}>
                             <div className="menuProfile_form_submit_text">Lưu hồ sơ</div>
                         </button>
                     </div>

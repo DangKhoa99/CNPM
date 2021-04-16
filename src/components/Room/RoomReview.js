@@ -1,27 +1,43 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef,  useCallback} from 'react'
 import "../../style/RoomReview.css"
 import StarIcon from "@material-ui/icons/Star"
 import {Avatar, styled} from "@material-ui/core"
 import StarRatings from "react-star-ratings"
+import axios from 'axios'
 
 import useToken from '../../useToken'
 
 function RoomReview({
     reference,
-    review
+    // review
+    idHotel
 }) {
     const { token, setToken } = useToken();
+    const [dataReview, setDataReview] = useState([]);
     const [rating, setRating] = useState(0);
+
+    const _id = {"hotelId": idHotel};
+
+    const loadReviewHotelFromServer = useCallback(async () =>{
+        await axios.post("http://localhost:5000/hotel/review", _id)
+            .then(response => {
+                setDataReview(response.data);
+            })
+    },[idHotel]);
+
+    useEffect(() => {
+        loadReviewHotelFromServer()
+    },[loadReviewHotelFromServer])
 
     let avgReview = 0;
     // const calAvgReview = () =>{
-    if(review.length > 0){
-        for(var key in review){
-            var obj = review[key];
+    if(dataReview.length > 0){
+        for(var key in dataReview){
+            var obj = dataReview[key];
             // console.log((obj.score));
             avgReview = avgReview + obj.score;
         }
-        avgReview = (avgReview / review.length).toFixed(1);
+        avgReview = (avgReview / dataReview.length).toFixed(1);
     }
     // }
 
@@ -79,7 +95,7 @@ function RoomReview({
                     <h2>
                         <span className="roomHeader_heading_stars">
                             <StarIcon className="roomHeader_heading_star"/>
-                            <strong>{avgReview} ({review.length} đánh giá)</strong>
+                            <strong>{avgReview} ({dataReview.length} đánh giá)</strong>
                         </span>
                     </h2>
                 </div>
@@ -94,7 +110,7 @@ function RoomReview({
                         </div>
 
                         <div className="commentator_info">
-                            dangkhoa99 - <i style={{fontWeight: '400', fontSize: '14px'}}>tháng {(new Date().getMonth())} năm {(new Date().getFullYear())}</i>
+                            dangkhoa99 - <i style={{fontWeight: '400', fontSize: '14px'}}>tháng {(new Date().getMonth() + 1)} năm {(new Date().getFullYear())}</i>
 
                             <div className="comment_stars">
                                 <StarRatings
@@ -169,7 +185,7 @@ function RoomReview({
                             </div>
                         </div> */}
 
-                        {review.map(reviews => {
+                        {dataReview.map(reviews => {
                             return <div className="box_comment">
                                         <div className="commentator">
                                             <div className="commentator_avatar">

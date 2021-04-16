@@ -105,6 +105,7 @@
     display: inline-block !important;
     white-space: normal !important;
     flex: 0 0 auto !important;
+    cursor: pointer;
 }
 
 .roomBody_rooms_roomType.disable{

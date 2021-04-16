@@ -55,7 +55,7 @@ router.route('/login').post( async (req, res) => {
     });
 
     newToken.save()
-    .then(() => res.header('auth-token', token).json({"auth-token" : token, "customerId": user._id}))
+    .then(() => res.header('auth-token', token).json({"authToken" : token, "customerId": user._id}))
     .catch(err => res.status(400).json('Error: ' + err)) 
 });
 

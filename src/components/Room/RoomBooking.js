@@ -6,6 +6,8 @@ import { vi } from 'date-fns/locale'
 import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 
+import useToken from '../../useToken'
+import SignIn from '../../pages/SignIn/SignIn'
 
 function RoomBooking({
     priceSmallRoom,
@@ -15,6 +17,7 @@ function RoomBooking({
     quantity,
     price,
 }) {
+    const { token, setToken } = useToken();
     // DATE RANGE PICKER
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
@@ -40,8 +43,12 @@ function RoomBooking({
 
     const [room, setRoom] = useState(roomType[0]);
 
-    function onRoomChanged(e) {
+    const onRoomChanged = (e) => {
         setRoom(e.currentTarget.value);
+    }
+
+    const handleOrderRoom = (e) => {
+        e.preventDefault();
     }
 
     // console.log(typeof(roomType[0]))
@@ -56,6 +63,8 @@ function RoomBooking({
     else if (room == "Large"){
         pricePerNight = priceLargeRoom; 
     }
+
+    
     
     return (
         <div className="roomBooking">
@@ -158,49 +167,13 @@ function RoomBooking({
                                                     {t}
                                                 </label>
                                     })}
-
-                                    
-                                    {/* <label class={smallRoom ? "room_type" : "room_type disable"}>
-                                        <input 
-                                            type="radio" 
-                                            id="small" 
-                                            name="room_type" 
-                                            value="small"
-                                        />
-                                        <span class="check_mark"></span>
-                                        Nhỏ
-                                    </label>
-                                    
-                                    <label class={mediumRoom ? "room_type" : "room_type disable"}>
-                                        <input 
-                                            type="radio" 
-                                            id="medium" 
-                                            name="room_type" 
-                                            value="medium"
-                                        />
-                                        <span class="check_mark"></span>
-                                        Vừa
-                                    </label>
-                                    
-                                    <label class={largeRoom ? "room_type" : "room_type disable"}>
-                                        <input 
-                                            type="radio" 
-                                            id="big" 
-                                            name="room_type" 
-                                            value="big"
-                                        />
-                                        <span class="check_mark"></span>
-                                        Lớn
-                                    </label> */}
                                 </div>
                             </div>
 
                             
 
                             <div className="roomBooking_box_layout_body_row">
-                            
-                                    <button className='form_booking_btn' type='submit'>Đặt phòng</button>
-                                
+                                <button className='form_booking_btn' type='submit' onClick={handleOrderRoom}>Đặt phòng</button>
                             </div>
                         </div>
                     </form>

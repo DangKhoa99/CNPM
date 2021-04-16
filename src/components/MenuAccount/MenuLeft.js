@@ -6,12 +6,14 @@ import {ReactComponent as IconEdit} from "../../icons/iconEdit.svg"
 import {ReactComponent as IconFavorite} from "../../icons/iconFavorite.svg"
 import {ReactComponent as IconBooking} from "../../icons/iconBooking.svg"
 import {ReactComponent as IconHistoryBooking} from "../../icons/iconHistoryBooking.svg"
+import {Link} from 'react-router-dom'
 
 
 
 
 function MenuLeft({
     markPage,
+    username
 }) {
 
 
@@ -89,7 +91,7 @@ function MenuLeft({
                 <div className="account_avatar_container">
                     <Avatar 
                         className="account_avatar" 
-                        alt="dangkhoa99" 
+                        alt={username} 
                         // src="/images/Khoa.jpg"
                         src={selectedFile}
                     />               
@@ -114,17 +116,17 @@ function MenuLeft({
 
                 {selectedFile!="/images/Khoa.jpg"?<div className="btn_upload_image"><button>Lưu</button></div>:""}
 
-                <div className="account_username">dangkhoa99</div>
+                <div className="account_username">{username}</div>
 
                 <ul className="menuLeft_list">
                     {data.map(item => {
                         if(item.id === markPage) 
                             item.active = "menu_active"
                         return <li id={item.id} className={"menuLeft_menuItem " + item.active}>
-                                    <a className="menuLeft_menuLink" href={item.to}>
+                                    <Link className="menuLeft_menuLink" to={item.to}>
                                         {item.icon}
                                         {item.name}
-                                    </a>
+                                    </Link>
                                 </li>
                     })}
                 </ul>

@@ -3,6 +3,7 @@ import "../../style/SearchPage.css"
 import SearchCard from "../../components/Search/SearchCard"
 import LoadingScreen from "../../components/LoadingScreen"
 import axios from 'axios'
+import useToken from '../../useToken'
 
 function SearchPage() {
     const [data, setData] = useState([]);
@@ -42,18 +43,16 @@ function SearchPage() {
         placeMap = "PQ"
     }
 
-    const location = {
-        "location": placeMap,
-    }
-
-    console.log("location", location.location);
-
     const fetchData = useCallback(async () => {
         setIsLoading(true);
         setNotData(false);
 
         if(capitalize(place) == "Việt Nam"){
-            axios.get('http://localhost:5000/hotel/')
+            const options = {
+                method: "GET",
+                url: "http://localhost:5000/hotel/"
+            }
+            axios(options)
             .then(response => {
                 if(response.data.length > 0){
                     setData(response.data);
@@ -62,9 +61,17 @@ function SearchPage() {
             })
         }
         else{
-            axios.post('http://localhost:5000/hotel/location', location)
+            const options = {
+                method: "POST",
+                data: {
+                    "location": placeMap
+                },
+                url: "http://localhost:5000/hotel/location"
+            }
+            axios(options)
             .then(response => {
                 if(response.data.length > 0){
+                    console.log(response.data)
                     setData(response.data);
                     setIsLoading(false);
                 }
@@ -76,8 +83,30 @@ function SearchPage() {
         }
     },[place]);
 
+    const { token, setToken } = useToken();
+    const [dataFavoriteHotelOfCustomer, setDataFavoriteHotelOfCustomer] = useState([]);
+    const getDataFavoriteHotelOfCustomer = async () => {
+        const options = {
+            method: "POST",
+            headers: {
+                "auth-token": token.authToken,
+            },
+            data: {
+                "customerId": token.customerId
+            },
+            url: "http://localhost:5000/customer/favorite"
+        }
+        axios(options)
+        .then(response => {
+            console.log("TEST: ", (response.data))
+            setDataFavoriteHotelOfCustomer(response.data)
+        })
+        .catch(error => console.log(error))
+    };
+
     useEffect(() => {
         fetchData();
+        getDataFavoriteHotelOfCustomer();
     },[fetchData])
 
     function capitalize(str) {
@@ -112,6 +141,15 @@ function SearchPage() {
     // const indexOfLastCard = paging.currentPage * paging.cardsPerPage;
     // const indexOfFirstCard = indexOfLastCard - paging.cardsPerPage;
     // const currentCards = paging.cards.slice(indexOfFirstCard, indexOfLastCard);
+
+    let savedHotelId = [];
+    for(let key in dataFavoriteHotelOfCustomer){
+        // console.log("key", dataFavoriteHotelOfCustomer[key]._id)
+        data.map(item=>{
+            return (dataFavoriteHotelOfCustomer[key]._id == item._id) ? savedHotelId.push(item._id) : ""
+        }
+    )
+    }
 
     return (
         <div className="searchPage">
@@ -158,8 +196,8 @@ function SearchPage() {
                                         .map(ttt => {
                                         return ttt + " · " 
                                     })}
-                                    star={0}
                                     price={item.room.price}
+                                    savedHotelId={savedHotelId}
                                 />
                     })
                     : 
@@ -174,8 +212,8 @@ function SearchPage() {
                                         .map(ttt => {
                                         return ttt + " · " 
                                     })}
-                                    star={0}
                                     price={item.room.price}
+                                    savedHotelId={savedHotelId}
                                 />
                     })
             // data.map(item => {

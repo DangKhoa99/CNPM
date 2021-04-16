@@ -3,6 +3,7 @@ const {verify, adminVerify} = require('./verifyToken');
 let {Customer, Booking} = require('../models/customer.model');
 const bcrypt = require('../../node_modules/bcrypt');
 let {Hotel, Review} = require('../models/hotel.model');
+const { HowToRegOutlined } = require('@material-ui/icons');
 
 
 //Query all customers in DB | admin required
@@ -62,8 +63,11 @@ router.route('/add').post(adminVerify,async (req, res) => {
 router.route('/favorite').post(verify, (req, res) => {
     const customerId = req.body.customerId;
     Customer.findById(customerId)
-    .then(customer => {
-        res.json(res.json(customer.favorite));
+    .then(async customer => {
+        
+        const favoriteHotelArr = await Hotel.find().where('_id').in(customer.favorite).exec();
+        res.json(favoriteHotelArr);
+        
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });

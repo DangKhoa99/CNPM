@@ -8,9 +8,9 @@ function Home() {
   const [data, setData] = useState([
     {
       // src: NhaTrang,
-      src: "images/NhaTrang.jpg",
-      txt: "Nha Trang",
-      link: "nha+trang",
+      src: "images/HCMC.jpg",
+      txt: "TP. Hồ Chí Minh",
+      link: "Hồ Chí Minh",
     },
     {
       // src: VungTau,
@@ -44,9 +44,9 @@ function Home() {
     },
     {
       // src: Sapa,
-      src: "images/Sapa.jpg",
-      txt: "Sapa",
-      link: "sapa",
+      src: "images/HaNoi.jpg",
+      txt: "Hà Nội",
+      link: "Hà Nội",
     },
   ])
 
@@ -63,7 +63,7 @@ function Home() {
         <div className="home_destination">
           {data.map(d => {
             return  <div className="home_destination_cell">
-                      <a href={'/search-page?result=' + d.link} className="home_link" target="_blank">
+                      <a href={'/search-page?result=' + d.link} className="home_link">
                         <img src={d.src} alt={d.txt} className="home_destination_cell_img"/>
                         <div className="home_destination_cell_text">{d.txt}</div>
                       </a>

@@ -8,6 +8,10 @@
   align-items: center;
 }
 
+.footer_container.hideFooter{
+  display: none;
+}
+
 .footer_to_top{
   width: 90%;
   text-align: right;

@@ -1,22 +1,47 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import "../../style/MenuAccount.css"
-import Header from '../../components/Header'
 import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuOverview from "../../components/MenuAccount/MenuOverview"
 
 import useToken from '../../useToken'
 import SignIn from '../SignIn/SignIn'
 
-import axios from 'axios';
+import axios from 'axios'
 
 function Overview() {
     const { token, setToken } = useToken();
 
+    const [dataCustomer, setDataCustomer] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const options = {
+                method: "POST",
+                headers: {
+                    "auth-token": token.authToken,
+                },
+                data: {
+                    "customerId": token.customerId
+                },
+                url: "http://localhost:5000/customer/"
+            }
+            axios(options)
+            .then(response => {
+                console.log(response.data)
+                setDataCustomer(response.data)
+            })
+            .catch(error => console.log(error))
+        }
+
+        fetchData()
+    },[])
+
+    document.title = dataCustomer.username + " | RoyalStay"
+
+    
     if(!token){
         return <SignIn />
     }
-
-    document.title = "Tổng quan về tài khoản | RoyalStay"
     
     return (
         <div className="account">
@@ -25,8 +50,17 @@ function Overview() {
                 <div className="account_container">
                     <MenuLeft 
                         markPage="overview"
+                        username={dataCustomer.username}
                     />
-                    <MenuOverview />
+                    <MenuOverview
+                        id={token.customerId}
+                        fullName={dataCustomer.name}
+                        email={dataCustomer.email}
+                        username={dataCustomer.username}
+                        phone={dataCustomer.phone}
+                        sex={dataCustomer.sex}
+                        address={dataCustomer.address}
+                    />
                 </div>
             </div>
         </div>

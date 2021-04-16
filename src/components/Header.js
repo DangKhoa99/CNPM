@@ -16,7 +16,7 @@ import { store } from 'react-notifications-component'
 
 function Header() {
   const { token, setToken } = useToken();
-  console.log("token in HEADER: ", token)
+  // console.log("token in HEADER: ", token)
   // const token = useSelector(tokensSelector);
   // console.log("header: ", token);
 
@@ -93,6 +93,17 @@ function Header() {
     }
   }
 
+  const [hideHeader, setHideHeader] = useState(false);
+
+  const handleHideHeader = () =>{
+    if(location.pathname == "/404"){
+      setHideHeader(true)
+    }
+    else{
+      setHideHeader(false);
+    }
+  }
+
   // console.log("Test Header: " + window.location.href)
 
   // Bấm vào logo để lên đầu trang
@@ -102,33 +113,30 @@ function Header() {
       behavior: "smooth"
     })
   }
-  console.log("token before logout", token)
+  // console.log("token before logout", token)
   //log out
   const handleLogOut = () => {
     const options = {
       headers : {
-      'auth-token': token,
+      'auth-token': token.authToken,
     }
   };
     
-    console.log("headers: ", options);
+    // console.log("headers: ", options);
 
     axios.post('http://localhost:5000/auth/logout',{}, options)
         .then(response => {
             console.log("logout: ", response.data);
     })
     
-    localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
     setToken(null);
 
     store.addNotification(notificationLogoutSuccess);
 
-    console.log("token: ", token)
-    console.log("log out");
+    // console.log("token: ", token)
+    // console.log("log out");
   }
-  
- 
-
   
   useEffect(() => {
     Aos.init({ 
@@ -138,6 +146,7 @@ function Header() {
     Aos.refresh();
     showButton();
     changeBackground();
+    handleHideHeader();
 
     // Chỉ đổi màu thanh Header khi scroll ở Trang chủ
     if(location.pathname != "/"){
@@ -172,7 +181,7 @@ function Header() {
   // console.log(dataSearchLocation);
 
   return (
-      <nav className={colorHeader ? 'header active' : 'header'}>
+      <nav className={hideHeader ? "header hideHeader" : colorHeader ? 'header active' : 'header'}>
         <div className='header_container'>
 
           {/* Logo */}

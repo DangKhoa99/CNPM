@@ -10,9 +10,9 @@
   z-index: 999;
 }
 
-/* .header.hideHeader{
+.header.hideHeader{
   display: none;
-} */
+}
 
 /* .form-label::after {
   content: '*';
@@ -172,7 +172,7 @@
 }
 
 .profile_menu{
-  right: 0px;
+  right: 20px;
   margin-top: -8px;
   display: block;
   position: absolute;
