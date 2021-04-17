@@ -8,7 +8,7 @@ function MenuFavorite({
         <div className="menuFavorite">
             <div className="menuFavorite_container">
                 <h1 className="menuFavorite_title">Khách sạn yêu thích</h1>
-                {/* {favoriteHotel} */}
+
                 {favoriteHotel.map(hotel => {
                     return  <a className="menuFavorite_box" href={"/room-detail?id=" + hotel._id}>
                                 <img src={hotel.imageLink[0]} alt=""/>

@@ -1,51 +1,69 @@
 import React, {useState, useEffect, useRef,  useCallback} from 'react'
 import "../../style/RoomReview.css"
 import StarIcon from "@material-ui/icons/Star"
-import {Avatar, styled} from "@material-ui/core"
+import {Avatar} from "@material-ui/core"
 import StarRatings from "react-star-ratings"
 import axios from 'axios'
+import { store } from 'react-notifications-component'
 
 import useToken from '../../useToken'
 
 function RoomReview({
     reference,
-    // review
     idHotel
 }) {
     const { token, setToken } = useToken();
     const [dataReview, setDataReview] = useState([]);
     const [rating, setRating] = useState(0);
+    const [dataUser, setDataUser] = useState([]);
 
     const _id = {"hotelId": idHotel};
 
-    const loadReviewHotelFromServer = useCallback(async () =>{
+    const loadReviewHotelFromServer = useCallback(async () => {
         await axios.post("http://localhost:5000/hotel/review", _id)
             .then(response => {
+                // console.log("Review: ", response.data);
                 setDataReview(response.data);
             })
+            .catch(error => console.log("Error: ", error))
     },[idHotel]);
 
+    const getDataUser = async () => {
+        const options = {
+            method: "POST",
+            headers: {
+                "auth-token": token.authToken,
+            },
+            data: {
+                "customerId": token.customerId
+            },
+            url: "http://localhost:5000/customer/"
+        }
+        axios(options)
+        .then(response => {
+            // console.log("getDataUser: ", response.data)
+            setDataUser(response.data)
+        })
+        .catch(error => console.log(error))
+    }
+
     useEffect(() => {
-        loadReviewHotelFromServer()
+        loadReviewHotelFromServer();
+        if(token){
+            getDataUser();
+        }
     },[loadReviewHotelFromServer])
 
     let avgReview = 0;
-    // const calAvgReview = () =>{
+
     if(dataReview.length > 0){
         for(var key in dataReview){
             var obj = dataReview[key];
-            // console.log((obj.score));
             avgReview = avgReview + obj.score;
         }
         avgReview = (avgReview / dataReview.length).toFixed(1);
     }
-    // }
-
-    // useEffect (() => {
-        
-    // },[])
     
-
     function changeRating(newRating){
         setRating(newRating);
     }
@@ -78,13 +96,47 @@ function RoomReview({
         setCommentTxt(value);
     }
 
-    function removeReviewInput(){
+    const removeReviewInput = () => {
         setRating(0);
         setCommentTxt("");
     }
 
+    // Chưa sử dụng khách sạn bao giờ
+    const notification_notYetUsed = {
+        title: ' RoyalStay - Thông báo',
+        message: "Bạn chỉ có thể đánh giá khách sạn khi đã từng sử dụng dịch vụ",
+        type: 'warning',
+        container: 'bottom-left',
+        dismiss: {
+            duration: 2000
+        }
+    };
+
     const submitComment = (e) => {
         e.preventDefault();
+        const options = {
+            method: "POST",
+            headers: {
+                "auth-token": token.authToken,
+            },
+            data: {
+                "customerId": token.customerId,
+                "hotelId": idHotel,
+                "score": rating,
+                "content": commentTxt,
+            },
+            url: "http://localhost:5000/hotel/review/add"
+        }
+        axios(options)
+        .then(response => {
+            console.log("Data cmt: ", response.data)
+            if(response.data == "Chỉ có thể đánh giá khách sạn đã ở"){
+                store.addNotification(notification_notYetUsed);
+                removeReviewInput();
+            }
+            
+        })
+        .catch(error => console.log("Error11: ", error))
     }
 
     return (
@@ -101,16 +153,17 @@ function RoomReview({
                 </div>
 
                 {!token ? 
-                "Bạn cần đăng nhập để có thể đánh giá khách sạn" 
+                <p style={{marginBottom: "50px", textAlign: "center"}}>Bạn cần <a href="/sign-in">đăng nhập</a> và sử dụng dịch vụ của khách sạn để có thể đánh giá khách sạn</p>
                 : 
                 <div className="roomReview_review_input"> 
                     <div className="commentator">
                         <div className="commentator_avatar">
-                            <Avatar className="commentator_img" alt="dangkhoa99" src="/images/Khoa.jpg"/>
+                            <Avatar className="commentator_img" alt={dataUser.username} src={dataUser.username}></Avatar>
                         </div>
 
                         <div className="commentator_info">
-                            dangkhoa99 - <i style={{fontWeight: '400', fontSize: '14px'}}>tháng {(new Date().getMonth() + 1)} năm {(new Date().getFullYear())}</i>
+                            {(dataUser.username)}
+                            {/* - <i style={{fontWeight: '400', fontSize: '14px'}}>tháng {(new Date().getMonth() + 1)} năm {(new Date().getFullYear())}</i> */}
 
                             <div className="comment_stars">
                                 <StarRatings
@@ -132,7 +185,7 @@ function RoomReview({
                     </div>
 
                     <div className="comment_input">
-                        <form onSubmit = {submitComment}>
+                        <form onSubmit={submitComment}>
                             <textarea 
                                 name="my_comment" 
                                 rows="1" 
@@ -156,48 +209,21 @@ function RoomReview({
                 <div className="aaa">
                     {/* comment_section - phần bình luận */}
                     <div className="bbb"> 
-
-                        {/* <div className="box_comment">
-                            <div className="commentator">
-                                <div className="commentator_avatar">
-                                    <Avatar className="commentator_img" alt="dangkhoa99" src="/images/Khoa.jpg"/>
-                                </div>
-
-                                <div className="commentator_info">
-                                    dangkhoa99
-                                    <div className="comment_time">
-                                        <div>tháng 3 năm 2021</div>
-                                    </div>
-                                </div>
-
-                                <div className="commentator_edit">
-                                    Edit
-                                </div>
-                                
-                            </div>
-
-                            <div>
-                                <span>
-                                    <div className="comment_text">
-                                        <span>Tôi sẽ quay lại . Quá tuyệt vời . Thích nhất cái phòng tắm </span>
-                                    </div>
-                                </span>
-                            </div>
-                        </div> */}
-
                         {dataReview.map(reviews => {
                             return <div className="box_comment">
                                         <div className="commentator">
                                             <div className="commentator_avatar">
-                                                <Avatar className="commentator_img" src="">tên</Avatar>
+                                                <Avatar className="commentator_img" src="">{(reviews.customerID).charAt(0)}</Avatar>
                                             </div>
 
                                             <div className="commentator_info">
-                                                {reviews.customerID} - tên
+                                                {reviews.customerID}
                                                 <div className="comment_time">
-                                                    <div>time - tháng 2 năm 2021</div>
+                                                    {/* <div>time - tháng 2 năm 2021</div> */}
 
-                                                    <div className="comment_stars" style={{marginLeft: "10px"}}>
+                                                    <div className="comment_stars" 
+                                                    // style={{marginLeft: "10px"}}
+                                                    >
                                                         <StarRatings
                                                             rating={reviews.score}
                                                             numberOfStars={5}
@@ -222,52 +248,6 @@ function RoomReview({
                                         </div>
                                     </div>
                         })}
-
-                        {/* <div className="box_comment">
-                            <div className="commentator">
-                                <div className="commentator_avatar">
-                                    <Avatar className="commentator_img">D</Avatar>
-                                </div>
-
-                                <div className="commentator_info">
-                                    thanhdo
-                                    <div className="comment_time">
-                                        <div>tháng 2 năm 2021</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <span>
-                                    <div className="comment_text">
-                                        <span>Nơi ở khá gần phố cổ, đạp xe 1 tí là tới nơi. Nhân viên thân thiện, không gian mát mẻ và đem lại sự thoáng đãng. Phòng ốc rất sạch sẽ và tiện nghi. Nếu có cơ hội mình sẽ chọn ở đây tiếp </span>
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="box_comment">
-                            <div className="commentator">
-                                <div className="commentator_avatar">
-                                    <Avatar className="commentator_img">T</Avatar>
-                                </div>
-
-                                <div className="commentator_info">
-                                    ductai
-                                    <div className="comment_time">
-                                        <div>tháng 3 năm 2021</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <span>
-                                    <div className="comment_text">
-                                        <span>Chỗ ở cực sạch sẽ, phòng rộng thoáng, ban công to. Các dịch vụ đều rất tốt, mọi người rất tận tình, dễ thương. Thiết kế nhà mang lại cảm giác ấm cúng, không gian hồ bơi đẹp. Cũng không quá xa so với phố cổ, đi bộ tầm 10-15 phút là đến. Có thể bắt taxi vừa tiện vừa nhanh. Buổi sáng còn được chọn món ăn sáng, buổi tối thì không giới hạn giờ giấc đi về. Highly recommend </span>
-                                    </div>
-                                </span>
-                            </div> */}
-                        {/* </div> */}
                     </div>
                 </div>
             </div>

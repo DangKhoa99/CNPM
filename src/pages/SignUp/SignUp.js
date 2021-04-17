@@ -5,7 +5,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 import axios from 'axios'
 import { useForm } from 'react-hook-form';
 import { store } from 'react-notifications-component'
-
+import { Link } from 'react-router-dom'
 import useToken from '../../useToken'
 import history from '../../history';
 
@@ -94,7 +94,7 @@ if(token){
               <div className="formLoginRegister">
                   <div className="formLoginRegister_container">
                       <header>
-                          <h1>Tạo tài khoản</h1>
+                      <h1>Tạo tài khoản <a href="/" style={{textDecoration: "none", color: "black"}}>RoyalStay</a></h1>
                       </header>
                       
                       <section>
@@ -171,7 +171,7 @@ if(token){
                               <button className="loginRegister_submit_btn" type="submit">Đăng ký</button>
 
                               <div className="loginRegister_subText">
-                                  <a href="/sign-in">Đăng nhập ngay</a>
+                                  <Link to="/sign-in">Đăng nhập ngay</Link>
                               </div>
                           </form>
                       </section>

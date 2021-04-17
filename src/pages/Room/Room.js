@@ -37,7 +37,7 @@ function Room() {
         }
         axios(options)
         .then(response => {
-            console.log("TEST: ", (response.data))
+            // console.log("TEST: ", (response.data))
             setDataFavoriteHotelOfCustomer(response.data)
         })
         .catch(error => console.log(error))
@@ -61,8 +61,10 @@ function Room() {
     },[getID]); // every time id changed, new data will be loaded
 
     useEffect(() => {
-        loadDetailHotelFromServer()
-        getDataFavoriteHotelOfCustomer()
+        loadDetailHotelFromServer();
+        if(token){
+            getDataFavoriteHotelOfCustomer();
+        }   
     },[loadDetailHotelFromServer])// useEffect will run once and when id changes
 
     if(!data) return null //first render, when useEffect did't triggered yet we will return null
@@ -77,14 +79,12 @@ function Room() {
 
     let savedHotel = "false";
     for(let key in dataFavoriteHotelOfCustomer){
-        console.log("key", dataFavoriteHotelOfCustomer[key]._id)
+        // console.log("key", dataFavoriteHotelOfCustomer[key]._id)
         if(dataFavoriteHotelOfCustomer[key]._id == getID){
-            console.log("true");
+            // console.log("true");
             savedHotel = "true";
         }
     }
-
-    console.log("asdasd ", dataFavoriteHotelOfCustomer)
 
     return (
         <div className="room">
@@ -115,7 +115,6 @@ function Room() {
             
                 <RoomReview 
                     reference={roomReview}
-                    // review={data.review}
                     idHotel={getID}
                 />  
             </div>      

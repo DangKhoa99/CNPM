@@ -56,8 +56,11 @@ function Favorite() {
             .catch(error => console.log(error))
         };
 
-        fetchDataCustomer();
-        fetchDataFavoriteHotelOfCustomer();
+        if(token){
+            fetchDataCustomer();
+            fetchDataFavoriteHotelOfCustomer();
+        }
+        
     },[])
 
     document.title = dataCustomer.username + " | RoyalStay"
@@ -74,6 +77,7 @@ function Favorite() {
                     <MenuLeft 
                         markPage="favorite"
                         username={dataCustomer.username}
+                        imageUser={dataCustomer.username}
                     />
 
                     {isLoading ? <LoadingScreen/> 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "../../style/MenuAccount.css"
 import {Avatar} from "@material-ui/core"
 import {ReactComponent as IconHome} from "../../icons/iconHome.svg"
@@ -8,15 +8,11 @@ import {ReactComponent as IconBooking} from "../../icons/iconBooking.svg"
 import {ReactComponent as IconHistoryBooking} from "../../icons/iconHistoryBooking.svg"
 import {Link} from 'react-router-dom'
 
-
-
-
 function MenuLeft({
     markPage,
-    username
+    username,
+    imageUser
 }) {
-
-
     const [data, setData] = useState([
         {
             id: "overview",
@@ -55,7 +51,11 @@ function MenuLeft({
         },
     ]);
 
-    const [selectedFile, setSelectedFile] = useState("/images/Khoa.jpg");
+    const [selectedFile, setSelectedFile] = useState(imageUser);
+
+    useEffect(() => {
+        setSelectedFile(imageUser);
+    }, [imageUser])
 
     // Select file (from the pop up)
     const onFileChange = (e) => {
@@ -114,7 +114,11 @@ function MenuLeft({
                     
                 </div>
 
-                {selectedFile!="/images/Khoa.jpg"?<div className="btn_upload_image"><button>Lưu</button></div>:""}
+                {selectedFile != imageUser ? 
+                    <div className="btn_upload_image"><button>Lưu</button></div> 
+                    : 
+                    ""
+                }
 
                 <div className="account_username">{username}</div>
 
@@ -122,7 +126,7 @@ function MenuLeft({
                     {data.map(item => {
                         if(item.id === markPage) 
                             item.active = "menu_active"
-                        return <li id={item.id} className={"menuLeft_menuItem " + item.active}>
+                        return  <li id={item.id} className={"menuLeft_menuItem " + item.active}>
                                     <Link className="menuLeft_menuLink" to={item.to}>
                                         {item.icon}
                                         {item.name}

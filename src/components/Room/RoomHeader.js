@@ -19,7 +19,7 @@ function RoomHeader({
     click,
     savedHotel
 }) {
-    console.log("ID khách sạn: ", idHotel)
+    // console.log("ID khách sạn: ", idHotel)
     const { token, setToken } = useToken();
     const [clickFavorite, setClickFavorite] = useState(false);
 
@@ -37,7 +37,7 @@ function RoomHeader({
         else{
             setClickFavorite(!clickFavorite);
 
-            if(clickFavorite == true){       
+            if(clickFavorite == true){
                 removeSaveHotel()
                 store.addNotification(notification_notSaveFavorite);
             }
@@ -91,7 +91,6 @@ function RoomHeader({
         }
         avgReview = (avgReview / review.length).toFixed(1);
     }
-
 
     const saveHotel = async () => {
         const options = {

@@ -32,8 +32,10 @@ function Overview() {
             })
             .catch(error => console.log(error))
         }
-
-        fetchData()
+        if(token){
+            fetchData();
+        }
+        
     },[])
 
     document.title = dataCustomer.username + " | RoyalStay"
@@ -51,6 +53,7 @@ function Overview() {
                     <MenuLeft 
                         markPage="overview"
                         username={dataCustomer.username}
+                        imageUser={dataCustomer.username}
                     />
                     <MenuOverview
                         id={token.customerId}

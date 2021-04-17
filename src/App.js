@@ -14,6 +14,7 @@ import Overview from './pages/MenuAccount/Overview'
 import Profile from './pages/MenuAccount/Profile'
 import Favorite from './pages/MenuAccount/Favorite'
 import Booking from './pages/MenuAccount/Booking'
+import HotelInvoiceDetail from './pages/MenuAccount/HotelInvoiceDetail'
 import HistoryBooking from './pages/MenuAccount/HistoryBooking'
 import Book from './pages/Booking/Booking'
 import ErrorPage from './pages/404Page/ErrorPage'
@@ -81,6 +82,7 @@ function App() {
           <Route path='/account/favorite/' component={Favorite} />
           <Route path='/account/booking/' component={Booking} />
           <Route path='/account/history-booking/' component={HistoryBooking} />
+          <Route path='/account/hotel-invoice-detail/' component={HotelInvoiceDetail} />
           
           <Redirect from='*' to='/404' />
           

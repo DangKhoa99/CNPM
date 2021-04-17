@@ -49,7 +49,14 @@ router.route('/add').post(adminVerify, (req, res) =>{
 router.route('/review').post((req, res) => {
     const hotelId = req.body.hotelId;
     Hotel.findById(hotelId)
-    .then(hotel => {
+    .then(async hotel => {
+        const customerNameArr = []
+        for(i in hotel.review){
+            let customerName = await Customer.findById(hotel.review[i].customerID);
+            // customerNameArr.push(customerName.name);
+            hotel.review[i].customerID = customerName.name;
+        }
+        // console.log(customerNameArr);
         res.json(hotel.review);
     })
     .catch(err => res.status(400).json('Error: ' + err));

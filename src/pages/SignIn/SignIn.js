@@ -10,7 +10,7 @@ import history from '../../history';
 import PropTypes from 'prop-types';
 import useToken from '../../useToken'
 import { useLocation } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 function SignIn(
     // {setToken}
 
@@ -83,7 +83,7 @@ function SignIn(
                 // console.log("token1", token)
                 if(location.pathname == "/sign-in"){
                     // history.push("/");
-                    window.location ="/";
+                    window.location = "/";
                     console.log("token path sign in: ",token)//null
                     store.addNotification(notificationLoginSuccess);
                     // window.location.reload();
@@ -139,7 +139,7 @@ function SignIn(
                     <div className="formLoginRegister">
                         <div className="formLoginRegister_container">
                             <header>
-                                <h1>Đăng nhập vào RoyalStay</h1>
+                                <h1>Đăng nhập vào <a href="/" style={{textDecoration: "none", color: "black"}}>RoyalStay</a></h1>
                             </header>
                             <section>
 
@@ -184,8 +184,8 @@ function SignIn(
 
                                     <div className="loginRegister_subText">
                                         Bạn chưa có tài khoản?
-                                        <a href="/sign-up"> Đăng ký</a>
-                                    </div>
+                                        <Link to="/sign-up"> Đăng ký</Link>
+                                    </div>                           
                                 </form>
                             </section>
                         </div>

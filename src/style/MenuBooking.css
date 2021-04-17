@@ -44,15 +44,19 @@
     color: black !important;
 }
 
-.hotel_booking_status.success{
+.hotel_booking_status.Staying{
+    color: rgb(255, 158, 66) !important;
+}
+
+.hotel_booking_status.Stayed{
     color: green !important;
 }
 
-.hotel_booking_status.error{
+.hotel_booking_status.Cancel{
     color: red !important;
 }
 
-.hotel_booking_status.wait{
+.hotel_booking_status.Pending{
     color: #007bff !important;
 }
 
@@ -73,4 +77,36 @@
 
 .menuBooking_price > h2, .menuBooking_price > h2 + p{
     display: inline;
+}
+
+.menuBookingCard_btn, .menuBookingCard_btn_hotel{
+    cursor: not-allowed;
+    position: absolute;
+    /* top: 20px; */
+    right: 60px;
+    cursor: pointer !important;
+    margin: 0px -8px !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
+    border: medium none !important;
+    background: transparent none repeat scroll 0% 0% !important;
+    color: rgb(34, 34, 34) !important;
+    text-decoration: underline !important;
+    -moz-box-align: center !important;
+    display: flex !important;
+    outline: none !important;
+    z-index: 999;
+}
+
+.menuBookingCard_btn_hotel{
+    right: 100px;
+}
+
+.menuBookingCard_btn:hover, .menuBookingCard_btn_hotel:hover {
+    border: medium none !important;
+    background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
+    color: rgb(0, 0, 0) !important;
 }

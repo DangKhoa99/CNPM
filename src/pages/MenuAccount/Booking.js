@@ -25,7 +25,7 @@ function Booking() {
                 },
                 url: "http://localhost:5000/customer/"
             }
-            axios(options)
+            await axios(options)
             .then(response => {
                 console.log(response.data)
                 setDataCustomer(response.data)
@@ -33,13 +33,21 @@ function Booking() {
             .catch(error => console.log(error))
         }
 
-        fetchData()
+        if(token){
+            fetchData();
+        }
     },[])
 
     document.title = dataCustomer.username + " | RoyalStay"
 
     if(!token){
         return <SignIn />
+    }
+
+    let hotelBooking = [];
+    for(let key in dataCustomer.booking){
+        // console.log("key", dataCustomer.booking[key])
+        hotelBooking.push(dataCustomer.booking[key])
     }
     
     return (
@@ -50,9 +58,10 @@ function Booking() {
                     <MenuLeft 
                         markPage="booking"
                         username={dataCustomer.username}
+                        imageUser={dataCustomer.username}
                     />
                     <MenuBooking
-                        booking={dataCustomer.booking}
+                        booking={hotelBooking}
                     />
                 </div>
             </div>

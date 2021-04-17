@@ -16,13 +16,6 @@ import { store } from 'react-notifications-component'
 
 function Header() {
   const { token, setToken } = useToken();
-  // console.log("token in HEADER: ", token)
-  // const token = useSelector(tokensSelector);
-  // console.log("header: ", token);
-
-  // if(token != ""){
-  //   console.log("true")
-  // }
 
   const notificationLogoutSuccess = {
     title: ' RoyalStay - Thông báo',
@@ -94,13 +87,22 @@ function Header() {
   }
 
   const [hideHeader, setHideHeader] = useState(false);
-
   const handleHideHeader = () =>{
-    if(location.pathname == "/404"){
+    if(location.pathname == "/404" || location.pathname == "/sign-in" || location.pathname == "/sign-up"){
       setHideHeader(true)
     }
     else{
       setHideHeader(false);
+    }
+  }
+
+  const [blockHeader, setBlockHeader] = useState(false);
+  const handleBlockHeader = () =>{
+    if(location.pathname == "/room-detail" || location.pathname == "/booking"){
+      setBlockHeader(true)
+    }
+    else{
+      setBlockHeader(false);
     }
   }
 
@@ -117,14 +119,15 @@ function Header() {
   //log out
   const handleLogOut = () => {
     const options = {
+      method: "POST",
       headers : {
-      'auth-token': token.authToken,
-    }
+        'auth-token': token.authToken,
+      },
+      data: {},
+      url: "http://localhost:5000/auth/logout"
+      
   };
-    
-    // console.log("headers: ", options);
-
-    axios.post('http://localhost:5000/auth/logout',{}, options)
+    axios(options)
         .then(response => {
             console.log("logout: ", response.data);
     })
@@ -132,12 +135,31 @@ function Header() {
     localStorage.removeItem('authToken');
     setToken(null);
 
-    store.addNotification(notificationLogoutSuccess);
-
-    // console.log("token: ", token)
-    // console.log("log out");
+    window.location.reload();
+    store.addNotification(notificationLogoutSuccess); 
   }
-  
+
+  // getImageUser
+  const [dataCustomer, setDataCustomer] = useState([]);
+  const fetchData = async () => {
+    const options = {
+        method: "POST",
+        headers: {
+            "auth-token": token.authToken,
+        },
+        data: {
+            "customerId": token.customerId
+        },
+        url: "http://localhost:5000/customer/"
+    }
+    axios(options)
+    .then(response => {
+        console.log(response.data)
+        setDataCustomer(response.data)
+    })
+    .catch(error => console.log(error))
+}
+
   useEffect(() => {
     Aos.init({ 
       duration: 500,
@@ -147,6 +169,10 @@ function Header() {
     showButton();
     changeBackground();
     handleHideHeader();
+    handleBlockHeader();
+    if(token){
+      fetchData();
+    }
 
     // Chỉ đổi màu thanh Header khi scroll ở Trang chủ
     if(location.pathname != "/"){
@@ -168,20 +194,17 @@ function Header() {
     setSearchLocation(e.target.value);
   } 
 
-  // function searchHotel(e){
-  //   e.preventDefault();
-  //   const location = {
-  //     "location": searchLocation,
-  //   }
-
-  //   axios.post("http://localhost:5000/hotel/location", location)
-  //   .then(response => setDataSearchLocation(response.data));
-  // }  
-  // if(!dataSearchLocation) return null
-  // console.log(dataSearchLocation);
 
   return (
-      <nav className={hideHeader ? "header hideHeader" : colorHeader ? 'header active' : 'header'}>
+      <nav className={
+        hideHeader ? 
+        "header hideHeader" 
+        : 
+        colorHeader ? 
+          blockHeader ? 'header staticHeader': 'header active' 
+          : 
+          'header'
+      }>
         <div className='header_container'>
 
           {/* Logo */}
@@ -223,7 +246,12 @@ function Header() {
 
             {/* Menu Search Suggestion */}
             <div 
-              className={menuSearchSuggestion ? "search_suggestions" : "search_suggestions close"} 
+              className={
+                menuSearchSuggestion ?
+                blockHeader ? "search_suggestions staticHeader" :
+                "search_suggestions"
+                : 
+                "search_suggestions close"} 
               onMouseDown={handleMenuSearchSuggestionsClick}
             >
               <ul className="search_suggestions_lists">
@@ -326,11 +354,11 @@ function Header() {
               >
                 <Avatar 
                   className="avatar_header" 
-                  alt="dangkhoa99" 
-                  src="/images/Khoa.jpg"
+                  alt={dataCustomer.username}
+                  src={dataCustomer.username}
                 />
 
-                <span>Hồ sơ</span>
+                <span>{dataCustomer.name}</span>
 
                 <svg
                   viewBox="0 0 1024 1024" 

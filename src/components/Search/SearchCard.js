@@ -17,7 +17,7 @@ function SearchCard({
     price,
     savedHotelId
 }) {
-    console.log("asdfjkahjf: ", savedHotelId)
+    // console.log("asdfjkahjf: ", savedHotelId)
     const { token, setToken } = useToken();
     const [clickFavorite, setClickFavorite] = useState(false);
 
@@ -26,11 +26,17 @@ function SearchCard({
 
     const _id = {"hotelId": id};
 
-    const loadReviewHotelFromServer = useCallback(async () =>{
+    const loadReviewHotelFromServer = useCallback(async () => {
         await axios.post("http://localhost:5000/hotel/review", _id)
             .then(response => {
-                setDataReview(response.data);
+                console.log("Data REVIEW: ",response.data)
+                if(response.data.length>0){
+                    setDataReview(response.data);
+                }
+                
+                
             })
+            .catch(error => console.log(error))
     },[id]);
 
     useEffect(() => {

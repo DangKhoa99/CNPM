@@ -1,6 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react'
 import "../../style/RoomBody.css"
-import StarIcon from "@material-ui/icons/Star"
 import {ReactComponent as Wifi} from "../../icons/iconWifi.svg"
 import {ReactComponent as Parking} from "../../icons/iconParking.svg"
 import {ReactComponent as Pool} from "../../icons/iconPool.svg"
@@ -25,6 +24,7 @@ import {ReactComponent as NoPets} from "../../icons/iconNoPets.svg"
 import RoomBooking from "./RoomBooking"
 
 function RoomBody({
+    idHotel,
     description,
     roomType,
     quantity,
@@ -53,17 +53,13 @@ function RoomBody({
             }
         }
     },[roomType])
-
-
-
-
     // console.log("roomType", roomType[0]);
 
     const scrollToElement = () =>{
         if(!isReadMore){
                 window.scrollTo({
                 behavior: "smooth",
-                top: myRef.current.offsetHeight + 400
+                top: myRef.current.offsetHeight + 460
             });
         }
       }
@@ -278,6 +274,7 @@ function RoomBody({
                     roomType={roomType}
                     quantity={quantity}
                     price={price}
+                    idHotel={idHotel}
                 />
             </div>
         </div>

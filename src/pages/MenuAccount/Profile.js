@@ -33,7 +33,9 @@ function Profile() {
             .catch(error => console.log(error))
         }
 
-        fetchData()
+        if(token){
+            fetchData();
+        }
     },[])
 
     if(!token){
@@ -49,6 +51,7 @@ function Profile() {
                     <MenuLeft 
                         markPage="profile"
                         username={dataCustomer.username}
+                        imageUser={dataCustomer.username}
                     />
                     <MenuProfile 
                         id={token.customerId}

@@ -56,7 +56,7 @@ function Footer() {
   const [hideFooter, setHideFooter] = useState(false);
 
   const handleHideFooter = () =>{
-    if(location.pathname == "/404"){
+    if(location.pathname == "/404" || location.pathname == "/sign-in" || location.pathname == "/sign-up"){
       setHideFooter(true)
     }
     else{
@@ -97,23 +97,23 @@ function Footer() {
             <small class='website_rights'>© 2021 RoyalStay</small>
 
             <div class='social_icons'>
-              <a href="https://www.facebook.com/..." class="social_icon_link facebook" target="_blank" title="Facebook">
+              <a href="https://www.facebook.com/royalStay" class="social_icon_link facebook" target="_blank" title="Facebook">
                 <i class='fab fa-facebook-f' />
               </a>
 
-              <a href="https://www.instagram.com/..." class="social_icon_link instagram" target="_blank" title="Instagram">
+              <a href="https://www.instagram.com/royalStay" class="social_icon_link instagram" target="_blank" title="Instagram">
                 <i class='fab fa-instagram' />
               </a>
 
-              <a href="https://www.youtube.com/..." class="social_icon_link youtube" target="_blank" title="Youtube">
+              <a href="https://www.youtube.com/royalStay" class="social_icon_link youtube" target="_blank" title="Youtube">
                 <i class='fab fa-youtube' />
               </a>
 
-              <a href="https://twitter.com/..." class="social_icon_link twitter" target="_blank" title="Twitter">
+              <a href="https://twitter.com/royalStay" class="social_icon_link twitter" target="_blank" title="Twitter">
                 <i class='fab fa-twitter' />
               </a>
 
-              <a href="https://www.linkedin.com/company/..." class="social_icon_link linkedin" target="_blank" title="LinkedIn">
+              <a href="https://www.linkedin.com/company/royalStay" class="social_icon_link linkedin" target="_blank" title="LinkedIn">
                 <i class='fab fa-linkedin' />
               </a>
             </div>

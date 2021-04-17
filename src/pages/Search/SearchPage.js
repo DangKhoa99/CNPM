@@ -106,7 +106,10 @@ function SearchPage() {
 
     useEffect(() => {
         fetchData();
-        getDataFavoriteHotelOfCustomer();
+        if(token){
+            getDataFavoriteHotelOfCustomer();
+        }
+        
     },[fetchData])
 
     function capitalize(str) {

@@ -213,4 +213,28 @@ router.route('/booking/cancel').post(verify, (req, res) =>{
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// View 1 booking of 1 customer || token require
+router.route('/booking/view_one').post(verify, (req, res) =>{
+    const bookingId = req.body.bookingId;
+    const customerId = req.body.customerId;
+    
+    Customer.findById(customerId)
+    .then(customer => {
+
+        let bookingToRes = [];
+        
+        for(i in customer.booking){
+            if(customer.booking[i]["_id"] == bookingId){
+                bookingToRes = customer.booking[i];
+                break;
+            }
+        }
+
+        customer.save()
+        .then(() => res.json(bookingToRes))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 module.exports = router;

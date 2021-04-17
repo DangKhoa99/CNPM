@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "../../style/RoomBooking.css"
-import StarIcon from "@material-ui/icons/Star"
 import { getDay, format } from 'date-fns'
 import { vi } from 'date-fns/locale'
 import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
+
+import { store } from 'react-notifications-component'
 
 import useToken from '../../useToken'
 import SignIn from '../../pages/SignIn/SignIn'
@@ -16,11 +17,21 @@ function RoomBooking({
     roomType,
     quantity,
     price,
+    idHotel,
 }) {
     const { token, setToken } = useToken();
+    
     // DATE RANGE PICKER
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
+
+    const onStartDateChange = (e) => {
+        setStartDate(e)
+    }
+
+    const onEndDateChange = (e) => {
+        setEndDate(e)
+    }
 
     const modifiers = {
       // disabled: date => getDay(date) === 6, // Disables T7
@@ -47,11 +58,43 @@ function RoomBooking({
         setRoom(e.currentTarget.value);
     }
 
+    // Chưa điền đầy đủ
+    const notification_notFilled = {
+        title: ' RoyalStay - Thông báo',
+        message: "Vui lòng điền đủ thông tin để đặt phòng",
+        type: 'warning',
+        container: 'top-right',
+        dismiss: {
+            duration: 2000
+        }
+    };
+
+    // Check EndDate
+    const notification_checkEndDate = {
+        title: ' RoyalStay - Thông báo',
+        message: "Số đêm tối thiểu là 1",
+        type: 'warning',
+        container: 'top-right',
+        dismiss: {
+            duration: 3000
+        }
+    };
+
     const handleOrderRoom = (e) => {
-        e.preventDefault();
+        if(!startDate){
+            e.preventDefault();
+            store.addNotification(notification_notFilled);
+        }
+        else if(!endDate){
+            e.preventDefault();
+            store.addNotification(notification_notFilled);
+        }
+        else if(calDate(startDate, endDate) == 0){
+            e.preventDefault();
+            store.addNotification(notification_checkEndDate);
+        }
     }
 
-    // console.log(typeof(roomType[0]))
 
     let pricePerNight = 0;
     if (room == "Small"){;
@@ -63,42 +106,36 @@ function RoomBooking({
     else if (room == "Large"){
         pricePerNight = priceLargeRoom; 
     }
-
-    
     
     return (
         <div className="roomBooking">
             <div className="roomBooking_box">
                 <div className="roomBooking_box_layout">
                     <div className="roomBooking_box_layout_header">
-                        {/* <div className="roomBooking_box_layout_header_left"> */}
                         <div className="roomBooking_box_layout_header_defaultPrice">
                             <span className="roomBooking_defaultPrice">${pricePerNight}</span>
                             <span className="roomBooking_night">/đêm</span>
                         </div>
-                        {/* </div> */}
 
-                        
-                            {/* <span className="roomBooking_stars">
-                                <StarIcon className="roomFirst_star"/>
-                                <strong>4.9 (41)</strong>
-                            </span> */}
-                        <button className="roomBooking_btn_remove" title="Xóa ngày đã chọn" onClick={removeOptional}>Xóa chọn</button>
-                        
+                        <button className="roomBooking_btn_remove" title="Xóa ngày đã chọn" onClick={removeOptional}>
+                            Xóa chọn
+                        </button>
                     </div>
 
-                    <form className="form_booking" action="/booking"> {/* method="POST"> */}
-                        {/* Check in , check out, room type, check log in, ... */}
+                    <form className="form_booking" action="/booking">
                         <div className="roomBooking_box_layout_body">
                             <div className="roomBooking_box_layout_body_row">
                                 <div className="roomBooking_box_layout_body_row_a">
-                                    <h2>{startDate, endDate ? 'Số đêm: ' + calDate(startDate, endDate) : startDate ? 'Chọn ngày trả phòng' : 'Chọn ngày nhận phòng'}</h2>
-                                    <p>{startDate, endDate ? format(startDate, 'dd MMM yyyy', { locale: vi }) + ' - ' + format(endDate, 'dd MMM yyyy', { locale: vi }) : 'Thêm ngày đi để biết giá chính xác'}</p>
+                                    <input style={{display: "none"}} name="id" value={idHotel}/>
+                                    <h2>{startDate && endDate ? 'Số đêm: ' + calDate(startDate, endDate) : startDate ? 'Chọn ngày trả phòng' : 'Chọn ngày nhận phòng'}</h2>
+
+                                    <p>{startDate && endDate ? format(startDate, 'dd MMM yyyy', { locale: vi }) + ' - ' + format(endDate, 'dd MMM yyyy', { locale: vi }) : 'Thêm ngày đi để biết giá chính xác'}</p>
+
                                     <DateRangePicker
                                         startDate={startDate}
                                         endDate={endDate}
-                                        onStartDateChange={setStartDate}
-                                        onEndDateChange={setEndDate}
+                                        onStartDateChange={onStartDateChange}
+                                        onEndDateChange={onEndDateChange}
                                         minimumDate={new Date()}
                                         minimumLength={0}
                                         format='dd/MM/yyyy'
@@ -115,17 +152,31 @@ function RoomBooking({
                                                     className={'input' + (focus === START_DATE ? ' -focused' : '')}
                                                     {...startDateInputProps}
                                                     placeholder='Chọn ngày'
+                                                    name="checkin" 
                                                 />
                                             </div>
                                             <span class="date-range_arrow"></span>
                                             <div className="check_out">
                                                 <label>TRẢ PHÒNG</label>
-                                                <input
-                                                    readOnly
-                                                    className={'input' + (focus === END_DATE ? ' -focused' : '')}
-                                                    {...endDateInputProps}
-                                                    placeholder='Chọn ngày'
-                                                />
+                                                {startDate ? 
+                                                    <input
+                                                        readOnly
+                                                        className={'input' + (focus === END_DATE ? ' -focused' : '')}
+                                                        {...endDateInputProps}
+                                                        placeholder='Chọn ngày'
+                                                        name="checkout" 
+                                                    />
+                                                :
+                                                    <input
+                                                        style={{cursor: "not-allowed"}}
+                                                        readOnly
+                                                        disabled
+                                                        className={'input' + (focus === END_DATE ? ' -focused' : '')}
+                                                        {...endDateInputProps}
+                                                        placeholder='Chọn ngày'
+                                                        name="checkout" 
+                                                    />
+                                                }
                                             </div>
                                         </div>
                                         )}
@@ -154,11 +205,11 @@ function RoomBooking({
                                         else if(type == "Large"){
                                             t = "Lớn"
                                         }
-                                        return <label class="room_type">
+                                        return  <label class="room_type">
                                                     <input 
                                                         type="radio" 
                                                         id={type} 
-                                                        name="room_type" 
+                                                        name="roomType" 
                                                         value={type}
                                                         checked={room === type}
                                                         onChange={onRoomChanged}
@@ -169,8 +220,6 @@ function RoomBooking({
                                     })}
                                 </div>
                             </div>
-
-                            
 
                             <div className="roomBooking_box_layout_body_row">
                                 <button className='form_booking_btn' type='submit' onClick={handleOrderRoom}>Đặt phòng</button>

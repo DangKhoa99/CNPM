@@ -33,7 +33,9 @@ function HistoryBooking() {
             .catch(error => console.log(error))
         }
 
-        fetchData()
+        if(token){
+            fetchData();
+        }
     },[])
 
     if(!token){
@@ -50,6 +52,7 @@ function HistoryBooking() {
                     <MenuLeft 
                         markPage="history_booking"
                         username={dataCustomer.username}
+                        imageUser={dataCustomer.username}
                     />
                     <MenuHistoryBooking
                         
