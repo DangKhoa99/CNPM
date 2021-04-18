@@ -19,6 +19,7 @@ router.route("/").post((req, res) => {
     .catch(err => res.status(400).json('Error ' + err));
 });
 
+// Add hotel by Admin
 router.route('/add').post(adminVerify, (req, res) =>{
     const name = req.body.name;
     const email = req.body.email;

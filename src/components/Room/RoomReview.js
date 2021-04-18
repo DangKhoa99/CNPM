@@ -60,9 +60,13 @@ function RoomReview({
         for(var key in dataReview){
             var obj = dataReview[key];
             avgReview = avgReview + obj.score;
+
+            console.log("DATA REVIEW: ", dataReview[key])
         }
         avgReview = (avgReview / dataReview.length).toFixed(1);
     }
+
+    
     
     function changeRating(newRating){
         setRating(newRating);
@@ -137,7 +141,11 @@ function RoomReview({
             
         })
         .catch(error => console.log("Error11: ", error))
+
+        window.location.reload();
     }
+
+    const userName = (dataUser.name || "").split(' ').slice(-1).join(' ');
 
     return (
         <div className="roomReview">
@@ -158,7 +166,11 @@ function RoomReview({
                 <div className="roomReview_review_input"> 
                     <div className="commentator">
                         <div className="commentator_avatar">
-                            <Avatar className="commentator_img" alt={dataUser.username} src={dataUser.username}></Avatar>
+                            <Avatar 
+                                className="commentator_img" 
+                                alt={userName} 
+                                src={userName}
+                            />
                         </div>
 
                         <div className="commentator_info">
@@ -213,7 +225,11 @@ function RoomReview({
                             return <div className="box_comment">
                                         <div className="commentator">
                                             <div className="commentator_avatar">
-                                                <Avatar className="commentator_img" src="">{(reviews.customerID).charAt(0)}</Avatar>
+                                                <Avatar 
+                                                    className="commentator_img" 
+                                                    alt={reviews.customerID} 
+                                                    src={reviews.customerID}
+                                                />
                                             </div>
 
                                             <div className="commentator_info">

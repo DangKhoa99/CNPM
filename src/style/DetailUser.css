@@ -1,0 +1,49 @@
+.detailUser{
+    padding: 20px 400px;
+    text-align: left;
+}
+
+.detailUser_table{
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #3c4b64;
+    border-collapse: collapse;
+    /* text-align: center; */
+}
+
+.detailUser_table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #d8dbe0;
+    /* vertical-align: middle;
+    overflow: hidden; */
+}
+
+.detailUser_table td, .detailUser_table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #d8dbe0;
+}
+
+th {
+    text-align: inherit;
+}
+
+.th_text{
+    display: inline !important;
+}
+
+.detailUser_table tbody tr:nth-of-type(2n+1){
+    background-color: rgba(0,0,21,.05);
+}
+
+.detailUser_action{
+    color: black;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 99px;
+}
+
+.detailUser_action:hover{
+    background-color: rgba(46, 44, 45, 0.05);
+    color: rgb(129, 62, 62);
+}

@@ -44,6 +44,15 @@ function HistoryBooking() {
 
     document.title = dataCustomer.username + " | RoyalStay"
 
+    let hotelBooking = [];
+    for(let key in dataCustomer.booking){
+        // console.log("key", dataCustomer.booking[key])
+        hotelBooking.push(dataCustomer.booking[key])
+    }
+
+    const fullName = (dataCustomer.name || "");
+    const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
+
     return (
         <div className="account">
             {/* <Header /> */}
@@ -51,11 +60,13 @@ function HistoryBooking() {
                 <div className="account_container">
                     <MenuLeft 
                         markPage="history_booking"
+                        fullName={fullName}
+                        nameUser={userName}
                         username={dataCustomer.username}
-                        imageUser={dataCustomer.username}
+                        imageUser={fullName}
                     />
                     <MenuHistoryBooking
-                        
+                        booking={hotelBooking}
                     />
                 </div>
             </div>

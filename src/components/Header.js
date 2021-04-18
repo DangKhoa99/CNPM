@@ -120,7 +120,7 @@ function Header() {
   const handleLogOut = () => {
     const options = {
       method: "POST",
-      headers : {
+      headers: {
         'auth-token': token.authToken,
       },
       data: {},
@@ -192,8 +192,9 @@ function Header() {
   const [searchLocation, setSearchLocation] = useState("");
   function onChangeSearchLocation(e){
     setSearchLocation(e.target.value);
-  } 
+  }
 
+  const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
 
   return (
       <nav className={
@@ -354,10 +355,11 @@ function Header() {
               >
                 <Avatar 
                   className="avatar_header" 
-                  alt={dataCustomer.username}
-                  src={dataCustomer.username}
+                  alt={userName}
+                  src={dataCustomer.name}
                 />
-
+                {/* Tách tên */}
+                {/* dataCustomer.name.split(' ').slice(-1).join(' ') */}
                 <span>{dataCustomer.name}</span>
 
                 <svg
@@ -369,17 +371,25 @@ function Header() {
               </button>
 
               {/* Menu hồ sơ */}
-              <div className={menuProfile ? "profile_menu" : "profile_menu close"}>
+              <div className={menuProfile ? dataCustomer.isAdmin ? "profile_menu isAdmin" : "profile_menu" : "profile_menu close"}>
                 <ul className="profile_menu_lists">
                   <li className="profile_menu_list">
-                    <a href="/account/overview/">Tài khoản</a>
+                    <a href="/account/overview/">{dataCustomer.isAdmin ? <i class="fas fa-user-shield"/> : <i class="fas fa-user"/>}    Tài khoản</a>
+                  </li>
+
+                  <li className={dataCustomer.isAdmin ? "profile_menu_list" : "profile_menu_list notAdmin"}>
+                    <a href="/account/admin/user-management/"><i class="fas fa-user-cog"/>   Quản lý người dùng</a>
+                  </li>
+
+                  <li className={dataCustomer.isAdmin ? "profile_menu_list" : "profile_menu_list notAdmin"}>
+                    <a href="/account/admin/hotel-management/"><i class="fas fa-hotel"/>   Quản lý khách sạn</a>
                   </li>
 
                   <li className="profile_menu_list">
                     <a 
                     className="log_out" 
                     // href="/" 
-                    onClick={handleLogOut}>Đăng xuất</a>
+                    onClick={handleLogOut}><i class="fas fa-sign-out-alt"/>     Đăng xuất</a>
                   </li>
                 </ul>
               </div>

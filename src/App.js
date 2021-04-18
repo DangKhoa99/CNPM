@@ -19,6 +19,12 @@ import HistoryBooking from './pages/MenuAccount/HistoryBooking'
 import Book from './pages/Booking/Booking'
 import ErrorPage from './pages/404Page/ErrorPage'
 
+import UserManagement from './pages/Admin/UserManagement'
+import DetailUser from './pages/Admin/DetailUser'
+import HotelManagement from './pages/Admin/HotelManagement'
+import AddHotel from './pages/Admin/AddHotel'
+import AddUser from './pages/Admin/AddUser'
+
 import ReactNotifications from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css'
 
@@ -83,6 +89,13 @@ function App() {
           <Route path='/account/booking/' component={Booking} />
           <Route path='/account/history-booking/' component={HistoryBooking} />
           <Route path='/account/hotel-invoice-detail/' component={HotelInvoiceDetail} />
+
+          <Route path='/account/admin/user-management/' component={UserManagement} />
+          <Route path='/account/admin/detail-user' component={DetailUser} />
+          <Route path='/account/admin/hotel-management/' component={HotelManagement} />
+          <Route path='/account/admin/add-hotel/' component={AddHotel} />
+          <Route path='/account/admin/add-user/' component={AddUser} />
+          
           
           <Redirect from='*' to='/404' />
           

@@ -4,21 +4,28 @@ import SearchCard from "../../components/Search/SearchCard"
 import LoadingScreen from "../../components/LoadingScreen"
 import axios from 'axios'
 import useToken from '../../useToken'
+import Slider from '@material-ui/core/Slider'
 
 function SearchPage() {
     const [data, setData] = useState([]);
     const [notData, setNotData] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [filterPrice, setFilterPrice] = useState(false); // false: giảm - true: tăng
-
+    const [filterPrice, setFilterPrice] = useState(true); // false: giảm - true: tăng
     const handleClickFilterPrice = () => setFilterPrice(!filterPrice);
-
     let price = "Giảm dần";
     if(filterPrice == true){
         price = "Tăng dần";
     }
+    const [valuePrice, setValuePrice] =  React.useState([0, 100]);
+    const rangeSelector = (event, newValue) => {
+        setValuePrice(newValue);
+        console.log(newValue)
+      };
 
-    const place = decodeURIComponent(window.location.href.split("=").pop()).split("+").join(" ");
+    // const place = decodeURIComponent(window.location.href.split("=").pop()).split("+").join(" ");
+    const searchParams = new URLSearchParams(window.location.search);
+    const place = searchParams.get('result');
+    // console.log("PLACE: ", place)
 
     let placeMap = place;
     if(capitalize(place) == "Hồ Chí Minh"){
@@ -165,10 +172,22 @@ function SearchPage() {
                     :
                     "Khách sạn tại " + capitalize(place)
                 }</h1>
+            </div>
 
+            <div className="hotelManagement_header">
                 <button className="searchPage_filter_hotel" onClick={handleClickFilterPrice}>
                     Giá: {price}
                 </button>
+
+                <br></br>
+
+                <Slider
+                    style={{width: "500px", color:"red"}}
+                    value={valuePrice}
+                    onChange={rangeSelector}
+                    valueLabelDisplay="auto"
+                />
+                <p>Bạn đang lọc giá từ ${valuePrice[0]} đến ${valuePrice[1]}</p>
             </div>
 
             {/* Filter theo khoảng giá trị */}
@@ -188,7 +207,8 @@ function SearchPage() {
             :
             notData ? <h1 style={{textAlign: "center"}}>Chúng tôi không tìm thấy bất kỳ khách sạn nào nơi bạn muốn đến. Vui lòng chọn nơi khác.</h1> :
                 filterPrice ?
-                    data.sort((a, b) => (a.room.price - b.room.price)) 
+                    data.sort((a, b) => (a.room.price - b.room.price))
+                    .filter(item => valuePrice[0] <= item.room.price && item.room.price <= valuePrice[1])
                     .map(item => {
                         return  <SearchCard 
                                     id={item._id}
@@ -205,6 +225,7 @@ function SearchPage() {
                     })
                     : 
                     data.sort((a, b) => (b.room.price - a.room.price))
+                    .filter(item => valuePrice[0] <= item.room.price && item.room.price <= valuePrice[1])
                     .map(item => {
                         return  <SearchCard 
                                     id={item._id}
@@ -219,20 +240,6 @@ function SearchPage() {
                                     savedHotelId={savedHotelId}
                                 />
                     })
-            // data.map(item => {
-            //     return  <SearchCard 
-            //                 // id={item.id}
-            //                 img={item.imangeLink}
-            //                 address={item.address}
-            //                 name={item.name}
-            //                 description={item.tien_ich
-            //                     .map(ttt => {
-            //                     return ttt + " · " 
-            //                 })}
-            //                 star={0}
-            //                 price={item.price}
-            //             />
-            // })
         }
         </div>
     )

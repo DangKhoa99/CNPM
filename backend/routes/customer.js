@@ -6,11 +6,19 @@ let {Hotel, Review} = require('../models/hotel.model');
 const { HowToRegOutlined } = require('@material-ui/icons');
 
 
-//Query all customers in DB | admin required
+// Get all customers in DB | admin required
 router.route('/').get(adminVerify, (req, res) => {
     Customer.find()
         .then(customers => res.json(customers))
         .catch(err => res.status(400).json('Error ' + err));
+});
+
+// Get a customer by Admin | token require
+router.route("/getUser").post(adminVerify, (req, res) => {
+    const customerId = req.body.customerId;
+    Customer.findById(customerId)
+    .then(customer => res.json(customer))
+    .catch(err => res.status(400).json('Error ' + err));     
 });
 
 // Get a customer by customerId | token require

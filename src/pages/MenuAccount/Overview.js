@@ -44,6 +44,9 @@ function Overview() {
     if(!token){
         return <SignIn />
     }
+
+    const fullName = (dataCustomer.name || "");
+    const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
     
     return (
         <div className="account">
@@ -52,8 +55,10 @@ function Overview() {
                 <div className="account_container">
                     <MenuLeft 
                         markPage="overview"
+                        fullName={fullName}
+                        nameUser={userName}
                         username={dataCustomer.username}
-                        imageUser={dataCustomer.username}
+                        imageUser={fullName}
                     />
                     <MenuOverview
                         id={token.customerId}

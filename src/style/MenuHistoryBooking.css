@@ -39,11 +39,6 @@
     color: gray;
 }
 
-.hotel_booking_status{
-    font-weight: 600;
-    color: black !important;
-}
-
 .menuHistoryBooking_infoBottom{
     display: flex;
     justify-content: space-between;

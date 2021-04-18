@@ -10,6 +10,8 @@ import {Link} from 'react-router-dom'
 
 function MenuLeft({
     markPage,
+    fullName,
+    nameUser,
     username,
     imageUser
 }) {
@@ -91,7 +93,7 @@ function MenuLeft({
                 <div className="account_avatar_container">
                     <Avatar 
                         className="account_avatar" 
-                        alt={username} 
+                        alt={nameUser} 
                         // src="/images/Khoa.jpg"
                         src={selectedFile}
                     />               

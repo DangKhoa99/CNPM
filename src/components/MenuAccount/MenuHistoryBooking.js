@@ -1,48 +1,54 @@
 import React from 'react'
 import "../../style/MenuHistoryBooking.css"
+import MenuBookingCard from "./MenuBookingCard"
+import NoItem from "../NoItem"
 
-function MenuHistoryBooking() {
+function MenuHistoryBooking({
+    booking
+}) {
+    let onlyReturn = 0
+    console.log("BOOKING: ", booking)
     return (
         <div className="menuHistoryBooking">
             <div className="menuHistoryBooking_container">
                 <h1 className="menuHistoryBooking_title">Lịch sử đặt khách sạn</h1>
                 
-                <a className="menuHistoryBooking_box" href="#">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU" alt=""/>
-                    <div className="menuHistoryBooking_info">
-                        <div className="menuHistoryBooking_infoTop">
-                            <h3>Holo Ben Thanh SaiGon - Serviced HomeStay</h3>
-                            <p>6 tháng 8 2020 - 7 tháng 8 2020 · TP. Hồ Chí Minh</p>
-                            <p className="hotel_booking_status success">Đã thanh toán</p>
-                        </div>
-                        <div className="menuHistoryBooking_infoBottom">
-                            <div className="menuHistoryBooking_price">
-                                <p>Tổng: </p>
-                                <h2>1.520.000 VND</h2> 
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                {booking.map(isHotelBooking => {
+                    let type = "Nhỏ"
+                    
+                    if(isHotelBooking.roomType == "small"){
+                        type = "Nhỏ"
+                    }
+                    if(isHotelBooking.roomType == "medium"){
+                        type = "Vừa"
+                    }
+                    if(isHotelBooking.roomType == "large"){
+                        type = "Lớn"
+                    }
+                    if(isHotelBooking.status == "Stayed" || isHotelBooking.status == "Cancel"){
+                        return  <MenuBookingCard
+                                    idInvoice={isHotelBooking._id}
+                                    idHotel={isHotelBooking.hotelId}
+                                    checkIn={isHotelBooking.checkIn}
+                                    checkOut={isHotelBooking.checkOut}
+                                    roomType={type}
+                                    status={isHotelBooking.status}
+                                />
+                    }
+                    else{
+                        console.log("return only")
+                        if(onlyReturn == 0){
+                            onlyReturn += 1
+                            return <NoItem text="Không có lịch sử"/>
+                        }
+                        else{
+                            return ""
+                        }  
+                    }
 
-                <a className="menuHistoryBooking_box" href="#">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ_wbPYTxQPMcBh7SPzLFActXnP3uhifeVT_g&usqp=CAU" alt=""/>
-                    <div className="menuHistoryBooking_info">
-                        <div className="menuHistoryBooking_infoTop">
-                            <h3>Holo Ben Thanh SaiGon - Serviced HomeStay</h3>
-                            <p>6 tháng 8 2020 - 7 tháng 8 2020 · TP. Hồ Chí Minh</p>
-                            <p className="hotel_booking_status error">Hủy</p>
-                        </div>
-                        <div className="menuHistoryBooking_infoBottom">
-                            <div className="menuHistoryBooking_price">
-                                <p>Tổng: </p>
-                                <h2>1.520.000 VND</h2> 
-                            </div>
-                        </div>
-                    </div>
-                </a>
-
+                    
+                })}
             </div>
-
         </div>
     )
 }

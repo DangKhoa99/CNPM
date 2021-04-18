@@ -20,7 +20,9 @@ function Room() {
     const roomReview = useRef();
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const getID = window.location.href.split("=").pop();
+    // const getID = window.location.href.split("=").pop();
+    const searchParams = new URLSearchParams(window.location.search);
+    const getID = searchParams.get('id');
 
     const { token, setToken } = useToken();
     const [dataFavoriteHotelOfCustomer, setDataFavoriteHotelOfCustomer] = useState([]);
@@ -67,7 +69,10 @@ function Room() {
         }   
     },[loadDetailHotelFromServer])// useEffect will run once and when id changes
 
-    if(!data) return null //first render, when useEffect did't triggered yet we will return null
+    //first render, when useEffect did't triggered yet we will return null
+    if(!data){
+        return null
+    } 
 
     const arrImage = []
     for (var key in data.imageLink) {

@@ -19,6 +19,9 @@ function menuOverview({
     if(!address){
         address = "Chưa cập nhật";
     }
+    if(!email){
+        email = "Chưa cập nhật";
+    }
 
     return (
         <div className="menuOverview">

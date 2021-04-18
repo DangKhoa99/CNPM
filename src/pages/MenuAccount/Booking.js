@@ -49,6 +49,9 @@ function Booking() {
         // console.log("key", dataCustomer.booking[key])
         hotelBooking.push(dataCustomer.booking[key])
     }
+
+    const fullName = (dataCustomer.name || "");
+    const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
     
     return (
         <div className="account">
@@ -57,8 +60,10 @@ function Booking() {
                 <div className="account_container">
                     <MenuLeft 
                         markPage="booking"
+                        fullName={fullName}
+                        nameUser={userName}
                         username={dataCustomer.username}
-                        imageUser={dataCustomer.username}
+                        imageUser={fullName}
                     />
                     <MenuBooking
                         booking={hotelBooking}

@@ -1,0 +1,69 @@
+.userManagement{
+    padding: 50px 200px;
+    text-align: center;
+}
+
+.userManagement_table{
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #3c4b64;
+    border-collapse: collapse;
+    /* text-align: center; */
+}
+
+.userManagement_table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #d8dbe0;
+    /* vertical-align: middle;
+    overflow: hidden; */
+}
+
+.userManagement_table td, .userManagement_table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #d8dbe0;
+}
+
+th {
+    text-align: inherit;
+}
+
+.th_text{
+    display: inline !important;
+}
+
+.userManagement_table tbody tr:nth-of-type(2n+1){
+    background-color: rgba(0,0,21,.05);
+}
+
+.userManagement_action{
+    color: black;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 99px;
+}
+
+.userManagement_action:hover{
+    background-color: rgba(46, 44, 45, 0.05);
+    color: rgb(129, 62, 62);
+}
+
+.userManagement_addUser{
+    cursor: pointer !important;
+    text-align: center !important;
+    border: 1px solid rgb(176, 176, 176) !important;
+    background-color: rgb(255, 255, 255) !important;
+    outline: currentcolor none medium !important;
+    margin:  10px 10px !important;
+    border-radius: 30px !important;
+    color: rgb(34, 34, 34) !important;
+    position: relative !important;
+    padding: 8px 32px !important;
+    font-size: 16px !important;
+    line-height: 16px !important;
+    font-weight: 600;
+}
+
+.userManagement_addUser:hover{
+    border-color: rgb(34, 34, 34) !important;
+}

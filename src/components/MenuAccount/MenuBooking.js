@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import "../../style/MenuBooking.css"
 import MenuBookingCard from "./MenuBookingCard"
+import NoItem from "../NoItem"
 
 function MenuBooking({
     booking
 }) {
-    console.log("Hotel Booking: ", booking)
+    let onlyReturn = 0
     return (
         <div className="menuBooking">
             <div className="menuBooking_container">
@@ -21,20 +22,27 @@ function MenuBooking({
                     if(isHotelBooking.roomType == "large"){
                         type = "Lớn"
                     }
-                    return  <MenuBookingCard
-                                idInvoice={isHotelBooking._id}
-                                idHotel={isHotelBooking.hotelId}
-                                checkIn={isHotelBooking.checkIn}
-                                checkOut={isHotelBooking.checkOut}
-                                roomType={type}
-                                status={isHotelBooking.status}
-                            />
+                    if(isHotelBooking.status == "Pending" || isHotelBooking.status == "Staying"){
+                        return  <MenuBookingCard
+                                    idInvoice={isHotelBooking._id}
+                                    idHotel={isHotelBooking.hotelId}
+                                    checkIn={isHotelBooking.checkIn}
+                                    checkOut={isHotelBooking.checkOut}
+                                    roomType={type}
+                                    status={isHotelBooking.status}
+                                />
+                    }
+                    else{
+                        if(onlyReturn == 0){
+                            onlyReturn += 1
+                            return <NoItem text="Không có phòng đang đặt"/>
+                        }
+                        else{
+                            return ""
+                        }  
+                    }
                 })}
-                
-                
-
             </div>
-
         </div>
     )
 }

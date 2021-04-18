@@ -6,15 +6,10 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form';
 import { store } from 'react-notifications-component'
 import history from '../../history';
-
-import PropTypes from 'prop-types';
 import useToken from '../../useToken'
-import { useLocation } from 'react-router-dom'
-import { Redirect, Link } from 'react-router-dom'
-function SignIn(
-    // {setToken}
+import { useLocation, Link } from 'react-router-dom'
 
-) {
+function SignIn() {
 
     const { token, setToken } = useToken();
     const location = useLocation();

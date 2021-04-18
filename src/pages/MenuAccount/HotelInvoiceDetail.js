@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
-import { store } from 'react-notifications-component'
 
 import useToken from '../../useToken'
 
@@ -16,8 +15,20 @@ function HotelInvoiceDetail() {
 
      let history = useHistory();
 
+     const [delTask, setDelTask] = useState(false)
 
-
+    const handleConfirmationBox = () => {
+        if (!delTask){
+            document.querySelector(".confirm-bg").style.display = "flex"
+            document.querySelector(".confirmBox_container").style.display = "flex"
+            setDelTask(true)
+        } 
+        else {
+            document.querySelector(".confirm-bg").style.display = "none"
+            document.querySelector(".confirmBox_container").style.display = "none"
+            setDelTask(false)
+        }
+    }
 
      const loadDetailHotelFromServer = useCallback(async () =>{
         const options = {
@@ -90,6 +101,31 @@ function HotelInvoiceDetail() {
     const calNight = parseInt(dataBookingHotelOfCustomer.checkOut.split("/")[1]) - parseInt(dataBookingHotelOfCustomer.checkIn.split("/")[1]);
 
     document.title = "Chi tiết khách sạn đặt | RoyalStay"
+
+    const handleDeleteOrderHotel = () =>{
+        console.log("CLICK")
+        const options = {
+            method: "POST",
+            headers: {
+                "auth-token": token.authToken,
+            },
+            data: {
+                "customerId": token.customerId,
+                "bookingId": bookingId
+            },
+            url: "http://localhost:5000/customer/booking/cancel"
+        }
+        axios(options)
+        .then(response => {
+            console.log("DELETE ORDER HOTEL: ", response.data)
+            window.location = "/account/booking"
+        })
+        .catch(error => console.log(error))
+    }
+
+
+
+
     return (
         <div className="hotelInvoiceDetail">
             <div className="booking_container">
@@ -107,6 +143,9 @@ function HotelInvoiceDetail() {
                             <div className="bookingHeader_text">
                                 Chi tiết hóa đơn khách sạn đã đặt
                             </div>
+                            <a className="menuBookingCard_btn_hotel" href={"/room-detail?id=" + dataBookingHotelOfCustomer.hotelId} title="Xem khách sạn">
+                                <i class="fas fa-hotel" style={{fontSize: "20px"}}/>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -216,10 +255,37 @@ function HotelInvoiceDetail() {
                         <div className="bookingBody_components_line"></div>
 
                         <div className="bookingBody_components">
-                            <button className="booking_btn_confirm" style={{marginRight: "20px"}}>
+                            <button className={"booking_btn_confirm " + dataBookingHotelOfCustomer.status} style={{marginRight: "20px"}} onClick={() => {handleConfirmationBox()}}>
                                 Hủy đặt phòng
                             </button>
-                            <button className="booking_btn_confirm" style={{background: "green"}} onClick={history.goBack}>
+
+                            {/* ConfirmBOX DELETE */}
+                            <div className="confirmBox_container">
+                                <div className="confirmation-text">
+                                    Bạn có chắc muốn hủy đặt phòng khách sạn ở <br></br><b>`{dataHotel.name}`</b>
+                                </div>
+
+                                <div className="button-container">
+                                    <button 
+                                        className="cancel-button" 
+                                        onClick={() => handleConfirmationBox()}>
+                                            <i class="far fa-window-close"/>
+                                    </button>
+
+                                    <button 
+                                    className="confirmation-button"
+                                    onClick={handleDeleteOrderHotel}>
+                                        <i class="far fa-trash-alt"/>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div 
+                                className="confirm-bg" 
+                                onClick={() => handleConfirmationBox()}>
+                            </div>
+
+                            <button className="booking_btn_confirm invoiceOk" onClick={history.goBack}>
                                 OK
                             </button>
                         </div>

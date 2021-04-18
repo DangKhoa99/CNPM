@@ -41,23 +41,27 @@
 
 .hotel_booking_status{
     font-weight: 600;
-    color: black !important;
+    color: white !important;
+    border-radius: 10px;
+    width: 100px;
+    padding: 10px;
+    text-align: center;
 }
 
 .hotel_booking_status.Staying{
-    color: rgb(255, 158, 66) !important;
+    background-color: rgb(255, 158, 66) !important;
 }
 
 .hotel_booking_status.Stayed{
-    color: green !important;
+    background-color: green !important;
 }
 
 .hotel_booking_status.Cancel{
-    color: red !important;
+    background-color: red !important;
 }
 
 .hotel_booking_status.Pending{
-    color: #007bff !important;
+    background-color: #007bff !important;
 }
 
 .menuBooking_infoBottom{
@@ -98,7 +102,7 @@
     -moz-box-align: center !important;
     display: flex !important;
     outline: none !important;
-    z-index: 999;
+    z-index: 50;
 }
 
 .menuBookingCard_btn_hotel{

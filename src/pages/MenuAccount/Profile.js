@@ -43,6 +43,10 @@ function Profile() {
     }
     document.title = dataCustomer.username + " | RoyalStay"
 
+    const fullName = (dataCustomer.name || "");
+    const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
+    
+
     return (
         <div className="account">
             {/* <Header /> */}
@@ -50,8 +54,10 @@ function Profile() {
                 <div className="account_container">
                     <MenuLeft 
                         markPage="profile"
+                        fullName={fullName}
+                        nameUser={userName}
                         username={dataCustomer.username}
-                        imageUser={dataCustomer.username}
+                        imageUser={fullName}
                     />
                     <MenuProfile 
                         id={token.customerId}

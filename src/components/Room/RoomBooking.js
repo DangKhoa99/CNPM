@@ -95,6 +95,29 @@ function RoomBooking({
         }
     }
 
+    // Not allow order hotel
+    const notification_notAllowOrder = {
+        title: ' RoyalStay - Thông báo',
+        message: "Khách sạn đã hết phòng - Quý khách vui lòng quay lại sau",
+        type: 'info',
+        container: 'top-right',
+        dismiss: {
+            duration: 3000
+        }
+    };
+
+    const notAllowOrderRoom = (e) => {
+        e.preventDefault();
+        store.addNotification(notification_notAllowOrder);
+    }
+
+    const [allowOrder, setAllowOrder] = useState(true)
+    useEffect(() => {
+        if(quantity <= 0){
+            setAllowOrder(false)
+        }
+    },[quantity])
+
 
     let pricePerNight = 0;
     if (room == "Small"){;
@@ -147,13 +170,26 @@ function RoomBooking({
                                         <div className='date-range'>
                                             <div className="check_in">
                                                 <label>NHẬN PHÒNG</label>
-                                                <input
-                                                    readOnly
-                                                    className={'input' + (focus === START_DATE ? ' -focused' : '')}
-                                                    {...startDateInputProps}
-                                                    placeholder='Chọn ngày'
-                                                    name="checkin" 
-                                                />
+                                                {allowOrder ? 
+                                                    <input
+                                                        readOnly
+                                                        className={'input' + (focus === START_DATE ? ' -focused' : '')}
+                                                        {...startDateInputProps}
+                                                        placeholder='Chọn ngày'
+                                                        name="checkin" 
+                                                    />
+                                                :
+                                                    <input
+                                                        style={{cursor: "not-allowed"}}
+                                                        readOnly
+                                                        disabled
+                                                        className={'input' + (focus === START_DATE ? ' -focused' : '')}
+                                                        {...startDateInputProps}
+                                                        placeholder='Chọn ngày'
+                                                        name="checkin" 
+                                                    />
+                                                }
+                                                
                                             </div>
                                             <span class="date-range_arrow"></span>
                                             <div className="check_out">
@@ -205,6 +241,7 @@ function RoomBooking({
                                         else if(type == "Large"){
                                             t = "Lớn"
                                         }
+                                        if(allowOrder){
                                         return  <label class="room_type">
                                                     <input 
                                                         type="radio" 
@@ -217,12 +254,27 @@ function RoomBooking({
                                                     <span class="check_mark"></span>
                                                     {t}
                                                 </label>
+                                        }
+                                        else{
+                                            return <label class="room_type">
+                                                        <input 
+                                                            type="radio" 
+                                                            id={type}
+                                                            disabled
+                                                            name="roomType" 
+                                                            value={type}
+                                                            checked=""
+                                                        />
+                                                        <span class="check_mark"></span>
+                                                        {t}
+                                                    </label>
+                                        }
                                     })}
                                 </div>
                             </div>
 
                             <div className="roomBooking_box_layout_body_row">
-                                <button className='form_booking_btn' type='submit' onClick={handleOrderRoom}>Đặt phòng</button>
+                                <button className={allowOrder ?'form_booking_btn' : 'form_booking_btn disable'} type='submit' onClick={allowOrder ? handleOrderRoom : notAllowOrderRoom}>{allowOrder ? "Đặt phòng" : "Hết phòng"}</button>
                             </div>
                         </div>
                     </form>

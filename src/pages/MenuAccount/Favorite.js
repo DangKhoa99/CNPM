@@ -65,6 +65,9 @@ function Favorite() {
 
     document.title = dataCustomer.username + " | RoyalStay"
 
+    const fullName = (dataCustomer.name || "");
+    const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
+
     if(!token){
         return <SignIn />
     }
@@ -76,8 +79,10 @@ function Favorite() {
                 <div className="account_container">
                     <MenuLeft 
                         markPage="favorite"
+                        fullName={fullName}
+                        nameUser={userName}
                         username={dataCustomer.username}
-                        imageUser={dataCustomer.username}
+                        imageUser={fullName}
                     />
 
                     {isLoading ? <LoadingScreen/> 
