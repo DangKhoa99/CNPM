@@ -7,7 +7,7 @@ import 'react-nice-dates/build/style.css'
 
 import { store } from 'react-notifications-component'
 
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import SignIn from '../../pages/SignIn/SignIn'
 
 function RoomBooking({

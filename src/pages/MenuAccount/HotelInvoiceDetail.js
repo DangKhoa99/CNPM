@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
 
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 
 function HotelInvoiceDetail() {
     const { token, setToken } = useToken();
@@ -122,9 +122,6 @@ function HotelInvoiceDetail() {
         })
         .catch(error => console.log(error))
     }
-
-
-
 
     return (
         <div className="hotelInvoiceDetail">

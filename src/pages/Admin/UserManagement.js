@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import "../../style/UserManagement.css"
 import axios from 'axios'
 import SignIn from '../SignIn/SignIn'
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import LoadingScreen from "../../components/LoadingScreen"
 
 function UserManagement() {

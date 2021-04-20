@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import "../../style/DetailUser.css"
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 
 function DetailUser() {
     let history = useHistory();
@@ -38,7 +38,6 @@ function DetailUser() {
         if(token){
             fetchData();
         }
-        
     },[])
 
     return (

@@ -7,7 +7,7 @@ import Gallery from 'react-grid-gallery';
 import { store } from 'react-notifications-component'
 
 import axios from 'axios'
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 
 function RoomHeader({
     idHotel,

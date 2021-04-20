@@ -3,8 +3,10 @@ import "../../style/SearchPage.css"
 import SearchCard from "../../components/Search/SearchCard"
 import LoadingScreen from "../../components/LoadingScreen"
 import axios from 'axios'
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import Slider from '@material-ui/core/Slider'
+
+import StarIcon from "@material-ui/icons/Star"
 
 function SearchPage() {
     const [data, setData] = useState([]);
@@ -179,68 +181,63 @@ function SearchPage() {
                     Giá: {price}
                 </button>
 
-                <br></br>
-
-                <Slider
-                    style={{width: "500px", color:"red"}}
-                    value={valuePrice}
-                    onChange={rangeSelector}
-                    valueLabelDisplay="auto"
-                />
-                <p>Bạn đang lọc giá từ ${valuePrice[0]} đến ${valuePrice[1]}</p>
+                <div className="slider_price">
+                    <div className="price_wrap">
+                        <h2>${valuePrice[0]} </h2>
+                        <h2>${valuePrice[1]}</h2>
+                    </div>
+                    <Slider
+                        className="slider"
+                        value={valuePrice}
+                        onChange={rangeSelector}
+                        valueLabelDisplay="auto"
+                    />
+                    
+                </div>
             </div>
 
-            {/* Filter theo khoảng giá trị */}
-            {/* {data.filter(data => data.price < 50).map(d => {
-                return  <SearchCard 
-                            id={d.id}
-                            img={d.img}
-                            location={d.location}
-                            title={d.title}
-                            description={d.description}
-                            star={d.stars}
-                            price={d.price}
-                        />
-            })} */}
-
-            {isLoading ? <LoadingScreen/>
-            :
-            notData ? <h1 style={{textAlign: "center"}}>Chúng tôi không tìm thấy bất kỳ khách sạn nào nơi bạn muốn đến. Vui lòng chọn nơi khác.</h1> :
-                filterPrice ?
-                    data.sort((a, b) => (a.room.price - b.room.price))
-                    .filter(item => valuePrice[0] <= item.room.price && item.room.price <= valuePrice[1])
-                    .map(item => {
-                        return  <SearchCard 
-                                    id={item._id}
-                                    img={item.imageLink}
-                                    address={item.address}
-                                    name={item.name}
-                                    description={item.tien_ich
-                                        .map(ttt => {
-                                        return ttt + " · " 
-                                    })}
-                                    price={item.room.price}
-                                    savedHotelId={savedHotelId}
-                                />
-                    })
-                    : 
-                    data.sort((a, b) => (b.room.price - a.room.price))
-                    .filter(item => valuePrice[0] <= item.room.price && item.room.price <= valuePrice[1])
-                    .map(item => {
-                        return  <SearchCard 
-                                    id={item._id}
-                                    img={item.imageLink}
-                                    address={item.address}
-                                    name={item.name}
-                                    description={item.tien_ich
-                                        .map(ttt => {
-                                        return ttt + " · " 
-                                    })}
-                                    price={item.room.price}
-                                    savedHotelId={savedHotelId}
-                                />
-                    })
-        }
+            <ul class="list-product">
+                {isLoading ? <div style={{marginLeft: "750px", marginTop: "-200px"}}><LoadingScreen /></div>
+                :
+                notData ? <h1 style={{textAlign: "center"}}>Chúng tôi không tìm thấy bất kỳ khách sạn nào nơi bạn muốn đến. Vui lòng chọn nơi khác.</h1> :
+                    filterPrice ?
+                        data.sort((a, b) => (a.room.price - b.room.price))
+                        .filter(item => valuePrice[0] <= item.room.price && item.room.price <= valuePrice[1])
+                        .map(item => {
+                            return  <SearchCard 
+                                        id={item._id}
+                                        img={item.imageLink}
+                                        address={item.address}
+                                        name={item.name}
+                                        description={item.tien_ich
+                                            .map(ttt => {
+                                            return ttt + " · " 
+                                        })}
+                                        price={item.room.price}
+                                        savedHotelId={savedHotelId}
+                                    />
+                                
+                        })
+                        : 
+                        data.sort((a, b) => (b.room.price - a.room.price))
+                        .filter(item => valuePrice[0] <= item.room.price && item.room.price <= valuePrice[1])
+                        .map(item => {
+                            return <SearchCard 
+                                        id={item._id}
+                                        img={item.imageLink}
+                                        address={item.address}
+                                        name={item.name}
+                                        description={item.tien_ich
+                                            .map(ttt => {
+                                            return ttt + " · " 
+                                        })}
+                                        price={item.room.price}
+                                        savedHotelId={savedHotelId}
+                                    />
+                    
+                        })
+                }
+            </ul>
         </div>
     )
 }

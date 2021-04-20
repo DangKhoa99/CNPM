@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import axios from 'axios'
 
 function AddUser() {

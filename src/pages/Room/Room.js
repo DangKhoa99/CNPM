@@ -6,7 +6,7 @@ import RoomReview from "../../components/Room/RoomReview"
 import LoadingScreen from "../../components/LoadingScreen"
 
 import axios from 'axios'
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 
 function Room() {
     const scrollToElement = (ref) => {

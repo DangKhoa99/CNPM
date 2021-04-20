@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form';
 import { store } from 'react-notifications-component'
 import { Link } from 'react-router-dom'
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import history from '../../history';
 
 function SignUp() {

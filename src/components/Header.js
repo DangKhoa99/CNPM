@@ -8,10 +8,7 @@ import "aos/dist/aos.css"
 import {ReactComponent as IconLocation} from "../icons/iconBooking.svg"
 import {Avatar} from "@material-ui/core"
 import axios from 'axios'
-
-// import { useSelector } from 'react-redux'
-// import { tokensSelector } from '../store/reducers/tokensSlice'
-import useToken from '../useToken'
+import useToken from '../hooks/useToken'
 import { store } from 'react-notifications-component'
 
 function Header() {

@@ -3,7 +3,7 @@ import "../../style/HotelManagement.css"
 import HotelCard from "./HotelCard"
 import LoadingScreen from "../../components/LoadingScreen"
 import axios from 'axios'
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import Slider from '@material-ui/core/Slider'
 
 function HotelManagement() {

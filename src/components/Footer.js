@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 
 function Footer() {
   const location = useLocation();
-  const [data, setData] = useState([
+  const data = [
     {
       title: "GIỚI THIỆU",
       links: [
@@ -43,7 +43,7 @@ function Footer() {
         "Tin cậy và an toàn",
       ],
     },
-  ])
+  ]
 
   // Bấm vào logo để lên đầu trang
   const scrollToTop = () =>{

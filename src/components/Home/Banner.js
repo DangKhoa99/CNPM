@@ -2,8 +2,6 @@ import React, { useState, useRef } from 'react'
 import '../../style/Banner.css'
 import {Button} from "@material-ui/core"
 import { Link } from 'react-router-dom'
-// import Background from '/test/img-home.png'
-
 
 function Banner() {
   const [inHover, setHover] = useState(false);
@@ -12,7 +10,7 @@ function Banner() {
   const scrollToElement = () =>{
     window.scrollTo({
       behavior: "smooth",
-      top: myRef.current.offsetHeight - 60
+      top: myRef.current.offsetHeight - 40
     });
   }
 
@@ -37,8 +35,6 @@ function Banner() {
           {inHover &&
           <i class="fas fa-arrow-right"></i>}
         </Button>
-
-      
       </div>
     </div>
   );

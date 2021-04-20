@@ -28,34 +28,7 @@ import AddUser from './pages/Admin/AddUser'
 import ReactNotifications from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css'
 
-import useToken from './useToken'
-//SearchPage->SearchResult
-//rooms->itemDetail/:id
-// use Redux Provider
-
-// const fakeAuth = {
-//   isAuthenticated: false,
-//   authenticate(cb) {
-//     this.isAuthenticated = true
-//     setTimeout(cb, 100)
-//   },
-//   signout(cb) {
-//     this.isAuthenticated = false
-//     setTimeout(cb, 100)
-//   }
-// }
-
-
-// function PrivateRoute ({component: Component, ...rest}) {
-//   return (
-//     <Route
-//       {...rest}
-//       render={(props) => localStorage.getItem("token")
-//         ? <Component {...props} />
-//         : <Redirect to={{pathname: '/sign-in', state: {from: props.location}}} />}
-//     />
-//   )
-// }
+import useToken from './hooks/useToken'
 
 function App() {
 

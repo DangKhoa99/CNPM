@@ -6,7 +6,7 @@ import {ReactComponent as RedHeart} from "../../icons/iconRedHeart.svg"
 import { store } from 'react-notifications-component'
 import axios from 'axios'
 
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 
 function SearchCard({
     id,
@@ -30,11 +30,9 @@ function SearchCard({
         await axios.post("http://localhost:5000/hotel/review", _id)
             .then(response => {
                 console.log("Data REVIEW: ",response.data)
-                if(response.data.length>0){
+                if(response.data.length > 0){
                     setDataReview(response.data);
                 }
-                
-                
             })
             .catch(error => console.log(error))
     },[id]);
@@ -151,7 +149,47 @@ function SearchCard({
 
     return (
         <div className="searchCard">
-            <a href={'/room-detail?id=' + id}>
+            <li class="product__item">
+                <div class="product__thumbnail"> 
+                    <img src={img[0]} alt="thumbnail"/>
+                    <div class="product__love-icon">
+                        <button 
+                            className="searchCard_btn"
+                            onClick={() => {handleClickFavorite();}}
+                        >
+                            <span className="searchCard_heart">
+                                {clickFavorite ? <RedHeart className="searchCard_redHeart_svg" /> : <Heart className="searchCard_heart_svg" />}
+                            </span>
+                            {saveFavorite}
+                        </button>
+                    </div>
+                    <div className="product__love-icon1">
+                        <div className="searchCard_stars">
+                            <StarIcon className="searchCard_star"/>
+                            <p>
+                                <strong>{avgReview} ({dataReview.length})</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="product__price">
+                    <strong>${price}</strong> /đêm
+                </div>
+                <div class="product__detail">
+                    <p className="product__address">{address}</p>
+                    <h1 class="product__title">
+                        {name}
+                    </h1>
+                    <p class="product__description">
+                        {description}
+                    </p>
+                    <a href={'/room-detail?id=' + id} class="product__button">Xem thêm</a>
+                </div>
+            </li>
+
+
+
+            {/* <a href={'/room-detail?id=' + id}>
                 <img className="searchCard_img_hotel" src={img[0]} alt=""/>
             </a>
 
@@ -185,7 +223,7 @@ function SearchCard({
                         </div>
                     </div>
                 </div>
-            </a>
+            </a> */}
         </div>
     )
 }

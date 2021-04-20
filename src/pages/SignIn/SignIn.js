@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form';
 import { store } from 'react-notifications-component'
 import history from '../../history';
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import { useLocation, Link } from 'react-router-dom'
 
 function SignIn() {

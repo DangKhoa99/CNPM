@@ -1,4 +1,4 @@
-.searchCard{
+/* .searchCard{
     display: flex;
     position: relative;
     margin: 20px;
@@ -6,16 +6,16 @@
     border-top: 1px solid lightgray;
     border-bottom: 1px solid lightgray;
     cursor: pointer;
-}
+} */
 
 .searchCard_links{
     display: flex;
     text-decoration: none;
 }
 
-.searchCard:hover{
+/* .searchCard:hover{
     opacity: 0.8;
-}
+} */
 
 .searchCard_img_hotel{
     height: 200px;
@@ -35,7 +35,7 @@
 
 .searchCard_btn{
     cursor: not-allowed;
-    position: absolute;
+    /* position: absolute; */
     top: 20px;
     right: 40px;
     cursor: pointer !important;
@@ -56,7 +56,7 @@
 
 .searchCard_btn:hover{
     border: medium none !important;
-    background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
+    background: rgb(240, 240, 240) none repeat scroll 0% 0% !important;
     color: rgb(0, 0, 0) !important;
 }
 

@@ -1,13 +1,17 @@
+.home{
+    background-color:antiquewhite;
+}
+
 .home_section{
-    background-color: #212329;
+    background-color: antiquewhite;
     /* width: 100vw; */
     height: auto;
     min-height: 100vh;
-    padding-bottom: 8rem;
+    padding-bottom: 20px;
 }
 
 .home_heading{
-    color: white;
+    color: black;
     text-align: center;
     margin-bottom: 2rem;
     padding-top: 3rem;
@@ -20,9 +24,9 @@
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    transform: translateY(80px);
+    /* transform: translateY(80px); */
     padding: 0;
-    background-color: #212329;
+    background-color: antiquewhite;
     height: auto;
 }
 

@@ -2,19 +2,21 @@ import React, {useState, useEffect} from 'react'
 import "../../style/MenuAccount.css"
 import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuBooking from "../../components/MenuAccount/MenuBooking"
-
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import SignIn from '../SignIn/SignIn'
+import useGetDataCustomer from '../../hooks/useDataCustomer'
+import LoadingScreen from "../../components/LoadingScreen"
 
 import axios from 'axios'
 
 function Booking() {
-    const { token, setToken } = useToken();
-
-    const [dataCustomer, setDataCustomer] = useState([]);
+    const {token, setToken} = useToken();
+    const {dataCustomer, isLoading} = useGetDataCustomer();
+    
+    const [dataBookingListHotelOfCustomer, setDataBookingListHotelOfCustomer] = useState([])
 
     useEffect(() => {
-        const fetchData = async () => {
+        const getDataBookingListHotelOfCustomer = async () => {
             const options = {
                 method: "POST",
                 headers: {
@@ -23,32 +25,29 @@ function Booking() {
                 data: {
                     "customerId": token.customerId
                 },
-                url: "http://localhost:5000/customer/"
+                url: "http://localhost:5000/customer/booking"
             }
-            await axios(options)
+            axios(options)
             .then(response => {
                 console.log(response.data)
-                setDataCustomer(response.data)
+                setDataBookingListHotelOfCustomer(response.data)
             })
             .catch(error => console.log(error))
         }
 
         if(token){
-            fetchData();
+            getDataBookingListHotelOfCustomer();
         }
     },[])
 
-    document.title = dataCustomer.username + " | RoyalStay"
+
+
 
     if(!token){
         return <SignIn />
     }
 
-    let hotelBooking = [];
-    for(let key in dataCustomer.booking){
-        // console.log("key", dataCustomer.booking[key])
-        hotelBooking.push(dataCustomer.booking[key])
-    }
+    document.title = dataCustomer.username + " | RoyalStay"
 
     const fullName = (dataCustomer.name || "");
     const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
@@ -58,6 +57,8 @@ function Booking() {
             {/* <Header /> */}
             <div className="account_page">
                 <div className="account_container">
+                    {isLoading ? <LoadingScreen/> 
+                    :
                     <MenuLeft 
                         markPage="booking"
                         fullName={fullName}
@@ -65,9 +66,13 @@ function Booking() {
                         username={dataCustomer.username}
                         imageUser={fullName}
                     />
+                    }
+                    {isLoading ? <LoadingScreen/> 
+                        :
                     <MenuBooking
-                        booking={hotelBooking}
+                        booking={dataBookingListHotelOfCustomer}
                     />
+                    }
                 </div>
             </div>
         </div>

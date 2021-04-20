@@ -3,7 +3,7 @@ import "../../style/Booking.css"
 import BookingHeader from "../../components/Booking/BookingHeader"
 import BookingBody from "../../components/Booking/BookingBody"
 
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import SignIn from '../SignIn/SignIn'
 import axios from 'axios'
 

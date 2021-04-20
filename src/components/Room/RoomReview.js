@@ -5,17 +5,18 @@ import {Avatar} from "@material-ui/core"
 import StarRatings from "react-star-ratings"
 import axios from 'axios'
 import { store } from 'react-notifications-component'
+import useGetDataCustomer from '../../hooks/useDataCustomer'
 
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 
 function RoomReview({
     reference,
     idHotel
 }) {
     const { token, setToken } = useToken();
+    const {dataCustomer, isLoading} = useGetDataCustomer();
     const [dataReview, setDataReview] = useState([]);
     const [rating, setRating] = useState(0);
-    const [dataUser, setDataUser] = useState([]);
 
     const _id = {"hotelId": idHotel};
 
@@ -28,30 +29,8 @@ function RoomReview({
             .catch(error => console.log("Error: ", error))
     },[idHotel]);
 
-    const getDataUser = async () => {
-        const options = {
-            method: "POST",
-            headers: {
-                "auth-token": token.authToken,
-            },
-            data: {
-                "customerId": token.customerId
-            },
-            url: "http://localhost:5000/customer/"
-        }
-        axios(options)
-        .then(response => {
-            // console.log("getDataUser: ", response.data)
-            setDataUser(response.data)
-        })
-        .catch(error => console.log(error))
-    }
-
     useEffect(() => {
         loadReviewHotelFromServer();
-        if(token){
-            getDataUser();
-        }
     },[loadReviewHotelFromServer])
 
     let avgReview = 0;
@@ -145,7 +124,7 @@ function RoomReview({
         window.location.reload();
     }
 
-    const userName = (dataUser.name || "").split(' ').slice(-1).join(' ');
+    const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
 
     return (
         <div className="roomReview">
@@ -174,7 +153,7 @@ function RoomReview({
                         </div>
 
                         <div className="commentator_info">
-                            {(dataUser.username)}
+                            {(dataCustomer.username)}
                             {/* - <i style={{fontWeight: '400', fontSize: '14px'}}>tháng {(new Date().getMonth() + 1)} năm {(new Date().getFullYear())}</i> */}
 
                             <div className="comment_stars">

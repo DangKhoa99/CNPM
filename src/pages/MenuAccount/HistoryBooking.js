@@ -3,18 +3,20 @@ import "../../style/MenuAccount.css"
 import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuHistoryBooking from "../../components/MenuAccount/MenuHistoryBooking"
 
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import SignIn from '../SignIn/SignIn'
 
 import axios from 'axios';
+import useGetDataCustomer from '../../hooks/useDataCustomer'
+import LoadingScreen from "../../components/LoadingScreen"
 
 function HistoryBooking() {
-    const { token, setToken } = useToken();
-
-    const [dataCustomer, setDataCustomer] = useState([]);
+    const {token, setToken} = useToken();
+    const {dataCustomer, isLoading} = useGetDataCustomer();
+    const [dataBookingListHotelOfCustomer, setDataBookingListHotelOfCustomer] = useState([])
 
     useEffect(() => {
-        const fetchData = async () => {
+        const getDataBookingListHotelOfCustomer = async () => {
             const options = {
                 method: "POST",
                 headers: {
@@ -23,18 +25,18 @@ function HistoryBooking() {
                 data: {
                     "customerId": token.customerId
                 },
-                url: "http://localhost:5000/customer/"
+                url: "http://localhost:5000/customer/booking"
             }
             axios(options)
             .then(response => {
                 console.log(response.data)
-                setDataCustomer(response.data)
+                setDataBookingListHotelOfCustomer(response.data)
             })
             .catch(error => console.log(error))
         }
 
         if(token){
-            fetchData();
+            getDataBookingListHotelOfCustomer();
         }
     },[])
 
@@ -44,12 +46,6 @@ function HistoryBooking() {
 
     document.title = dataCustomer.username + " | RoyalStay"
 
-    let hotelBooking = [];
-    for(let key in dataCustomer.booking){
-        // console.log("key", dataCustomer.booking[key])
-        hotelBooking.push(dataCustomer.booking[key])
-    }
-
     const fullName = (dataCustomer.name || "");
     const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
 
@@ -58,6 +54,8 @@ function HistoryBooking() {
             {/* <Header /> */}
             <div className="account_page">
                 <div className="account_container">
+                    {isLoading ? <LoadingScreen/> 
+                    :
                     <MenuLeft 
                         markPage="history_booking"
                         fullName={fullName}
@@ -65,9 +63,13 @@ function HistoryBooking() {
                         username={dataCustomer.username}
                         imageUser={fullName}
                     />
+                    }
+                    {isLoading ? <LoadingScreen/> 
+                    :
                     <MenuHistoryBooking
-                        booking={hotelBooking}
+                        booking={dataBookingListHotelOfCustomer}
                     />
+                    }
                 </div>
             </div>
         </div>

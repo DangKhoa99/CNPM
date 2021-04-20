@@ -1,43 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import "../../style/MenuAccount.css"
-import Header from '../../components/Header'
 import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuProfile from "../../components/MenuAccount/MenuProfile"
-
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 import SignIn from '../SignIn/SignIn'
-
-import axios from 'axios';
+import useGetDataCustomer from '../../hooks/useDataCustomer'
+import LoadingScreen from "../../components/LoadingScreen"
 
 function Profile() {
-    const { token, setToken } = useToken();
-    const [dataCustomer, setDataCustomer] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const options = {
-                method: "POST",
-                headers: {
-                    "auth-token": token.authToken,
-                },
-                data: {
-                    "customerId": token.customerId
-                },
-                url: "http://localhost:5000/customer/"
-            }
-            axios(options)
-            .then(response => {
-                console.log(response.data)
-                setDataCustomer(response.data)
-            })
-            .catch(error => console.log(error))
-        }
-
-        if(token){
-            fetchData();
-        }
-    },[])
-
+    const {token, setToken} = useToken();
+    const {dataCustomer, isLoading} = useGetDataCustomer();
     if(!token){
         return <SignIn />
     }
@@ -49,9 +21,10 @@ function Profile() {
 
     return (
         <div className="account">
-            {/* <Header /> */}
             <div className="account_page">
                 <div className="account_container">
+                    {isLoading ? <LoadingScreen/> 
+                    :
                     <MenuLeft 
                         markPage="profile"
                         fullName={fullName}
@@ -59,6 +32,10 @@ function Profile() {
                         username={dataCustomer.username}
                         imageUser={fullName}
                     />
+                    }
+                    
+                    {isLoading ? <LoadingScreen/> 
+                    :
                     <MenuProfile 
                         id={token.customerId}
                         fullName={dataCustomer.name}
@@ -69,6 +46,7 @@ function Profile() {
                         sex={dataCustomer.sex}
                         address={dataCustomer.address}
                     />
+                    }
                 </div>
             </div>
         </div>

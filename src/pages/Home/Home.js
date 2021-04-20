@@ -5,7 +5,7 @@ import Banner from '../../components/Home/Banner'
 function Home() {
   document.title = "Trang chủ | RoyalStay"
 
-  const [data, setData] = useState([
+  const data = [
     {
       // src: NhaTrang,
       src: "images/HCMC.jpg",
@@ -48,15 +48,15 @@ function Home() {
       txt: "Hà Nội",
       link: "Hà Nội",
     },
-  ])
+  ]
 
   return (
     <div className='home'>
-      {/* <Header /> */}
       <Banner />
 
       <div className="home_section">
         <div className="home_heading">
+          <img src="images/Place.png"/>
           <h1>ĐIỂM ĐẾN YÊU THÍCH</h1>
         </div>
 

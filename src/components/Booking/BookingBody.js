@@ -6,7 +6,7 @@ import { DateRangePicker, START_DATE, END_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 import { store } from 'react-notifications-component'
 import axios from 'axios'
-import useToken from '../../useToken'
+import useToken from '../../hooks/useToken'
 
 function BookingBody({
     idHotel,
