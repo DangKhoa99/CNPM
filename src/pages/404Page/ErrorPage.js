@@ -9,13 +9,13 @@ function ErrorPage() {
             <div class="text">
                 <p>404</p>
             </div>
-            <div class="subText">
+            <div class="errorPage_subText">
                 <p>TRANG BẠN TÌM KIẾM KHÔNG TỒN TẠI</p>
                
                <a href="/"><button class="snip1582">Trở về trang chủ</button></a>
             </div>
 
-            <div class="container">
+            <div class="errorPage_container">
 
             <div class="caveman">
                 <div class="leg">

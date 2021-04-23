@@ -131,16 +131,18 @@ function HotelInvoiceDetail() {
                         <div className="bookingHeader_block">
                             <div className="bookingHeader_back">
                                 <button className="bookingHeader_icon" onClick={history.goBack}>
-                                    <svg viewBox="0 0 32 32">
-                                        <path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/> 
-                                    </svg>
+                                <i class="fas fa-chevron-left"></i>
                                 </button>
                             </div>
 
                             <div className="bookingHeader_text">
                                 Chi tiết hóa đơn khách sạn đã đặt
                             </div>
-                            <a className="menuBookingCard_btn_hotel" href={"/room-detail?id=" + dataBookingHotelOfCustomer.hotelId} title="Xem khách sạn">
+                            <a 
+                                className="menuBookingCard_btn_hotel1" 
+                                href={"/room-detail?id=" + dataBookingHotelOfCustomer.hotelId} 
+                                title="Xem khách sạn"
+                            >
                                 <i class="fas fa-hotel" style={{fontSize: "20px"}}/>
                             </a>
                         </div>
@@ -152,6 +154,8 @@ function HotelInvoiceDetail() {
 
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
+                                <h4 style={{marginBottom: "20px", color: "gray"}}><i class="fas fa-receipt"/> Mã hóa đơn: <i>{bookingId}</i></h4>
+
                                 <div className="bookingBody_hotel_name">
                                         <h2>{dataHotel.name}</h2>
                                 </div>

@@ -193,7 +193,7 @@ function RoomHeader({
                                     onClick={() => {handleClickFavorite() }}
                                 >
                                     <span className="roomHeader_heading_heart">
-                                        {clickFavorite ? <RedHeart className="roomHeader_heading_redHeart_svg" /> : <Heart className="roomHeader_heading_heart_svg" />}
+                                    {clickFavorite ? <i class="fas fa-heart" style={{color: "red"}}></i> : <i class="far fa-heart"/>}
                                     </span>
                                     {saveFavorite}
                                 </button>

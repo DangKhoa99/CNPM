@@ -5,11 +5,11 @@ import {ReactComponent as LogoRoyalStay} from "../icons/logoRoyalStay.svg"
 import {ReactComponent as Logo} from "../icons/logo.svg"
 import Aos from "aos"
 import "aos/dist/aos.css"
-import {ReactComponent as IconLocation} from "../icons/iconBooking.svg"
 import {Avatar} from "@material-ui/core"
 import axios from 'axios'
 import useToken from '../hooks/useToken'
 import { store } from 'react-notifications-component'
+import SearchBar from './SearchBar'
 
 function Header() {
   const { token, setToken } = useToken();
@@ -114,19 +114,18 @@ function Header() {
   }
   // console.log("token before logout", token)
   //log out
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     const options = {
       method: "POST",
       headers: {
         'auth-token': token.authToken,
       },
       data: {},
-      url: "http://localhost:5000/auth/logout"
-      
-  };
+      url: "http://localhost:5000/auth/logout"  
+    };
     axios(options)
-        .then(response => {
-            console.log("logout: ", response.data);
+      .then(response => {
+        console.log("logout: ", response.data);
     })
     
     localStorage.removeItem('authToken');
@@ -186,10 +185,10 @@ function Header() {
 
   // Search bar
   // const [dataSearchLocation, setDataSearchLocation] = useState([]);
-  const [searchLocation, setSearchLocation] = useState("");
-  function onChangeSearchLocation(e){
-    setSearchLocation(e.target.value);
-  }
+  // const [searchLocation, setSearchLocation] = useState("");
+  // function onChangeSearchLocation(e){
+  //   setSearchLocation(e.target.value);
+  // }
 
   const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
 
@@ -215,76 +214,16 @@ function Header() {
           </a>
 
           {/* Search Bar */}
-          <div 
-            className={colorHeader ? "header_search active" : "header_search"} 
-            onClick={openMenuSearchSuggestion} 
-            onBlur={closeMenuSearchSuggestion}
-          >
-            <form 
-            // onSubmit={searchHotel} 
-            action="/search-page">
-              <input 
-                // required
-                type="text" 
-                name="result" 
-                className={colorHeader ? "input_search active" : "input_search"} 
-                placeholder="Bạn sắp đi đâu?" 
-                spellCheck="false"
-                autoComplete="off"
-                value={searchLocation}
-                onChange={onChangeSearchLocation}
-              />
-            </form>
-            <a 
-              href={"/search-page?result=" + searchLocation}
-              className={colorHeader ? "header_search_btn active" : "header_search_btn"}
-            >
-              <i className="fas fa-search"></i>
-            </a>
-
-            {/* Menu Search Suggestion */}
-            <div 
-              className={
-                menuSearchSuggestion ?
-                blockHeader ? "search_suggestions staticHeader" :
-                "search_suggestions"
-                : 
-                "search_suggestions close"} 
-              onMouseDown={handleMenuSearchSuggestionsClick}
-            >
-              <ul className="search_suggestions_lists">
-                <li className="search_suggestions_item">       
-                    <a 
-                      className="search_suggestions_link" 
-                      href="/search-page?result=Hồ+Chí+Minh"
-                    >
-                      Hồ Chí Minh
-                      <IconLocation />
-                    </a>
-                </li>
-
-                <li className="search_suggestions_item">
-                  <a 
-                    className="search_suggestions_link" 
-                    href="/search-page?result=Đà+Nẵng"
-                  >
-                    Đà Nẵng
-                    <IconLocation />
-                  </a>
-                </li>
-
-                <li className="search_suggestions_item">
-                  <a 
-                    className="search_suggestions_link" 
-                    href="/search-page?result=Hà+Nội"
-                  >
-                    Hà Nội
-                    <IconLocation />
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <SearchBar
+            colorHeader={colorHeader}
+            openMenuSearchSuggestion={openMenuSearchSuggestion}
+            closeMenuSearchSuggestion={closeMenuSearchSuggestion}
+            // searchLocation={searchLocation}
+            // onChangeSearchLocation={onChangeSearchLocation}
+            menuSearchSuggestion={menuSearchSuggestion}
+            blockHeader={blockHeader}
+            handleMenuSearchSuggestionsClick={handleMenuSearchSuggestionsClick}
+          />
           
           {/* Mobile Menu */}
           <div 
@@ -355,58 +294,39 @@ function Header() {
                   alt={userName}
                   src={dataCustomer.name}
                 />
-                {/* Tách tên */}
-                {/* dataCustomer.name.split(' ').slice(-1).join(' ') */}
-                <span>{dataCustomer.name}</span>
-
-                <svg
-                  viewBox="0 0 1024 1024" 
-                  className={menuProfile ? "reverse_svg" : ""}
-                >
-                  <path d="M476.455 806.696L95.291 425.532Q80.67 410.911 80.67 390.239t14.621-34.789 35.293-14.117 34.789 14.117L508.219 698.8l349.4-349.4q14.621-14.117 35.293-14.117t34.789 14.117 14.117 34.789-14.117 34.789L546.537 800.142q-19.159 19.159-38.318 19.159t-31.764-12.605z"/>
-                </svg>
               </button>
 
               {/* Menu hồ sơ */}
               <div className={menuProfile ? dataCustomer.isAdmin ? "profile_menu isAdmin" : "profile_menu" : "profile_menu close"}>
+                <h3>{dataCustomer.name}
+                {dataCustomer.isAdmin ? <p>Admin</p> : ""}
+                </h3>
                 <ul className="profile_menu_lists">
                   <li className="profile_menu_list">
-                    <a href="/account/overview/">{dataCustomer.isAdmin ? <i class="fas fa-user-shield"/> : <i class="fas fa-user"/>}    Tài khoản</a>
+                    <a href="/account/overview/">{dataCustomer.isAdmin ? <i className="fas fa-user-shield"/> : <i className="fas fa-user"/>} Tài khoản</a>
+                  </li>
+
+                  <li className="profile_menu_list">
+                    <a href="/account/profile/"><i className="fas fa-user-edit"></i>Chỉnh sửa thông tin</a>
                   </li>
 
                   <li className={dataCustomer.isAdmin ? "profile_menu_list" : "profile_menu_list notAdmin"}>
-                    <a href="/account/admin/user-management/"><i class="fas fa-user-cog"/>   Quản lý người dùng</a>
+                    <a href="/account/admin/user-management/"><i className="fas fa-user-cog"/>Quản lý người dùng</a>
                   </li>
 
                   <li className={dataCustomer.isAdmin ? "profile_menu_list" : "profile_menu_list notAdmin"}>
-                    <a href="/account/admin/hotel-management/"><i class="fas fa-hotel"/>   Quản lý khách sạn</a>
+                    <a href="/account/admin/hotel-management/"><i className="fas fa-hotel"/> Quản lý khách sạn</a>
                   </li>
 
                   <li className="profile_menu_list">
                     <a 
                     className="log_out" 
-                    // href="/" 
-                    onClick={handleLogOut}><i class="fas fa-sign-out-alt"/>     Đăng xuất</a>
+                    onClick={handleLogOut}><i className="fas fa-sign-out-alt"/> Đăng xuất</a>
                   </li>
                 </ul>
               </div>
             </li>
-
-
-
-            {/* <li className='header_item'>
-              <Link to='/host/homes' className={colorHeader ? 'header_links active' : 'header_links'} onClick={closeMobileMenu}>
-                Trở thành chủ nhà
-              </Link>
-            </li> */}
-
-            {/* <li>
-              <Link to='/sign-in' className={colorHeader ? 'header_links_mobile active' : 'header_links_mobile'} onClick={closeMobileMenu}>
-                Đăng nhập
-              </Link>
-            </li> */}
           </ul>
-          {/* {buttonSignIn && <Button className={colorHeader ? "header_btn_signIn active" : "header_btn_signIn"} variant="outlined" href="/sign-up">ĐĂNG KÝ</Button>} */}
         </div>
       </nav>
   );

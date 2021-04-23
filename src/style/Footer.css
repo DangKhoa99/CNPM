@@ -15,16 +15,15 @@
 .footer_to_top{
   width: 90%;
   text-align: right;
+
 }
 
 .footer_btn_to_top{
   background-color: transparent !important;
   color: black !important;
-  /* text-transform: inherit; */
-  /* margin-top: 20px; */
-  /* font-weight: 600 !important; */
+  cursor: pointer;
   padding: 20px 20px !important;
-  border-radius: 2px;
+  border-radius: 99px;
   border: 1px solid black !important;
 }
 
@@ -64,11 +63,14 @@
   color: black;
   text-decoration: none;
   margin-bottom: 1.5rem;
+  transition: all 0.15s ease;
 }
 
 .footer_link_items > a:hover {
-  text-decoration: underline;
-  transition: 0.3s ease-out;
+  /* text-decoration: underline;
+  transition: 0.3s ease-out; */
+  transform: translateX(1rem);
+  color: #ff7779;
 }
 
 .social_media {

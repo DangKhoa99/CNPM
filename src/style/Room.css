@@ -1,3 +1,7 @@
+.room{
+    margin-top: 60px;
+}
+
 .room__container{
     max-width: 1200px !important;
     height: 100% !important;

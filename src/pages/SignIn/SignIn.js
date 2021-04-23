@@ -56,7 +56,7 @@ function SignIn() {
 
         axios.post('http://localhost:5000/auth/login', loginAccount)
         .then(response => {
-            console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", response.data.authToken);
+            // console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaa: ", response.data.authToken);
             if(response.data == "Tài khoản hoặc mật khẩu không đúng"){
                 store.addNotification(notificationLoginFail);
             }

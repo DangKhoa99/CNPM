@@ -93,6 +93,9 @@
   text-decoration: none;
   padding: 0.5rem 1rem;
   height: 100%;
+
+  /* margin-top: 25px; */
+
 }
 
 .header_links.register{
@@ -179,14 +182,104 @@
   width: 50px !important;
 }
 
+.profile_menu::before{
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: 110px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  transform: rotate(45deg);
+}
+
 .profile_menu{
+  position: absolute;
+  top: 80;
+  right: -60px;
+  padding: 10px 20px;
+  background: white;
+  width: 250px;
+  box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  transition: 0.5s;
+  box-shadow:rgba(0, 0, 0, 0.5) 0px 1px 12px !important;
+}
+
+.profile_menu.close{
+  visibility: hidden;
+  opacity: 0;
+}
+
+.profile_menu > h3 {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  padding: 20px 0;
+  font-weight: 500;
+  color: #555;
+  line-height: 1.2em;
+}
+
+.profile_menu h3 p{
+  font-size: 14px;
+  color: #cecece;
+  font-weight: 400;
+}
+
+.profile_menu_list{
+  list-style: none;
+  padding: 10px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+.profile_menu_list i{
+  max-width: 20px;
+  margin-right: 10px;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+/* .profile_menu_list:hover i{
+  opacity: 1;
+} */
+
+.profile_menu_list a{
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.profile_menu_list a:hover{
+  color: red !important;
+}
+
+.profile_menu_list.notAdmin{
+  display:none
+}
+
+
+
+
+
+
+
+
+
+
+/* .profile_menu{
   right: 20px;
   margin-top: -8px;
   display: block;
   position: absolute;
   top: 100%;
   width: 25%;
-  transition: all 0.5s;
+  transition: all 5s;
 }
 
 .profile_menu.isAdmin{
@@ -236,7 +329,7 @@
 .profile_menu_list > a:hover{
   cursor: pointer;
   color: red !important;
-}
+} */
 
 .log_out{
   color: #919496 !important;
@@ -341,7 +434,8 @@
 .header_search_btn {
   color: white !important;
   float: right;
-  width: 40px;
+  /* width: 40px; */
+  width: 60px;
   height: 40px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%) repeat scroll 0% 0% !important;
@@ -430,10 +524,6 @@
   display: block;
   position: relative;
   fill: #c1c3c6;
-  /* padding: 15px 15px 15px 30px; */
-  /* padding: 15px; */
-  /* padding-right: 15px; */
-  padding-left: 50px;
   color: black;
   border: none;
   border-radius: 0;
@@ -618,7 +708,7 @@
     border: 1px solid black !important;
   }
    
-  .header_search:hover > .input_search {
+  .header_search:hover > form > .input_search {
     width: 240px;
     padding: 0 6px;
   }

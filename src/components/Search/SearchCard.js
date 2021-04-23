@@ -1,12 +1,12 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import "../../style/SearchCard.css"
 import StarIcon from "@material-ui/icons/Star"
-import {ReactComponent as Heart} from "../../icons/iconHeart.svg"
-import {ReactComponent as RedHeart} from "../../icons/iconRedHeart.svg"
 import { store } from 'react-notifications-component'
 import axios from 'axios'
-
 import useToken from '../../hooks/useToken'
+
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 function SearchCard({
     id,
@@ -151,39 +151,57 @@ function SearchCard({
         <div className="searchCard">
             <li class="product__item">
                 <div class="product__thumbnail"> 
-                    <img src={img[0]} alt="thumbnail"/>
-                    <div class="product__love-icon">
-                        <button 
-                            className="searchCard_btn"
-                            onClick={() => {handleClickFavorite();}}
-                        >
-                            <span className="searchCard_heart">
-                                {clickFavorite ? <RedHeart className="searchCard_redHeart_svg" /> : <Heart className="searchCard_heart_svg" />}
-                            </span>
-                            {saveFavorite}
-                        </button>
-                    </div>
-                    <div className="product__love-icon1">
+                    {/* <img src={img[0]} alt="thumbnail"/> */}
+                    <Carousel 
+                        showThumbs={false}
+                        autoPlay={false}
+                        showStatus={false}
+                        showIndicators={false}
+                    >
+                        <div>
+                            <img src={img[0]}/>
+                        </div>
+                        <div>
+                            <img src={img[1]}/>
+                        </div>
+                        <div>
+                            <img src={img[2]}/>
+                        </div>
+                        <div>
+                            <img src={img[3]}/>
+                        </div>
+                        <div>
+                            <img src={img[4]}/>
+                        </div>
+                    </Carousel>
+                
+
+
+                    <button class="product__love-icon" onClick={() => {handleClickFavorite();}}>
+                        {clickFavorite ? <i class="fas fa-heart"></i> : <i class="far fa-heart"/>}
+                    </button>
+                    <div className="product__love-iconLeft">
                         <div className="searchCard_stars">
                             <StarIcon className="searchCard_star"/>
                             <p>
-                                <strong>{avgReview} ({dataReview.length})</strong>
+                                <strong>{avgReview}</strong> ({dataReview.length})
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="product__price">
-                    <strong>${price}</strong> /đêm
+                    <span style={{fontSize: "24px"}}><strong>${price}</strong></span>
+                    <span style={{fontSize: "14px"}}>/đêm</span>
                 </div>
                 <div class="product__detail">
-                    <p className="product__address">{address}</p>
+                    <p className="product__address"><i class="fas fa-map-marker-alt"/> {address}</p>
                     <h1 class="product__title">
                         {name}
                     </h1>
                     <p class="product__description">
                         {description}
                     </p>
-                    <a href={'/room-detail?id=' + id} class="product__button">Xem thêm</a>
+                    <a href={'/room-detail?id=' + id} class="product__button"><i class="fas fa-hotel"/>  Xem chi tiết</a>
                 </div>
             </li>
 

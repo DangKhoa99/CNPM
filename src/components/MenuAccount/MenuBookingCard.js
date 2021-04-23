@@ -49,7 +49,7 @@ function MenuBookingCard({
     return (
         <div className="menuBookingCard">
             <a className="menuBookingCard_btn" href={"/account/hotel-invoice-detail?id=" + idInvoice} title="Xem chi tiết hóa đơn">
-                <i class="far fa-file" style={{fontSize: "20px"}}/>
+                <i class="fas fa-receipt" style={{fontSize: "20px"}}/>
             </a>
 
             <a className="menuBookingCard_btn_hotel" href={"/room-detail?id=" + idHotel} title="Xem khách sạn">

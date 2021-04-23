@@ -248,12 +248,12 @@ function RoomBody({
                         <div className="roomBody_thingsToKnow_cell">
                             <h3>Y tế và an toàn</h3>
                             <div className="roomBody_thingsToKnow_cell_detail">
-                                <div className="roomBody_thingsToKnow_cell_detail_title">Đã cam kết thực hiện quy trình vệ sinh tăng cường của Airbnb.</div>
+                                <div className="roomBody_thingsToKnow_cell_detail_title">Đã cam kết thực hiện quy trình vệ sinh tăng cường của RoyalStay.</div>
                                 <div className="roomBody_thingsToKnow_cell_detail_icon"><IncreaseHygiene/></div>
                             </div>
 
                             <div className="roomBody_thingsToKnow_cell_detail">
-                                <div className="roomBody_thingsToKnow_cell_detail_title">Áp dụng hướng dẫn về giãn cách xã hội và các hướng dẫn khác liên quan đến COVID-19 của Airbnb</div>
+                                <div className="roomBody_thingsToKnow_cell_detail_title">Áp dụng hướng dẫn về giãn cách xã hội và các hướng dẫn khác liên quan đến COVID-19 của RoyalStay</div>
                                 <div className="roomBody_thingsToKnow_cell_detail_icon"><Aerosol/></div>
                             </div>
 

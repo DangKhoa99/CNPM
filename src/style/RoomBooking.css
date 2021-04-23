@@ -292,11 +292,11 @@
 }
 
 .room_type:hover input ~ .check_mark {
-    border-color: red;
+    border-color: #B22222;
 }
 
 .room_type input:checked ~ .check_mark {
-    background: red none repeat scroll 0% 0%;
+    background: #B22222 none repeat scroll 0% 0%;
     border-width: 0px;
 }
   

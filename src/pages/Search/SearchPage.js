@@ -4,9 +4,7 @@ import SearchCard from "../../components/Search/SearchCard"
 import LoadingScreen from "../../components/LoadingScreen"
 import axios from 'axios'
 import useToken from '../../hooks/useToken'
-import Slider from '@material-ui/core/Slider'
-
-import StarIcon from "@material-ui/icons/Star"
+import { Slider } from '@material-ui/core';
 
 function SearchPage() {
     const [data, setData] = useState([]);
@@ -21,7 +19,7 @@ function SearchPage() {
     const [valuePrice, setValuePrice] =  React.useState([0, 100]);
     const rangeSelector = (event, newValue) => {
         setValuePrice(newValue);
-        console.log(newValue)
+        // console.log(newValue)
       };
 
     // const place = decodeURIComponent(window.location.href.split("=").pop()).split("+").join(" ");
@@ -165,9 +163,8 @@ function SearchPage() {
 
     return (
         <div className="searchPage">
-            {/* <Header /> */}
             <div className="searchPage_info">
-                {/* <p>Hơn 300 chỗ ở</p> */}
+                <p style={{fontSize: "15px", color: "gray", fontStyle: "italic"}}>Khoảng <b>{data.length}</b> khách sạn</p>
                 <h1>{
                     capitalize(place) == "" ?
                     "Khách sạn tại Việt Nam"
@@ -176,7 +173,7 @@ function SearchPage() {
                 }</h1>
             </div>
 
-            <div className="hotelManagement_header">
+            <div className="menuHotelManagement_header">
                 <button className="searchPage_filter_hotel" onClick={handleClickFilterPrice}>
                     Giá: {price}
                 </button>
@@ -190,9 +187,8 @@ function SearchPage() {
                         className="slider"
                         value={valuePrice}
                         onChange={rangeSelector}
-                        valueLabelDisplay="auto"
+                        // valueLabelDisplay="auto"
                     />
-                    
                 </div>
             </div>
 
@@ -210,8 +206,8 @@ function SearchPage() {
                                         address={item.address}
                                         name={item.name}
                                         description={item.tien_ich
-                                            .map(ttt => {
-                                            return ttt + " · " 
+                                            .map(function(ttt, index) {
+                                                return (index ? ' · ' : '') + ttt
                                         })}
                                         price={item.room.price}
                                         savedHotelId={savedHotelId}

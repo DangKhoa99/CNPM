@@ -24,6 +24,11 @@
 
 .roomReview_review_input{
     margin-bottom: 40px;
+    padding: 20px;
+    width: 650px;
+
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 12px !important;
+    border-radius: 20px;
 }
 
 .comment_stars_text{
@@ -46,6 +51,7 @@
     align-items: baseline !important; */
 
     width: 600px;
+
     /* margin: auto; */
     /* padding: 0 20px; */
 }

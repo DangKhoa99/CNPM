@@ -6,10 +6,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 0 1000px rgba(29, 41, 62, 0.5);
   object-fit: contain;
-
-  border-radius: 0 0 100px 100px;
 }
 
 .banner_container > h1{

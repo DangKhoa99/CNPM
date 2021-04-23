@@ -15,7 +15,7 @@ function MenuLeft({
     username,
     imageUser
 }) {
-    const [data, setData] = useState([
+    const data = [
         {
             id: "overview",
             to: "/account/overview/",
@@ -51,7 +51,7 @@ function MenuLeft({
             icon: <IconHistoryBooking/>,
             active: ""
         },
-    ]);
+    ]
 
     const [selectedFile, setSelectedFile] = useState(imageUser);
 
@@ -110,10 +110,7 @@ function MenuLeft({
                                 <input type="file" name="image" id="upload_image" onChange={onFileChange}/>
                             </div>
                         </button>
-                        
                     </div>
-
-                    
                 </div>
 
                 {selectedFile != imageUser ? 

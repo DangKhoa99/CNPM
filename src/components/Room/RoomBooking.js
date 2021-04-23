@@ -169,7 +169,7 @@ function RoomBooking({
                                         {({ startDateInputProps, endDateInputProps, focus }) => (
                                         <div className='date-range'>
                                             <div className="check_in">
-                                                <label>NHẬN PHÒNG</label>
+                                                <label><i class="far fa-calendar-check"/> NHẬN PHÒNG</label>
                                                 {allowOrder ? 
                                                     <input
                                                         readOnly
@@ -193,7 +193,7 @@ function RoomBooking({
                                             </div>
                                             <span class="date-range_arrow"></span>
                                             <div className="check_out">
-                                                <label>TRẢ PHÒNG</label>
+                                                <label><i class="far fa-calendar-check"/> TRẢ PHÒNG</label>
                                                 {startDate ? 
                                                     <input
                                                         readOnly

@@ -20,7 +20,7 @@ import Book from './pages/Booking/Booking'
 import ErrorPage from './pages/404Page/ErrorPage'
 
 import UserManagement from './pages/Admin/UserManagement'
-import DetailUser from './pages/Admin/DetailUser'
+import DetailUser from './components/Admin/DetailUser'
 import HotelManagement from './pages/Admin/HotelManagement'
 import AddHotel from './pages/Admin/AddHotel'
 import AddUser from './pages/Admin/AddUser'

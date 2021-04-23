@@ -1,9 +1,9 @@
-.hotelManagement_header{
+.menuHotelManagement_header{
     padding: 30px 50px;
     text-align: center;
 }
 
-.hotelManagement_filter_hotel{
+.menuHotelManagement_filter_hotel{
     cursor: pointer !important;
     text-align: center !important;
     border: 1px solid rgb(176, 176, 176) !important;
@@ -19,20 +19,20 @@
     font-weight: 600;
 }
 
-.hotelManagement_filter_hotel:hover{
+.menuHotelManagement_filter_hotel:hover{
     border-color: rgb(34, 34, 34) !important;
 }
 
-.hotelManagement_info{
+.menuHotelManagement_info{
     width: 70vw;
 }
 
-.hotelManagement_info > h3{
+.menuHotelManagement_info > h3{
     font-weight: 300;
     margin-top: 10px;
 }
 
-.hotelManagement_info > p{
+.menuHotelManagement_info > p{
     margin-top: 10px;
     font-size: 13px;
     color: gray;
@@ -48,7 +48,7 @@
     cursor: pointer;
 }
 
-.hotelManagement_links{
+.menuHotelManagement_links{
     display: flex;
     text-decoration: none;
 }
@@ -57,14 +57,14 @@
     opacity: 0.8;
 }
 
-.hotelManagement_img_hotel{
+.menuHotelManagement_img_hotel{
     height: 200px;
     width: 350px;
     border-radius: 10px;
     overflow: hidden;
 }
 
-.hotelManagement_info{
+.menuHotelManagement_info{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -73,7 +73,7 @@
     width: 100%;
 }
 
-.hotelManagement_btn{
+.menuHotelManagement_btn{
     cursor: not-allowed;
     position: absolute;
     top: 20px;
@@ -94,21 +94,21 @@
     outline: none !important;
 }
 
-.hotelManagement_btn.editHotel{
+.menuHotelManagement_btn.editHotel{
     right: 80px;
 }
 
-.hotelManagement_btn:hover{
+.menuHotelManagement_btn:hover{
     border: medium none !important;
     background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
     color: rgb(0, 0, 0) !important;
 }
 
-.hotelManagement_heart{
+.menuHotelManagement_heart{
     margin-right: 16px !important;
 }
 
-.hotelManagement_heart_svg{
+.menuHotelManagement_heart_svg{
     display: block;
     height: 8px !important;
     width: 8px !important;
@@ -117,7 +117,7 @@
     overflow: visible;
 }
 
-.hotelManagement_redHeart_svg{
+.menuHotelManagement_redHeart_svg{
     display: block;
     fill: rgb(255, 56, 92);
     height: 16px;
@@ -127,42 +127,42 @@
     overflow: visible;
 }
 
-.hotelManagement_infoTop > h3{
+.menuHotelManagement_infoTop > h3{
     font-weight: 300;
     margin-top: 10px;
 }
 
-.hotelManagement_infoTop > p{
+.menuHotelManagement_infoTop > p{
     margin-top: 10px;
     font-size: 13px;
     color: gray;
 }
 
-.hotelManagement_infoBottom{
+.menuHotelManagement_infoBottom{
     display: flex;
     justify-content: space-between;
 }
 
-.hotelManagement_star{
+.menuHotelManagement_star{
     color: red;
 }
 
-.hotelManagement_stars{
+.menuHotelManagement_stars{
     display: flex;
     align-items: center;
 }
 
-.hotelManagement_price{
+.menuHotelManagement_price{
     position: absolute;
     bottom: 20px;
     right: 30px;
 }
 
-.hotelManagement_price > h2 + p, .hotelManagement_price > h2{
+.menuHotelManagement_price > h2 + p, .menuHotelManagement_price > h2{
     display: inline;
 }
 
-.hotelManagement_price > p{
+.menuHotelManagement_price > p{
     text-align: right;
 }
 

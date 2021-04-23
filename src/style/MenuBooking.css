@@ -83,7 +83,7 @@
     display: inline;
 }
 
-.menuBookingCard_btn, .menuBookingCard_btn_hotel{
+.menuBookingCard_btn, .menuBookingCard_btn_hotel, .menuBookingCard_btn_hotel1{
     cursor: not-allowed;
     position: absolute;
     /* top: 20px; */
@@ -103,6 +103,10 @@
     display: flex !important;
     outline: none !important;
     z-index: 50;
+}
+
+.menuBookingCard_btn_hotel1{
+    right: 200px;
 }
 
 .menuBookingCard_btn_hotel{

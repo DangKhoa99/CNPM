@@ -79,7 +79,8 @@ function RoomReview({
         setCommentTxt(value);
     }
 
-    const removeReviewInput = () => {
+    const removeReviewInput = (e) => {
+        e.preventDefault();
         setRating(0);
         setCommentTxt("");
     }
@@ -189,7 +190,7 @@ function RoomReview({
                             <div className="comment_input_btn">
                                 <button className="comment_btn_cancel" onClick={removeReviewInput}>Hủy</button>
 
-                                <button className="comment_btn_submit" type="submit">Gửi</button>
+                                <button className="comment_btn_submit" type="submit"><i class="far fa-comment"/> Đánh giá</button>
                             </div>
                         </form>                        
                     </div>
