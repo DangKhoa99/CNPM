@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 function SearchBar({
     colorHeader,
@@ -10,8 +10,9 @@ function SearchBar({
     handleMenuSearchSuggestionsClick,
 
 }) {
+    const [location, setLocation] = useState("");
     const [searchLocation, setSearchLocation] = useState({
-        value: '',
+        location: "",
         predictions: [
             "Hồ Chí Minh",
             "Hà Nội",
@@ -36,28 +37,30 @@ function SearchBar({
         ].filter(item => item.toLowerCase().indexOf(value.toLowerCase()) !== -1);
     }
 
-    function onChangeSearchLocation(e){
-        const value = e.target.value;
-        setSearchLocation({value: value});
-
-        if(value.length > 0){
-            const predictions = getPredictions(value);
-            setSearchLocation({predictions: predictions});
-            
-        }
-        else{
-            setSearchLocation({predictions:["Hồ Chí Minh",
-                                            "Hà Nội",
-                                            "Phan Thiết",
-                                            "Vũng Tàu",
-                                            "Phú Quốc",
-                                            "Đà Nẵng",
-                                            "Đà Lạt",
-                                            ]
-            });
-        }
+    const onChangeSearchLocation = (e) => {
+      const value = e.target.value;
+      setSearchLocation({location: value});
+      setLocation(value)
+      
+      if(value.length > 0){
+        const predictions = getPredictions(value);
+        console.log("value: ", value)
+        setSearchLocation({predictions: predictions});
+          
+      }
+      else{
+          setSearchLocation({predictions:["Hồ Chí Minh",
+                                          "Hà Nội",
+                                          "Phan Thiết",
+                                          "Vũng Tàu",
+                                          "Phú Quốc",
+                                          "Đà Nẵng",
+                                          "Đà Lạt",
+                                          ]
+          });
+      }
     }
-
+    
     return (
         <div className="searchBar">
             <div 
@@ -74,12 +77,12 @@ function SearchBar({
                 placeholder="Bạn sắp đi đâu?" 
                 spellCheck="false"
                 autoComplete="off"
-                value={searchLocation.value}
+                value={searchLocation.location}
                 onChange={onChangeSearchLocation}
               />
             </form>
             <a 
-              href={"/search-page?result=" + searchLocation.value}
+              href={"/search-page?result=" + location}
               className={colorHeader ? "header_search_btn active" : "header_search_btn"}
             >
               <i className="fas fa-search-location"></i>

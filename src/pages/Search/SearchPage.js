@@ -4,7 +4,8 @@ import SearchCard from "../../components/Search/SearchCard"
 import LoadingScreen from "../../components/LoadingScreen"
 import axios from 'axios'
 import useToken from '../../hooks/useToken'
-import { Slider } from '@material-ui/core';
+import { Slider } from '@material-ui/core'
+import NoItem from "../../components/NoItem"
 
 function SearchPage() {
     const [data, setData] = useState([]);
@@ -16,11 +17,7 @@ function SearchPage() {
     if(filterPrice == true){
         price = "Tăng dần";
     }
-    const [valuePrice, setValuePrice] =  React.useState([0, 100]);
-    const rangeSelector = (event, newValue) => {
-        setValuePrice(newValue);
-        // console.log(newValue)
-      };
+
 
     // const place = decodeURIComponent(window.location.href.split("=").pop()).split("+").join(" ");
     const searchParams = new URLSearchParams(window.location.search);
@@ -78,7 +75,7 @@ function SearchPage() {
             axios(options)
             .then(response => {
                 if(response.data.length > 0){
-                    console.log(response.data)
+                    // console.log(response.data)
                     setData(response.data);
                     setIsLoading(false);
                 }
@@ -105,7 +102,7 @@ function SearchPage() {
         }
         axios(options)
         .then(response => {
-            console.log("TEST: ", (response.data))
+            // console.log("TEST: ", (response.data))
             setDataFavoriteHotelOfCustomer(response.data)
         })
         .catch(error => console.log(error))
@@ -157,25 +154,35 @@ function SearchPage() {
         // console.log("key", dataFavoriteHotelOfCustomer[key]._id)
         data.map(item=>{
             return (dataFavoriteHotelOfCustomer[key]._id == item._id) ? savedHotelId.push(item._id) : ""
-        }
-    )
+        })
     }
+    let maxPrice = Math.max(...Object.values(data.map(item => (item.room.price))));
+    console.log("MAX PRICE: ", (maxPrice))
+    const [valuePrice, setValuePrice] =  React.useState([0, 120]);
+    useEffect(() => {
+        setValuePrice([0, maxPrice])
+    },[maxPrice])
+    const rangeSelector = (e, newValue) => {
+        setValuePrice(newValue);
+        // console.log(newValue)
+    };
+
 
     return (
         <div className="searchPage">
             <div className="searchPage_info">
                 <p style={{fontSize: "15px", color: "gray", fontStyle: "italic"}}>Khoảng <b>{data.length}</b> khách sạn</p>
-                <h1>{
+                <h1><i className="fas fa-map-marked-alt"/>{
                     capitalize(place) == "" ?
-                    "Khách sạn tại Việt Nam"
+                    " Khách sạn tại Việt Nam"
                     :
-                    "Khách sạn tại " + capitalize(place)
+                    " Khách sạn tại " + capitalize(place)
                 }</h1>
             </div>
 
             <div className="menuHotelManagement_header">
                 <button className="searchPage_filter_hotel" onClick={handleClickFilterPrice}>
-                    Giá: {price}
+                <i className="fas fa-funnel-dollar"/> {price} {filterPrice? <i className="fas fa-long-arrow-alt-up"/> : <i className="fas fa-long-arrow-alt-down"/>}
                 </button>
 
                 <div className="slider_price">
@@ -187,15 +194,13 @@ function SearchPage() {
                         className="slider"
                         value={valuePrice}
                         onChange={rangeSelector}
-                        // valueLabelDisplay="auto"
                     />
                 </div>
             </div>
-
-            <ul class="list-product">
+                {notData ? <div><h1 style={{textAlign: "center"}}>Chúng tôi không tìm thấy bất kỳ khách sạn nào nơi bạn muốn đến. Vui lòng chọn nơi khác.</h1><NoItem /></div> : ""}
+            <ul className="list-product">
                 {isLoading ? <div style={{marginLeft: "750px", marginTop: "-200px"}}><LoadingScreen /></div>
                 :
-                notData ? <h1 style={{textAlign: "center"}}>Chúng tôi không tìm thấy bất kỳ khách sạn nào nơi bạn muốn đến. Vui lòng chọn nơi khác.</h1> :
                     filterPrice ?
                         data.sort((a, b) => (a.room.price - b.room.price))
                         .filter(item => valuePrice[0] <= item.room.price && item.room.price <= valuePrice[1])
@@ -224,8 +229,8 @@ function SearchPage() {
                                         address={item.address}
                                         name={item.name}
                                         description={item.tien_ich
-                                            .map(ttt => {
-                                            return ttt + " · " 
+                                            .map(function(ttt, index) {
+                                                return (index ? ' · ' : '') + ttt
                                         })}
                                         price={item.room.price}
                                         savedHotelId={savedHotelId}

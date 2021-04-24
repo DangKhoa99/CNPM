@@ -29,7 +29,7 @@ function SearchCard({
     const loadReviewHotelFromServer = useCallback(async () => {
         await axios.post("http://localhost:5000/hotel/review", _id)
             .then(response => {
-                console.log("Data REVIEW: ",response.data)
+                // console.log("Data REVIEW: ",response.data)
                 if(response.data.length > 0){
                     setDataReview(response.data);
                 }
@@ -149,8 +149,8 @@ function SearchCard({
 
     return (
         <div className="searchCard">
-            <li class="product__item">
-                <div class="product__thumbnail"> 
+            <li className="product__item">
+                <div className="product__thumbnail"> 
                     {/* <img src={img[0]} alt="thumbnail"/> */}
                     <Carousel 
                         showThumbs={false}
@@ -177,8 +177,8 @@ function SearchCard({
                 
 
 
-                    <button class="product__love-icon" onClick={() => {handleClickFavorite();}}>
-                        {clickFavorite ? <i class="fas fa-heart"></i> : <i class="far fa-heart"/>}
+                    <button className="product__love-icon" onClick={() => {handleClickFavorite();}}>
+                        {clickFavorite ? <i className="fas fa-heart"></i> : <i className="far fa-heart"/>}
                     </button>
                     <div className="product__love-iconLeft">
                         <div className="searchCard_stars">
@@ -189,19 +189,19 @@ function SearchCard({
                         </div>
                     </div>
                 </div>
-                <div class="product__price">
+                <div className="product__price">
                     <span style={{fontSize: "24px"}}><strong>${price}</strong></span>
                     <span style={{fontSize: "14px"}}>/đêm</span>
                 </div>
-                <div class="product__detail">
-                    <p className="product__address"><i class="fas fa-map-marker-alt"/> {address}</p>
-                    <h1 class="product__title">
+                <div className="product__detail">
+                    <p className="product__address"><i className="fas fa-map-marker-alt"/> {address}</p>
+                    <h1 className="product__title">
                         {name}
                     </h1>
-                    <p class="product__description">
+                    <p className="product__description">
                         {description}
                     </p>
-                    <a href={'/room-detail?id=' + id} class="product__button"><i class="fas fa-hotel"/>  Xem chi tiết</a>
+                    <a href={'/room-detail?id=' + id} className="product__button"><i className="fas fa-hotel"/>  Xem chi tiết</a>
                 </div>
             </li>
 

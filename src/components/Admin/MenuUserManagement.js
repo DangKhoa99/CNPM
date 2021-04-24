@@ -6,7 +6,7 @@ import useToken from '../../hooks/useToken'
 import LoadingScreen from "../LoadingScreen"
 import DataTable from "./DataTable"
 
-function MenumenuUserManagement() {
+function MenuUserManagement() {
     const { token, setToken } = useToken();
     const [isLoading, setIsLoading] = useState(false);
     const [dataUser, setDataUser] = useState([]);
@@ -59,14 +59,14 @@ function MenumenuUserManagement() {
             <div className="menuUserManagement_function">
                 <a href="/account/admin/add-user/">
                     <button className="menuUserManagement_addUser">
-                        <i class="fas fa-user-plus"/> Thêm người dùng
+                        <i className="fas fa-user-plus"/> Thêm người dùng
                     </button>
                 </a>
 
                 <div className="menuUserManagement_boxSearch">
                     
                     <div className="menuUserManagement_search">
-                        <i class="fas fa-search" style={{fontSize: "30px", marginTop: "auto", marginBottom: "auto", marginLeft: "-30px"}}></i>
+                        <i className="fas fa-search" style={{fontSize: "30px", marginTop: "auto", marginBottom: "auto", marginLeft: "-30px"}}></i>
                         <input 
                             className="searchTerm"
                             placeholder="Tìm..."
@@ -100,7 +100,7 @@ function MenumenuUserManagement() {
                                             }}
                                         />
                                         
-                                        <span class="checkmark_checkbox"></span>
+                                        <span className="checkmark_checkbox"></span>
                                     </label>
                         })}
                     </div>
@@ -118,4 +118,4 @@ function MenumenuUserManagement() {
     )
 }
 
-export default MenumenuUserManagement
+export default MenuUserManagement

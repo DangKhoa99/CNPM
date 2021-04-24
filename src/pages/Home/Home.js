@@ -7,43 +7,36 @@ function Home() {
 
   const data = [
     {
-      // src: NhaTrang,
       src: "images/HCMC.jpg",
       txt: "TP. Hồ Chí Minh",
       link: "Hồ Chí Minh",
     },
     {
-      // src: VungTau,
       src: "images/VungTau.jpg",
       txt: "Vũng Tàu",
       link: "vũng+tàu",
     },
     {
-      // src: PhanThiet,
       src: "images/PhanThiet.jpg",
       txt: "Phan Thiết",
       link: "phan+thiết",
     },
     {
-      // src: PhuQuoc,
       src: "images/PhuQuoc.jpg",
       txt: "Phú Quốc",
       link: "phú+quốc",
     },
     {
-      // src: DaNang,
       src: "images/DaNang.jpg",
       txt: "Đà Nẵng",
       link: "đà+nẵng",
     },
     {
-      // src: DaLat,
       src: "images/DaLat.jpg",
       txt: "Đà Lạt",
       link: "đà+lạt",
     },
     {
-      // src: Sapa,
       src: "images/HaNoi.jpg",
       txt: "Hà Nội",
       link: "Hà Nội",

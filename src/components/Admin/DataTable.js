@@ -8,9 +8,9 @@ export default function DataTable({ data }){
 
     const [sortName, setSortName] = useState(true); // false: giảm - true: tăng
     const handleClickSortName = () => setSortName(!sortName);
-    let sort = <i class="fas fa-sort-down" style={{marginLeft: "5px"}}></i>;
+    let sort = <i className="fas fa-sort-down" style={{marginLeft: "5px"}}></i>;
     if(sortName == false){
-        sort = <i class="fas fa-sort-up" style={{marginLeft: "5px"}}></i>;
+        sort = <i className="fas fa-sort-up" style={{marginLeft: "5px"}}></i>;
     }
     return(
         <table className="menuUserManagement_table" cellPadding={0} cellSpacing={0}>
@@ -52,7 +52,7 @@ export default function DataTable({ data }){
                                                 }
                                             )}
                                                 <td>  
-                                                    <a className="menuUserManagement_table_action" href={"/account/admin/detail-user?id=" + row._id} title={"Xem thông tin của " + row.username}><i class="fas fa-info-circle"/></a>
+                                                    <a className="menuUserManagement_table_action" href={"/account/admin/detail-user?id=" + row._id} title={"Xem thông tin của " + row.username}><i className="fas fa-info-circle"/></a>
                                                 </td>
                                         </tr>
                              }
@@ -76,7 +76,7 @@ export default function DataTable({ data }){
                                                 }
                                             )}
                                                 <td>  
-                                                    <a className="menuUserManagement_table_action" href={"/account/admin/detail-user?id=" + row._id} title={"Xem thông tin của " + row.username}><i class="fas fa-info-circle"/></a>
+                                                    <a className="menuUserManagement_table_action" href={"/account/admin/detail-user?id=" + row._id} title={"Xem thông tin của " + row.username}><i className="fas fa-info-circle"/></a>
                                                 </td>
                                         </tr>
                             }

@@ -11,44 +11,54 @@ function AddHotel() {
     const { register, handleSubmit, formState: { errors }} = useForm();
 
     const onSubmit = async (data)  => {
-        console.log("DATA: ",data);
+        console.log("DATA: ", data);
+        
+        let type = []
+        if(data.Small){
+            type.push("Small")
+        }
+        if(data.Medium){
+            type.push("Medium")
+        }
+        if(data.Large){
+            type.push("Large")
+        }
 
-        // const options = {
-        //     method: "POST",
-        //     headers: {
-        //         "auth-token": token.authToken,
-        //     },
-        //     data: {
-        //         name: data.name,
-        //         address: data.address,
-        //         bio: data.bio,
-        //         tien_ich: [
-        //             data.tien_ich
-        //         ],
-        //         imageLink: [
-        //             data.imageLink,
-        //             data.imageLink2,
-        //             data.imageLink3,
-        //             data.imageLink4,
-        //             data.imageLink5
-        //         ],
-        //         room: {
-        //             roomType: data.roomType,
-                    
-        //             price: data.price,
-        //             quantity: data.quantity
-        //         }
-        //     },
-        //     url: "http://localhost:5000/hotel/add"
-        // }
-        // axios(options)
-        // .then(response => {
-        //     console.log("ADD HOTEL: ", response.data)
-        //     window.location = "/account/admin/hotel-management/"
-        // })
-        // .catch(error => console.log(error))
+        const options = {
+            method: "POST",
+            headers: {
+                "auth-token": token.authToken,
+            },
+            data: {
+                name: data.name,
+                address: data.address,
+                bio: data.bio,
+                tien_ich: [
+                    data.tien_ich
+                ],
+                imageLink: [
+                    data.imageLink,
+                    data.imageLink2,
+                    data.imageLink3,
+                    data.imageLink4,
+                    data.imageLink5
+                ],
+                room: {
+                    roomType: type,   
+                    price: data.price,
+                    quantity: data.quantity
+                }
+            },
+            url: "http://localhost:5000/hotel/add"
+        }
+        axios(options)
+        .then(response => {
+            console.log("ADD HOTEL: ", response.data)
+            window.location = "/account/admin/hotel-management/"
+        })
+        .catch(error => console.log(error))
     }
-    // console.log(errors);
+    console.log(errors);
 
 
     const onChange = (e) => {
@@ -134,60 +144,45 @@ function AddHotel() {
                     {errors.tien_ich && <p>⚠ {errors.tien_ich.message}</p>}
                 </div>
 
-                {/* <div className="input_row">
-                    <input 
-                        className="form_input"
-                        type="text" 
-                        placeholder="Loại phòng" 
-                        {...register("roomType", {
-                            required: "Vui lòng nhập loại phòng khách sạn"
-                        })} 
-                    />
-                    {errors.roomType && <p>⚠ {errors.roomType.message}</p>}
-                </div> */}
-
                 <div className="input_row">
-                {/* {...register("roomType", {
-                            required: "Vui lòng nhập loại phòng khách sạn"
-                        })}  */}
-                <label>
-                    <input
-
-                    name="roomType"
-                    type="checkbox"
-                    onChange={onChange}
-                    {...register("Small", {
-                         required: 'Vui lòng chọn loại phòng khách sạn' 
-                    })}
-                    />{' '}
-                    Nhỏ
-                </label>
-                <label>
-                    <input
-  
-                    name="roomType"
-                    type="checkbox"
-                    onChange={onChange}
-                    {...register("Medium", {
-                         required: 'Vui lòng chọn loại phòng khách sạn' 
-                    })}
-                    />{' '}
-                    Vừa
-                </label>
-                <label>
-                    <input
-      
-                    name="roomType"
-                    type="checkbox"
-                    onChange={onChange}
-                    {...register("Large", {
-                         required: 'Vui lòng chọn loại phòng khách sạn' 
-                    })}
-                    />{' '}
-                    Lớn
-                </label>
-                {errors.roomType && <p>{errors.roomType.message}</p>}
+                    <div className="group_checkbox">
+                        Loại phòng:
+                        <label className="container_checkbox">
+                            <input
+                                name="roomType"
+                                type="checkbox"
+                                onChange={onChange}
+                                {...register("Small", {
+                                    required: 'Vui lòng chọn loại phòng khách sạn' 
+                                })}
+                                />{' '}
+                                Nhỏ
+                            <span className="checkmark_checkbox"></span>
+                        </label>
+                        <label className="container_checkbox">
+                            <input
+                                name="roomType"
+                                type="checkbox"
+                                onChange={onChange}
+                                {...register("Medium")}
+                                />{' '}
+                                Vừa
+                            <span className="checkmark_checkbox"></span>
+                        </label>
+                        <label className="container_checkbox">
+                            <input
+                            name="roomType"
+                            type="checkbox"
+                            onChange={onChange}
+                            {...register("Large")}
+                            />{' '}
+                            Lớn
+                            <span className="checkmark_checkbox"></span>
+                        </label>
+                    </div> 
+                    {errors.Small && <p>⚠ {errors.Small.message}</p>}
                 </div>
+                
 
                 <div className="input_row">
                     <input 

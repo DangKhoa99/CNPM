@@ -10,7 +10,7 @@ function BookingHeader() {
                 <div className="bookingHeader_block">
                     <div className="bookingHeader_back">
                         <button className="bookingHeader_icon" onClick={history.goBack}>
-                        <i class="fas fa-chevron-left"></i>
+                        <i className="fas fa-chevron-left"></i>
                         </button>
                     </div>
 

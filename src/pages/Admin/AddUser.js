@@ -60,7 +60,7 @@ function AddUser() {
     return (
         <div className="addUser">
             <button className="bookingHeader_icon" onClick={history.goBack} title="Quay lại">
-            <i class="fas fa-chevron-left"></i>
+            <i className="fas fa-chevron-left"></i>
             </button>
 
             <div className="addUser_header">

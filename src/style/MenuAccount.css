@@ -13,6 +13,7 @@
     background-image: linear-gradient(to right, #242424 0%, #bebebe 100%);
     background-repeat: repeat-x;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
 }
 
 .menuLeft{
@@ -207,8 +208,8 @@
     position: relative;
     fill: #c1c3c6;
     padding: 15px 15px 15px 30px;
-        padding-right: 15px;
-        padding-left: 75px;
+    padding-right: 15px;
+    /* padding-left: 75px; */
     color: #919496;
     border: none;
     border-radius: 0;
@@ -216,13 +217,9 @@
     text-transform: none;
 }
 
-.menuLeft_menuLink > svg{
-    display: block;
-    width: 1.3em;
-    height: 1.3em;
-    position: absolute;
-    top: 15px;
-    left: 30px;
+.menuLeft_menuLink > i{
+    margin-right: 20px;
+    font-size: 20px;
 }
 
 /* Phần chung của các Menu */

@@ -18,12 +18,12 @@ function HotelCard({
 
             <a href={"/room-detail?id=" + id}>
                 <button className="menuHotelManagement_btn" title="Chi tiết khách sạn">
-                    <i class="fas fa-info-circle" style={{color: "purple"}}/>
+                    <i className="fas fa-info-circle" style={{color: "purple"}}/>
                 </button>
             </a>
 
             <button className="menuHotelManagement_btn editHotel" title="Chỉnh sửa khách sạn">
-                <i class="far fa-edit" style={{color: "green"}}/>
+                <i className="far fa-edit" style={{color: "green"}}/>
             </button>
 
             <a className="menuHotelManagement_links">

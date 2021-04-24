@@ -75,11 +75,11 @@ function MenuHotelManagement() {
                 <h1 style={{marginBottom: "20px", fontSize: "50px"}}>QUẢN LÝ KHÁCH SẠN</h1>
 
                 <button className="menuHotelManagement_filter_hotel" onClick={handleClickFilterPrice}>
-                    <i class="fas fa-funnel-dollar"/>  Lọc giá: {price}
+                    <i className="fas fa-funnel-dollar"/>  Lọc giá: {price}
                 </button>        
 
                 {/* react-select */}
-                {/* <i class="fas fa-map-marked-alt" style={{fontSize: "20px"}}/> */}
+                {/* <i className="fas fa-map-marked-alt" style={{fontSize: "20px"}}/> */}
                 <select className="menuHotelManagement_filter_hotel" onChange={handleFilterLocation}>
                     <optgroup label="Chọn địa điểm">
                         <option value='All'>Tất cả địa điểm</option>
@@ -95,7 +95,7 @@ function MenuHotelManagement() {
 
                 <a href="/account/admin/add-hotel/">
                     <button className="menuHotelManagement_filter_hotel">
-                        <i class="fas fa-plus-square"/>  Thêm khách sạn
+                        <i className="fas fa-plus-square"/>  Thêm khách sạn
                     </button>
                 </a>
             </div>

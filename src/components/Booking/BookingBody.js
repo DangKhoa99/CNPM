@@ -275,7 +275,7 @@ function BookingBody({
                                         />
                                     </div>
 
-                                    <span class="date-range_arrow"></span>
+                                    <span className="date-range_arrow"></span>
 
                                     <div className="check_out">
                                         <label>TRẢ PHÒNG</label>
@@ -324,7 +324,7 @@ function BookingBody({
                                 else if(type == "Large"){
                                     t = "Lớn"
                                 }
-                                return  <label class="room_type">
+                                return  <label className="room_type">
                                             <input 
                                                 type="radio" 
                                                 id={type} 
@@ -333,7 +333,7 @@ function BookingBody({
                                                 checked={room === type}
                                                 onChange={onRoomChanged}
                                             />
-                                            <span class="check_mark"></span>
+                                            <span className="check_mark"></span>
                                             {t}
                                         </label>
                             })}
@@ -395,15 +395,15 @@ function BookingBody({
 
                     <div className="bookingBody_hotel">
                         <div className="bookingBody_hotel_pay">
-                            <label class="pay_type">
+                            <label className="pay_type">
                                 <input type="radio" id="small" name="pay_type" value="small" checked/>
-                                <span class="check_mark_pay"></span>
+                                <span className="check_mark_pay"></span>
                                 Trực tiếp tại khách sạn
                             </label>
                             
-                            <label class="pay_type disable_radio">
+                            <label className="pay_type disable_radio">
                                 <input type="radio" id="medium" name="pay_type" value="medium" disabled/>
-                                <span class="check_mark_pay"></span>
+                                <span className="check_mark_pay"></span>
                                 Thẻ ngân hàng
                             </label>
                         </div>

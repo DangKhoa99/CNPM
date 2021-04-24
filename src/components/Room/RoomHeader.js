@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import "../../style/RoomHeader.css"
 import StarIcon from "@material-ui/icons/Star"
-import {ReactComponent as Heart} from "../../icons/iconHeart.svg"
-import {ReactComponent as RedHeart} from "../../icons/iconRedHeart.svg"
 import Gallery from 'react-grid-gallery';
 import { store } from 'react-notifications-component'
 
@@ -193,7 +191,7 @@ function RoomHeader({
                                     onClick={() => {handleClickFavorite() }}
                                 >
                                     <span className="roomHeader_heading_heart">
-                                    {clickFavorite ? <i class="fas fa-heart" style={{color: "red"}}></i> : <i class="far fa-heart"/>}
+                                    {clickFavorite ? <i className="fas fa-heart" style={{color: "red"}}></i> : <i className="far fa-heart"/>}
                                     </span>
                                     {saveFavorite}
                                 </button>

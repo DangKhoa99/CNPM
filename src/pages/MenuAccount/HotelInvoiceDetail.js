@@ -131,7 +131,7 @@ function HotelInvoiceDetail() {
                         <div className="bookingHeader_block">
                             <div className="bookingHeader_back">
                                 <button className="bookingHeader_icon" onClick={history.goBack}>
-                                <i class="fas fa-chevron-left"></i>
+                                <i className="fas fa-chevron-left"></i>
                                 </button>
                             </div>
 
@@ -143,7 +143,7 @@ function HotelInvoiceDetail() {
                                 href={"/room-detail?id=" + dataBookingHotelOfCustomer.hotelId} 
                                 title="Xem khách sạn"
                             >
-                                <i class="fas fa-hotel" style={{fontSize: "20px"}}/>
+                                <i className="fas fa-hotel" style={{fontSize: "20px"}}/>
                             </a>
                         </div>
                     </div>
@@ -154,7 +154,7 @@ function HotelInvoiceDetail() {
 
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
-                                <h4 style={{marginBottom: "20px", color: "gray"}}><i class="fas fa-receipt"/> Mã hóa đơn: <i>{bookingId}</i></h4>
+                                <h4 style={{marginBottom: "20px", color: "gray"}}><i className="fas fa-receipt"/> Mã hóa đơn: <i>{bookingId}</i></h4>
 
                                 <div className="bookingBody_hotel_name">
                                         <h2>{dataHotel.name}</h2>
@@ -270,13 +270,13 @@ function HotelInvoiceDetail() {
                                     <button 
                                         className="cancel-button" 
                                         onClick={() => handleConfirmationBox()}>
-                                            <i class="far fa-window-close"/>
+                                            <i className="far fa-window-close"/>
                                     </button>
 
                                     <button 
                                     className="confirmation-button"
                                     onClick={handleDeleteOrderHotel}>
-                                        <i class="far fa-trash-alt"/>
+                                        <i className="far fa-trash-alt"/>
                                     </button>
                                 </div>
                             </div>

@@ -6,51 +6,51 @@ function ErrorPage() {
     return (
         <div className="errorPage">
             
-            <div class="text">
+            <div className="text">
                 <p>404</p>
             </div>
-            <div class="errorPage_subText">
+            <div className="errorPage_subText">
                 <p>TRANG BẠN TÌM KIẾM KHÔNG TỒN TẠI</p>
                
-               <a href="/"><button class="snip1582">Trở về trang chủ</button></a>
+               <a href="/"><button className="snip1582">Trở về trang chủ</button></a>
             </div>
 
-            <div class="errorPage_container">
+            <div className="errorPage_container">
 
-            <div class="caveman">
-                <div class="leg">
-                <div class="foot"><div class="fingers"></div></div>      
+            <div className="caveman">
+                <div className="leg">
+                <div className="foot"><div className="fingers"></div></div>      
                 </div>
-                <div class="leg">
-                <div class="foot"><div class="fingers"></div></div>      
+                <div className="leg">
+                <div className="foot"><div className="fingers"></div></div>      
                 </div>
-                <div class="shape">
-                <div class="circle"></div>
-                <div class="circle"></div>
+                <div className="shape">
+                <div className="circle"></div>
+                <div className="circle"></div>
                 </div>
-                <div class="head">
-                <div class="eye"><div class="nose"></div></div>
-                <div class="mouth"></div>
+                <div className="head">
+                <div className="eye"><div className="nose"></div></div>
+                <div className="mouth"></div>
                 </div>
-                <div class="arm-right"><div class="club"></div></div>    
+                <div className="arm-right"><div className="club"></div></div>    
             </div>
 
-            <div class="caveman">
-                <div class="leg">
-                <div class="foot"><div class="fingers"></div></div>      
+            <div className="caveman">
+                <div className="leg">
+                <div className="foot"><div className="fingers"></div></div>      
                 </div>
-                <div class="leg">
-                <div class="foot"><div class="fingers"></div></div>      
+                <div className="leg">
+                <div className="foot"><div className="fingers"></div></div>      
                 </div>
-                <div class="shape">
-                <div class="circle"></div>
-                <div class="circle"></div>
+                <div className="shape">
+                <div className="circle"></div>
+                <div className="circle"></div>
                 </div>
-                <div class="head">
-                <div class="eye"><div class="nose"></div></div>
-                <div class="mouth"></div>
+                <div className="head">
+                <div className="eye"><div className="nose"></div></div>
+                <div className="mouth"></div>
                 </div>
-                <div class="arm-right"><div class="club"></div></div>  
+                <div className="arm-right"><div className="club"></div></div>  
                 
             </div>
             </div>

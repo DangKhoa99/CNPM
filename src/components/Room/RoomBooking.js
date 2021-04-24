@@ -169,7 +169,7 @@ function RoomBooking({
                                         {({ startDateInputProps, endDateInputProps, focus }) => (
                                         <div className='date-range'>
                                             <div className="check_in">
-                                                <label><i class="far fa-calendar-check"/> NHẬN PHÒNG</label>
+                                                <label><i className="far fa-calendar-check"/> NHẬN PHÒNG</label>
                                                 {allowOrder ? 
                                                     <input
                                                         readOnly
@@ -191,9 +191,9 @@ function RoomBooking({
                                                 }
                                                 
                                             </div>
-                                            <span class="date-range_arrow"></span>
+                                            <span className="date-range_arrow"></span>
                                             <div className="check_out">
-                                                <label><i class="far fa-calendar-check"/> TRẢ PHÒNG</label>
+                                                <label><i className="far fa-calendar-check"/> TRẢ PHÒNG</label>
                                                 {startDate ? 
                                                     <input
                                                         readOnly
@@ -242,7 +242,7 @@ function RoomBooking({
                                             t = "Lớn"
                                         }
                                         if(allowOrder){
-                                        return  <label class="room_type">
+                                        return  <label className="room_type">
                                                     <input 
                                                         type="radio" 
                                                         id={type} 
@@ -251,12 +251,12 @@ function RoomBooking({
                                                         checked={room === type}
                                                         onChange={onRoomChanged}
                                                     />
-                                                    <span class="check_mark"></span>
+                                                    <span className="check_mark"></span>
                                                     {t}
                                                 </label>
                                         }
                                         else{
-                                            return <label class="room_type">
+                                            return <label className="room_type">
                                                         <input 
                                                             type="radio" 
                                                             id={type}
@@ -265,7 +265,7 @@ function RoomBooking({
                                                             value={type}
                                                             checked=""
                                                         />
-                                                        <span class="check_mark"></span>
+                                                        <span className="check_mark"></span>
                                                         {t}
                                                     </label>
                                         }

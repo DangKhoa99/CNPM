@@ -6,6 +6,7 @@ import StarRatings from "react-star-ratings"
 import axios from 'axios'
 import { store } from 'react-notifications-component'
 import useGetDataCustomer from '../../hooks/useDataCustomer'
+import NoItem from "../NoItem"
 
 import useToken from '../../hooks/useToken'
 
@@ -190,7 +191,7 @@ function RoomReview({
                             <div className="comment_input_btn">
                                 <button className="comment_btn_cancel" onClick={removeReviewInput}>Hủy</button>
 
-                                <button className="comment_btn_submit" type="submit"><i class="far fa-comment"/> Đánh giá</button>
+                                <button className="comment_btn_submit" type="submit"><i class="far fa-comment-dots"/> Đánh giá</button>
                             </div>
                         </form>                        
                     </div>
@@ -198,11 +199,60 @@ function RoomReview({
                 }
 
             
-                <div className="aaa">
+                <div className="block_comment">
                     {/* comment_section - phần bình luận */}
-                    <div className="bbb"> 
-                        {dataReview.map(reviews => {
-                            return <div className="box_comment">
+                    <div className="block_comment_container"> 
+
+                        <div className="box_comment">
+                            <div className="commentator">
+                                <div className="commentator_avatar">
+                                    <Avatar 
+                                        className="commentator_img" 
+                                        src="/images/Khoa.jpg"
+                                    />
+                                </div>
+
+                                <div className="commentator_info">
+                                    <div className="commentator_name">
+                                        <p>Khoa - TEST EDIT CMT</p> 
+                                        <i className="far fa-edit"/>
+                                    </div>
+                                    <div className="comment_time">
+                                        {/* <div>time - tháng 2 năm 2021</div> */}
+
+                                        <div className="comment_stars" 
+                                        // style={{marginLeft: "10px"}}
+                                        >
+                                            <StarRatings
+                                                rating={5}
+                                                numberOfStars={5}
+                                                name='rating'
+                                                starRatedColor="#f1c40f"
+                                                starEmptyColor="gray"
+                                                starDimension="14px"
+                                                svgIconPath="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                                                svgIconViewBox="0 0 576 512"
+                                            /> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <span>
+                                    <div className="comment_text">
+                                        <span>alo 1234</span>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+
+
+
+
+                        {dataReview.length==0 ? <div style={{width: "100%"}}><NoItem text="Chưa có đánh giá" /></div> : 
+                        dataReview.map(reviews => {
+                            return  <div className="box_comment">
                                         <div className="commentator">
                                             <div className="commentator_avatar">
                                                 <Avatar 

@@ -81,14 +81,25 @@
   line-height: 1.8;
   margin-bottom: 10px;
   z-index: 999;
-  top: 75%;
+  top: 128%;
   right: 5px;
   color: gray;
 }
 
 .btn_suggest_link{
   position: absolute;
-  top: 70%;
+  top: 125%;
   right: 15%;
   cursor: pointer;
+}
+
+.addHotel_label{
+  color: black !important;
+  font-size: 16px;
+}
+
+.group_checkbox{
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
 }

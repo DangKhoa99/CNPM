@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react'
 import '../../style/Banner.css'
 import {Button} from "@material-ui/core"
-import { Link } from 'react-router-dom'
 
 function Banner() {
   const [inHover, setHover] = useState(false);
@@ -31,9 +30,9 @@ function Banner() {
           onClick={scrollToElement}>
           KHÁM PHÁ 
           {!inHover &&
-          <i className='fas fa-chevron-right' />}
+          <i className='fas fa-chevron-right'/>}
           {inHover &&
-          <i class="fas fa-arrow-right"></i>}
+          <i className="fas fa-arrow-right"/>}
         </Button>
       </div>
     </div>

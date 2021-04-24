@@ -4,8 +4,6 @@ import { useHistory } from "react-router-dom";
 import axios from 'axios'
 import useToken from '../../hooks/useToken'
 
-
-
 function DetailUser() {
     let history = useHistory();
     const searchParams = new URLSearchParams(window.location.search);

@@ -44,9 +44,7 @@ function MenuHistoryBooking({
                         else{
                             return ""
                         }  
-                    }
-
-                    
+                    } 
                 })}
             </div>
         </div>

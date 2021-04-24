@@ -51,7 +51,6 @@ function HistoryBooking() {
 
     return (
         <div className="account">
-            {/* <Header /> */}
             <div className="account_page">
                 <div className="account_container">
                     {isLoading ? <LoadingScreen/> 

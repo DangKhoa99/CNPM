@@ -305,17 +305,14 @@ function Header() {
                   <li className="profile_menu_list">
                     <a href="/account/overview/">{dataCustomer.isAdmin ? <i className="fas fa-user-shield"/> : <i className="fas fa-user"/>} Tài khoản</a>
                   </li>
-
-                  <li className="profile_menu_list">
-                    <a href="/account/profile/"><i className="fas fa-user-edit"></i>Chỉnh sửa thông tin</a>
-                  </li>
-
-                  <li className={dataCustomer.isAdmin ? "profile_menu_list" : "profile_menu_list notAdmin"}>
-                    <a href="/account/admin/user-management/"><i className="fas fa-user-cog"/>Quản lý người dùng</a>
-                  </li>
+                  {dataCustomer.isAdmin ? "" :
+                    <li className="profile_menu_list">
+                      <a href="/account/profile/"><i className="fas fa-user-edit"></i>Chỉnh sửa thông tin</a>
+                    </li>
+                  }
 
                   <li className={dataCustomer.isAdmin ? "profile_menu_list" : "profile_menu_list notAdmin"}>
-                    <a href="/account/admin/hotel-management/"><i className="fas fa-hotel"/> Quản lý khách sạn</a>
+                    <a href="/account/admin/user-management/"><i className="fas fa-cogs"/>Quản lý</a>
                   </li>
 
                   <li className="profile_menu_list">

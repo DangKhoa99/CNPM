@@ -1,11 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import "../../style/MenuAccount.css"
 import {Avatar} from "@material-ui/core"
-import {ReactComponent as IconHome} from "../../icons/iconHome.svg"
-import {ReactComponent as IconEdit} from "../../icons/iconEdit.svg"
-import {ReactComponent as IconFavorite} from "../../icons/iconFavorite.svg"
-import {ReactComponent as IconBooking} from "../../icons/iconBooking.svg"
-import {ReactComponent as IconHistoryBooking} from "../../icons/iconHistoryBooking.svg"
 import {Link} from 'react-router-dom'
 
 function MenuLeft({
@@ -19,36 +14,36 @@ function MenuLeft({
         {
             id: "overview",
             to: "/account/overview/",
-            name: "Tổng quan về Tài khoản",
-            icon: <IconHome/>,
+            name: " Tổng quan về Tài khoản",
+            icon: <i className="fas fa-user-circle"></i>,
             active: ""
         },
         {
             id: "profile",
             to: "/account/profile/",
             name: "Sửa hồ sơ",
-            icon: <IconEdit/>,
+            icon: <i className="fas fa-user-edit"></i>,
             active: ""
         },
         {
             id: "favorite",
             to: "/account/favorite/",
-            name: "Yêu thích",
-            icon: <IconFavorite/>,
+            name: " Yêu thích",
+            icon: <i className="fab fa-gratipay"></i>,
             active: ""
         },
         {
             id: "booking",
             to: "/account/booking/",
-            name: "Khách sạn đang đặt",
-            icon: <IconBooking/>,
+            name: " Khách sạn đang đặt",
+            icon: <i className="fas fa-calendar-check"></i>,
             active: ""
         },
         {
             id: "history_booking",
             to: "/account/history-booking/",
-            name: "Khách sạn đã đặt trước đây",
-            icon: <IconHistoryBooking/>,
+            name: " Lịch sử đặt khách sạn",
+            icon: <i className="fas fa-history"></i>,
             active: ""
         },
     ]
@@ -102,9 +97,7 @@ function MenuLeft({
                         <button className="account_avatar_edit_btn">
                             <div className="account_avatar_icon_edit">
                                 <label for="upload_image">
-                                    <svg viewBox="0 0 48 48">
-                                        <path d="M33.402 3.006L8.852 31.751l-2.337 12.61 12.09-4.281 24.552-28.746-9.755-8.328zM9.112 41.32l1.543-8.327 6.44 5.5-7.983 2.827zm9.418-4.231l-6.712-5.732L33.625 5.825l6.711 5.731L18.53 37.089z"/>
-                                    </svg>
+                                    <i className="fas fa-upload" style={{fontSize: "50px", marginBottom: "10px"}}/>
                                     <span>Chọn ảnh</span>
                                 </label>
                                 <input type="file" name="image" id="upload_image" onChange={onFileChange}/>
@@ -134,7 +127,6 @@ function MenuLeft({
                     })}
                 </ul>
             </div>
-
         </div>
     )
 }

@@ -15,14 +15,14 @@ function MenuAdmin({
             id: "userManagement",
             to: "/account/admin/user-management/",
             name: "Quản lý người dùng",
-            icon: <i class="fas fa-user-cog"></i>,
+            icon: <i className="fas fa-user-cog"></i>,
             active: ""
         },
         {
             id: "hotelManagement",
             to: "/account/admin/hotel-management/",
             name: "Quản lý khách sạn",
-            icon: <i class="fas fa-hotel"></i>,
+            icon: <i className="fas fa-hotel"></i>,
             active: ""
         },
     ];
@@ -31,10 +31,10 @@ function MenuAdmin({
 
             <input type="checkbox" id="check"/>
             <label for="check">
-                <i class="fas fa-bars" id="sidebar_btn"></i>
+                <i className="fas fa-bars" id="sidebar_btn"></i>
             </label>
 
-            <div class="sidebar">
+            <div className="sidebar">
                 <Avatar 
                     className="menuAdmin_avatar" 
                     alt={nameUser} 
@@ -53,7 +53,7 @@ function MenuAdmin({
                         </div>
                 })}
             </div>
-            <div class="content"></div>
+            <div className="content"></div>
         </div>
     )
 }
