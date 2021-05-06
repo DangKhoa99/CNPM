@@ -1,0 +1,10 @@
+.roomSuggestionHotel_container{
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+.scrollMenu {
+    /* box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 12px !important; */
+    padding: 20px;
+    border-radius: 20px;
+}

@@ -1,9 +1,14 @@
 import React from 'react'
 import "../../style/BookingHeader.css"
 import { useHistory } from "react-router-dom";
+import * as myConstClass from "../../constants/constantsLanguage"
 
-function BookingHeader() {
+function BookingHeader({language}) {
     let history = useHistory();
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
     return (
         <div className="bookingHeader">
             <div className="bookingHeader_container">
@@ -15,7 +20,7 @@ function BookingHeader() {
                     </div>
 
                     <div className="bookingHeader_text">
-                        Xác nhận đặt phòng và phương thức thanh toán
+                        {content.confirmOrderRoom}
                     </div>
                 </div>
             </div>

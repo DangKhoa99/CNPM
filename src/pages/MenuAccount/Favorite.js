@@ -7,8 +7,10 @@ import useToken from '../../hooks/useToken'
 import SignIn from '../SignIn/SignIn'
 import useGetDataCustomer from '../../hooks/useDataCustomer'
 import useGetDataFavoriteHotelOfCustomer from '../../hooks/useDataFavoriteHotelOfCustomer'
+import useLanguage from '../../hooks/useLanguage'
 
 function Favorite() {
+    const { language, setLanguage } = useLanguage();
     const { token, setToken } = useToken();
     const {dataCustomer, isLoading} = useGetDataCustomer();
     const {dataFavoriteHotelOfCustomer, isLoadingDataFavoriteHotelOfCustomer} = useGetDataFavoriteHotelOfCustomer();
@@ -34,6 +36,7 @@ function Favorite() {
                         nameUser={userName}
                         username={dataCustomer.username}
                         imageUser={fullName}
+                        language={language}
                     />
                     }
                     
@@ -41,6 +44,7 @@ function Favorite() {
                     :
                     <MenuFavorite 
                         favoriteHotel={dataFavoriteHotelOfCustomer}
+                        language={language}
                     />
                     }
                 </div>

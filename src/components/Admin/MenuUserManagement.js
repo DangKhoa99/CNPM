@@ -5,8 +5,13 @@ import SignIn from '../../pages/SignIn/SignIn'
 import useToken from '../../hooks/useToken'
 import LoadingScreen from "../LoadingScreen"
 import DataTable from "./DataTable"
+import * as myConstClass from "../../constants/constantsLanguage"
 
-function MenuUserManagement() {
+function MenuUserManagement({language}) {
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
     const { token, setToken } = useToken();
     const [isLoading, setIsLoading] = useState(false);
     const [dataUser, setDataUser] = useState([]);
@@ -36,10 +41,9 @@ function MenuUserManagement() {
         if(token){
             fetchData();
         }
-        
     },[])
 
-    console.log("ADMIN: ", dataUser)
+    // console.log("ADMIN: ", dataUser)
     const [q, setQ] = useState("")
     const [searchColumns, setSearchColumns] = useState(["name", "username"])
     function search(rows){
@@ -55,11 +59,11 @@ function MenuUserManagement() {
     
     return (
         <div className="menuUserManagement">
-            <h1 style={{marginBottom: "20px", fontSize: "50px"}}>QUẢN LÝ NGƯỜI DÙNG</h1>
+            <h1 style={{marginBottom: "20px", fontSize: "50px", textTransform: "uppercase"}}>{content.userManagement}</h1>
             <div className="menuUserManagement_function">
                 <a href="/account/admin/add-user/">
                     <button className="menuUserManagement_addUser">
-                        <i className="fas fa-user-plus"/> Thêm người dùng
+                        <i className="fas fa-user-plus"/> {content.addUser}
                     </button>
                 </a>
 
@@ -69,7 +73,7 @@ function MenuUserManagement() {
                         <i className="fas fa-search" style={{fontSize: "30px", marginTop: "auto", marginBottom: "auto", marginLeft: "-30px"}}></i>
                         <input 
                             className="searchTerm"
-                            placeholder="Tìm..."
+                            placeholder={content.placeholderSearchMenuUserManagement}
                             type="text" 
                             value={q} 
                             onChange={(e) => setQ(e.target.value)}
@@ -80,12 +84,12 @@ function MenuUserManagement() {
                     </div>
 
                     <div className="menuUserManagement_option_search">
-                        {columns && columns.map(column => {
-                            let column_vi = "Họ tên"
+                        {columns && columns.map((column, index) => {
+                            let column_vi = content.fullName
                             if(column == "username"){
-                                column_vi = "Tài khoản"
+                                column_vi = content.username
                             }
-                            return  <label className="container_checkbox">{column_vi}
+                            return  <label key={index + column} className="container_checkbox">{column_vi}
                                         <input
                                             className="checkbox"
                                             type="checkbox"
@@ -111,6 +115,7 @@ function MenuUserManagement() {
             <div>
                 <DataTable
                     data={search(dataUser)}
+                    language={language}
                 />
             </div>
             }

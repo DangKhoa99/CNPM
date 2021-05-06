@@ -3,15 +3,23 @@ import "../../style/AddHotel.css"
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import useToken from '../../hooks/useToken'
+import SignIn from '../SignIn/SignIn'
 import axios from 'axios'
+import useLanguage from '../../hooks/useLanguage'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function AddHotel() {
+    const { language, setLanguage } = useLanguage();
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+      ? (content = content.English)
+      : (content = content.Vietnam);
     const { token, setToken } = useToken();
     let history = useHistory();
     const { register, handleSubmit, formState: { errors }} = useForm();
 
     const onSubmit = async (data)  => {
-        console.log("DATA: ", data);
+        // console.log("DATA: ", data);
         
         let type = []
         if(data.Small){
@@ -58,22 +66,25 @@ function AddHotel() {
         })
         .catch(error => console.log(error))
     }
-    console.log(errors);
+    // console.log(errors);
 
 
     const onChange = (e) => {
         console.log('change', e.target.value);
     };
 
-
-
     const [suggestLink, setSuggestLink] = useState(false);
     const clickSuggestLink = () => setSuggestLink(!suggestLink)
 
+    if(!token){
+        return <SignIn />
+    }
+
+    document.title = content.addHotel + " | RoyalStay"
 
     return (
         <div className="addHotel">
-            <button className="bookingHeader_icon" onClick={history.goBack} title="Quay lại">
+            <button className="bookingHeader_icon" onClick={history.goBack} title={content.return}>
                 <i className="fas fa-chevron-left"></i>
             </button>
 
@@ -91,7 +102,7 @@ function AddHotel() {
             </div>
 
             <div className="addHotel_header">
-                <h1 style={{marginBottom: "20px", fontSize: "50px"}}>THÊM KHÁCH SẠN</h1>
+                <h1 style={{marginBottom: "20px", fontSize: "50px", textTransform: "uppercase"}}>{content.addHotel}</h1>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -99,9 +110,9 @@ function AddHotel() {
                     <input
                         className="form_input"
                         type="text" 
-                        placeholder="Tên khách sạn" 
+                        placeholder={content.hotelName}
                         {...register("name", {
-                            required: "Vui lòng nhập tên khách sạn"
+                            required: content.validationHotelName
                         })} 
                     />
                     {errors.name && <p>⚠ {errors.name.message}</p>}
@@ -111,9 +122,9 @@ function AddHotel() {
                     <input 
                         className="form_input"
                         type="text" 
-                        placeholder="Địa chỉ" 
+                        placeholder={content.hotelAddress}
                         {...register("address", {
-                            required: "Vui lòng nhập địa chỉ khách sạn"
+                            required: content.validationHotelAddress
                         })} 
                     />
                     {errors.address && <p>⚠ {errors.address.message}</p>}
@@ -124,9 +135,9 @@ function AddHotel() {
                         className="form_input bioHotel"
                         type="text"
                         rows="1" 
-                        placeholder="Mô tả" 
+                        placeholder={content.hotelInformation}
                         {...register("bio", {
-                            required: "Vui lòng nhập thông tin khách sạn"
+                            required: content.validationHotelInformation
                         })} 
                     />
                     {errors.bio && <p>⚠ {errors.bio.message}</p>}
@@ -136,9 +147,9 @@ function AddHotel() {
                     <input 
                         className="form_input"
                         type="text" 
-                        placeholder="Tiện ích" 
+                        placeholder={content.utilities}
                         {...register("tien_ich", {
-                            required: "Vui lòng nhập tiện ích khách sạn"
+                            required: content.validationUtilities
                         })} 
                     />
                     {errors.tien_ich && <p>⚠ {errors.tien_ich.message}</p>}
@@ -146,17 +157,17 @@ function AddHotel() {
 
                 <div className="input_row">
                     <div className="group_checkbox">
-                        Loại phòng:
+                        {content.typeRoom}:
                         <label className="container_checkbox">
                             <input
                                 name="roomType"
                                 type="checkbox"
                                 onChange={onChange}
                                 {...register("Small", {
-                                    required: 'Vui lòng chọn loại phòng khách sạn' 
+                                    required: content.validationRoomType
                                 })}
                                 />{' '}
-                                Nhỏ
+                                {content.smallRoom}
                             <span className="checkmark_checkbox"></span>
                         </label>
                         <label className="container_checkbox">
@@ -166,7 +177,7 @@ function AddHotel() {
                                 onChange={onChange}
                                 {...register("Medium")}
                                 />{' '}
-                                Vừa
+                                {content.mediumRoom}
                             <span className="checkmark_checkbox"></span>
                         </label>
                         <label className="container_checkbox">
@@ -176,21 +187,20 @@ function AddHotel() {
                             onChange={onChange}
                             {...register("Large")}
                             />{' '}
-                            Lớn
+                            {content.largeRoom}
                             <span className="checkmark_checkbox"></span>
                         </label>
                     </div> 
                     {errors.Small && <p>⚠ {errors.Small.message}</p>}
                 </div>
                 
-
                 <div className="input_row">
                     <input 
                         className="form_input"
                         type="text" 
-                        placeholder="Giá" 
+                        placeholder={content.price}
                         {...register("price", {
-                            required: "Vui lòng nhập giá phòng khách sạn"
+                            required: content.validationPriceHotel
                         })} 
                     />
                     {errors.price && <p>⚠ {errors.price.message}</p>}
@@ -200,12 +210,12 @@ function AddHotel() {
                     <input 
                         className="form_input"
                         type="number" 
-                        placeholder="Số lượng phòng" 
+                        placeholder={content.quantityHotel}
                         {...register("quantity", {
-                            required: "Vui lòng nhập số lượng khách sạn",
+                            required: content.validationQuantityHotel,
                             min: {
                                 value: 1,
-                                message: "Số lượng phòng ít nhất là 1"
+                                message: content.validationQuantityHotel1
                             }
                         })} 
                     />
@@ -216,12 +226,12 @@ function AddHotel() {
                     <input 
                         className="form_input"
                         type="url" 
-                        placeholder="Link ảnh 1" 
+                        placeholder={content.linkImage1}
                         {...register("imageLink", {
-                            required: "Vui lòng điền link ảnh khách sạn",
+                            required: content.validationLinkImage,
                             pattern: {
                                 value: /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/,
-                                message: "Định dạng yêu cầu là: `http(s)://royalstay.com`"
+                                message: content.validationLinkImage1
                             }
                         })}
                     />
@@ -232,7 +242,7 @@ function AddHotel() {
                     <input 
                         className="form_input"
                         type="text" 
-                        placeholder="Link ảnh 2" 
+                        placeholder={content.linkImage2}
                         {...register("imageLink2")} 
                     />
                 </div>
@@ -241,7 +251,7 @@ function AddHotel() {
                     <input 
                         className="form_input"
                         type="text" 
-                        placeholder="Link ảnh 3" 
+                        placeholder={content.linkImage3}
                         {...register("imageLink3")} 
                     />
                 </div>
@@ -250,7 +260,7 @@ function AddHotel() {
                     <input 
                         className="form_input"
                         type="text" 
-                        placeholder="Link ảnh 4" 
+                        placeholder={content.linkImage4}
                         {...register("imageLink4")} 
                     />
                 </div>
@@ -259,12 +269,12 @@ function AddHotel() {
                     <input 
                         className="form_input"
                         type="text" 
-                        placeholder="Link ảnh 5" 
+                        placeholder={content.linkImage5}
                         {...register("imageLink5")} 
                     />
                 </div>
 
-                <button className="addHotel_submit_btn" type="submit">Tạo khách sạn</button>
+                <button className="addHotel_submit_btn" type="submit">{content.addHotel}</button>
             </form>
              
         </div>

@@ -4,9 +4,10 @@ import StarIcon from "@material-ui/icons/Star"
 import { store } from 'react-notifications-component'
 import axios from 'axios'
 import useToken from '../../hooks/useToken'
-
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import * as myConstClass from "../../constants/constantsLanguage"
+import { calAvgReview } from "../../helpers/calAvgReview"
 
 function SearchCard({
     id,
@@ -15,27 +16,18 @@ function SearchCard({
     name,
     description,
     price,
-    savedHotelId
+    savedHotelId,
+    review,
+    language
 }) {
-    // console.log("asdfjkahjf: ", savedHotelId)
+    let content = myConstClass.LANGUAGE;
+
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
+
     const { token, setToken } = useToken();
     const [clickFavorite, setClickFavorite] = useState(false);
-
-    const [dataReview, setDataReview] = useState([]);
-    const [rating, setRating] = useState(0);
-
-    const _id = {"hotelId": id};
-
-    const loadReviewHotelFromServer = useCallback(async () => {
-        await axios.post("http://localhost:5000/hotel/review", _id)
-            .then(response => {
-                // console.log("Data REVIEW: ",response.data)
-                if(response.data.length > 0){
-                    setDataReview(response.data);
-                }
-            })
-            .catch(error => console.log(error))
-    },[id]);
 
     useEffect(() => {
         for(let i in savedHotelId){
@@ -43,20 +35,12 @@ function SearchCard({
                 setClickFavorite(true)
             }
         }
-        loadReviewHotelFromServer();
-    },[savedHotelId, loadReviewHotelFromServer])
+    },[savedHotelId])
 
-    let avgReview = 0;
-    if(dataReview.length > 0){
-        for(var key in dataReview){
-            var obj = dataReview[key];
-            avgReview = avgReview + obj.score;
-        }
-        avgReview = (avgReview / dataReview.length).toFixed(1);
-    }
+    let avgReview = calAvgReview(review);
 
     const handleClickFavorite = () => {
-        console.log("Click Favorite", token)
+        // console.log("Click Favorite", token)
         if(!token){
             store.addNotification(notification_requireLogin)
         }
@@ -184,14 +168,14 @@ function SearchCard({
                         <div className="searchCard_stars">
                             <StarIcon className="searchCard_star"/>
                             <p>
-                                <strong>{avgReview}</strong> ({dataReview.length})
+                                <strong>{avgReview}</strong> ({review.length})
                             </p>
                         </div>
                     </div>
                 </div>
                 <div className="product__price">
                     <span style={{fontSize: "24px"}}><strong>${price}</strong></span>
-                    <span style={{fontSize: "14px"}}>/đêm</span>
+                    <span style={{fontSize: "14px"}}>/{content.night}</span>
                 </div>
                 <div className="product__detail">
                     <p className="product__address"><i className="fas fa-map-marker-alt"/> {address}</p>
@@ -201,7 +185,7 @@ function SearchCard({
                     <p className="product__description">
                         {description}
                     </p>
-                    <a href={'/room-detail?id=' + id} className="product__button"><i className="fas fa-hotel"/>  Xem chi tiết</a>
+                    <a href={'/room-detail?id=' + id} className="product__button"><i className="fas fa-hotel"/>  {content.detailRoom}</a>
                 </div>
             </li>
 

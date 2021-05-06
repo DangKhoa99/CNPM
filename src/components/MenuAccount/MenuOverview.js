@@ -1,5 +1,6 @@
 import React from 'react'
 import "../../style/MenuOverView.css"
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function menuOverview({
     id,
@@ -9,25 +10,31 @@ function menuOverview({
     phone,
     sex,
     address,
+    language
 }) {
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
+
     if(!sex){
-        sex = "Chưa cập nhật";
+        sex = content.notUpdate;
     }
     if(!phone){
-        phone = "Chưa cập nhật";
+        phone = content.notUpdate;
     }
     if(!address){
-        address = "Chưa cập nhật";
+        address = content.notUpdate;
     }
     if(!email){
-        email = "Chưa cập nhật";
+        email = content.notUpdate;
     }
 
     return (
         <div className="menuOverview">
             <div className="menuOverview_container">
-                <h1 className="menuOverview_title">Tổng quan về tài khoản</h1>
-                <h3 className="menuOverview_subTitle">Hồ sơ</h3>
+                <h1 className="menuOverview_title">{content.accountOverview}</h1>
+                <h3 className="menuOverview_subTitle">{content.profile}</h3>
                 <section>
                     <table className="account_info_table">
                         <colgroup>
@@ -36,15 +43,15 @@ function menuOverview({
                         </colgroup>
                         <tbody>
                             <tr className="account_info_row">
-                                <td className="account_info_col_left">Id tài khoản</td>
+                                <td className="account_info_col_left">{content.idAccount}</td>
                                 <td className="account_info_col_right">{id}</td>
                             </tr>
                             <tr className="account_info_row">
-                                <td className="account_info_col_left">Tên tài khoản</td>
+                                <td className="account_info_col_left">{content.username}</td>
                                 <td className="account_info_col_right">{username}</td>
                             </tr>
                             <tr className="account_info_row">
-                                <td className="account_info_col_left">Họ và tên</td>
+                                <td className="account_info_col_left">{content.fullName}</td>
                                 <td className="account_info_col_right">{fullName}</td>
                             </tr>
                             <tr className="account_info_row">
@@ -52,22 +59,22 @@ function menuOverview({
                                 <td className="account_info_col_right">{email}</td>
                             </tr>
                             <tr className="account_info_row">
-                                <td className="account_info_col_left">Giới tính</td>
+                                <td className="account_info_col_left">{content.sex}</td>
                                 <td className="account_info_col_right">{sex}</td>
                             </tr>
                             <tr className="account_info_row">
-                                <td className="account_info_col_left">Số điện thoại</td>
+                                <td className="account_info_col_left">{content.phoneNumber}</td>
                                 <td className="account_info_col_right">{phone}</td>
                             </tr>
                             <tr className="account_info_row">
-                                <td className="account_info_col_left">Địa chỉ</td>
+                                <td className="account_info_col_left">{content.address}</td>
                                 <td className="account_info_col_right">{address}</td>
                             </tr>
                         </tbody>
                     </table>
                 </section>
                 <div>
-                    <a className="edit_profile" href="/account/profile/">Chỉnh sửa hồ sơ</a>
+                    <a className="edit_profile" href="/account/profile/">{content.editProfile}</a>
                 </div>
             </div>
         </div>

@@ -7,6 +7,8 @@ import 'react-nice-dates/build/style.css'
 import { store } from 'react-notifications-component'
 import axios from 'axios'
 import useToken from '../../hooks/useToken'
+import * as myConstClass from "../../constants/constantsLanguage"
+import {calDate} from "../../helpers/calDate"
 
 function BookingBody({
     idHotel,
@@ -17,7 +19,12 @@ function BookingBody({
     checkOut,
     typeRoomOrder,
     arrayRoomTypeOfHotel,
+    language
 }) {
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
     const { token, setToken } = useToken();
     const startDateOrder = checkIn.split("/");
     const endDateOrder = checkOut.split("/");
@@ -57,15 +64,15 @@ function BookingBody({
 
     useEffect(() => {
         if(typeRoom == "Small"){
-            setTypeRoom("Nhỏ");
+            setTypeRoom(content.smallRoom);
             setPricePerNight(priceSmallRoom);
         }
         else if (typeRoom == "Medium"){
-            setTypeRoom("Vừa");
+            setTypeRoom(content.mediumRoom);
             setPricePerNight(priceMediumRoom);
         }
         else if (typeRoom == "Large"){
-            setTypeRoom("Lớn");
+            setTypeRoom(content.largeRoom);
             setPricePerNight(priceLargeRoom);
         }
     },[typeRoom])
@@ -80,11 +87,6 @@ function BookingBody({
       highlight: '-highlight'
     }
 
-    // Cal night
-    function calDate(startDate, endDate){
-        return Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
-    }
-
     // Edit RoomType, CheckIn, CheckOut
     const [clickEditTypeRoom, setClickEditTypeRoom] = useState(false);
     const [clickEditDate, setClickEditDate] = useState(false);
@@ -92,13 +94,13 @@ function BookingBody({
     // Click open, close edit roomType
     const handleClickEditTypeRoom = () => {
         setClickEditTypeRoom(!clickEditTypeRoom);
-        if(typeRoom == "Nhỏ"){
+        if(typeRoom == content.smallRoom){
             setRoom("Small");
         }
-        else if(typeRoom == "Vừa"){
+        else if(typeRoom == content.mediumRoom){
             setRoom("Medium");
         }
-        else if(typeRoom == "Lớn"){
+        else if(typeRoom == content.largeRoom){
             setRoom("Large");
         }
     }
@@ -111,8 +113,8 @@ function BookingBody({
 
     // Chưa điền đầy đủ
     const notification_notFilled = {
-        title: ' RoyalStay - Thông báo',
-        message: "Vui lòng điền đủ thông tin để đặt phòng",
+        title: ' RoyalStay - ' + content.notification,
+        message: content.fillInfoToOrderRoom,
         type: 'warning',
         container: 'bottom-left',
         dismiss: {
@@ -122,8 +124,8 @@ function BookingBody({
 
     // Check EndDate
     const notification_checkEndDate = {
-        title: ' RoyalStay - Thông báo',
-        message: "Số đêm tối thiểu là 1",
+        title: ' RoyalStay - ' + content.notification,
+        message: content.minNumberOfNight,
         type: 'warning',
         container: 'bottom-left',
         dismiss: {
@@ -157,15 +159,15 @@ function BookingBody({
     }
     
     // change string display
-    let editTypeRoom = "Chỉnh sửa";
-    let editDate = "Chỉnh sửa";
+    let editTypeRoom = content.edit;
+    let editDate = content.edit;
 
     if(clickEditTypeRoom === true){
-        editTypeRoom = "Hủy";
+        editTypeRoom = content.cancel;
     }
 
     if(clickEditDate === true){
-        editDate = "Hủy";
+        editDate = content.cancel;
     }
 
     // console.log("STARTDATE: ", typeof(startDate))
@@ -174,13 +176,13 @@ function BookingBody({
     const confirmOrderHotel = (e) => {
         e.preventDefault();
         let type = "small";
-        if(typeRoom == "Nhỏ"){
+        if(typeRoom == content.smallRoom){
             type = "small";
         }
-        else if(typeRoom == "Vừa"){
+        else if(typeRoom == content.mediumRoom){
             type = "medium";
         }
-        else if(typeRoom == "Lớn"){
+        else if(typeRoom == content.largeRoom){
             type = "large";
         }
         let checkIn = format(startDate, "MM/dd/yyyy")
@@ -209,7 +211,6 @@ function BookingBody({
         .catch(error => console.log(error))
     }
 
-
     return (
         <div className="bookingBody">
             <div className="bookingBody_container">
@@ -232,14 +233,14 @@ function BookingBody({
 
                 <div className="bookingBody_components">
                     <div className="bookingBody_component">
-                        <h2>Chuyến đi của bạn</h2>
+                        <h2>{content.yourTrip}</h2>
                     </div>
                 </div>
 
                 <div className="bookingBody_components">
                     <div className="bookingBody_component">
                         <div className="bookingBody_component_block">
-                            <h3>Ngày</h3>
+                            <h3>{content.dates}</h3>
                             <div className="bookingBody_component_day_block_subText">
                             {format(startDate, 'dd MMM yyyy', { locale: vi }) + ' - ' + format(endDate, 'dd MMM yyyy', { locale: vi })}
                             </div>
@@ -249,8 +250,8 @@ function BookingBody({
                         </div>
 
                         <div className={clickEditDate ? "bookingBody_component_edit_date active" : "bookingBody_component_edit_date"}>
-                            <h2>{startDateEdit && endDateEdit ? 'Số đêm: ' + calDate(startDateEdit, endDateEdit) : startDateEdit ? 'Chọn ngày trả phòng' : 'Chọn ngày nhận phòng'}</h2>
-                            <p>{startDateEdit && endDateEdit ? format(startDateEdit, 'dd MMM yyyy', { locale: vi }) + ' - ' + format(endDateEdit, 'dd MMM yyyy', { locale: vi }) : 'Thêm ngày đi để biết giá chính xác'}</p>
+                            <h2>{startDateEdit && endDateEdit ? content.numberOfNights + calDate(startDateEdit, endDateEdit) : startDateEdit ? content.selectCheckoutDate : content.selectCheckInDate}</h2>
+                            <p>{startDateEdit && endDateEdit ? format(startDateEdit, 'dd MMM yyyy', { locale: vi }) + ' - ' + format(endDateEdit, 'dd MMM yyyy', { locale: vi }) : content.exactPricing}</p>
                             <DateRangePicker
                                 startDate={startDateEdit}
                                 endDate={endDateEdit}
@@ -266,24 +267,24 @@ function BookingBody({
                                 {({ startDateInputProps, endDateInputProps, focus }) => (
                                 <div className='date-range'>
                                     <div className="check_in">
-                                        <label>NHẬN PHÒNG</label>
+                                        <label><i className="far fa-calendar-check"/>{content.checkIn}</label>
                                         <input
                                             readOnly
                                             className={'input' + (focus === START_DATE ? ' -focused' : '')}
                                             {...startDateInputProps}
-                                            placeholder='Chọn ngày'
+                                            placeholder={content.addDate}
                                         />
                                     </div>
 
                                     <span className="date-range_arrow"></span>
 
                                     <div className="check_out">
-                                        <label>TRẢ PHÒNG</label>
+                                        <label><i className="far fa-calendar-check"/>{content.checkOut}</label>
                                         <input
                                             readOnly
                                             className={'input' + (focus === END_DATE ? ' -focused' : '')}
                                             {...endDateInputProps}
-                                            placeholder='Chọn ngày'
+                                            placeholder={content.addDate}
                                         />
                                     </div>
                                 </div>
@@ -291,7 +292,7 @@ function BookingBody({
                             </DateRangePicker>
 
                             <button className="booking_btn_confirm_edit" onClick={handleSaveEditDate} type="submit">
-                                Lưu
+                                {content.save}
                             </button>
                         </div>
                     </div>
@@ -300,7 +301,7 @@ function BookingBody({
                 <div className="bookingBody_components">
                     <div className="bookingBody_component">
                         <div className="bookingBody_component_block">
-                            <h3>Loại phòng</h3>
+                            <h3>{content.typeRoom}</h3>
                             <div className="bookingBody_component_day_block_subText">
                                 {typeRoom}
                             </div>
@@ -311,20 +312,20 @@ function BookingBody({
                         
                         {/* Edit type Room */}
                         <div className={clickEditTypeRoom ? "bookingBody_component_edit_typeRoom active" : "bookingBody_component_edit_typeRoom"}>
-                            <p>Chọn loại phòng:</p>
+                            <p>{content.selectRoomType}</p>
 
-                            {arrayRoomTypeOfHotel.map(type => {
-                                let t = "Nhỏ";
+                            {arrayRoomTypeOfHotel.map((type, index) => {
+                                let t = content.smallRoom;
                                 if(type == "Small"){
-                                    t = "Nhỏ";
+                                    t = content.smallRoom;
                                 }
                                 else if(type == "Medium"){
-                                    t = "Vừa"
+                                    t = content.mediumRoom;
                                 }
                                 else if(type == "Large"){
-                                    t = "Lớn"
+                                    t = content.largeRoom;
                                 }
-                                return  <label className="room_type">
+                                return  <label key={index + type} className="room_type">
                                             <input 
                                                 type="radio" 
                                                 id={type} 
@@ -339,7 +340,7 @@ function BookingBody({
                             })}
 
                             <button className="booking_btn_confirm_edit" onClick={handleSaveEditTypeRoom}>
-                                Lưu
+                                {content.save}
                             </button>
                         </div>     
                     </div>
@@ -349,16 +350,16 @@ function BookingBody({
 
                 <div className="bookingBody_components">
                     <div className="bookingBody_component">
-                        <h2>Chi tiết giá</h2>
+                        <h2>{content.priceDetails}</h2>
                     </div>
                 </div>
 
                 <div className="bookingBody_components">
                     <div className="bookingBody_component">
                         <div className="bookingBody_component_block">
-                            <h4>Giá tiền</h4>
+                            <h4>{content.price}</h4>
                             <div className="bookingBody_component_day_block_subText">
-                                ${pricePerNight}/ đêm
+                                ${pricePerNight}/{content.night}
                             </div>
                         </div>
                     </div>
@@ -367,9 +368,9 @@ function BookingBody({
                 <div className="bookingBody_components">
                     <div className="bookingBody_component">
                         <div className="bookingBody_component_block">
-                            <h4>Số ngày ở</h4>
+                            <h4>{content.numberOfDaysToStay}</h4>
                             <div className="bookingBody_component_day_block_subText">
-                                {calDate(startDate, endDate)} đêm
+                                {calDate(startDate, endDate)} {content.night}
                             </div>
                         </div>
                     </div>
@@ -378,7 +379,7 @@ function BookingBody({
                 <div className="bookingBody_components">
                     <div className="bookingBody_component">
                         <div className="bookingBody_component_block">
-                            <h3><u>Tổng</u></h3>
+                            <h3><u>{content.total}</u></h3>
                             <div className="bookingBody_component_day_block_subText">
                                 ${pricePerNight * calDate(startDate, endDate)}
                             </div>
@@ -390,7 +391,7 @@ function BookingBody({
 
                 <div className="bookingBody_components">
                     <div className="bookingBody_component">
-                        <h2>Thanh toán bằng</h2>
+                        <h2>{content.payWith}</h2>
                     </div>
 
                     <div className="bookingBody_hotel">
@@ -398,13 +399,13 @@ function BookingBody({
                             <label className="pay_type">
                                 <input type="radio" id="small" name="pay_type" value="small" checked/>
                                 <span className="check_mark_pay"></span>
-                                Trực tiếp tại khách sạn
+                                {content.atTheHotel}
                             </label>
                             
                             <label className="pay_type disable_radio">
                                 <input type="radio" id="medium" name="pay_type" value="medium" disabled/>
                                 <span className="check_mark_pay"></span>
-                                Thẻ ngân hàng
+                                {content.bankCard}
                             </label>
                         </div>
                     </div>
@@ -416,7 +417,7 @@ function BookingBody({
                     <div className="bookingBody_component">
                         <div className="bookingBody_component_block">
                             <div className="bookingBody_component_privacy">
-                                Bằng việc chọn nút bên dưới, tôi đồng ý với <i style={{color:"red"}}>Nội quy khách sạn, Tiết lộ thông tin an toàn, Hướng dẫn về giãn cách xã hội và các hướng dẫn khác liên quan đến COVID-19 của RoyalStay</i>. Tôi cũng đồng ý thanh toán tổng số tiền được hiển thị.
+                                {content.textPrivacy1}<i style={{color:"red"}}>{content.textPrivacy2}</i>{content.textPrivacy3}
                             </div>
                         </div>
                     </div>
@@ -424,7 +425,7 @@ function BookingBody({
 
                 <div className="bookingBody_components">
                     <button className="booking_btn_confirm" onClick={confirmOrderHotel}>
-                        Xác nhận đặt phòng và phương thức thanh toán
+                        {content.confirmOrderRoom}
                     </button>
                 </div>
             </div>

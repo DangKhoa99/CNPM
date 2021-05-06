@@ -2,47 +2,54 @@ import React, {useState, useEffect} from 'react'
 import "../../style/MenuAccount.css"
 import {Avatar} from "@material-ui/core"
 import {Link} from 'react-router-dom'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function MenuLeft({
     markPage,
     fullName,
     nameUser,
     username,
-    imageUser
+    imageUser,
+    language
 }) {
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
+
     const data = [
         {
             id: "overview",
             to: "/account/overview/",
-            name: " Tổng quan về Tài khoản",
+            name: " " + content.accountOverview,
             icon: <i className="fas fa-user-circle"></i>,
             active: ""
         },
         {
             id: "profile",
             to: "/account/profile/",
-            name: "Sửa hồ sơ",
+            name: content.editProfile,
             icon: <i className="fas fa-user-edit"></i>,
             active: ""
         },
         {
             id: "favorite",
             to: "/account/favorite/",
-            name: " Yêu thích",
+            name: " " + content.favorite,
             icon: <i className="fab fa-gratipay"></i>,
             active: ""
         },
         {
             id: "booking",
             to: "/account/booking/",
-            name: " Khách sạn đang đặt",
+            name: " " + content.bookingHotel,
             icon: <i className="fas fa-calendar-check"></i>,
             active: ""
         },
         {
             id: "history_booking",
             to: "/account/history-booking/",
-            name: " Lịch sử đặt khách sạn",
+            name: " " + content.hotelBookingHistory,
             icon: <i className="fas fa-history"></i>,
             active: ""
         },
@@ -96,9 +103,9 @@ function MenuLeft({
                     <div className="account_avatar_edit">
                         <button className="account_avatar_edit_btn">
                             <div className="account_avatar_icon_edit">
-                                <label for="upload_image">
+                                <label htmlFor="upload_image">
                                     <i className="fas fa-upload" style={{fontSize: "50px", marginBottom: "10px"}}/>
-                                    <span>Chọn ảnh</span>
+                                    <span>{content.selectImage}</span>
                                 </label>
                                 <input type="file" name="image" id="upload_image" onChange={onFileChange}/>
                             </div>
@@ -115,10 +122,10 @@ function MenuLeft({
                 <div className="account_username">{username}</div>
 
                 <ul className="menuLeft_list">
-                    {data.map(item => {
+                    {data.map((item, index) => {
                         if(item.id === markPage) 
                             item.active = "menu_active"
-                        return  <li id={item.id} className={"menuLeft_menuItem " + item.active}>
+                        return  <li key={index + item} id={item.id} className={"menuLeft_menuItem " + item.active}>
                                     <Link className="menuLeft_menuLink" to={item.to}>
                                         {item.icon}
                                         {item.name}

@@ -8,8 +8,16 @@ import { store } from 'react-notifications-component'
 import history from '../../history';
 import useToken from '../../hooks/useToken'
 import { useLocation, Link } from 'react-router-dom'
+import useLanguage from '../../hooks/useLanguage'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function SignIn() {
+    const { language, setLanguage } = useLanguage();
+    let content = myConstClass.LANGUAGE;
+
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
 
     const { token, setToken } = useToken();
     const location = useLocation();
@@ -18,13 +26,13 @@ function SignIn() {
         history.push("/")
     }
 
-    document.title = "Đăng nhập | RoyalStay"
+    document.title = content.login + " | RoyalStay"
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const notificationLoginFail = {
-        title: ' RoyalStay - Thông báo',
-        message: 'Tài khoản hoặc mật khẩu không đúng',
+        title: ' RoyalStay - ' + content.notification,
+        message: content.loginWarning,
         type: 'warning',
         container: 'bottom-left',
         dismiss: {
@@ -33,8 +41,8 @@ function SignIn() {
     };
 
     const notificationLoginSuccess = {
-        title: ' RoyalStay - Thông báo',
-        message: 'Đăng nhập thành công',
+        title: ' RoyalStay - ' + content.notification,
+        message: content.loginSuccess,
         type: 'success',
         container: 'bottom-left',
         dismiss: {
@@ -42,13 +50,8 @@ function SignIn() {
         }
     };
 
-    // useEffect(() => {
-    //     onSubmit();
-    // },[])
-
     const onSubmit = async (data)  => {
-        console.log(data);
-
+        // console.log(data);
         const loginAccount = {
             username: data.username,
             password: data.password   
@@ -62,10 +65,8 @@ function SignIn() {
             }
             else{
                 const accessToken = response.data;
-
                 setToken(accessToken);
-               
-                console.log("token 1: ",token);
+                // console.log("token 1: ",token);
             // console.log(setToken(response.data));
                 // store.addNotification(notificationLoginSuccess);
 
@@ -79,7 +80,7 @@ function SignIn() {
                 if(location.pathname == "/sign-in"){
                     // history.push("/");
                     window.location = "/";
-                    console.log("token path sign in: ",token)//null
+                    // console.log("token path sign in: ",token)//null
                     store.addNotification(notificationLoginSuccess);
                     // window.location.reload();
 
@@ -94,17 +95,10 @@ function SignIn() {
         })
         .catch(err => {
             console.log("Error: ", err);
-        })
-
-        
+        })    
     }
 
-    
-
-    console.log("token out Submit: ",token);
-
-
-    // console.log("token3", token)
+    // console.log("token out Submit: ", token);
 
     const Eye = <FontAwesomeIcon className="iconEye" icon={faEye} />;
     const EyeSlash = <FontAwesomeIcon className="iconEye" icon ={faEyeSlash}/>;
@@ -114,10 +108,10 @@ function SignIn() {
     const password = useRef();
 
     const { ref, ...rest } = register("password", {
-        required: "Vui lòng nhập mật khẩu", 
+        required: content.pleaseEnterPassword, 
         minLength: {
             value: 6,
-            message: "Mật khẩu phải chứa hơn 6 kí tự"
+            message: content.validationPassword
         }
     })
 
@@ -126,7 +120,6 @@ function SignIn() {
         password.current.type = showPassword ? "password" : "text";
     }
 
-
     return (
         <div className="signIn">
             <div className="loginRegister">
@@ -134,7 +127,7 @@ function SignIn() {
                     <div className="formLoginRegister">
                         <div className="formLoginRegister_container">
                             <header>
-                                <h1>Đăng nhập vào <a href="/" style={{textDecoration: "none", color: "black"}}>RoyalStay</a></h1>
+                                <h1>{content.titleSignIn}<a href="/" style={{textDecoration: "none", color: "black"}}>RoyalStay</a></h1>
                             </header>
                             <section>
 
@@ -144,12 +137,12 @@ function SignIn() {
                                             className="form_input"
                                             autoComplete="off"
                                             type="text" 
-                                            placeholder="Nhập tài khoản" 
+                                            placeholder={content.placeholderUsername}
                                             {...register("username", {
-                                                required: "Vui lòng nhập tài khoản", 
+                                                required: content.validationUsername, 
                                                 pattern: {
                                                     value: /^([a-z\d]+-)*[a-z\d]+$/i,
-                                                    message: "Tên tài khoản không hợp lệ"
+                                                    message: content.validationUsername1
                                                 }
                                             })} 
                                         />
@@ -162,7 +155,7 @@ function SignIn() {
                                                 className="form_input"
                                                 autoComplete="off"
                                                 type="password" 
-                                                placeholder="Nhập mật khẩu"
+                                                placeholder={content.placeholderPassword}
                                                 {...rest}
                                                 ref={(e) => {
                                                     ref(e)
@@ -175,11 +168,11 @@ function SignIn() {
                                     </div>
                                     
 
-                                    <button className="loginRegister_submit_btn" type="submit">Đăng nhập</button>
+                                    <button className="loginRegister_submit_btn" type="submit">{content.login}</button>
 
                                     <div className="loginRegister_subText">
-                                        Bạn chưa có tài khoản?
-                                        <Link to="/sign-up"> Đăng ký</Link>
+                                        {content.notHaveAcc}
+                                        <Link to="/sign-up"> {content.register}</Link>
                                     </div>                           
                                 </form>
                             </section>
@@ -192,6 +185,3 @@ function SignIn() {
 }
 
 export default SignIn
-// SignIn.propTypes = {
-//     setToken: PropTypes.func.isRequired
-// };

@@ -106,10 +106,42 @@
   cursor: default;
 }
 
+.center_footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 15%;
+}
+
 /* Copy right */
 .website_rights {
   color: black;
   margin-bottom: 16px;
+}
+
+.center_footer span::before {
+  content: "Khoa";
+  animation: animate infinite 3s;
+  margin-left: 5px;
+  transition-duration: 0.5s;
+  opacity: 1;
+}
+
+@keyframes animate {
+  0% {
+      content: "Khoa";
+      opacity: 1;
+  }
+
+  50% {
+      content: "Tài";
+      opacity: 1;
+  }
+
+  75% {
+      content: "Đô";
+      opacity: 1;
+  }
 }
 
 /* Các Social Icons */
@@ -117,7 +149,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 240px;
+  /* width: 240px; */
   margin-bottom: 16px;
 }
 

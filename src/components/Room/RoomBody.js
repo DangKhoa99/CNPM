@@ -22,6 +22,7 @@ import {ReactComponent as NoSmoking} from "../../icons/iconNoSmoking.svg"
 import {ReactComponent as NoPets} from "../../icons/iconNoPets.svg"
 
 import RoomBooking from "./RoomBooking"
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function RoomBody({
     idHotel,
@@ -29,7 +30,14 @@ function RoomBody({
     roomType,
     quantity,
     price,
+    language
 }) {
+    let content = myConstClass.LANGUAGE;
+
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
+
     const myRef = useRef(null);
 
     const [small, setSmall] = useState(false);
@@ -71,47 +79,47 @@ function RoomBody({
         },
         {
           symbol: <Parking />,
-          txt: "Bãi đậu xe miễn phí"
+          txt: content.freeParking
         },
         {
           symbol: <Pool />,
-          txt: "Bể bơi"
+          txt: content.pool
         },
         {
           symbol: <AirConditioner />,
-          txt: "Máy điều hòa"
+          txt: content.airConditioner
         },
         {
           symbol: <Essentials />,
-          txt: "Tiện nghi thiết yếu"
+          txt: content.essentials
         },
         {
           symbol: <Hangers />,
-          txt: "Mắc áo"
+          txt: content.hangers
         },
         {
           symbol: <HairDryer />,
-          txt: "Máy sấy tóc"
+          txt: content.hairDryer
         },
         {
           symbol: <Kitchen />,
-          txt: "Bếp"
+          txt: content.kitchen
         },
         {
           symbol: <SecurityCamera />,
-          txt: "Camera an ninh trong nhà"
+          txt: content.securityCamera
         },
         {
           symbol: <Elevator />,
-          txt: "Thang máy"
+          txt: content.elevator
         },
         {
           symbol: <TV />,
-          txt: "Tivi"
+          txt: content.TV
         },
         {
           symbol: <More />,
-          txt: "Và nhiều tiện nghi khác"
+          txt: content.otherAmenities
         },
     ]);
 
@@ -121,19 +129,17 @@ function RoomBody({
         setIsReadMore(!isReadMore);
     };
 
-
-
     return (
         <div className="roomBody">
             <div className="roomBody_container_left">
                 <div className="roomBody_description">
-                    <h2 ref={myRef}>Mô tả</h2>
+                    <h2 ref={myRef}>{content.description}</h2>
                     <div className="roomBody_description_paragraph">
                         <span >{isReadMore ? description.slice(0, 150) + "..." : description}</span>
                         
                     </div>
                     <button onClick={() => {toggleReadMore(); scrollToElement();}} className="readMore">
-                            {isReadMore ? "Xem thêm" : " Ẩn bớt"}
+                            {isReadMore ? content.readMore : content.hidden}
                     </button> 
 
                 </div>
@@ -141,7 +147,7 @@ function RoomBody({
                 <div className="roomBody_line"></div>
 
                 <div className="roomBody_rooms">
-                    <h2>Loại phòng</h2>
+                    <h2>{content.typeRoom}</h2>
                     <div className="roomBody_rooms_options">
                         <div className="roomBody_rooms_roomTypes">
 
@@ -153,9 +159,9 @@ function RoomBody({
                                                 <TwinBeds />
                                             </span>
                                         </div>
-                                        <div className="roomBody_rooms_roomType_frame_title">Phòng nhỏ</div>
-                                        <div className="roomBody_rooms_roomType_frame_subTitle">1 giường đôi</div>
-                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {priceSmallRoom}$ /đêm</div>
+                                        <div className="roomBody_rooms_roomType_frame_title">{content.smallRoom}</div>
+                                        <div className="roomBody_rooms_roomType_frame_subTitle">{content.doubleBed}</div>
+                                        <div className="roomBody_rooms_roomType_frame_price">{content.price}: {priceSmallRoom}$ /{content.night}</div>
                                     </div>
                                 </div>
                             </div>
@@ -172,9 +178,9 @@ function RoomBody({
                                                 <TwinBeds />
                                             </span>
                                         </div>
-                                        <div className="roomBody_rooms_roomType_frame_title">Phòng vừa</div>
-                                        <div className="roomBody_rooms_roomType_frame_subTitle">1 giường đơn + 1 giường đôi</div>
-                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {priceMediumRoom}$ /đêm</div>
+                                        <div className="roomBody_rooms_roomType_frame_title">{content.mediumRoom}</div>
+                                        <div className="roomBody_rooms_roomType_frame_subTitle">{content.mixBed}</div>
+                                        <div className="roomBody_rooms_roomType_frame_price">{content.price}: {priceMediumRoom}$ /{content.night}</div>
                                     </div>
                                 </div>
                             </div>
@@ -191,9 +197,9 @@ function RoomBody({
                                                 <TwinBeds />
                                             </span>
                                         </div>
-                                        <div className="roomBody_rooms_roomType_frame_title">Phòng lớn</div>
-                                        <div className="roomBody_rooms_roomType_frame_subTitle">2 giường đôi</div>
-                                        <div className="roomBody_rooms_roomType_frame_price">Giá tiền: {priceLargeRoom}$ /đêm</div>
+                                        <div className="roomBody_rooms_roomType_frame_title">{content.largeRoom}</div>
+                                        <div className="roomBody_rooms_roomType_frame_subTitle">{content.doubleBeds}</div>
+                                        <div className="roomBody_rooms_roomType_frame_price">{content.price}: {priceLargeRoom}$ /{content.night}</div>
                                     </div>
                                 </div>
                             </div>
@@ -204,10 +210,10 @@ function RoomBody({
                 <div className="roomBody_line"></div>
 
                 <div className="roomBody_amenities">
-                    <h2>Tiện nghi</h2>
+                    <h2>{content.amenities}</h2>
                     <div className="roomBody_amenities_cells">
-                        {amenities.map(a => {
-                            return  <div className="roomBody_amenities_cell">
+                        {amenities.map((a, index) => {
+                            return  <div key={index + a} className="roomBody_amenities_cell">
                                         <div className="roomBody_amenities_cell_detail">
                                             <div className="roomBody_amenities_cell_detail_title">{a.txt}</div>
                                             <div className="roomBody_amenities_cell_detail_icon">{a.symbol}</div>
@@ -220,45 +226,45 @@ function RoomBody({
                 <div className="roomBody_line"></div>
 
                 <div className="roomBody_thingsToKnow">
-                    <h2>Những điều cần biết</h2>
+                    <h2>{content.thingsToKnow}</h2>
                     <div className="roomBody_thingsToKnow_cells">
                         <div className="roomBody_thingsToKnow_cell">
-                            <h3>Nội quy khách sạn</h3>
+                            <h3>{content.hotelRules}</h3>
                             <div className="roomBody_thingsToKnow_cell_detail">
-                                <div className="roomBody_thingsToKnow_cell_detail_title">Nhận phòng: Sau 14:00</div>
+                                <div className="roomBody_thingsToKnow_cell_detail_title">{content.hoursCheckIn}</div>
                                 <div className="roomBody_thingsToKnow_cell_detail_icon"><Clock/></div>
                             </div>
 
                             <div className="roomBody_thingsToKnow_cell_detail">
-                                <div className="roomBody_thingsToKnow_cell_detail_title">Trả phòng: 12:00</div>
+                                <div className="roomBody_thingsToKnow_cell_detail_title">{content.hoursCheckOut}</div>
                                 <div className="roomBody_thingsToKnow_cell_detail_icon"><Clock/></div>
                             </div>
 
                             <div className="roomBody_thingsToKnow_cell_detail">
-                                <div className="roomBody_thingsToKnow_cell_detail_title">Không hút thuốc</div>
+                                <div className="roomBody_thingsToKnow_cell_detail_title">{content.noSmoking}</div>
                                 <div className="roomBody_thingsToKnow_cell_detail_icon"><NoSmoking /></div>
                             </div>
 
                             <div className="roomBody_thingsToKnow_cell_detail">
-                                <div className="roomBody_thingsToKnow_cell_detail_title">Không thú cưng</div>
+                                <div className="roomBody_thingsToKnow_cell_detail_title">{content.noPets}</div>
                                 <div className="roomBody_thingsToKnow_cell_detail_icon"><NoPets/></div>
                             </div>
                         </div>
 
                         <div className="roomBody_thingsToKnow_cell">
-                            <h3>Y tế và an toàn</h3>
+                            <h3>{content.healthSafety}</h3>
                             <div className="roomBody_thingsToKnow_cell_detail">
-                                <div className="roomBody_thingsToKnow_cell_detail_title">Đã cam kết thực hiện quy trình vệ sinh tăng cường của RoyalStay.</div>
+                                <div className="roomBody_thingsToKnow_cell_detail_title">{content.commitCleaning}</div>
                                 <div className="roomBody_thingsToKnow_cell_detail_icon"><IncreaseHygiene/></div>
                             </div>
 
                             <div className="roomBody_thingsToKnow_cell_detail">
-                                <div className="roomBody_thingsToKnow_cell_detail_title">Áp dụng hướng dẫn về giãn cách xã hội và các hướng dẫn khác liên quan đến COVID-19 của RoyalStay</div>
+                                <div className="roomBody_thingsToKnow_cell_detail_title">{content.applicationCOVID19}</div>
                                 <div className="roomBody_thingsToKnow_cell_detail_icon"><Aerosol/></div>
                             </div>
 
                             <div className="roomBody_thingsToKnow_cell_detail">
-                                <div className="roomBody_thingsToKnow_cell_detail_title">Máy phát hiện khí CO</div>
+                                <div className="roomBody_thingsToKnow_cell_detail_title">{content.COdetector}</div>
                                 <div className="roomBody_thingsToKnow_cell_detail_icon"><CO/></div>
                             </div>
                         </div>
@@ -275,6 +281,7 @@ function RoomBody({
                     quantity={quantity}
                     price={price}
                     idHotel={idHotel}
+                    language={language}
                 />
             </div>
         </div>

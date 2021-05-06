@@ -6,15 +6,23 @@ import useToken from '../../hooks/useToken'
 import SignIn from '../SignIn/SignIn'
 import useGetDataCustomer from '../../hooks/useDataCustomer'
 import LoadingScreen from "../../components/LoadingScreen"
+import useLanguage from '../../hooks/useLanguage'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function UserManagement() {
+    const { language, setLanguage } = useLanguage();
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+      ? (content = content.English)
+      : (content = content.Vietnam);
+
     const {token, setToken} = useToken();
     const {dataCustomer, isLoading} = useGetDataCustomer();
     if(!token){
         return <SignIn />
     }
 
-    document.title = "Quản lý người dùng | RoyalStay"
+    document.title = content.userManagement + " | RoyalStay"
     const fullName = (dataCustomer.name || "");
     const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
     return (
@@ -28,9 +36,12 @@ function UserManagement() {
                             nameUser={userName}
                             username={dataCustomer.username}
                             imageUser={fullName}
+                            language={language}
                         />
                     }
-                    <MenuUserManagement/>
+                    <MenuUserManagement
+                        language={language}
+                    />
                 </div>
             </div> 
         </div>

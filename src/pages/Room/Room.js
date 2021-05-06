@@ -3,12 +3,15 @@ import "../../style/Room.css"
 import RoomHeader from "../../components/Room/RoomHeader"
 import RoomBody from "../../components/Room/RoomBody"
 import RoomReview from "../../components/Room/RoomReview"
+import RoomSuggestionHotel from "../../components/Room/RoomSuggestionHotel"
 import LoadingScreen from "../../components/LoadingScreen"
-
 import axios from 'axios'
 import useToken from '../../hooks/useToken'
+import useLanguage from '../../hooks/useLanguage'
 
 function Room() {
+    const { language, setLanguage } = useLanguage();
+
     const scrollToElement = (ref) => {
         window.scrollTo({
             behavior: "smooth",
@@ -20,7 +23,6 @@ function Room() {
     const roomReview = useRef();
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    // const getID = window.location.href.split("=").pop();
     const searchParams = new URLSearchParams(window.location.search);
     const getID = searchParams.get('id');
 
@@ -45,7 +47,6 @@ function Room() {
         .catch(error => console.log(error))
     };
 
-
     const loadDetailHotelFromServer = useCallback(async () =>{
         setIsLoading(true);
         const options = {
@@ -54,8 +55,8 @@ function Room() {
                 "hotelId": getID
             },
             url: "http://localhost:5000/hotel/"
-        }
-        await axios(options)
+            }
+            await axios(options)
             .then(response => {
                 setData(response.data);
                 setIsLoading(false);
@@ -105,6 +106,7 @@ function Room() {
                     reference={roomHeader}
                     click={() => scrollToElement(roomReview)}
                     savedHotel={savedHotel}
+                    language={language}
                 />
                 }
                 {isLoading ? <LoadingScreen/>
@@ -115,12 +117,20 @@ function Room() {
                     roomType={data.room.roomType}
                     quantity={data.room.quantity}
                     price={data.room.price}
+                    language={language}
                 />
                 }
             
                 <RoomReview 
                     reference={roomReview}
                     idHotel={getID}
+                    language={language}
+                />
+
+                <RoomSuggestionHotel
+                    location={data.address.split(" ").pop()}
+                    idHotel={getID}
+                    language={language}
                 />  
             </div>      
         </div>

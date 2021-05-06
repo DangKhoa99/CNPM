@@ -2,35 +2,42 @@ import React, {useState, useEffect}  from 'react'
 import "../../style/MenuAdmin.css"
 import {Avatar} from "@material-ui/core"
 import {Link} from 'react-router-dom'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function MenuAdmin({
     markPage,
     fullName,
     nameUser,
     username,
-    imageUser
+    imageUser,
+    language
 }) {
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
+
     const data = [
         {
             id: "userManagement",
             to: "/account/admin/user-management/",
-            name: "Quản lý người dùng",
+            name: content.userManagement,
             icon: <i className="fas fa-user-cog"></i>,
             active: ""
         },
         {
             id: "hotelManagement",
             to: "/account/admin/hotel-management/",
-            name: "Quản lý khách sạn",
+            name: content.hotelManagement,
             icon: <i className="fas fa-hotel"></i>,
             active: ""
         },
     ];
+
     return (
         <div className="menuAdmin">
-
             <input type="checkbox" id="check"/>
-            <label for="check">
+            <label htmlFor="check">
                 <i className="fas fa-bars" id="sidebar_btn"></i>
             </label>
 
@@ -42,10 +49,10 @@ function MenuAdmin({
                     src={nameUser}
                 />
                 <div className="menuAdmin_username">{username}</div>
-                {data.map(item => {
+                {data.map((item, index) => {
                 if(item.id === markPage) 
                     item.active = "menu_active"
-                return  <div id={item.id} className={"menuAdmin_menuItem " + item.active}>
+                return  <div key={index + index} id={item.id} className={"menuAdmin_menuItem " + item.active}>
                             <Link className="menuAdmin_menuLink" to={item.to}>
                                 {item.icon}
                                 <span style={{fontSize: "16px"}}>{item.name}</span>

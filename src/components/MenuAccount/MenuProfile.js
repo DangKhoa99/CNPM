@@ -4,6 +4,7 @@ import "../../style/MenuProfile.css"
 // import { DatePicker } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 // import { Favorite } from '@material-ui/icons'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function MenuProfile({
     id,
@@ -14,8 +15,13 @@ function MenuProfile({
     phone,
     sex,
     address,
+    language
 }) {
     // const [date, setDate] = useState(new Date(2000, 8, 9))
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
 
     const [selectValue, setSelectValue] = useState(sex);
     const [changeFullName, setChangeFullName] = useState(fullName);
@@ -48,24 +54,25 @@ function MenuProfile({
     return (
         <div className="menuProfile">
             <div className="menuProfile_container">
-                <h1 className="menuProfile_title">Chỉnh sửa hồ sơ</h1>
+                <h1 className="menuProfile_title">{content.editProfile}</h1>
                 <form 
                 // onSubmit={e => this.handleSubmitForm(e)}
                 >
                     <section className="menuProfile_form">
                         <div className="menuProfile_form_row">
-                            <label className="menuProfile_form_label" for="username">Id tài khoản</label>
+                            <label className="menuProfile_form_label" htmlFor="account_id">{content.idAccount}</label>
                             <input 
                                 type="text" 
-                                id="username" 
+                                id="account_id" 
                                 className="menuProfile_form_input" 
-                                disabled="true" name="username" 
+                                disabled
+                                name="account_id" 
                                 value={id}
                             />
                         </div>
 
                         <div className="menuProfile_form_row">
-                            <label className="menuProfile_form_label" for="fullName">Họ và tên</label>
+                            <label className="menuProfile_form_label" htmlFor="fullName">{content.fullName}</label>
                             <input 
                                 type="text" 
                                 id="fullName" 
@@ -77,30 +84,31 @@ function MenuProfile({
                         </div>
 
                         <div className="menuProfile_form_row">
-                            <label className="menuProfile_form_label" for="username">Tên tài khoản</label>
+                            <label className="menuProfile_form_label" htmlFor="username">{content.username}</label>
                             <input 
                                 type="text" 
                                 id="username" 
                                 className="menuProfile_form_input" 
-                                disabled="true" name="username" 
+                                disabled
+                                name="username" 
                                 value={username}
                             />
                         </div>
 
                         <div className="menuProfile_form_row">
-                            <label className="menuProfile_form_label" for="password">Mật khẩu</label>
+                            <label className="menuProfile_form_label" htmlFor="password">{content.password}</label>
                             <input 
                                 type="password" 
                                 id="password" 
                                 className="menuProfile_form_input" 
-                                disabled="true" 
+                                disabled
                                 name="password" 
                                 value={password}
                             />
                         </div>
 
                         <div className="menuProfile_form_row">
-                            <label className="menuProfile_form_label" for="email">Địa chỉ Email</label>
+                            <label className="menuProfile_form_label" htmlFor="email">Email</label>
                             <input 
                                 type="email" 
                                 id="text" 
@@ -112,7 +120,7 @@ function MenuProfile({
                         </div>
 
                         {/* <div className="menuProfile_form_row">
-                            <label className="menuProfile_form_label" for="birthDay">Ngày sinh</label>
+                            <label className="menuProfile_form_label" htmlFor="birthDay">Ngày sinh</label>
                             <input type="text" id="birthDay" className="menuProfile_form_input" name="birthDay" value="09/09/2000" />
                             <DatePicker 
                                 date={date} 
@@ -132,7 +140,7 @@ function MenuProfile({
                         </div> */}
 
                         <div className="menuProfile_form_row">
-                            <label className="menuProfile_form_label" for="address">Địa chỉ</label>
+                            <label className="menuProfile_form_label" htmlFor="address">{content.address}</label>
                             <input 
                                 type="text" 
                                 id="address" 
@@ -144,7 +152,7 @@ function MenuProfile({
                         </div>
 
                         <div className="menuProfile_form_row">
-                            <label className="menuProfile_form_label" for="phone">Số điện thoại</label>
+                            <label className="menuProfile_form_label" htmlFor="phone">{content.phoneNumber}</label>
                             <input 
                                 type="text" 
                                 id="phone" 
@@ -156,7 +164,7 @@ function MenuProfile({
                         </div>
 
                         <div className="menuProfile_form_row">
-                            <label className="menuProfile_form_label" for="gender">Giới tính</label>
+                            <label className="menuProfile_form_label" htmlFor="gender">{content.sex}</label>
                             {/* <input type="text" id="gender" name="gender" className="menuProfile_form_input" value={selectValue} /> */}
                             
                             <div className="menuProfile_form_select">
@@ -166,9 +174,9 @@ function MenuProfile({
                                     value={selectValue}
                                     onChange={e => handleSelectValue(e)}
                                 >
-                                    <option value="NEUTRAL">Giới tính trung lập</option>
-                                    <option value="MALE">Nam</option>
-                                    <option value="FEMALE">Nữ</option>
+                                    <option value="NEUTRAL">{content.neutral}</option>
+                                    <option value="MALE">{content.male}</option>
+                                    <option value="FEMALE">{content.female}</option>
                                 </select>
                                 <svg viewBox="0 0 1024 1024">
                                     <path d="M476.455 806.696L95.291 425.532Q80.67 410.911 80.67 390.239t14.621-34.789 35.293-14.117 34.789 14.117L508.219 698.8l349.4-349.4q14.621-14.117 35.293-14.117t34.789 14.117 14.117 34.789-14.117 34.789L546.537 800.142q-19.159 19.159-38.318 19.159t-31.764-12.605z"/>
@@ -177,9 +185,9 @@ function MenuProfile({
                         </div>
                     </section>
                     <div className="menuProfile_form_btn">
-                        <a className="menuProfile_form_btn_cancel" href="/account/overview">Hủy</a>
+                        <a className="menuProfile_form_btn_cancel" href="/account/overview">{content.cancel}</a>
                         <button className="menuProfile_form_submit" type="submit" onClick={handleSubmitEditProfile}>
-                            <div className="menuProfile_form_submit_text">Lưu hồ sơ</div>
+                            <div className="menuProfile_form_submit_text">{content.saveProfile}</div>
                         </button>
                     </div>
                 </form>

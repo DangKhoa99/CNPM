@@ -3,46 +3,61 @@ import '../style/Footer.css'
 import { Link } from 'react-router-dom'
 import {ReactComponent as LogoRoyalStay} from "../icons/logoRoyalStay.svg"
 import { useLocation } from 'react-router-dom'
+import useLanguage from '../hooks/useLanguage'
+import * as myConstClass from "../constants/constantsLanguage"
 
 function Footer() {
+  const { language, setLanguage } = useLanguage();
   const location = useLocation();
+  let content = myConstClass.LANGUAGE;
+
+  language === "English"
+    ? (content = content.English)
+    : (content = content.Vietnam);
+  
+  // Singleton pattern
   const data = [
     {
-      title: "GIỚI THIỆU",
+      title: content.about,
       links: [
-        "Phương thức hoạt động",
-        "Trang tin tức",
-        "Nhà đầu tư",
-        "Cơ hội nghề nghiệp",
-        "Quyền riêng tư",
-        "Điều khoản dịch vụ",
+        content.howWorks,
+        content.newsroom,
+        content.investors,
+        content.careers,
+        content.privacy,
+        content.terms,
       ],
     },
     {
-      title: "CỘNG ĐỒNG",
+      title: content.community,
       links: [
-        "Đối tác",
-        "Mời bạn bè",
+        content.partner,
+        content.inviteFriends,
       ],
     },
     {
-      title: "ĐÓN TIẾP KHÁCH",
+      title: content.hotels,
       links: [
-        "Cho thuê phòng",
-        "Tổ chức trải nghiệm",
-        "Đón tiếp khách có trách nhiệm",
-        "Trung tâm cộng đồng",
+        content.hostHotel,
+        content.hostExperience,
+        content.responsibleHosting,
+        content.communityCenter,
       ],
     },
     {
-      title: "HỖ TRỢ",
+      title: content.support,
       links: [
-        "Trung tâm trợ giúp",
-        "Hỗ trợ khu dân cư",
-        "Tin cậy và an toàn",
+        content.helpCenter,
+        content.neighborhoodSupport,
+        content.trustSafety,
       ],
     },
   ]
+
+  // const data1 = data;
+  // data1[0].title = "KAKA";
+  // console.log("DATA", data[0].title)
+  // console.log("DATA1", data1.title)
 
   // Bấm vào logo để lên đầu trang
   const scrollToTop = () =>{
@@ -55,7 +70,7 @@ function Footer() {
   const [hideFooter, setHideFooter] = useState(false);
 
   const handleHideFooter = () =>{
-    if(location.pathname == "/404" || location.pathname == "/sign-in" || location.pathname == "/sign-up" || location.pathname == "/account/admin/user-management/" || location.pathname == "/account/admin/hotel-management/" || location.pathname == "/account/admin/add-user/" || location.pathname == "/account/admin/add-hotel/"){
+    if(location.pathname == "/404" || location.pathname == "/sign-in" || location.pathname == "/sign-up" || location.pathname == "/account/admin/user-management/" || location.pathname == "/account/admin/hotel-management/" || location.pathname == "/account/admin/add-user/" || location.pathname == "/account/admin/add-hotel/" || location.pathname == "/account/admin/detail-user"){
       setHideFooter(true)
     }
     else{
@@ -93,7 +108,12 @@ function Footer() {
               <LogoRoyalStay />
             </div>
 
-            <small className='website_rights'>© 2021 RoyalStay</small>
+            <div className="center_footer">
+              <small className='website_rights'>© 2021 RoyalStay</small>
+              <p style={{width: "100%"}}>Made with ❤️ by
+              <b><span></span></b>
+              </p>  
+            </div>
 
             <div className='social_icons'>
               <a href="https://www.facebook.com/royalStay" className="social_icon_link facebook" target="_blank" title="Facebook">

@@ -21,6 +21,9 @@ const reviewSchema = new Schema({
         type: String,
         required: true
     },
+    customerName: { //Khoa - có gì xem lại
+        type: String,
+    },
     content: {
         type: String
     },

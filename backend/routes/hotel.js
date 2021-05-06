@@ -55,7 +55,7 @@ router.route('/review').post((req, res) => {
         for(i in hotel.review){
             let customerName = await Customer.findById(hotel.review[i].customerID);
             // customerNameArr.push(customerName.name);
-            hotel.review[i].customerID = customerName.name;
+            hotel.review[i].customerName = customerName.name; // Khoa - có gì xem lại
         }
         // console.log(customerNameArr);
         res.json(hotel.review);

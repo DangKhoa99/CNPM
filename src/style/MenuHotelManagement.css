@@ -58,8 +58,9 @@
 }
 
 .menuHotelManagement_img_hotel{
-    height: 200px;
-    width: 350px;
+    background-color: gray;
+    height: 200px !important;
+    width: 350px !important;
     border-radius: 10px;
     overflow: hidden;
 }

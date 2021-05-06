@@ -1,9 +1,14 @@
 import React, {useState} from 'react'
 import useToken from '../../hooks/useToken'
+import * as myConstClass from "../../constants/constantsLanguage"
 
-export default function DataTable({ data }){
+export default function DataTable({ data, language }){
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
     const { token, setToken } = useToken();
-    const columns_vi = ["Họ tên" ,"Tài khoản", "Chức vụ"]
+    const columns_vi = [content.fullName, content.username, content.role]
     const columns = ["name" ,"username", "isAdmin"]
 
     const [sortName, setSortName] = useState(true); // false: giảm - true: tăng
@@ -17,16 +22,16 @@ export default function DataTable({ data }){
             <thead>
                 <tr>
                     {
-                        columns_vi.map(heading => {
-                            if(heading != "Họ tên"){
-                                return <th>{heading}</th>
+                        columns_vi.map((heading, index) => {
+                            if(heading != content.fullName){
+                                return <th key={index + heading}>{heading}</th>
                             }
                             else{
-                                return <th onClick={handleClickSortName} style={{cursor: "pointer"}}>{heading}{sort}</th>
+                                return <th key={index + heading} onClick={handleClickSortName} style={{cursor: "pointer"}}>{heading}{sort}</th>
                             }
                         })
                         
-                    }<th>Hành động</th>
+                    }<th>{content.action}</th>
                     
                 </tr>
             </thead>
@@ -34,44 +39,44 @@ export default function DataTable({ data }){
 
                 {data.length > 0 ?
                     sortName ? 
-                        data.sort((a, b) => (a.name > b.name)).map(row => {
+                        data.sort((a, b) => (a.name > b.name)).map((row, indexRow) => {
                             if(row["_id"] != token.customerId){
-                                return  <tr>
-                                            {columns.map(column => {
-                                                let position = "Người dùng"
+                                return  <tr key={indexRow + row}>
+                                            {columns.map((column, indexCol) => {
+                                                let position = content.user
                                                 
                                                     if(column != "isAdmin"){
-                                                        return <td>{row[column]}</td>
+                                                        return <td key={indexCol + column}>{row[column]}</td>
                                                     }
                                                     else{
                                                         if(row[column]){
-                                                            position = "Admin"
+                                                            position = content.admin
                                                         }
-                                                        return <td>{position}</td>
+                                                        return <td key={indexCol + column}>{position}</td>
                                                     }
                                                 }
                                             )}
                                                 <td>  
-                                                    <a className="menuUserManagement_table_action" href={"/account/admin/detail-user?id=" + row._id} title={"Xem thông tin của " + row.username}><i className="fas fa-info-circle"/></a>
+                                                    <a className="menuUserManagement_table_action" href={"/account/admin/detail-user?id=" + row._id} title={content.informationUser + row.username + content.informationUser1}><i className="fas fa-info-circle"/></a>
                                                 </td>
                                         </tr>
                              }
                         })
                     :
-                        data.sort((a, b) => (b.name > a.name)).map(row => {
+                        data.sort((a, b) => (b.name > a.name)).map((row, indexRow) => {
                             if(row["_id"] != token.customerId){
-                                return  <tr>
-                                            {columns.map(column => {
+                                return  <tr key={indexRow + row}>
+                                            {columns.map((column, indexCol) => {
                                                 let position = "Người dùng"
                                                 
                                                     if(column != "isAdmin"){
-                                                        return <td>{row[column]}</td>
+                                                        return <td key={indexCol + column}>{row[column]}</td>
                                                     }
                                                     else{
                                                         if(row[column]){
                                                             position = "Admin"
                                                         }
-                                                        return <td>{position}</td>
+                                                        return <td key={indexCol + column}>{position}</td>
                                                     }
                                                 }
                                             )}
@@ -81,7 +86,7 @@ export default function DataTable({ data }){
                                         </tr>
                             }
                         })
-                : "Không tìm thấy dữ liệu phù hợp"
+                : <tr><td>Không tìm thấy dữ liệu phù hợp</td></tr>
                 }
             </tbody>
         </table>

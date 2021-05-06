@@ -1,21 +1,26 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
-
+import useLanguage from '../../hooks/useLanguage'
+import * as myConstClass from "../../constants/constantsLanguage"
 import useToken from '../../hooks/useToken'
+import {calDate} from "../../helpers/calDate"
 
 function HotelInvoiceDetail() {
+    const { language, setLanguage } = useLanguage();
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
+
     const { token, setToken } = useToken();
     const searchParams = new URLSearchParams(window.location.search);
     const bookingId = searchParams.get('id');
 
-     const [dataBookingHotelOfCustomer, setDataBookingHotelOfCustomer] = useState([]);
-
-     const [dataHotel, setDataHotel] = useState(null);
-
-     let history = useHistory();
-
-     const [delTask, setDelTask] = useState(false)
+    const [dataBookingHotelOfCustomer, setDataBookingHotelOfCustomer] = useState([]);
+    const [dataHotel, setDataHotel] = useState(null);
+    let history = useHistory();
+    const [delTask, setDelTask] = useState(false)
 
     const handleConfirmationBox = () => {
         if (!delTask){
@@ -30,7 +35,7 @@ function HotelInvoiceDetail() {
         }
     }
 
-     const loadDetailHotelFromServer = useCallback(async () =>{
+    const loadDetailHotelFromServer = useCallback(async () =>{
         const options = {
             method: "POST",
             data: {
@@ -43,7 +48,6 @@ function HotelInvoiceDetail() {
                 setDataHotel(response.data);
             })
     },[dataBookingHotelOfCustomer.hotelId]); // every time id changed, new data will be loaded
-
 
     useEffect(() => {
         const getDataBookingHotelOfCustomer = async () => {
@@ -66,44 +70,40 @@ function HotelInvoiceDetail() {
             .catch(error => console.log(error))
         }
 
-
         if(token){
             getDataBookingHotelOfCustomer();
         }
-
         loadDetailHotelFromServer();
-
-
     },[loadDetailHotelFromServer])
     
-
     if(!dataHotel) return null
 
-    let type = "Nhỏ";
+    let type = content.smallRoom;
     const priceSmallRoom = dataHotel.room.price;
     const priceMediumRoom = dataHotel.room.price + 50;
     const priceLargeRoom = dataHotel.room.price + 100;
 
     let pricePerNight = 0;
     if(dataBookingHotelOfCustomer.roomType == "small"){
-        type = "Nhỏ";
+        type = content.smallRoom;
         pricePerNight = priceSmallRoom;
     }
     else if(dataBookingHotelOfCustomer.roomType == "medium"){
-        type = "Vừa";
+        type = content.mediumRoom;
         pricePerNight = priceMediumRoom;
     }
     else if(dataBookingHotelOfCustomer.roomType == "large"){
-        type = "Lớn";
+        type = content.largeRoom;
         pricePerNight = priceLargeRoom;
     }
 
-    const calNight = parseInt(dataBookingHotelOfCustomer.checkOut.split("/")[1]) - parseInt(dataBookingHotelOfCustomer.checkIn.split("/")[1]);
+    let checkIn = new Date(dataBookingHotelOfCustomer.checkIn)
+    let checkOut = new Date(dataBookingHotelOfCustomer.checkOut)
+    const calNight = calDate(checkIn, checkOut);
 
-    document.title = "Chi tiết khách sạn đặt | RoyalStay"
+    document.title = content.detailInvoice + " | RoyalStay"
 
     const handleDeleteOrderHotel = () =>{
-        console.log("CLICK")
         const options = {
             method: "POST",
             headers: {
@@ -136,12 +136,12 @@ function HotelInvoiceDetail() {
                             </div>
 
                             <div className="bookingHeader_text">
-                                Chi tiết hóa đơn khách sạn đã đặt
+                                {content.detailInvoice}
                             </div>
                             <a 
                                 className="menuBookingCard_btn_hotel1" 
                                 href={"/room-detail?id=" + dataBookingHotelOfCustomer.hotelId} 
-                                title="Xem khách sạn"
+                                title={content.detailRoom}
                             >
                                 <i className="fas fa-hotel" style={{fontSize: "20px"}}/>
                             </a>
@@ -154,7 +154,7 @@ function HotelInvoiceDetail() {
 
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
-                                <h4 style={{marginBottom: "20px", color: "gray"}}><i className="fas fa-receipt"/> Mã hóa đơn: <i>{bookingId}</i></h4>
+                                <h4 style={{marginBottom: "20px", color: "gray"}}><i className="fas fa-receipt"/> {content.idInvoice}: <i>{bookingId}</i></h4>
 
                                 <div className="bookingBody_hotel_name">
                                         <h2>{dataHotel.name}</h2>
@@ -172,14 +172,14 @@ function HotelInvoiceDetail() {
 
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
-                                <h2>Chuyến đi của bạn</h2>
+                                <h2>{content.yourTrip}</h2>
                             </div>
                         </div>
 
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
                                 <div className="bookingBody_component_block">
-                                    <h3>Ngày</h3>
+                                    <h3>{content.dates}</h3>
                                     <div className="bookingBody_component_day_block_subText">
                                         {dataBookingHotelOfCustomer.checkIn} - {dataBookingHotelOfCustomer.checkOut}
                                     </div>
@@ -190,7 +190,7 @@ function HotelInvoiceDetail() {
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
                                 <div className="bookingBody_component_block">
-                                    <h3>Loại phòng</h3>
+                                    <h3>{content.typeRoom}</h3>
                                     <div className="bookingBody_component_day_block_subText">
                                         {type}
                                     </div>
@@ -201,9 +201,9 @@ function HotelInvoiceDetail() {
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
                                 <div className="bookingBody_component_block">
-                                    <h3>Giá tiền</h3>
+                                    <h3>{content.price}</h3>
                                     <div className="bookingBody_component_day_block_subText">
-                                        ${pricePerNight}/đêm
+                                        ${pricePerNight}/{content.night}
                                     </div>
                                 </div>
                             </div>
@@ -212,9 +212,9 @@ function HotelInvoiceDetail() {
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
                                 <div className="bookingBody_component_block">
-                                    <h3>Số ngày ở</h3>
+                                    <h3>{content.numberOfDaysToStay}</h3>
                                     <div className="bookingBody_component_day_block_subText">
-                                        {calNight} đêm
+                                        {calNight} {content.night}
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@ function HotelInvoiceDetail() {
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
                                 <div className="bookingBody_component_block">
-                                    <h3><u>Tổng</u></h3>
+                                    <h3><u>{content.total}</u></h3>
                                     <div className="bookingBody_component_day_block_subText">
                                         ${pricePerNight * calNight}
                                     </div>
@@ -234,9 +234,9 @@ function HotelInvoiceDetail() {
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
                                 <div className="bookingBody_component_block">
-                                    <h3>Hình thức thanh toán</h3>
+                                    <h3>{content.payments}</h3>
                                     <div className="bookingBody_component_day_block_subText">
-                                    Trực tiếp tại khách sạn
+                                    {content.atTheHotel}
                                     </div>
                                 </div>
                             </div>
@@ -245,7 +245,7 @@ function HotelInvoiceDetail() {
                         <div className="bookingBody_components">
                             <div className="bookingBody_component">
                                 <div className="bookingBody_component_block">
-                                    <h3>Trạng thái</h3>
+                                    <h3>{content.status}</h3>
                                     <div className="bookingBody_component_day_block_subText">
                                         <p className={"hotel_booking_status " + dataBookingHotelOfCustomer.status}>{dataBookingHotelOfCustomer.status}</p>
                                     </div>
@@ -255,15 +255,19 @@ function HotelInvoiceDetail() {
 
                         <div className="bookingBody_components_line"></div>
 
+
+
+                        {/* <div className="bookingBody_components_line"></div> */}
+
                         <div className="bookingBody_components">
                             <button className={"booking_btn_confirm " + dataBookingHotelOfCustomer.status} style={{marginRight: "20px"}} onClick={() => {handleConfirmationBox()}}>
-                                Hủy đặt phòng
+                                {content.cancelOrderRoom}
                             </button>
 
                             {/* ConfirmBOX DELETE */}
                             <div className="confirmBox_container">
                                 <div className="confirmation-text">
-                                    Bạn có chắc muốn hủy đặt phòng khách sạn ở <br></br><b>`{dataHotel.name}`</b>
+                                    {content.confirmCancelOrderRoom}<br></br><b>`{dataHotel.name}`</b>?
                                 </div>
 
                                 <div className="button-container">

@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+import * as myConstClass from "../constants/constantsLanguage"
 
 function SearchBar({
     colorHeader,
     openMenuSearchSuggestion,
     closeMenuSearchSuggestion,
-
     menuSearchSuggestion,
     blockHeader,
     handleMenuSearchSuggestionsClick,
-
+    language,
 }) {
     const [location, setLocation] = useState("");
     const [searchLocation, setSearchLocation] = useState({
@@ -60,6 +60,12 @@ function SearchBar({
           });
       }
     }
+
+    let content = myConstClass.LANGUAGE;
+  
+    language === "English"
+      ? (content = content.English)
+      : (content = content.Vietnam);
     
     return (
         <div className="searchBar">
@@ -74,7 +80,7 @@ function SearchBar({
                 type="text" 
                 name="result" 
                 className={colorHeader ? "input_search active" : "input_search"} 
-                placeholder="Bạn sắp đi đâu?" 
+                placeholder={content.placeholderSearch} 
                 spellCheck="false"
                 autoComplete="off"
                 value={searchLocation.location}

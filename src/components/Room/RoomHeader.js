@@ -3,9 +3,10 @@ import "../../style/RoomHeader.css"
 import StarIcon from "@material-ui/icons/Star"
 import Gallery from 'react-grid-gallery';
 import { store } from 'react-notifications-component'
-
 import axios from 'axios'
 import useToken from '../../hooks/useToken'
+import * as myConstClass from "../../constants/constantsLanguage"
+import { calAvgReview } from "../../helpers/calAvgReview"
 
 function RoomHeader({
     idHotel,
@@ -15,8 +16,15 @@ function RoomHeader({
     review,
     reference,
     click,
-    savedHotel
+    savedHotel,
+    language
 }) {
+    let content = myConstClass.LANGUAGE;
+
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
+
     // console.log("ID khách sạn: ", idHotel)
     const { token, setToken } = useToken();
     const [clickFavorite, setClickFavorite] = useState(false);
@@ -52,8 +60,8 @@ function RoomHeader({
     }
 
     const notification_saveFavorite = {
-        title: ' RoyalStay - Thông báo',
-        message: 'Đã lưu khách sạn `' + name + '`',
+        title: 'RoyalStay - ' + content.notification,
+        message: content.savedHotel + ' `' + name + '`',
         type: 'success',// 'default', 'success', 'info', 'warning'
         container: 'bottom-left',// where to position the notifications
         dismiss: {
@@ -62,8 +70,8 @@ function RoomHeader({
     };
 
     const notification_notSaveFavorite = {
-        title: 'RoyalStay - Thông báo',
-        message: 'Bỏ lưu khách sạn `' + name + '`',
+        title: 'RoyalStay - ' + content.notification,
+        message: content.unsaved + ' `' + name + '`',
         type: 'danger',
         container: 'bottom-left',
         dismiss: {
@@ -72,8 +80,8 @@ function RoomHeader({
     };
 
     const notification_requireLogin = {
-        title: 'RoyalStay - Thông báo',
-        message: 'Bạn chưa đăng nhập',
+        title: 'RoyalStay - ' + content.notification,
+        message: content.notLogin,
         type: 'danger',
         container: 'bottom-left',
         dismiss: {
@@ -81,14 +89,7 @@ function RoomHeader({
         }
     };
 
-    let avgReview = 0;
-    if(review.length > 0){
-        for(var key in review){
-            var obj = review[key];
-            avgReview = avgReview + obj.score;
-        }
-        avgReview = (avgReview / review.length).toFixed(1);
-    }
+    let avgReview = calAvgReview(review);
 
     const saveHotel = async () => {
         const options = {
@@ -135,35 +136,35 @@ function RoomHeader({
             thumbnail: img[0],
             thumbnailWidth: 200,
             thumbnailHeight: 130,
-            caption: "Image 1"
+            caption: content.image1
         },
         {
             src: img[1],
             thumbnail: img[1],
             thumbnailWidth: 200,
             thumbnailHeight: 130,
-            caption: "Image 2"
+            caption: content.image2
         },
         {
             src: img[2],
             thumbnail: img[2],
             thumbnailWidth: 200,
             thumbnailHeight: 130,
-            caption: "Image 3"
+            caption: content.image3
         },
         {
             src: img[3],
             thumbnail: img[3],
             thumbnailWidth: 200,
             thumbnailHeight: 130,
-            caption: "Image 4"
+            caption: content.image4
         },
         {
             src: img[4],
             thumbnail: img[4],
             thumbnailWidth: 200,
             thumbnailHeight: 130,
-            caption: "Image 5"
+            caption: content.image5
         },
     ];
     
@@ -173,28 +174,21 @@ function RoomHeader({
                 <div className="roomHeader_heading">
                     <section>
                         <div className="roomHeader_heading_name">
-                            <h1>Khách sạn {name}</h1>
+                            <h1>{content.titleRoomHeader} {name}</h1>
                         </div>
                         <div className="roomHeader_heading_description">
                             <div className="roomHeader_heading_description_left">
                                 <span className="roomHeader_heading_stars" onClick={click}>
                                     <StarIcon className="roomHeader_heading_star"/>
-                                    <strong>{avgReview} ({review.length})</strong>
+                                    <strong>{avgReview} ({review.length} {content.reviews})</strong>
                                 </span>
                                 <span className="roomHeader_heading_dot">·</span>
                                 <span className="roomHeader_heading_place">{address}</span>
                             </div>
                             
                             <div className="roomHeader_heading_description_right">
-                                <button 
-                                    className="roomHeader_heading_btn" 
-                                    onClick={() => {handleClickFavorite() }}
-                                >
-                                    <span className="roomHeader_heading_heart">
-                                    {clickFavorite ? <i className="fas fa-heart" style={{color: "red"}}></i> : <i className="far fa-heart"/>}
-                                    </span>
-                                    {saveFavorite}
-                                </button>
+                                {clickFavorite ? <input id="toggle-heart" className="checked" type="checkbox"/> : <input id="toggle-heart" type="checkbox" />}
+                                <label htmlFor="toggle-heart" aria-label="like" onClick={() => {handleClickFavorite() }}>❤</label>
                             </div>
                         </div>
                     </section>
@@ -206,8 +200,7 @@ function RoomHeader({
                             display: "block",
                             minHeight: "1px",
                             width: "100%",
-                            border: "1px solid #ddd",
-                            borderRadius: "12px",
+                            borderRadius: "15px",
                             overflow: "auto",
                             textAlign: "center",
                             background: "white"
@@ -218,7 +211,7 @@ function RoomHeader({
                             enableImageSelection={false}
                             backdropClosesModal={true}
                             showLightboxThumbnails={true}
-                            maxRows="1"
+                            maxRows={1}
                             rowHeight={300}
                         />
                     </div>

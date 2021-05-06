@@ -1,8 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './App.css'
 import { Router, Switch, Route , Link, Redirect, useHistory, useLocation } from 'react-router-dom'
 import history from './history'
-
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home/Home'
@@ -18,23 +17,17 @@ import HotelInvoiceDetail from './pages/MenuAccount/HotelInvoiceDetail'
 import HistoryBooking from './pages/MenuAccount/HistoryBooking'
 import Book from './pages/Booking/Booking'
 import ErrorPage from './pages/404Page/ErrorPage'
-
 import UserManagement from './pages/Admin/UserManagement'
 import DetailUser from './pages/Admin/DetailUser'
 import HotelManagement from './pages/Admin/HotelManagement'
 import AddHotel from './pages/Admin/AddHotel'
 import AddUser from './pages/Admin/AddUser'
-
 import ReactNotifications from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css'
 
-import useToken from './hooks/useToken'
-
 function App() {
-
   return (
     <Router history={history}>
-    {/* <Router> */}
       <div className="App">
         <ReactNotifications />
         <Header />

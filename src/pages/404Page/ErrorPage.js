@@ -1,7 +1,17 @@
 import React from 'react'
 import "../../style/ErrorPage.css"
+import useLanguage from '../../hooks/useLanguage'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function ErrorPage() {
+    const { language, setLanguage } = useLanguage();
+
+    let content = myConstClass.LANGUAGE;
+    
+      language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
+
     document.title = "404 Page Not Found | RoyalStay"
     return (
         <div className="errorPage">
@@ -10,9 +20,9 @@ function ErrorPage() {
                 <p>404</p>
             </div>
             <div className="errorPage_subText">
-                <p>TRANG BẠN TÌM KIẾM KHÔNG TỒN TẠI</p>
+                <p>{content.titlePageError}</p>
                
-               <a href="/"><button className="snip1582">Trở về trang chủ</button></a>
+               <a href="/"><button className="snip1582">{content.returnHome}</button></a>
             </div>
 
             <div className="errorPage_container">

@@ -238,7 +238,7 @@
 
 /* HotelInvoiceDetail.js ---------------------------------------- */
 .booking_btn_confirm.invoiceOk{
-    background-image: linear-gradient(to right, #DCE35B 0%, #45B649  51%, #DCE35B  100%);
+    background: green;
 }
 
 .booking_btn_confirm.invoiceOk:hover{

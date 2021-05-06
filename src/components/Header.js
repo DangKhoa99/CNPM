@@ -8,11 +8,19 @@ import "aos/dist/aos.css"
 import {Avatar} from "@material-ui/core"
 import axios from 'axios'
 import useToken from '../hooks/useToken'
+import useLanguage from '../hooks/useLanguage'
 import { store } from 'react-notifications-component'
 import SearchBar from './SearchBar'
+import * as myConstClass from "../constants/constantsLanguage"
 
-function Header() {
+function Header(){
   const { token, setToken } = useToken();
+  const { language, setLanguage } = useLanguage();
+
+  const handleSetLanguage= (e) => {
+    setLanguage(e.target.value);
+    window.location.reload();
+  }
 
   const notificationLogoutSuccess = {
     title: ' RoyalStay - Thông báo',
@@ -26,7 +34,7 @@ function Header() {
 
   // vị trí địa chỉ trình duyệt hiện tại
   const location = useLocation();
-  console.log("location: ", location.pathname);
+  // console.log("location: ", location.pathname);
 
   const [buttonSignIn, setButtonSignIn] = useState(true);
   const [colorHeader, setColorHeader] = useState(true);
@@ -150,7 +158,7 @@ function Header() {
     }
     axios(options)
     .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         setDataCustomer(response.data)
     })
     .catch(error => console.log(error))
@@ -183,14 +191,13 @@ function Header() {
   // Hiện nút Đăng ký khi Responsive
   window.addEventListener('resize', showButton);
 
-  // Search bar
-  // const [dataSearchLocation, setDataSearchLocation] = useState([]);
-  // const [searchLocation, setSearchLocation] = useState("");
-  // function onChangeSearchLocation(e){
-  //   setSearchLocation(e.target.value);
-  // }
-
   const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
+
+  let content = myConstClass.LANGUAGE;
+
+  language === "English"
+    ? (content = content.English)
+    : (content = content.Vietnam);
 
   return (
       <nav className={
@@ -218,11 +225,10 @@ function Header() {
             colorHeader={colorHeader}
             openMenuSearchSuggestion={openMenuSearchSuggestion}
             closeMenuSearchSuggestion={closeMenuSearchSuggestion}
-            // searchLocation={searchLocation}
-            // onChangeSearchLocation={onChangeSearchLocation}
             menuSearchSuggestion={menuSearchSuggestion}
             blockHeader={blockHeader}
             handleMenuSearchSuggestionsClick={handleMenuSearchSuggestionsClick}
+            language={language}
           />
           
           {/* Mobile Menu */}
@@ -252,7 +258,7 @@ function Header() {
                 className={colorHeader ? 'header_links active' : 'header_links'} 
                 onClick={closeMobileMenu}
               > 
-                <div>Trang chủ</div>
+                <div>{content.home}</div>
               </a>
             </li>
 
@@ -267,7 +273,7 @@ function Header() {
                 className={colorHeader ? 'header_links active' : 'header_links'} 
                 onClick={closeMobileMenu}
               > 
-                Đăng nhập
+                {content.login}
               </a>
             </li>
 
@@ -278,7 +284,7 @@ function Header() {
                 className={colorHeader ? 'header_links register active' : 'header_links register'} 
                 onClick={closeMobileMenu}
               > 
-                Đăng ký
+                {content.register}
               </a>
             </li>
 
@@ -303,27 +309,39 @@ function Header() {
                 </h3>
                 <ul className="profile_menu_lists">
                   <li className="profile_menu_list">
-                    <a href="/account/overview/">{dataCustomer.isAdmin ? <i className="fas fa-user-shield"/> : <i className="fas fa-user"/>} Tài khoản</a>
+                    <a href="/account/overview/">{dataCustomer.isAdmin ? <i className="fas fa-user-shield"/> : <i className="fas fa-user"/>} {content.account}</a>
                   </li>
                   {dataCustomer.isAdmin ? "" :
                     <li className="profile_menu_list">
-                      <a href="/account/profile/"><i className="fas fa-user-edit"></i>Chỉnh sửa thông tin</a>
+                      <a href="/account/profile/"><i className="fas fa-user-edit"></i>{content.editProfile}</a>
                     </li>
                   }
 
                   <li className={dataCustomer.isAdmin ? "profile_menu_list" : "profile_menu_list notAdmin"}>
-                    <a href="/account/admin/user-management/"><i className="fas fa-cogs"/>Quản lý</a>
+                    <a href="/account/admin/user-management/"><i className="fas fa-cogs"/>{content.management}</a>
                   </li>
 
                   <li className="profile_menu_list">
                     <a 
                     className="log_out" 
-                    onClick={handleLogOut}><i className="fas fa-sign-out-alt"/> Đăng xuất</a>
+                    onClick={handleLogOut}><i className="fas fa-sign-out-alt"/> {content.logout}</a>
                   </li>
                 </ul>
               </div>
             </li>
           </ul>
+          
+          <div className="language-select">
+            <select
+              className="custom_select"
+              value={language}
+              onChange={handleSetLanguage}
+            >
+              <option value="Vietnam">{content.vietnam}</option>
+              <option value="English">{content.english}</option>
+            </select>
+          </div>
+
         </div>
       </nav>
   );

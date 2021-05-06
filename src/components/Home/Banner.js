@@ -1,8 +1,11 @@
 import React, { useState, useRef } from 'react'
 import '../../style/Banner.css'
 import {Button} from "@material-ui/core"
+import * as myConstClass from "../../constants/constantsLanguage"
 
-function Banner() {
+function Banner({
+  language
+}) {
   const [inHover, setHover] = useState(false);
   const myRef = useRef(null);
 
@@ -17,10 +20,15 @@ function Banner() {
     background: `url('${process.env.PUBLIC_URL}/images/banner.jpg') center center/cover no-repeat`
   }
 
+  let content = myConstClass.LANGUAGE
+  language === "English"
+    ? (content = content.English)
+    : (content = content.Vietnam);
+
   return (
     <div className='banner_container' style={myStyleBackground} ref={myRef}>
-      <h1>TRẢI NGHIỆM KỲ NGHỈ TUYỆT VỜI</h1>
-      <p>Trải nghiệm trọn vẹn - Giá cả phải chăng</p>
+      <h1>{content.titleBanner}</h1>
+      <p>{content.subTitleBanner}</p>
       
       <div className='banner_btn'>
         <Button 
@@ -28,7 +36,7 @@ function Banner() {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           onClick={scrollToElement}>
-          KHÁM PHÁ 
+          {content.explore} 
           {!inHover &&
           <i className='fas fa-chevron-right'/>}
           {inHover &&

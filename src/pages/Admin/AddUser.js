@@ -6,8 +6,16 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import useToken from '../../hooks/useToken'
 import axios from 'axios'
+import useLanguage from '../../hooks/useLanguage'
+import * as myConstClass from "../../constants/constantsLanguage"
+import SignIn from '../SignIn/SignIn'
 
 function AddUser() {
+    const { language, setLanguage } = useLanguage();
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+      ? (content = content.English)
+      : (content = content.Vietnam);
     const { token, setToken } = useToken();
 
     let history = useHistory();
@@ -36,7 +44,7 @@ function AddUser() {
         })
         .catch(error => console.log(error))
     }
-    console.log(errors);
+    // console.log(errors);
 
     const Eye = <FontAwesomeIcon className="iconEye" icon={faEye} />;
     const EyeSlash = <FontAwesomeIcon className="iconEye" icon={faEyeSlash}/>;
@@ -45,10 +53,10 @@ function AddUser() {
     const password = useRef();
   
     const { ref, ...rest } = register("password", {
-        required: "Vui lòng nhập mật khẩu", 
+        required: content.pleaseEnterPassword, 
         minLength: {
             value: 6,
-            message: "Mật khẩu phải chứa hơn 6 kí tự"
+            message: content.validationPassword
         }
     })
 
@@ -57,14 +65,19 @@ function AddUser() {
         password.current.type = showPassword ? "password" : "text";
     }
 
+    if(!token){
+        return <SignIn />
+    }
+    
+    document.title = content.addUser + " | RoyalStay"
     return (
         <div className="addUser">
-            <button className="bookingHeader_icon" onClick={history.goBack} title="Quay lại">
+            <button className="bookingHeader_icon" onClick={history.goBack} title={content.return}>
             <i className="fas fa-chevron-left"></i>
             </button>
 
             <div className="addUser_header">
-                <h1 style={{marginBottom: "20px", fontSize: "50px"}}>THÊM NGƯỜI DÙNG</h1>
+                <h1 style={{marginBottom: "20px", fontSize: "50px", textTransform: "uppercase"}}>{content.addUser}</h1>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -73,12 +86,12 @@ function AddUser() {
                         className="form_input"
                         autoComplete="off"
                         type="text" 
-                        placeholder="Nhập họ tên" 
+                        placeholder={content.placeholderFullname}
                         {...register("fullName", {
-                            required: "Vui lòng nhập họ tên", 
+                            required: content.validationFullname, 
                             maxLength: {
                                 value: 100,
-                                message: "Không được vượt quá 100 kí tự"
+                                message: content.validationFullname1
                             }
                         })} 
                     />
@@ -90,12 +103,12 @@ function AddUser() {
                         className="form_input"
                         autoComplete="off"
                         type="text" 
-                        placeholder="Nhập email" 
+                        placeholder={content.placeholderEmail}
                         {...register("email", {
-                            required: "Vui lòng nhập email", 
+                            required: content.validationEmail, 
                             pattern: {
                                 value: /^\S+@\S+$/i,
-                                message: "Địa chỉ Email không hợp lệ"
+                                message: content.validationEmail1
                             }
                         })} 
                     />
@@ -107,12 +120,12 @@ function AddUser() {
                         className="form_input"
                         autoComplete="off"
                         type="text" 
-                        placeholder="Nhập tài khoản" 
+                        placeholder={content.placeholderUsername}
                         {...register("username", {
-                            required: "Vui lòng nhập tài khoản", 
+                            required: content.validationUsername, 
                             pattern: {
                                 value: /^([a-z\d]+-)*[a-z\d]+$/i,
-                                message: "Tên tài khoản không hợp lệ"
+                                message: content.validationUsername1
                             }
                         })} 
                     />
@@ -125,7 +138,7 @@ function AddUser() {
                             className="form_input"
                             autoComplete="off"
                             type="password" 
-                            placeholder="Nhập mật khẩu"
+                            placeholder={content.placeholderPassword}
                             {...rest}
                             ref={(e) => {
                                 ref(e)
@@ -137,7 +150,7 @@ function AddUser() {
                     {errors.password && <p>⚠ {errors.password.message}</p>}
                 </div>
 
-                <button className="addUser_submit_btn" type="submit">Tạo người dùng</button>
+                <button className="addUser_submit_btn" type="submit">{content.addUser}</button>
             </form>
             
         </div>

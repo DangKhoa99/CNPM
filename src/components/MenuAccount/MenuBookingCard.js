@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useCallback} from 'react'
 import "../../style/MenuBooking.css"
 import axios from 'axios'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function MenuBookingCard({
     idInvoice,
@@ -8,8 +9,13 @@ function MenuBookingCard({
     checkIn,
     checkOut,
     roomType,
-    status
+    status,
+    language
 }) {
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
     const [dataHotel, setDataHotel] = useState(null)
     const loadDetailHotelFromServer = useCallback(async () =>{
         const options = {
@@ -32,13 +38,13 @@ function MenuBookingCard({
     if(!dataHotel) return null
     
     let pricePerNight = 0
-    if(roomType == "Nhỏ"){
+    if(roomType == content.smallRoom){
         pricePerNight = dataHotel.room.price
     }
-    else if(roomType == "Vừa"){
+    else if(roomType == content.mediumRoom){
         pricePerNight = dataHotel.room.price + 50
     }
-    else if(roomType == "Lớn"){
+    else if(roomType == content.largeRoom){
         pricePerNight = dataHotel.room.price + 100
     }
 
@@ -48,11 +54,11 @@ function MenuBookingCard({
 
     return (
         <div className="menuBookingCard">
-            <a className="menuBookingCard_btn" href={"/account/hotel-invoice-detail?id=" + idInvoice} title="Xem chi tiết hóa đơn">
+            <a className="menuBookingCard_btn" href={"/account/hotel-invoice-detail?id=" + idInvoice} title={content.detailInvoice}>
                 <i className="fas fa-receipt" style={{fontSize: "20px"}}/>
             </a>
 
-            <a className="menuBookingCard_btn_hotel" href={"/room-detail?id=" + idHotel} title="Xem khách sạn">
+            <a className="menuBookingCard_btn_hotel" href={"/room-detail?id=" + idHotel} title={content.detailRoom}>
                 <i className="fas fa-hotel" style={{fontSize: "20px"}}/>
             </a>
 
@@ -66,9 +72,9 @@ function MenuBookingCard({
                     </div>
                     <div className="menuBooking_infoBottom">
                         <div className="menuBooking_price">
-                            <p style={{fontSize: "12px", marginBottom: "10px"}}>Loại phòng: <b>{roomType}</b></p>
+                            <p style={{fontSize: "12px", marginBottom: "10px"}}>{content.typeRoom}: <b>{roomType}</b></p>
                             <h2>${pricePerNight}</h2> 
-                            <p> /đêm</p>
+                            <p> /{content.night}</p>
                         </div>
                     </div>
                 </div>

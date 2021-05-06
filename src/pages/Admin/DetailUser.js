@@ -3,14 +3,22 @@ import "../../style/DetailUser.css"
 import { useHistory } from "react-router-dom";
 import axios from 'axios'
 import useToken from '../../hooks/useToken'
+import SignIn from '../SignIn/SignIn'
+import useLanguage from '../../hooks/useLanguage'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function DetailUser() {
+    const { language, setLanguage } = useLanguage();
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+      ? (content = content.English)
+      : (content = content.Vietnam);
+
     let history = useHistory();
     const searchParams = new URLSearchParams(window.location.search);
     const idCustomer = searchParams.get('id');
 
     const { token, setToken } = useToken();
-
     const [dataUser, setDataUser] = useState([]);
 
     useEffect(() => {
@@ -27,7 +35,7 @@ function DetailUser() {
             }
             axios(options)
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setDataUser(response.data)
             })
             .catch(error => {
@@ -40,25 +48,30 @@ function DetailUser() {
         }
     },[])
 
+    if(!token){
+        return <SignIn />
+    }
+
+    document.title = content.userInformation + " - " + dataUser.username + " | RoyalStay"
+
     return (
         <div className="detailUser">
             <div className="bookingHeader_block">
-                <button className="bookingHeader_icon" onClick={history.goBack}>
+                <button className="bookingHeader_icon" onClick={history.goBack} title={content.return}>
                     <svg viewBox="0 0 32 32">
                         <path d="m20 28-11.29289322-11.2928932c-.39052429-.3905243-.39052429-1.0236893 0-1.4142136l11.29289322-11.2928932"/> 
                     </svg>
                 </button>
                 <div style={{marginLeft: "30px"}} className="bookingHeader_text">
-                    Thông tin người dùng
+                    {content.userInformation}
                 </div>
             </div>
-
 
             <table className="detailUser_table">
                 <tbody style={{cursor: "pointer"}}>
                     <tr>
                         <td>
-                            id:
+                            {content.idAccount}:
                         </td>
                         <td style={{fontWeight: "600"}}>
                             {idCustomer}
@@ -67,16 +80,16 @@ function DetailUser() {
 
                     <tr>
                         <td>
-                            Chức vụ:
+                            {content.role}:
                         </td>
                         <td style={{fontWeight: "600"}}>
-                            {dataUser.isAdmin ? "Admin" : "Người dùng"}
+                            {dataUser.isAdmin ? content.admin : content.user}
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            Họ tên:
+                            {content.fullName}:
                         </td>
                         <td style={{fontWeight: "600"}}>
                             {dataUser.name}
@@ -85,7 +98,7 @@ function DetailUser() {
 
                     <tr>
                         <td>
-                            Tài khoản:
+                            {content.username}:
                         </td>
                         <td style={{fontWeight: "600"}}>
                             {dataUser.username}
@@ -97,39 +110,38 @@ function DetailUser() {
                             Email:
                         </td>
                         <td style={{fontWeight: "600"}}>
-                            {dataUser.email ? dataUser.email : "Chưa cập nhật"}
+                            {dataUser.email ? dataUser.email : content.notUpdate}
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            Số điện thoại:
+                            {content.phoneNumber}:
                         </td>
                         <td style={{fontWeight: "600"}}>
-                            {dataUser.phone ? dataUser.phone : "Chưa cập nhật"}
+                            {dataUser.phone ? dataUser.phone : content.notUpdate}
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            Giới tính:
+                            {content.sex}:
                         </td>
                         <td style={{fontWeight: "600"}}>
-                            {dataUser.sex ? "Nam" : "Nữ"}
+                            {dataUser.sex ? content.male : content.female}
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            Địa chỉ:
+                            {content.address}:
                         </td>
                         <td style={{fontWeight: "600"}}>
-                            {dataUser.address ? dataUser.address : "Chưa cập nhật"}
+                            {dataUser.address ? dataUser.address : content.notUpdate}
                         </td>
                     </tr>
                 </tbody>
             </table>
-            
         </div>
     )
 }

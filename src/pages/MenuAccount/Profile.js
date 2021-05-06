@@ -6,8 +6,10 @@ import useToken from '../../hooks/useToken'
 import SignIn from '../SignIn/SignIn'
 import useGetDataCustomer from '../../hooks/useDataCustomer'
 import LoadingScreen from "../../components/LoadingScreen"
+import useLanguage from '../../hooks/useLanguage'
 
 function Profile() {
+    const { language, setLanguage } = useLanguage();
     const {token, setToken} = useToken();
     const {dataCustomer, isLoading} = useGetDataCustomer();
     if(!token){
@@ -18,7 +20,6 @@ function Profile() {
     const fullName = (dataCustomer.name || "");
     const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
     
-
     return (
         <div className="account">
             <div className="account_page">
@@ -31,6 +32,7 @@ function Profile() {
                         nameUser={userName}
                         username={dataCustomer.username}
                         imageUser={fullName}
+                        language={language}
                     />
                     }
                     
@@ -45,6 +47,7 @@ function Profile() {
                         phone={dataCustomer.phone}
                         sex={dataCustomer.sex}
                         address={dataCustomer.address}
+                        language={language}
                     />
                     }
                 </div>

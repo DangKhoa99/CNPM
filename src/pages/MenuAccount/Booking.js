@@ -6,10 +6,11 @@ import useToken from '../../hooks/useToken'
 import SignIn from '../SignIn/SignIn'
 import useGetDataCustomer from '../../hooks/useDataCustomer'
 import LoadingScreen from "../../components/LoadingScreen"
-
 import axios from 'axios'
+import useLanguage from '../../hooks/useLanguage'
 
 function Booking() {
+    const { language, setLanguage } = useLanguage();
     const {token, setToken} = useToken();
     const {dataCustomer, isLoading} = useGetDataCustomer();
     
@@ -40,9 +41,6 @@ function Booking() {
         }
     },[])
 
-
-
-
     if(!token){
         return <SignIn />
     }
@@ -64,12 +62,14 @@ function Booking() {
                         nameUser={userName}
                         username={dataCustomer.username}
                         imageUser={fullName}
+                        language={language}
                     />
                     }
                     {isLoading ? <LoadingScreen/> 
                         :
                     <MenuBooking
                         booking={dataBookingListHotelOfCustomer}
+                        language={language}
                     />
                     }
                 </div>

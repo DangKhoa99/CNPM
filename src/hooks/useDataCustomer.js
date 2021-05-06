@@ -22,7 +22,7 @@ export default function useDataCustomer() {
             }
             axios(options)
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setDataCustomer(response.data)
                 setIsLoading(false);
             })

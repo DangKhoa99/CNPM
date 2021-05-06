@@ -6,15 +6,22 @@ import useToken from '../../hooks/useToken'
 import SignIn from '../SignIn/SignIn'
 import useGetDataCustomer from '../../hooks/useDataCustomer'
 import LoadingScreen from "../../components/LoadingScreen"
+import useLanguage from '../../hooks/useLanguage'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function HotelManagement() {
+    const { language, setLanguage } = useLanguage();
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+      ? (content = content.English)
+      : (content = content.Vietnam);
     const {token, setToken} = useToken();
     const {dataCustomer, isLoading} = useGetDataCustomer();
     if(!token){
         return <SignIn />
     }
 
-    document.title = "Quản lý người dùng | RoyalStay"
+    document.title = content.hotelManagement + " | RoyalStay"
     const fullName = (dataCustomer.name || "");
     const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
     return (
@@ -28,9 +35,12 @@ function HotelManagement() {
                             nameUser={userName}
                             username={dataCustomer.username}
                             imageUser={fullName}
+                            language={language}
                         />
                     }
-                    <MenuHotelManagement/>
+                    <MenuHotelManagement
+                        language={language}
+                    />
                 </div>
             </div> 
         </div>

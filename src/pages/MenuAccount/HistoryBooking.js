@@ -2,15 +2,15 @@ import React, {useState, useEffect} from 'react'
 import "../../style/MenuAccount.css"
 import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuHistoryBooking from "../../components/MenuAccount/MenuHistoryBooking"
-
 import useToken from '../../hooks/useToken'
 import SignIn from '../SignIn/SignIn'
-
 import axios from 'axios';
 import useGetDataCustomer from '../../hooks/useDataCustomer'
 import LoadingScreen from "../../components/LoadingScreen"
+import useLanguage from '../../hooks/useLanguage'
 
 function HistoryBooking() {
+    const { language, setLanguage } = useLanguage();
     const {token, setToken} = useToken();
     const {dataCustomer, isLoading} = useGetDataCustomer();
     const [dataBookingListHotelOfCustomer, setDataBookingListHotelOfCustomer] = useState([])
@@ -61,12 +61,14 @@ function HistoryBooking() {
                         nameUser={userName}
                         username={dataCustomer.username}
                         imageUser={fullName}
+                        language={language}
                     />
                     }
                     {isLoading ? <LoadingScreen/> 
                     :
                     <MenuHistoryBooking
                         booking={dataBookingListHotelOfCustomer}
+                        language={language}
                     />
                     }
                 </div>

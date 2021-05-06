@@ -5,21 +5,28 @@ import LoadingScreen from "../../components/LoadingScreen"
 import axios from 'axios'
 import useToken from '../../hooks/useToken'
 import { Slider } from '@material-ui/core'
-import NoItem from "../../components/NoItem"
+import Lottie from "react-lottie"
+import animationData from "../../lotties/pinjump"
+import useLanguage from '../../hooks/useLanguage'
+import * as myConstClass from "../../constants/constantsLanguage"
 
 function SearchPage() {
+    const { language, setLanguage } = useLanguage();
+    let content = myConstClass.LANGUAGE;
+    language === "English"
+        ? (content = content.English)
+        : (content = content.Vietnam);
+
     const [data, setData] = useState([]);
     const [notData, setNotData] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [filterPrice, setFilterPrice] = useState(true); // false: giảm - true: tăng
     const handleClickFilterPrice = () => setFilterPrice(!filterPrice);
-    let price = "Giảm dần";
+    let price = content.decrease;
     if(filterPrice == true){
-        price = "Tăng dần";
+        price = content.increase;
     }
 
-
-    // const place = decodeURIComponent(window.location.href.split("=").pop()).split("+").join(" ");
     const searchParams = new URLSearchParams(window.location.search);
     const place = searchParams.get('result');
     // console.log("PLACE: ", place)
@@ -46,6 +53,7 @@ function SearchPage() {
     else if(capitalize(place) == "Phú Quốc"){
         placeMap = "PQ"
     }
+
 
     const fetchData = useCallback(async () => {
         setIsLoading(true);
@@ -113,7 +121,6 @@ function SearchPage() {
         if(token){
             getDataFavoriteHotelOfCustomer();
         }
-        
     },[fetchData])
 
     function capitalize(str) {
@@ -152,12 +159,12 @@ function SearchPage() {
     let savedHotelId = [];
     for(let key in dataFavoriteHotelOfCustomer){
         // console.log("key", dataFavoriteHotelOfCustomer[key]._id)
-        data.map(item=>{
+        data.map((item)=>{
             return (dataFavoriteHotelOfCustomer[key]._id == item._id) ? savedHotelId.push(item._id) : ""
         })
     }
     let maxPrice = Math.max(...Object.values(data.map(item => (item.room.price))));
-    console.log("MAX PRICE: ", (maxPrice))
+    // console.log("MAX PRICE: ", (maxPrice))
     const [valuePrice, setValuePrice] =  React.useState([0, 120]);
     useEffect(() => {
         setValuePrice([0, maxPrice])
@@ -167,16 +174,24 @@ function SearchPage() {
         // console.log(newValue)
     };
 
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+          preserveAspectRatio: "xMidYMid slice"
+        }
+    };
 
     return (
         <div className="searchPage">
             <div className="searchPage_info">
-                <p style={{fontSize: "15px", color: "gray", fontStyle: "italic"}}>Khoảng <b>{data.length}</b> khách sạn</p>
+                <p style={{fontSize: "15px", color: "gray", fontStyle: "italic"}}>{content.subTitleSearchPage1} <b>{data.length}</b> {content.subTitleSearchPage2}</p>
                 <h1><i className="fas fa-map-marked-alt"/>{
                     capitalize(place) == "" ?
-                    " Khách sạn tại Việt Nam"
+                    content.titleSearchPage + " Việt Nam"
                     :
-                    " Khách sạn tại " + capitalize(place)
+                    content.titleSearchPage + capitalize(place)
                 }</h1>
             </div>
 
@@ -197,15 +212,19 @@ function SearchPage() {
                     />
                 </div>
             </div>
-                {notData ? <div><h1 style={{textAlign: "center"}}>Chúng tôi không tìm thấy bất kỳ khách sạn nào nơi bạn muốn đến. Vui lòng chọn nơi khác.</h1><NoItem /></div> : ""}
+                {notData ? <div><h1 style={{textAlign: "center"}}>{content.notData}</h1> <Lottie 
+                                        options={defaultOptions}
+                                        height={300}
+                                        width={300}/></div> : ""}
             <ul className="list-product">
                 {isLoading ? <div style={{marginLeft: "750px", marginTop: "-200px"}}><LoadingScreen /></div>
                 :
                     filterPrice ?
                         data.sort((a, b) => (a.room.price - b.room.price))
                         .filter(item => valuePrice[0] <= item.room.price && item.room.price <= valuePrice[1])
-                        .map(item => {
+                        .map((item, index) => {
                             return  <SearchCard 
+                                        key={index + item}
                                         id={item._id}
                                         img={item.imageLink}
                                         address={item.address}
@@ -216,14 +235,17 @@ function SearchPage() {
                                         })}
                                         price={item.room.price}
                                         savedHotelId={savedHotelId}
+                                        review={item.review}
+                                        language={language}
                                     />
                                 
                         })
                         : 
                         data.sort((a, b) => (b.room.price - a.room.price))
                         .filter(item => valuePrice[0] <= item.room.price && item.room.price <= valuePrice[1])
-                        .map(item => {
+                        .map((item, index) => {
                             return <SearchCard 
+                                        key={index + item}
                                         id={item._id}
                                         img={item.imageLink}
                                         address={item.address}
@@ -234,8 +256,9 @@ function SearchPage() {
                                         })}
                                         price={item.room.price}
                                         savedHotelId={savedHotelId}
+                                        review={item.review}
+                                        language={language}
                                     />
-                    
                         })
                 }
             </ul>
