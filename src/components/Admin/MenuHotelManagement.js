@@ -5,8 +5,10 @@ import LoadingScreen from "../LoadingScreen"
 import axios from 'axios'
 import Slider from '@material-ui/core/Slider'
 import * as myConstClass from "../../constants/constantsLanguage"
+import { CustomDialog } from 'react-st-modal'
+import AddHotel from "./AddHotel"
 
-function MenuHotelManagement({ language }) {
+function MenuHotelManagement({ language, token }) {
     let content = myConstClass.LANGUAGE;
     language === "English"
         ? (content = content.English)
@@ -19,6 +21,26 @@ function MenuHotelManagement({ language }) {
     if(filterPrice == true){
         price = content.increase;
     }
+
+    const [scrollBtn, setScrollBtn] = useState(false);
+    const toggleVisible = () =>{
+        const scrolled = document.documentElement.scrollTop;
+        if(scrolled > 100){
+            setScrollBtn(true);
+        }
+        else{
+            setScrollBtn(false);
+        }
+    }
+
+    const scrollToTop = () =>{
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }
+
+    window.addEventListener("scroll", toggleVisible);
 
     const [location, setLocation] = useState("All");
     const handleFilterLocation = (e) => {
@@ -65,8 +87,9 @@ function MenuHotelManagement({ language }) {
     },[getDataHotel])
 
     let maxPrice = Math.max(...Object.values(data.map(item => (item.room.price))));
-    const [valuePrice, setValuePrice] =  React.useState([0, 120]);
+    const [valuePrice, setValuePrice] =  useState([0, 999]);
     useEffect(() => {
+        console.log("MAX: ", maxPrice)
         setValuePrice([0, maxPrice])
     },[maxPrice])
     const rangeSelector = (event, newValue) => {
@@ -76,7 +99,6 @@ function MenuHotelManagement({ language }) {
 
     return (
         <div className="menuHotelManagement">
-
             <div className="menuHotelManagement_header">
                 <h1 style={{marginBottom: "20px", fontSize: "50px", textTransform: "uppercase"}}>{content.hotelManagement}</h1>
 
@@ -99,11 +121,21 @@ function MenuHotelManagement({ language }) {
                     </optgroup>
                 </select>
 
-                <a href="/account/admin/add-hotel/">
-                    <button className="menuHotelManagement_filter_hotel">
-                        <i className="fas fa-plus-square"/>  {content.addHotel}
-                    </button>
-                </a>
+                <button 
+                    className="menuHotelManagement_filter_hotel"
+                    onClick={async () => {
+                        const result = await CustomDialog(<AddHotel
+                            token={token}
+                            language={language}
+                        />, {
+                            title: content.addHotel,
+                            showCloseIcon: true,
+                        })
+                    }}
+                >
+                    <i className="fas fa-plus-square"/>  {content.addHotel}
+                </button>
+
             </div>
 
             <div className="menuHotelManagement_header">
@@ -115,6 +147,8 @@ function MenuHotelManagement({ language }) {
                     <Slider
                         className="slider"
                         value={valuePrice}
+                        min={0}
+                        max={maxPrice}
                         onChange={rangeSelector}
                     />
                 </div>
@@ -132,11 +166,14 @@ function MenuHotelManagement({ language }) {
                                 img={item.imageLink}
                                 address={item.address}
                                 name={item.name}
-                                description={item.tien_ich
-                                    .map(ttt => {
-                                    return ttt + " · " 
+                                description={item.bio}
+                                tien_ich={item.tien_ich
+                                    .map(function(ttt, index) {
+                                        return (index ? ' · ' : '') + ttt
                                 })}
-                                price={item.room.price} 
+                                price={item.room.price}
+                                quantity={item.room.quantity}
+                                roomType={item.room.roomType}
                                 review={item.review}
                                 language={language}
                             />
@@ -151,16 +188,21 @@ function MenuHotelManagement({ language }) {
                                 img={item.imageLink}
                                 address={item.address}
                                 name={item.name}
-                                description={item.tien_ich
-                                    .map(ttt => {
-                                    return ttt + " · " 
+                                description={item.bio}
+                                tien_ich={item.tien_ich
+                                    .map(function(ttt, index) {
+                                        return (index ? ' · ' : '') + ttt
                                 })}
                                 price={item.room.price}
+                                quantity={item.room.quantity}
+                                roomType={item.room.roomType}
                                 review={item.review}
                                 language={language}
                             />
                 })
             }
+
+            <button className="menuHotelManagement_btnScrollToTop" onClick={scrollToTop} style={{display: scrollBtn ? "inline" : "none"}}><i className="fas fa-arrow-circle-up"/></button>
         </div>
     )
 }

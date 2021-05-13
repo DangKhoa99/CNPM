@@ -3,61 +3,16 @@ import '../style/Footer.css'
 import { Link } from 'react-router-dom'
 import {ReactComponent as LogoRoyalStay} from "../icons/logoRoyalStay.svg"
 import { useLocation } from 'react-router-dom'
-import useLanguage from '../hooks/useLanguage'
-import * as myConstClass from "../constants/constantsLanguage"
+import Singleton from "../constants/Singleton"
 
 function Footer() {
-  const { language, setLanguage } = useLanguage();
   const location = useLocation();
-  let content = myConstClass.LANGUAGE;
 
-  language === "English"
-    ? (content = content.English)
-    : (content = content.Vietnam);
-  
   // Singleton pattern
-  const data = [
-    {
-      title: content.about,
-      links: [
-        content.howWorks,
-        content.newsroom,
-        content.investors,
-        content.careers,
-        content.privacy,
-        content.terms,
-      ],
-    },
-    {
-      title: content.community,
-      links: [
-        content.partner,
-        content.inviteFriends,
-      ],
-    },
-    {
-      title: content.hotels,
-      links: [
-        content.hostHotel,
-        content.hostExperience,
-        content.responsibleHosting,
-        content.communityCenter,
-      ],
-    },
-    {
-      title: content.support,
-      links: [
-        content.helpCenter,
-        content.neighborhoodSupport,
-        content.trustSafety,
-      ],
-    },
-  ]
-
-  // const data1 = data;
-  // data1[0].title = "KAKA";
-  // console.log("DATA", data[0].title)
-  // console.log("DATA1", data1.title)
+  const data =  new Singleton();
+  // console.log(typeof(data))
+  // console.log((data))
+  // console.log("data: ", data.data[0].title = "aaa");
 
   // Bấm vào logo để lên đầu trang
   const scrollToTop = () =>{
@@ -92,7 +47,7 @@ function Footer() {
         </div>
         
         <div className='footer_links'>
-            {data.map((d, index) => {
+            {data.data.map((d, index) => {
               return  <div key={index + d} className='footer_link_items'>
                         <h2>{d.title}</h2> 
                         {d.links.map((link, index1) => {
@@ -110,7 +65,7 @@ function Footer() {
 
             <div className="center_footer">
               <small className='website_rights'>© 2021 RoyalStay</small>
-              <p style={{width: "100%"}}>Made with ❤️ by
+              <p style={{width: "150%", marginBottom: "20px"}}>Made with ❤️ by
               <b><span></span></b>
               </p>  
             </div>

@@ -54,16 +54,16 @@ function MenuBookingCard({
 
     return (
         <div className="menuBookingCard">
-            <a className="menuBookingCard_btn" href={"/account/hotel-invoice-detail?id=" + idInvoice} title={content.detailInvoice}>
+            <a className="menuBookingCard_btn" href={"/account/hotel-invoice-detail/" + idInvoice} title={content.detailInvoice}>
                 <i className="fas fa-receipt" style={{fontSize: "20px"}}/>
             </a>
 
-            <a className="menuBookingCard_btn_hotel" href={"/room-detail?id=" + idHotel} title={content.detailRoom}>
+            <a className="menuBookingCard_btn_hotel" href={"/room-detail/" + idHotel} title={content.detailRoom}>
                 <i className="fas fa-hotel" style={{fontSize: "20px"}}/>
             </a>
 
             <a className="menuBooking_box">
-                <img src={dataHotel.imageLink[0]} alt={dataHotel.name}/>
+                <img src={dataHotel.imageLink[0]} style={{background: "gray"}}/>
                 <div className="menuBooking_info">
                     <div className="menuBooking_infoTop">
                         <h3>{dataHotel.name}</h3>

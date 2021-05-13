@@ -1,6 +1,7 @@
-import React, {useState, useEffect, useRef,  useCallback} from 'react'
+import React, {useState} from 'react'
 import "../../style/MenuFavorite.css"
 import * as myConstClass from "../../constants/constantsLanguage"
+import NoItem from "../NoItem"
 
 function MenuFavorite({
     favoriteHotel,
@@ -28,9 +29,11 @@ function MenuFavorite({
                 </div>
 
                 {filterPrice ? 
+                    favoriteHotel.length == 0 ? <NoItem text={content.noFavoriteHotel}/>
+                    :
                     favoriteHotel.sort((a, b) => (a.room.price - b.room.price))
-                        .map(hotel => {
-                            return  <a className="menuFavorite_box" href={"/room-detail?id=" + hotel._id}>
+                        .map((hotel, index) => {
+                            return  <a key={index + hotel} className="menuFavorite_box" href={"/room-detail/" + hotel._id}>
                                         <img src={hotel.imageLink[0]} alt=""/>
                                         
                                         <div className="menuFavorite_info">
@@ -48,8 +51,8 @@ function MenuFavorite({
                         })
                     :
                     favoriteHotel.sort((a, b) => (b.room.price - a.room.price))
-                        .map(hotel => {
-                            return  <a className="menuFavorite_box" href={"/room-detail?id=" + hotel._id}>
+                        .map((hotel, index) => {
+                            return  <a key={index + hotel} className="menuFavorite_box" href={"/room-detail/" + hotel._id}>
                                         <img src={hotel.imageLink[0]} alt=""/>
                                         
                                         <div className="menuFavorite_info">

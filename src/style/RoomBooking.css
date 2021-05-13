@@ -38,18 +38,6 @@
     align-items: baseline !important;
 }
 
-/* .roomBooking_box_layout_header_left{
-    -moz-box-pack: center !important;
-    -moz-box-direction: normal !important;
-    -moz-box-orient: vertical !important;
-    -moz-box-align: start !important;
-    align-items: flex-start !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    margin-bottom: 24px !important;
-} */
-
 .roomBooking_box_layout_header_defaultPrice{
     line-height: normal !important;
     /* width: 100% !important; */
@@ -112,25 +100,6 @@
     right: 80%;
 }
 
-
-
-
-
-
-
-/* .roomBooking_stars{
-    align-items: center;
-    display: inline-flex;
-    display: flex !important;
-    font-size: 15px !important;
-    line-height: 18px !important;
-}
-
-.roomFirst_star{
-    color: red;
-    margin-right: 4px;
-} */
-
 .roomBooking_box_layout_body{
     margin-bottom: 16px !important;
     position: relative !important;
@@ -167,10 +136,6 @@
 
 .nice-dates-day.-highlight { color: red !important; }
 .nice-dates-day.-disabled.-highlight { color: rgb(255, 188, 188) !important; }
-
-/* .nice-dates{
-  max-width: 20%;
-} */
 
 .date-range {
   display: flex;

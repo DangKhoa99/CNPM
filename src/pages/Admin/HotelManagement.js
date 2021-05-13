@@ -8,6 +8,7 @@ import useGetDataCustomer from '../../hooks/useDataCustomer'
 import LoadingScreen from "../../components/LoadingScreen"
 import useLanguage from '../../hooks/useLanguage'
 import * as myConstClass from "../../constants/constantsLanguage"
+import history from '../../history'
 
 function HotelManagement() {
     const { language, setLanguage } = useLanguage();
@@ -17,8 +18,13 @@ function HotelManagement() {
       : (content = content.Vietnam);
     const {token, setToken} = useToken();
     const {dataCustomer, isLoading} = useGetDataCustomer();
+
     if(!token){
         return <SignIn />
+    }
+    
+    if(token && !token.isAdmin){
+        history.push("/");
     }
 
     document.title = content.hotelManagement + " | RoyalStay"
@@ -36,10 +42,12 @@ function HotelManagement() {
                             username={dataCustomer.username}
                             imageUser={fullName}
                             language={language}
+                            token={token}
                         />
                     }
                     <MenuHotelManagement
                         language={language}
+                        token={token}
                     />
                 </div>
             </div> 

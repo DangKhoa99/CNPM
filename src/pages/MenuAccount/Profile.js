@@ -48,6 +48,7 @@ function Profile() {
                         sex={dataCustomer.sex}
                         address={dataCustomer.address}
                         language={language}
+                        token={token}
                     />
                     }
                 </div>

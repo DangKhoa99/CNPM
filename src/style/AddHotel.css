@@ -76,20 +76,21 @@
   font-size: 14px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 12px !important;
   border-radius: 10px;
-  /* margin-left: 400px; */
-  width: 250px;
+  width: 80%;
   line-height: 1.8;
   margin-bottom: 10px;
-  z-index: 999;
-  top: 128%;
+  z-index: 9999999;
+  top: 5%;
   right: 5px;
+  background-color: white;
   color: gray;
+  padding: 10px;
 }
 
 .btn_suggest_link{
   position: absolute;
-  top: 125%;
-  right: 15%;
+  top: 0%;
+  right: 0%;
   cursor: pointer;
 }
 

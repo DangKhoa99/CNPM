@@ -37,6 +37,11 @@ router.route("/").post(verify, (req, res) => {
 //Add 1 customer to DB | admin required
 router.route('/add').post(adminVerify,async (req, res) => {
     const username = req.body.username;
+
+    //Check if a customer is already in database
+    const usernameExist = await Customer.findOne({ username: req.body.username });
+    if(usernameExist) return res.json('Tên tài khoản đã tồn tại');
+
     const password = await bcrypt.hash(req.body.password, 10);
 
     const name = req.body.name;
@@ -59,12 +64,81 @@ router.route('/add').post(adminVerify,async (req, res) => {
         address,
         bio,
         booking,
-        favorite
+        favorite,
+        isAdmin: req.body.isAdmin
     });
 
     newCustomer.save()
         .then(() => res.json('Thêm khách hàng thành công'))
         .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// Delete 1 customer from DB | admin required
+router.route('/delete').post(adminVerify, async (req, res) =>{
+    const customerId = req.body.customerId;
+
+    const deletedItem = await Customer
+        .findByIdAndDelete(customerId)
+        .catch(err => res.status(400).send(err.message))
+
+    res.status(200).send("Xóa người dùng thành công");
+});
+
+// Edit user | token require
+router.route("/edit").post(verify, (req, res) => {
+    const customerId = req.body.customerId;
+
+    Customer.findById(customerId)
+    .then(customer => {
+        customer.name = req.body.name;
+        customer.email = req.body.email;
+        customer.phone = req.body.phone;
+        customer.sex = req.body.sex;
+        customer.address = req.body.address;
+        customer.bio = req.body.bio;
+
+        customer.save()
+        .then(() => res.json('Chỉnh sửa người dùng thành công'))
+        .catch(err => res.status(400).json('Error: ' + err));   
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// Edit user by admin | admin required
+router.route("/editByAdmin").post(adminVerify, (req, res) => {
+    const customerId = req.body.customerId;
+
+    Customer.findById(customerId)
+    .then(customer => {
+        customer.isAdmin = req.body.isAdmin;
+
+        customer.save()
+        .then(() => res.json('Chỉnh sửa người dùng thành công'))
+        .catch(err => res.status(400).json('Error: ' + err));   
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// Change password of 1 customer | token require
+router.route('/changePassword').post(verify, (req, res) => {
+    const customerId = req.body.customerId;
+    Customer.findById(customerId)
+    .then(async customer => {
+        const newPassword = await bcrypt.hash(req.body.newPassword, 10);
+
+        const isTrueOldPass = await bcrypt.compare(req.body.oldPassword, customer.password);
+
+        if(!isTrueOldPass)
+            return res.json("Mật khẩu cũ không chính xác");
+
+        customer.password = newPassword;
+        
+        customer.save()
+        .then(() => res.json('Đổi mật khẩu thành công'))
+        .catch(err => res.status(400).json('Error: ' + err));
+        
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 //Get favorite list of 1 customer | token require
@@ -144,6 +218,33 @@ router.route('/booking').post(verify, (req, res) => {
 
         bookingUpdate(customer);
         res.json(customer.booking);
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//Get booking list of 1 customer by its status | token require
+// status = [Pending, Staying, Stayed, Cancel]
+router.route('/bookingByStatus').post(verify, (req, res) => {
+    const customerId = req.body.customerId;
+    const status = req.body.status;
+
+    Customer.findById(customerId)
+    .then(async customer => {
+
+        bookingUpdate(customer);
+        
+        var books = JSON.stringify(customer.booking);
+        var books = JSON.parse(books);
+
+        var filterResult = []
+
+        for(var i = 0; i < books.length; i++){
+            // console.log(books[i]);
+            if(books[i].status === status)
+                filterResult.push(books[i]);
+        }
+
+        res.json(filterResult);
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });

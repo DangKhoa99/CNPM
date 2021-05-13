@@ -9,6 +9,9 @@ import axios from 'axios'
 import useToken from '../../hooks/useToken'
 import * as myConstClass from "../../constants/constantsLanguage"
 import {calDate} from "../../helpers/calDate"
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from 'react-responsive-carousel'
+import LoadingScreen from "../LoadingScreen"
 
 function BookingBody({
     idHotel,
@@ -54,6 +57,8 @@ function BookingBody({
     const onRoomChanged = (e) => {
         setRoom(e.currentTarget.value);
     }
+
+    const [isLoading, setIsLoading] = useState(false);
     
     // TYPE ROOM
     const [typeRoom, setTypeRoom] = useState(typeRoomOrder);
@@ -175,6 +180,7 @@ function BookingBody({
 
     const confirmOrderHotel = (e) => {
         e.preventDefault();
+        setIsLoading(true);
         let type = "small";
         if(typeRoom == content.smallRoom){
             type = "small";
@@ -205,8 +211,12 @@ function BookingBody({
 
         axios(options)
         .then(response => {
-            console.log("ĐẶT PHÒNG: ", response.data);
-            window.location = "/account/booking/"
+            // console.log("ĐẶT PHÒNG: ", response.data);
+            setTimeout(() => {
+                setIsLoading(false);
+                window.location = "/account/history-booking/";
+            }, 5000);
+            
         })
         .catch(error => console.log(error))
     }
@@ -224,7 +234,28 @@ function BookingBody({
                         <div className="bookingBody_hotel">
                             <div className="bookingBody_hotel_img">
                                 <div className="bookingBody_img">
-                                    <img src={imageHotel}/>
+                                    <Carousel 
+                                        showThumbs={false}
+                                        autoPlay={false}
+                                        showStatus={false}
+                                        showIndicators={false}
+                                    >
+                                        <div>
+                                            <img src={imageHotel[0]}/>
+                                        </div>
+                                        <div>
+                                            <img src={imageHotel[1]}/>
+                                        </div>
+                                        <div>
+                                            <img src={imageHotel[2]}/>
+                                        </div>
+                                        <div>
+                                            <img src={imageHotel[3]}/>
+                                        </div>
+                                        <div>
+                                            <img src={imageHotel[4]}/>
+                                        </div>
+                                    </Carousel>
                                 </div>
                             </div>
                         </div>
@@ -422,6 +453,16 @@ function BookingBody({
                         </div>
                     </div>
                 </div>
+
+                {isLoading ? 
+                    <div style={{position: "absolute", top: "60%", width: "50%", backgroundColor: "rgba(52, 52, 52, 0.3)", borderRadius: "20px",
+                    marginLeft: "240px"}}>
+                        <div style={{display: "flex", flexDirection: "column", marginTop: "-300px", marginBottom: "50px"}}>
+                            <LoadingScreen /> 
+                            <h1 style={{color: "#000", textAlign: "center", marginTop: "-300px"}}>{content.confirmOrderRoomLoading}</h1>
+                        </div>
+                    </div>
+                : ""}
 
                 <div className="bookingBody_components">
                     <button className="booking_btn_confirm" onClick={confirmOrderHotel}>

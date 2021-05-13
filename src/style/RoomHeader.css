@@ -58,17 +58,10 @@
     border: medium none !important;
     background: transparent none repeat scroll 0% 0% !important;
     color: rgb(34, 34, 34) !important;
-    /* text-decoration: underline !important; */
     -moz-box-align: center !important;
     display: flex !important;
     outline: none !important;
 }
-
-/* .roomHeader_heading_btn:hover{
-    border: medium none !important;
-    background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
-    color: rgb(0, 0, 0) !important;
-} */
 
 .roomHeader_heading_heart{
     margin-right: 16px !important;

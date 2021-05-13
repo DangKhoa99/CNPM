@@ -32,7 +32,7 @@ function RoomReview({
     const loadReviewHotelFromServer = useCallback(async () => {
         await axios.post("http://localhost:5000/hotel/review", _id)
             .then(response => {
-                console.log("Review: ", response.data);
+                // console.log("Review: ", response.data);
                 setDataReview(response.data);
             })
             .catch(error => console.log("Error: ", error))
@@ -76,8 +76,8 @@ function RoomReview({
         setCommentTxt(value);
     }
 
-    const removeReviewInput = (e) => {
-        e.preventDefault();
+    const removeReviewInput = () => {
+        // e.preventDefault();
         setRating(0);
         setCommentTxt("");
     }
@@ -125,16 +125,17 @@ function RoomReview({
             }
             axios(options)
             .then(response => {
-                console.log("Data cmt: ", response.data)
+                // console.log("Data cmt: ", response.data)
                 if(response.data == "Chỉ có thể đánh giá khách sạn đã ở"){
                     store.addNotification(notification_notYetUsed);
                     removeReviewInput();
                 }
-                
+                else{
+                    window.location.reload();
+                }
             })
             .catch(error => console.log("Error11: ", error))
-    
-            window.location.reload();
+            // window.location.reload();
         }
     }
 
@@ -179,7 +180,7 @@ function RoomReview({
                             </div>
 
                             <div className="commentator_info">
-                                {(dataCustomer.username)}
+                                {dataCustomer.username} {token.isAdmin ? <i style={{color: "green", fontSize: "14px"}} className="fas fa-check-circle"/> : ""}
                                 {/* - <i style={{fontWeight: '400', fontSize: '14px'}}>tháng {(new Date().getMonth() + 1)} năm {(new Date().getFullYear())}</i> */}
 
                                 <div className="comment_stars">
@@ -237,6 +238,7 @@ function RoomReview({
                                         idHotel={idHotel}
                                         reviewId={reviews._id}
                                         language={language}
+                                        token={token}
                                     />
                         })}
                     </div>

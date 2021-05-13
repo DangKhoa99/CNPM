@@ -57,7 +57,7 @@
     font-size: 18px !important;
     font-weight: inherit !important;
     line-height: inherit !important;
-    margin: 0px !important;
+    margin: 0px;
     padding: 0px !important;
 }
 
@@ -126,12 +126,11 @@
     min-height: 1px;
 }
 
-.bookingBody_img > img{
-    object-fit: cover;
-    vertical-align: bottom;
-    height: 100% !important;
-    width: 100% !important;
-    position: static !important;
+.bookingBody_img img {
+    height: 300px;
+    width: 408px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .bookingBody_hotel_name{
@@ -239,6 +238,11 @@
 /* HotelInvoiceDetail.js ---------------------------------------- */
 .booking_btn_confirm.invoiceOk{
     background: green;
+}
+
+.booking_btn_confirm.editHotel{
+    margin-right: 20px;
+    background: rgb(207, 112, 34);
 }
 
 .booking_btn_confirm.invoiceOk:hover{

@@ -2,7 +2,7 @@ import React from 'react'
 import "../../style/MenuOverView.css"
 import * as myConstClass from "../../constants/constantsLanguage"
 
-function menuOverview({
+function MenuOverview({
     id,
     fullName,
     email,
@@ -18,7 +18,10 @@ function menuOverview({
         : (content = content.Vietnam);
 
     if(!sex){
-        sex = content.notUpdate;
+        sex = content.female;
+    }
+    else{
+        sex = content.male;
     }
     if(!phone){
         phone = content.notUpdate;
@@ -81,4 +84,4 @@ function menuOverview({
     )
 }
 
-export default menuOverview
+export default MenuOverview

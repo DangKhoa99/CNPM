@@ -40,17 +40,17 @@ function MenuLeft({
             active: ""
         },
         {
-            id: "booking",
-            to: "/account/booking/",
-            name: " " + content.bookingHotel,
-            icon: <i className="fas fa-calendar-check"></i>,
-            active: ""
-        },
-        {
             id: "history_booking",
             to: "/account/history-booking/",
             name: " " + content.hotelBookingHistory,
             icon: <i className="fas fa-history"></i>,
+            active: ""
+        },
+        {
+            id: "password",
+            to: "/account/password/",
+            name: content.changePassword,
+            icon: <i className="fas fa-key"></i>,
             active: ""
         },
     ]
@@ -100,7 +100,7 @@ function MenuLeft({
                         src={selectedFile}
                     />               
                 
-                    <div className="account_avatar_edit">
+                    {/* <div className="account_avatar_edit">
                         <button className="account_avatar_edit_btn">
                             <div className="account_avatar_icon_edit">
                                 <label htmlFor="upload_image">
@@ -110,7 +110,7 @@ function MenuLeft({
                                 <input type="file" name="image" id="upload_image" onChange={onFileChange}/>
                             </div>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
 
                 {selectedFile != imageUser ? 

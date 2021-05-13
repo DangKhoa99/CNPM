@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import "../../style/RoomHeader.css"
+import { useHistory } from "react-router-dom";
 import StarIcon from "@material-ui/icons/Star"
 import Gallery from 'react-grid-gallery';
 import { store } from 'react-notifications-component'
@@ -7,6 +8,8 @@ import axios from 'axios'
 import useToken from '../../hooks/useToken'
 import * as myConstClass from "../../constants/constantsLanguage"
 import { calAvgReview } from "../../helpers/calAvgReview"
+import EditHotelModal from "../Admin/EditHotelModal"
+import { Confirm, CustomDialog } from 'react-st-modal'
 
 function RoomHeader({
     idHotel,
@@ -17,13 +20,39 @@ function RoomHeader({
     reference,
     click,
     savedHotel,
-    language
+    language,
+    price,
+    description,
+    roomType,
+    quantity,
+    tien_ich
 }) {
     let content = myConstClass.LANGUAGE;
 
     language === "English"
         ? (content = content.English)
         : (content = content.Vietnam);
+
+    let history1 = useHistory();
+
+    const handleDeleteHotel = () =>{
+        const options = {
+            method: "POST",
+            headers: {
+                "auth-token": token.authToken,
+            },
+            data: {
+                "hotelId": idHotel
+            },
+            url: "http://localhost:5000/hotel/delete"
+        }
+        axios(options)
+        .then(response => {
+            // console.log("DELETE ORDER HOTEL: ", response.data)
+            window.location = "/account/admin/hotel-management/"
+        })
+        .catch(error => console.log(error))
+    }
 
     // console.log("ID khách sạn: ", idHotel)
     const { token, setToken } = useToken();
@@ -105,7 +134,7 @@ function RoomHeader({
         }
         axios(options)
         .then(response => {
-            console.log("Success: ", response.data)
+            // console.log("Success: ", response.data)
         })
         .catch(error => console.log("Error:", error))
     }
@@ -124,7 +153,7 @@ function RoomHeader({
         }
         axios(options)
         .then(response => {
-            console.log("Success: ", response.data)
+            // console.log("Success: ", response.data)
         })
         .catch(error => console.log("Error:", error))
     }
@@ -171,6 +200,54 @@ function RoomHeader({
     return (
         <div className="roomHeader" ref={reference}>
             <div className="roomHeader_container">
+                {token && token.isAdmin ? 
+                <div className="bookingBody_components">
+                    <button 
+                        className="booking_btn_confirm Pending" 
+                        style={{marginRight: "20px"}} 
+                        onClick={async () => {
+                            const result = await Confirm(content.txtConfirmRemoveHotel + name + content.txtConfirmRemoveHotel1, content.confirmRemove)
+                            if(result){
+                                handleDeleteHotel();
+                            }
+                            else{
+                                
+                            }
+                        }}
+                    >
+                        {content.removeHotel}
+                    </button>
+
+                    <button 
+                        className="booking_btn_confirm editHotel"
+                        onClick={async () => {
+                            const result = await CustomDialog(<EditHotelModal
+                                idHotel={idHotel}
+                                img={img}
+                                address={address}
+                                name={name}
+                                description={description}
+                                price={price}
+                                quantity={quantity}
+                                tien_ich={tien_ich}
+                                roomType={roomType}
+                                token={token}
+                                language={language}
+                            />, {
+                                title: content.editInformationHotel,
+                                showCloseIcon: true,
+                            })
+                        }}
+                    >
+                        {content.edit}
+                    </button>
+
+                    <button className="booking_btn_confirm invoiceOk" onClick={history1.goBack}>
+                        {content.return}
+                    </button>
+                </div>
+                : ""}
+                
                 <div className="roomHeader_heading">
                     <section>
                         <div className="roomHeader_heading_name">

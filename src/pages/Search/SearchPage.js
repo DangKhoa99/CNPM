@@ -208,6 +208,8 @@ function SearchPage() {
                     <Slider
                         className="slider"
                         value={valuePrice}
+                        min={0}
+                        max={maxPrice}
                         onChange={rangeSelector}
                     />
                 </div>

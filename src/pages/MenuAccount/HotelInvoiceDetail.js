@@ -1,10 +1,17 @@
 import React, {useState, useEffect, useCallback} from 'react'
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import axios from 'axios'
 import useLanguage from '../../hooks/useLanguage'
 import * as myConstClass from "../../constants/constantsLanguage"
 import useToken from '../../hooks/useToken'
 import {calDate} from "../../helpers/calDate"
+import BoxComment from "../../components/Room/BoxComment"
+import history from "../../history"
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from 'react-responsive-carousel'
+import { Confirm } from 'react-st-modal'
+import { CustomDialog } from 'react-st-modal'
+import AddCommentModal from '../../components/MenuAccount/AddCommentModal'
 
 function HotelInvoiceDetail() {
     const { language, setLanguage } = useLanguage();
@@ -14,26 +21,16 @@ function HotelInvoiceDetail() {
         : (content = content.Vietnam);
 
     const { token, setToken } = useToken();
-    const searchParams = new URLSearchParams(window.location.search);
-    const bookingId = searchParams.get('id');
+    // const searchParams = new URLSearchParams(window.location.search);
+    // const bookingId = searchParams.get('id');
+    let location11 = useLocation();
+    const bookingId = location11.pathname.split("/").pop();
+    // console.log(bookingId)
 
     const [dataBookingHotelOfCustomer, setDataBookingHotelOfCustomer] = useState([]);
+    const [dataReview, setDataReview] = useState([]);
     const [dataHotel, setDataHotel] = useState(null);
-    let history = useHistory();
-    const [delTask, setDelTask] = useState(false)
-
-    const handleConfirmationBox = () => {
-        if (!delTask){
-            document.querySelector(".confirm-bg").style.display = "flex"
-            document.querySelector(".confirmBox_container").style.display = "flex"
-            setDelTask(true)
-        } 
-        else {
-            document.querySelector(".confirm-bg").style.display = "none"
-            document.querySelector(".confirmBox_container").style.display = "none"
-            setDelTask(false)
-        }
-    }
+    let history1 = useHistory();
 
     const loadDetailHotelFromServer = useCallback(async () =>{
         const options = {
@@ -43,7 +40,7 @@ function HotelInvoiceDetail() {
             },
             url: "http://localhost:5000/hotel/"
         }
-        await axios(options)
+        axios(options)
             .then(response => {
                 setDataHotel(response.data);
             })
@@ -64,10 +61,13 @@ function HotelInvoiceDetail() {
             }
             axios(options)
             .then(response => {
-                console.log("BOOKING ID:", response.data)
+                // console.log("BOOKING ID:", response.data)
                 setDataBookingHotelOfCustomer(response.data)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log("Error: ", error);
+                // history.push("/404");
+            })
         }
 
         if(token){
@@ -75,6 +75,31 @@ function HotelInvoiceDetail() {
         }
         loadDetailHotelFromServer();
     },[loadDetailHotelFromServer])
+
+    useEffect(() => {
+        const loadReviewHotelFromServer = async () => {
+            if(typeof dataBookingHotelOfCustomer.hotelId !== "undefined"){
+                const options = {
+                    method: "POST",
+                    headers: {
+                        "auth-token": token.authToken,
+                    },
+                    data: {
+                        "hotelId": dataBookingHotelOfCustomer.hotelId,
+                        "customerId": token.customerId,
+                    },
+                    url: "http://localhost:5000/hotel/review/getByCustomer"
+                }  
+                axios(options)
+                    .then(response => {
+                        // console.log("Review: ", response.data);
+                        setDataReview(response.data);
+                    })
+                    .catch(error => console.log("Error: ", error))
+                }
+            }
+        loadReviewHotelFromServer();
+    },[dataBookingHotelOfCustomer.hotelId])
     
     if(!dataHotel) return null
 
@@ -117,12 +142,11 @@ function HotelInvoiceDetail() {
         }
         axios(options)
         .then(response => {
-            console.log("DELETE ORDER HOTEL: ", response.data)
-            window.location = "/account/booking"
+            // console.log("DELETE ORDER HOTEL: ", response.data)
+            window.location = "/account/history-booking"
         })
         .catch(error => console.log(error))
     }
-
     return (
         <div className="hotelInvoiceDetail">
             <div className="booking_container">
@@ -130,7 +154,7 @@ function HotelInvoiceDetail() {
                     <div className="bookingHeader_container">
                         <div className="bookingHeader_block">
                             <div className="bookingHeader_back">
-                                <button className="bookingHeader_icon" onClick={history.goBack}>
+                                <button className="bookingHeader_icon" onClick={history1.goBack}>
                                 <i className="fas fa-chevron-left"></i>
                                 </button>
                             </div>
@@ -140,7 +164,7 @@ function HotelInvoiceDetail() {
                             </div>
                             <a 
                                 className="menuBookingCard_btn_hotel1" 
-                                href={"/room-detail?id=" + dataBookingHotelOfCustomer.hotelId} 
+                                href={"/room-detail/" + dataBookingHotelOfCustomer.hotelId} 
                                 title={content.detailRoom}
                             >
                                 <i className="fas fa-hotel" style={{fontSize: "20px"}}/>
@@ -163,7 +187,28 @@ function HotelInvoiceDetail() {
                                 <div className="bookingBody_hotel">
                                     <div className="bookingBody_hotel_img">
                                         <div className="bookingBody_img">
-                                            <img src={dataHotel.imageLink[0]}/>
+                                            <Carousel 
+                                                showThumbs={false}
+                                                autoPlay={false}
+                                                showStatus={false}
+                                                showIndicators={false}
+                                            >
+                                                <div>
+                                                    <img src={dataHotel.imageLink[0]}/>
+                                                </div>
+                                                <div>
+                                                    <img src={dataHotel.imageLink[1]}/>
+                                                </div>
+                                                <div>
+                                                    <img src={dataHotel.imageLink[2]}/>
+                                                </div>
+                                                <div>
+                                                    <img src={dataHotel.imageLink[3]}/>
+                                                </div>
+                                                <div>
+                                                    <img src={dataHotel.imageLink[4]}/>
+                                                </div>
+                                            </Carousel>
                                         </div>
                                     </div>
                                 </div>
@@ -252,43 +297,73 @@ function HotelInvoiceDetail() {
                                 </div>
                             </div>
                         </div> 
+                        {dataBookingHotelOfCustomer.status == "Stayed" ? 
+                            <div className="bookingBody_components">
+                                <div className="bookingBody_component">
+                                    <div className="bookingBody_component_block">
+                                        <h3 style={{margin: "auto 0px"}}>{content.review}</h3>
+                                        <div className="bookingBody_component_day_block_subText">
+                                            {
+                                            <div style={{width: "100%"}}>
+                                                {dataReview == "Bạn chưa đánh giá khách sạn này. Hãy đánh giá!" ? 
+                                                    <p>{content.txtNoReview}
+                                                        <button 
+                                                            style={{backgroundColor: "transparent", border: "none", fontSize: "16px", color: "#717171", fontWeight: "700", textDecoration: "underline", cursor: "pointer", marginLeft: "5px"}}
+                                                            onClick={async () => {
+                                                                const result = await CustomDialog(<AddCommentModal
+                                                                    token={token}
+                                                                    language={language}
+                                                                    idHotel={dataBookingHotelOfCustomer.hotelId}
+                                                                />, {
+                                                                    title: content.addCmt,
+                                                                    showCloseIcon: true,
+                                                                })
+                                                            }}
+                                                            > 
+                                                        {content.txtNoReview1}
+                                                        </button>
+                                                    </p>
+                                                :
+                                                    <BoxComment
+                                                        hotelInvoiceDetail={"HotelInvoiceDetail"}
+                                                        customerName={dataReview.customerName}
+                                                        customerID={dataReview.customerID}
+                                                        score={dataReview.score}
+                                                        content={dataReview.content}
+                                                        idHotel={dataBookingHotelOfCustomer.hotelId}
+                                                        reviewId={dataReview._id}
+                                                        language={language}
+                                                        token={token}
+                                                    />
+                                                }
+                                            </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        : 
+                            ""
+                        }
+                        
 
                         <div className="bookingBody_components_line"></div>
 
-
-
-                        {/* <div className="bookingBody_components_line"></div> */}
-
                         <div className="bookingBody_components">
-                            <button className={"booking_btn_confirm " + dataBookingHotelOfCustomer.status} style={{marginRight: "20px"}} onClick={() => {handleConfirmationBox()}}>
+                            <button 
+                                className={"booking_btn_confirm " + dataBookingHotelOfCustomer.status} style={{marginRight: "20px"}} 
+                                onClick={async () => {
+                                    const result = await Confirm(content.txtRemoveOrderHotel + dataHotel.name + content.txtRemoveOrderHotel1, content.confirmRemove)
+                                    if(result){
+                                        handleDeleteOrderHotel();
+                                    }
+                                    else{
+                                        
+                                    }
+                                }}
+                            >
                                 {content.cancelOrderRoom}
                             </button>
-
-                            {/* ConfirmBOX DELETE */}
-                            <div className="confirmBox_container">
-                                <div className="confirmation-text">
-                                    {content.confirmCancelOrderRoom}<br></br><b>`{dataHotel.name}`</b>?
-                                </div>
-
-                                <div className="button-container">
-                                    <button 
-                                        className="cancel-button" 
-                                        onClick={() => handleConfirmationBox()}>
-                                            <i className="far fa-window-close"/>
-                                    </button>
-
-                                    <button 
-                                    className="confirmation-button"
-                                    onClick={handleDeleteOrderHotel}>
-                                        <i className="far fa-trash-alt"/>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div 
-                                className="confirm-bg" 
-                                onClick={() => handleConfirmationBox()}>
-                            </div>
 
                             <button className="booking_btn_confirm invoiceOk" onClick={history.goBack}>
                                 OK

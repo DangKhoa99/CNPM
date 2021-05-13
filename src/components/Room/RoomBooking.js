@@ -204,7 +204,6 @@ function RoomBooking({
                                                 :
                                                     <input
                                                         style={{cursor: "not-allowed"}}
-                                                        
                                                         disabled
                                                         className={'input' + (focus === END_DATE ? ' -focused' : '')}
                                                         {...endDateInputProps}

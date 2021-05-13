@@ -58,7 +58,7 @@ function Booking() {
                 <BookingBody
                     idHotel={idHotel}
                     nameHotel={detailHotel.name}
-                    imageHotel={detailHotel.imageLink[0]}
+                    imageHotel={detailHotel.imageLink}
                     priceHotelPerNight={detailHotel.room.price}
                     checkIn={checkIn}
                     checkOut={checkOut}

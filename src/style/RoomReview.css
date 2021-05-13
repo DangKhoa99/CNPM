@@ -27,7 +27,7 @@
     padding: 20px;
     width: 650px;
 
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 12px !important;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 12px;
     border-radius: 20px;
 }
 
@@ -39,21 +39,10 @@
     font-style: italic;
 }
 
-
-
 .comment_input{
     font-weight: 400 !important;
     font-size: 14px !important;
-    /* line-height: 20px !important; */
-
-    /* -moz-box-align: baseline !important;
-    display: flex !important;
-    align-items: baseline !important; */
-
     width: 600px;
-
-    /* margin: auto; */
-    /* padding: 0 20px; */
 }
 
 .message{
@@ -134,37 +123,6 @@
     background-color: #e7e7e7;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .block_comment{
     display: block !important;
     margin-bottom: 0px !important;
@@ -194,6 +152,15 @@
     padding: 20px;
 }
 
+.box_comment.HotelInvoiceDetail{
+    width: 100% !important;
+    margin-right:  0 !important;
+    position: relative !important;
+    margin-left: 0% !important;
+    margin-bottom: 0px !important;
+    padding: 0px;
+}
+
 .commentator{
     margin-bottom: 16px !important;
     -moz-box-align: center !important;
@@ -203,6 +170,11 @@
 
 .commentator_avatar{
     display: block !important;
+    position: relative !important;
+}
+
+.commentator_avatar.HotelInvoiceDetail{
+    display: none !important;
     position: relative !important;
 }
 
@@ -222,10 +194,30 @@
     width: 100%;
 }
 
+.commentator_info.HotelInvoiceDetail{
+    display: flex;
+    color: rgb(34, 34, 34) !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    margin-left: 0px !important;
+    width: 100%;
+}
+
 .commentator_name{
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.commentator_name.HotelInvoiceDetail{
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentator_name.HotelInvoiceDetail > p{
+    display: none;
 }
 
 .commentator_name i{
@@ -290,41 +282,3 @@
     background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
     color: rgb(34, 34, 34) !important;
 }
-
-/* .rating_stars{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    direction: rtl;
-}
-
-.rating_stars a{
-    font-size: 40px;
-    color: #313131;
-    transition: 0.3s all;
-}
-
-.rating_stars a:hover{
-    color: #f1c40f;
-}
-
-.rating_star_1:hover ~ a {
-    color: #f1c40f;
-}
-
-.rating_star_2:hover ~ a {
-    color: #f1c40f;
-}
-
-.rating_star_3:hover ~ a {
-    color: #f1c40f;
-}
-
-.rating_star_4:hover ~ a {
-    color: #f1c40f;
-} */
-
-/* .rating_star_5 ~ a {
-    color: #f1c40f;
-} */

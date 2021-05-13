@@ -1,21 +1,22 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import * as myConstClass from "../../constants/constantsLanguage"
-import useToken from '../../hooks/useToken'
 import {Avatar} from "@material-ui/core"
 import StarRatings from "react-star-ratings"
 import axios from 'axios'
 import { store } from 'react-notifications-component'
+import { Confirm } from 'react-st-modal'
 
 function BoxComment({
+    hotelInvoiceDetail,
     customerName,
     customerID,
     score,
     content,
     idHotel,
     reviewId,
-    language
+    language,
+    token
 }) {
-    const { token, setToken } = useToken();
     let contentLanguage = myConstClass.LANGUAGE;
     language === "English"
         ? (contentLanguage = contentLanguage.English)
@@ -26,6 +27,26 @@ function BoxComment({
         setClickEditReview(!clickEditReview);
         setRating(score);
         setCommentTxt(content);
+    }
+
+    const handleDeleteCommentUserByAdmin = () => {
+        const options = {
+            method: "POST",
+            headers: {
+                "auth-token": token.authToken,
+            },
+            data: {
+                "hotelId": idHotel,
+                "reviewId": reviewId
+            },
+            url: "http://localhost:5000/hotel/review/delete"
+        }
+        axios(options)
+        .then(response => {
+            // console.log("DELETE REVIEW OF USER IN HOTEL: ", response.data)
+            window.location.reload();
+        })
+        .catch(error => console.log(error))
     }
 
     const [rating, setRating] = useState(score);
@@ -71,7 +92,7 @@ function BoxComment({
 
      // Chưa đánh giá sao cho khách sạn
      const notification_notStar = {
-        title: ' RoyalStay - ' + content.notification,
+        title: ' RoyalStay - ' + contentLanguage.notification,
         message: "Vui lòng đánh giá ⭐ và viết nhận xét cho khách sạn",
         type: 'warning',
         container: 'bottom-left',
@@ -106,38 +127,59 @@ function BoxComment({
                 if(response.data == "Chỉnh sửa không thành công"){
                     console.log("Chỉnh sửa không thành công");
                 }
-                
+                else{
+                    window.location.reload();
+                } 
             })
             .catch(error => console.log("Error11: ", error))
-    
-            window.location.reload();
         }
     }
 
+    const userName = (customerName || "").split(' ').slice(-1).join(' ');
+
     return (
-        <div className="box_comment">
+        <div className={"box_comment " + hotelInvoiceDetail}>
             <div className="commentator">
-                <div className="commentator_avatar">
+                <div className={"commentator_avatar " + hotelInvoiceDetail}>
                     <Avatar 
                         className="commentator_img" 
-                        alt={customerName} 
-                        src={customerName}
+                        alt={userName} 
+                        src={userName}
                     />
                 </div>
 
-                <div className="commentator_info">
-                {token && customerID == token.customerId 
-                ? 
-                    <div className="commentator_name">
-                        <p>{customerName}</p> 
-                        <button style={{background: "white", border: "none"}} onClick={handleClickEditReview}>
-                            <i className="far fa-edit" title={contentLanguage.editReview}/>
-                        </button>
-                        
-                    </div>
-                :
-                    customerName
-                }
+                <div className={"commentator_info " + hotelInvoiceDetail}>
+                    {
+                    token && token.isAdmin ?
+                        <div className="commentator_name">
+                            <p>{customerName}</p> 
+                            <button 
+                                style={{background: "white", border: "none"}}
+                                onClick={async () => {
+                                    const result = await Confirm(contentLanguage.txtRemoveCmtUser + customerName + contentLanguage.txtRemoveCmtUser1, contentLanguage.confirmRemove)
+                                    if(result){
+                                        handleDeleteCommentUserByAdmin();
+                                    }
+                                    else{
+                                        
+                                    }
+                                }}
+                            >
+                                <i className="fas fa-ban" style={{color: "red"}} title={contentLanguage.removeCmtUser}/>
+                            </button>
+                        </div>
+                    :
+                    token && customerID == token.customerId
+                    ? 
+                        <div className={"commentator_name " + hotelInvoiceDetail}>
+                            <p>{customerName}</p> 
+                            <button style={{background: "white", border: "none"}} onClick={handleClickEditReview}>
+                                <i className="far fa-edit" title={contentLanguage.editReview}/>
+                            </button>
+                        </div>
+                    :
+                        customerName
+                    }
                     <div className="comment_time">
                         {/* <div>time - tháng 2 năm 2021</div> */}
                         {clickEditReview && token && customerID == token.customerId 
@@ -172,7 +214,6 @@ function BoxComment({
                             /> 
                         </div>
                         }
-                        
                     </div>
                 </div>
             </div>
@@ -180,8 +221,6 @@ function BoxComment({
             <div>
                 <span>
                     <div className="comment_text">
-                        
-
                         {/* EDIT REVIEW */}
                         {clickEditReview && token && customerID == token.customerId ?
                         <div className="comment_input" style={{width: "500px"}}>

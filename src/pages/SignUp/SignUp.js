@@ -53,7 +53,7 @@ function SignUp() {
     
     const onSubmit = (data) => {
         setSubmittedData(data);
-        console.log(data);
+        // console.log(data);
         const registerAccount = {
             name: data.fullName,
             username: data.username,

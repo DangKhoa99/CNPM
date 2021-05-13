@@ -22,7 +22,7 @@ export default function useGetDataFavoriteHotelOfCustomer() {
             }
             axios(options)
             .then(response => {
-                console.log((response.data))
+                // console.log((response.data))
                 setDataFavoriteHotelOfCustomer(response.data)
                 setIsLoadingDataFavoriteHotelOfCustomer(false);
             })

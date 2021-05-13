@@ -46,6 +46,42 @@ router.route('/add').post(adminVerify, (req, res) =>{
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//Delete hotel | admin required
+router.route('/delete').post(adminVerify, async (req, res) =>{
+    const hotelId = req.body.hotelId;
+
+    const deletedItem = await Hotel
+        .findByIdAndDelete(hotelId)
+        .catch(err => res.status(400).send(err.message))
+
+    res.status(200).send("Xóa khách sạn thành công");
+});
+
+//Edit hotel | admin required
+router.route("/edit").post(adminVerify, (req, res) => {
+    const hotelId = req.body.hotelId;
+    const name = req.body.name;
+    const address = req.body.address;
+    const bio = req.body.bio;
+    const tien_ich = req.body.tien_ich;
+    const imageLink = req.body.imageLink;
+
+    Hotel.findById(hotelId)
+    .then(hotel => {
+        hotel.name = name;
+        hotel.address = address;
+        hotel.bio = bio;
+        hotel.tien_ich = tien_ich;
+        hotel.room = req.body.room;
+        hotel.imageLink = imageLink;
+
+        hotel.save()
+        .then(() => res.json('Chỉnh sửa khách sạn thành công'))
+        .catch(err => res.status(400).json('Error 1: ' + err));    
+    })
+    .catch(err => res.status(400).json('Error 2: ' + err));
+});
+
 //Get review list of a hotel
 router.route('/review').post((req, res) => {
     const hotelId = req.body.hotelId;
@@ -167,6 +203,76 @@ router.route('/review/edit').post(verify, (req, res) =>{
         }        
     })
     .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//Delete review from 1 hotel | admin require
+router.route("/review/delete").post(adminVerify, (req, res) => {
+    const hotelId = req.body.hotelId;
+    const reviewId = req.body.reviewId;
+
+    Hotel.findById(hotelId)
+    .then(hotel => {
+        if(!hotel){
+            res.json("Không có khách sạn này");
+        }
+        else{
+            
+            for(i in hotel.review){
+                if(hotel.review[i]["_id"] == reviewId){
+                    hotel.review[i].remove();
+                }
+            }
+
+            hotel.save()
+                .then(() => res.json('Xóa review thành công'))
+                .catch(err => res.status(400).json('Error: ' + err));
+        }
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+
+});
+
+//Get review of a customer about a hotel | token require
+router.route("/review/getByCustomer").post(verify, (req, res) => {
+    const hotelId = req.body.hotelId;
+    const customerId = req.body.customerId;
+    
+    Customer.findById(customerId)
+    .then(customer => {
+        let isStayed = false;
+        let books = JSON.stringify(customer.booking);
+        books = JSON.parse(books);
+
+        //Check if customer have stayed in this hotel
+        for(let i = 0; i < books.length; i++){
+            if(books[i].status === "Stayed" && books[i].hotelId == hotelId){
+                isStayed = true;
+                break;
+            }
+        }
+
+        // Check if this customer have reviewed this hotel
+        if(isStayed){
+            Hotel.findById(hotelId)
+            .then(async hotel => {
+                let reviews = JSON.stringify(hotel.review);
+                reviews = JSON.parse(reviews);
+    
+                for (let i = 0; i < reviews.length; i++){
+                    if(reviews[i].customerID == customerId){
+                        return await res.json(reviews[i]);
+                    }
+                }
+
+                res.json("Bạn chưa đánh giá khách sạn này. Hãy đánh giá!");
+            })
+            .catch(err => res.status(400).json('Error: ' + err));
+        }
+        else{
+            res.json("Chỉ có thể đánh giá khách sạn đã ở");
+        }
+    })
+    .catch(err => res.status(400).json('Error 1: ' + err));
 });
 
 // Search for hotels by location

@@ -134,18 +134,19 @@ function Header(){
     axios(options)
       .then(response => {
         console.log("logout: ", response.data);
-    })
-    
-    localStorage.removeItem('authToken');
-    setToken(null);
-
-    window.location.reload();
-    store.addNotification(notificationLogoutSuccess); 
+        if(response.data == "Đăng xuất thành công"){
+          localStorage.removeItem('authToken');
+          setToken(null);
+          window.location.reload();
+          store.addNotification(notificationLogoutSuccess); 
+        }
+      })
+      .catch(error => console.log("Error LogOut: ", error))
   }
 
   // getImageUser
   const [dataCustomer, setDataCustomer] = useState([]);
-  const fetchData = async () => {
+  const getImageUser = async () => {
     const options = {
         method: "POST",
         headers: {
@@ -175,7 +176,7 @@ function Header(){
     handleHideHeader();
     handleBlockHeader();
     if(token){
-      fetchData();
+      getImageUser();
     }
 
     // Chỉ đổi màu thanh Header khi scroll ở Trang chủ
@@ -194,7 +195,6 @@ function Header(){
   const userName = (dataCustomer.name || "").split(' ').slice(-1).join(' ');
 
   let content = myConstClass.LANGUAGE;
-
   language === "English"
     ? (content = content.English)
     : (content = content.Vietnam);
@@ -304,7 +304,7 @@ function Header(){
 
               {/* Menu hồ sơ */}
               <div className={menuProfile ? dataCustomer.isAdmin ? "profile_menu isAdmin" : "profile_menu" : "profile_menu close"}>
-                <h3>{dataCustomer.name}
+                <h3>{dataCustomer.name} {dataCustomer.isAdmin ? <i style={{color: "green", fontSize: "14px"}} className="fas fa-check-circle"/> : ""}
                 {dataCustomer.isAdmin ? <p>Admin</p> : ""}
                 </h3>
                 <ul className="profile_menu_lists">
@@ -313,7 +313,7 @@ function Header(){
                   </li>
                   {dataCustomer.isAdmin ? "" :
                     <li className="profile_menu_list">
-                      <a href="/account/profile/"><i className="fas fa-user-edit"></i>{content.editProfile}</a>
+                      <a href="/account/history-booking/"><i className="fas fa-calendar-alt"></i>{content.hotelBookingHistory}</a>
                     </li>
                   }
 

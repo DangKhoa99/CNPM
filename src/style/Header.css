@@ -20,12 +20,6 @@
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px !important;
 }
 
-/* .form-label::after {
-  content: '*';
-  margin-left: 2px;
-  color: red;
-} */
-
 .header.active{
   background: white;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px !important;
@@ -242,10 +236,6 @@
   transition: 0.5s;
 }
 
-/* .profile_menu_list:hover i{
-  opacity: 1;
-} */
-
 .profile_menu_list a{
   display: inline-block;
   text-decoration: none;
@@ -262,74 +252,6 @@
 .profile_menu_list.notAdmin{
   display:none
 }
-
-
-
-
-
-
-
-
-
-
-/* .profile_menu{
-  right: 20px;
-  margin-top: -8px;
-  display: block;
-  position: absolute;
-  top: 100%;
-  width: 25%;
-  transition: all 5s;
-}
-
-.profile_menu.isAdmin{
-  width: 40%;
-}
-
-.profile_menu.close{
-  display: none;
-}
-
-.profile_menu_lists::before{
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  right: 7px;
-  border-bottom: 16px solid #fff;
-  content: "";
-  display: block;
-  position: absolute;
-  width: 0;
-  height: 0;
-  top: -12px;
-}
-
-.profile_menu_lists {
-  margin: 2px 0 0;
-  background-color: white;
-  border-radius: 3px;
-  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.2);
-  padding: 10px 10px;
-  list-style: none;
-  text-align: left;
-}
-
-.profile_menu_list{
-  padding: 8px 14px;
-}
-
-.profile_menu_list.notAdmin{
-  display:none
-}
-
-.profile_menu_list > a{
-  text-decoration: none;
-  color: black;
-}
-
-.profile_menu_list > a:hover{
-  cursor: pointer;
-  color: red !important;
-} */
 
 .log_out{
   color: #919496 !important;
@@ -416,20 +338,6 @@
 .header_search:hover{
   box-shadow: 0 12px 18px 2px rgba(34,0,51,.04),0 6px 22px 4px rgba(7,48,114,.12),0 6px 10px -4px rgba(14,13,26,.12);
 }
-
-/* .header_search:hover.active{
-  border: 1px solid black;
-} */
- 
-/* .header_search:hover > .input_search {
-  width: 240px;
-  padding: 0 6px;
-}
- 
-.header_search:hover > .header_search_btn {
-  background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%) repeat scroll 0% 0% !important;
-  color: white !important;
-} */
  
 .header_search_btn {
   color: white !important;
@@ -574,15 +482,8 @@
   color: #fff;
   cursor: pointer;
   text-align: center;
+  text-align-last: center;
 }
-
-
-
-
-
-
-
-
 
 @media screen and (max-width: 1350px) {
   .header_btn_signIn{

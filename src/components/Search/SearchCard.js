@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useState, useEffect} from 'react'
 import "../../style/SearchCard.css"
 import StarIcon from "@material-ui/icons/Star"
 import { store } from 'react-notifications-component'
@@ -72,7 +72,7 @@ function SearchCard({
         }
         axios(options)
         .then(response => {
-            console.log("Success: ", response.data)
+            // console.log("Success: ", response.data)
         })
         .catch(error => console.log("Error:", error))
     }
@@ -91,7 +91,7 @@ function SearchCard({
         }
         axios(options)
         .then(response => {
-            console.log("Success: ", response.data)
+            // console.log("Success: ", response.data)
         })
         .catch(error => console.log("Error:", error))
     }
@@ -102,8 +102,8 @@ function SearchCard({
     }
 
     const notification_saveFavorite = {
-        title: ' RoyalStay - Thông báo',
-        message: 'Đã lưu khách sạn `' + name + '`',
+        title: ' RoyalStay - ' + content.notification,
+        message: content.savedHotel + '`' + name + '`',
         type: 'success',
         container: 'bottom-left',
         dismiss: {
@@ -112,8 +112,8 @@ function SearchCard({
     };
 
     const notification_notSaveFavorite = {
-        title: 'RoyalStay - Thông báo',
-        message: 'Bỏ lưu khách sạn `' + name + '`',
+        title: ' RoyalStay - ' + content.notification,
+        message: content.unsaved + '`' + name + '`',
         type: 'danger',
         container: 'bottom-left',
         dismiss: {
@@ -122,8 +122,8 @@ function SearchCard({
     };
 
     const notification_requireLogin = {
-        title: 'RoyalStay - Thông báo',
-        message: 'Bạn chưa đăng nhập',
+        title: ' RoyalStay - ' + content.notification,
+        message: content.notLogin,
         type: 'danger',
         container: 'bottom-left',
         dismiss: {
@@ -159,11 +159,10 @@ function SearchCard({
                         </div>
                     </Carousel>
                 
-
-
                     <button className="product__love-icon" onClick={() => {handleClickFavorite();}}>
                         {clickFavorite ? <i className="fas fa-heart"></i> : <i className="far fa-heart"/>}
                     </button>
+                    
                     <div className="product__love-iconLeft">
                         <div className="searchCard_stars">
                             <StarIcon className="searchCard_star"/>
@@ -173,10 +172,12 @@ function SearchCard({
                         </div>
                     </div>
                 </div>
+
                 <div className="product__price">
                     <span style={{fontSize: "24px"}}><strong>${price}</strong></span>
                     <span style={{fontSize: "14px"}}>/{content.night}</span>
                 </div>
+
                 <div className="product__detail">
                     <p className="product__address"><i className="fas fa-map-marker-alt"/> {address}</p>
                     <h1 className="product__title">
@@ -185,47 +186,9 @@ function SearchCard({
                     <p className="product__description">
                         {description}
                     </p>
-                    <a href={'/room-detail?id=' + id} className="product__button"><i className="fas fa-hotel"/>  {content.detailRoom}</a>
+                    <a href={'/room-detail/' + id} className="product__button"><i className="fas fa-hotel"/>  {content.detailRoom}</a>
                 </div>
             </li>
-
-
-
-            {/* <a href={'/room-detail?id=' + id}>
-                <img className="searchCard_img_hotel" src={img[0]} alt=""/>
-            </a>
-
-            <button 
-                className="searchCard_btn"
-                onClick={() => {handleClickFavorite();}}
-            >
-                <span className="searchCard_heart">
-                    {clickFavorite ? <RedHeart className="searchCard_redHeart_svg" /> : <Heart className="searchCard_heart_svg" />}
-                </span>
-                {saveFavorite}
-            </button>
-
-            <a className="searchCard_links" href={'/room-detail?id=' + id}>
-                <div className="searchCard_info">
-                    <div className="searchCard_infoTop">
-                        <p>{address}</p>
-                        <h3>{name}</h3>
-                        <p>________</p>
-                        <p>{description}</p>
-                    </div>
-                    <div className="searchCard_infoBottom">
-                        <div className="searchCard_stars">
-                            <StarIcon className="searchCard_star"/>
-                            <p>
-                                <strong>{avgReview} ({dataReview.length})</strong>
-                            </p>
-                        </div>
-                        <div className="searchCard_price">
-                            <h2>${price}</h2> <p> /đêm</p> 
-                        </div>
-                    </div>
-                </div>
-            </a> */}
         </div>
     )
 }

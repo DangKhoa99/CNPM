@@ -1,253 +1,217 @@
 .admin_page{
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    /* margin-bottom: 10px;
-    margin-top: 10px; */
-    position: relative;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative;
 }
 
 .admin_container{
-    transition: opacity 0.2s ease-in-out;
-    display: flex;
-    /* background-image: linear-gradient(to right, #242424 0%, #bebebe 100%);
-    background-repeat: repeat-x;
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.2); */
+  transition: opacity 0.2s ease-in-out;
+  display: flex;
 }
-/* 
-.menuAdmin{
-    width: auto;
-    visibility: visible;
-    flex-basis: 25%;
-    min-height: 100%;
-    display: block;
-    box-shadow: 8px 0 10px -6px rgba(0, 0, 0, 0.5);
-    margin-right: 10px;
-} */
 
 .menuAdmin_container{
-    min-height: 100%;
+  min-height: 100%;
 }
 
 .menuAdmin_avatar{
-    background-color: black !important;
-    color: white !important;
-    height: 100px !important;
-    width: 100px !important;
-    margin: 30px auto;
-    display: block;
-    outline: transparent !important;
+  background-color: black !important;
+  color: white !important;
+  height: 100px !important;
+  width: 100px !important;
+  margin: 30px auto;
+  display: block;
+  outline: transparent !important;
 }
 
 .menuAdmin_username{
-    margin-bottom: 10px;
-    padding: 10px;
-    text-align: center;
-    color: black;
-    font-size: 15px;
-    font-weight: 600;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: center;
+  color: black;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .menuAdmin_menu{
-    position: sticky !important;
-    top: 80px !important;
-    z-index: 1 !important;
-    display: inline-block !important;
-    width: 100% !important;
-    padding-right: 1px !important;
-    padding-bottom: 48px;
-    margin-top: 48px;
+  position: sticky !important;
+  top: 80px !important;
+  z-index: 1 !important;
+  display: inline-block !important;
+  width: 100% !important;
+  padding-right: 1px !important;
+  padding-bottom: 48px;
+  margin-top: 48px;
 }
 
 .menuAdmin_list{
-    font-size: 16px;
-    list-style: none;
-    position: relative;
-    border-bottom-color: rgba(255, 255, 255, 0.05);
-    border-top-color: rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
-    padding: 0;
-    list-style: none;
+  font-size: 16px;
+  list-style: none;
+  position: relative;
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+  border-top-color: rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 0;
+  list-style: none;
 }
 
 .menuAdmin_menuItem:hover::before, .menuAdmin_menuItem.menu_active::before{
-    background-color: #B22222;
+  background-color: #B22222;
 }
 
 .menuAdmin_menuItem::before{
-    background-color: transparent;
-    content: '';
-    height: 100%;
-    left: 0;
-    position: absolute;
-    width: 5px;
+  background-color: transparent;
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  width: 5px;
 }
 
 .menuAdmin_menuItem{
-    display: block;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.005);
-        border-bottom-color: rgba(0, 0, 0, 0.004);
-    border-top: 1px solid rgba(0, 0, 0, 0.025);
-        border-top-color: rgba(0, 0, 0, 0.024);
-    border-bottom-color: rgba(0, 0, 0, 0.2);
-    border-top-color: rgba(255, 255, 255, 0.05);
-    margin: 0;
-    padding: 0;
-    position: relative;
-    font-size: 16px;
-    line-height: 24px;
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.005);
+      border-bottom-color: rgba(0, 0, 0, 0.004);
+  border-top: 1px solid rgba(0, 0, 0, 0.025);
+      border-top-color: rgba(0, 0, 0, 0.024);
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  border-top-color: rgba(255, 255, 255, 0.05);
+  margin: 0;
+  padding: 0;
+  position: relative;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .menu_active .menuAdmin_menuLink{
-    fill: black;
-    color: black;
+  fill: black;
+  color: black;
 }
 
 .menuAdmin_menuLink{
-    text-decoration: none;
-    display: block;
-    position: relative;
-    fill: #c1c3c6;
-    /* padding: 15px 15px 15px 30px; */
-        padding-right: 15px;
-        padding-left: 75px;
-    color: #919496;
-    border: none;
-    border-radius: 0;
-    letter-spacing: 0;
-    text-transform: none;
+  text-decoration: none;
+  display: block;
+  position: relative;
+  fill: #c1c3c6;
+  padding-right: 15px;
+  padding-left: 75px;
+  color: #919496;
+  border: none;
+  border-radius: 0;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .menuAdmin_menuLink > svg{
-    display: block;
-    width: 1.3em;
-    height: 1.3em;
-    position: absolute;
-    top: 15px;
-    left: 30px;
+  display: block;
+  width: 1.3em;
+  height: 1.3em;
+  position: absolute;
+  top: 15px;
+  left: 30px;
 }
 
 /* Phần chung của các Menu */
 .menuUserManagement, .menuHotelManagement{
-    background-color: white !important;
-    padding: 48px;
-    flex: 1;
+  background-color: white !important;
+  padding: 48px;
+  flex: 1;
 }
 
-/* .menuUserManagement_container, .menuHotelManagement{
-    margin: 0px;
-}
-
-.menuUserManagement_title, .menuHotelManagement{
-    font-size: 48px;
-    line-height: 56px;
-    padding: 0px 0px 0.67em;
-    letter-spacing: -1px;
-} */
 label #sidebar_btn{
-    z-index: 1;
-    color: black;
-    position: fixed;
-    cursor: pointer;
-    left: 200px;
-    font-size: 20px;
-    margin: 20px 0px;
-    transition: 0.5s;
-  }
+  z-index: 1;
+  color: black;
+  position: fixed;
+  cursor: pointer;
+  left: 200px;
+  font-size: 20px;
+  margin: 20px 0px;
+  transition: 0.5s;
+}
   
-  label #sidebar_btn:hover{
-    color: #B22222;
-  }
-
-
-
+label #sidebar_btn:hover{
+  color: #B22222;
+}
 
 #check:checked ~ .sidebar{
-    left: -190px;
+  left: -190px;
 }
 
 #check:checked ~ label #sidebar_btn{
-    left: 20px;
+  left: 20px;
 }
   
-  #check:checked ~ .sidebar a span{
-    display: none;
-  }
+#check:checked ~ .sidebar a span{
+  display: none;
+}
   
-  #check:checked ~ .sidebar a{
-    font-size: 20px;
-    margin-left: 170px;
-    width: 80px;
-  }
+#check:checked ~ .sidebar a{
+  font-size: 20px;
+  margin-left: 170px;
+  width: 80px;
+}
   
-  #check{
-    display: none;
-  }
+#check{
+  display: none;
+}
 
   
-  .sidebar {
-    /* background: #2f323a; */
-    /* margin-top: 70px; */
-    /* padding-top: 30px; */
-    position: fixed;
-    left: 0;
-    /* width: 250px;
-    height: 100%; */
-    transition: 0.5s;
-    /* transition-property: left; */
+.sidebar {
+  position: fixed;
+  left: 0;
+  transition: 0.5s;
+  width: 250px;
+  visibility: visible;
+  flex-basis: 25%;
+  min-height: 100%;
+  display: block;
+  box-shadow: 8px 0 10px -6px rgba(0, 0, 0, 0.5);
+  margin-right: 10px;
+}
 
-    width: 250px;
-    visibility: visible;
-    flex-basis: 25%;
-    min-height: 100%;
-    display: block;
-    box-shadow: 8px 0 10px -6px rgba(0, 0, 0, 0.5);
-    margin-right: 10px;
-  }
-  
-  .sidebar .profile_image{
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
-    margin-bottom: 10px;
-  }
-  
-  .sidebar h4{
-    color: #ccc;
-    margin-top: 0;
-    margin-bottom: 20px;
-  }
-  
-  .sidebar a{
-    color: black;
-    display: block;
-    width: 100%;
-    line-height: 60px;
-    text-decoration: none;
-    padding-left: 40px;
-    box-sizing: border-box;
-    transition: 0.5s;
-    /* transition-property: background; */
-  }
-  
-  .sidebar a:hover{
-    background: #B22222;
-    color: white;
-  }
-  
-  .sidebar i{
-    padding-right: 10px;
-  }
+.sidebar .profile_image{
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
 
-  .content{
-    margin-left: 220px;
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-    transition: 0.5s;
-  }
-  
- #check:checked ~ .content{
-    margin-left: 30px;
+.sidebar h4{
+  color: #ccc;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.sidebar a{
+  color: black;
+  display: block;
+  width: 100%;
+  line-height: 60px;
+  text-decoration: none;
+  padding-left: 40px;
+  box-sizing: border-box;
+  transition: 0.5s;
+  /* transition-property: background; */
+}
+
+.sidebar a:hover{
+  background: #B22222;
+  color: white;
+}
+
+.sidebar i{
+  padding-right: 10px;
+}
+
+.content{
+  margin-left: 220px;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  transition: 0.5s;
+}
+
+#check:checked ~ .content{
+  margin-left: 30px;
 }
   

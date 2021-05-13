@@ -10,7 +10,8 @@ function MenuAdmin({
     nameUser,
     username,
     imageUser,
-    language
+    language,
+    token
 }) {
     let content = myConstClass.LANGUAGE;
     language === "English"
@@ -48,12 +49,12 @@ function MenuAdmin({
                     // src="/images/Khoa.jpg"
                     src={nameUser}
                 />
-                <div className="menuAdmin_username">{username}</div>
+                <div className="menuAdmin_username">{username} {token.isAdmin ? <i style={{color: "green", fontSize: "14px"}} className="fas fa-check-circle"/> : ""}</div>
                 {data.map((item, index) => {
                 if(item.id === markPage) 
                     item.active = "menu_active"
                 return  <div key={index + index} id={item.id} className={"menuAdmin_menuItem " + item.active}>
-                            <Link className="menuAdmin_menuLink" to={item.to}>
+                            <Link className={"menuAdmin_menuLink " + item.active} to={item.to}>
                                 {item.icon}
                                 <span style={{fontSize: "16px"}}>{item.name}</span>
                             </Link>

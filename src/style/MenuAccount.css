@@ -223,17 +223,17 @@
 }
 
 /* Phần chung của các Menu */
-.menuOverview, .menuProfile, .menuFavorite, .menuBooking, .menuHistoryBooking{
+.menuOverview, .menuProfile, .menuFavorite, .menuPassword, .menuHistoryBooking{
     background-color: white !important;
     padding: 48px;
     flex: 1;
 }
 
-.menuOverview_container, .menuProfile_container, .menuFavorite_container, .menuBooking_container, .menuHistoryBooking_container{
+.menuOverview_container, .menuProfile_container, .menuFavorite_container, .menuPassword_container, .menuHistoryBooking_container{
     margin: 0px;
 }
 
-.menuOverview_title, .menuProfile_title, .menuFavorite_title, .menuBooking_title, .menuHistoryBooking_title{
+.menuOverview_title, .menuProfile_title, .menuFavorite_title, .menuPassword_title, .menuHistoryBooking_title{
     font-size: 48px;
     line-height: 56px;
     padding: 0px 0px 0.67em;

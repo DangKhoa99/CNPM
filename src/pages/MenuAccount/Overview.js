@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import "../../style/MenuAccount.css"
 import MenuLeft from "../../components/MenuAccount/MenuLeft"
 import MenuOverview from "../../components/MenuAccount/MenuOverview"

@@ -70,7 +70,13 @@ export const LANGUAGE = {
       notification: "Thông báo",
       savedHotel: "Đã lưu khách sạn ",
       unsaved: "Bỏ lưu khách sạn ",
-      notLogin: "You are not logged in",
+      notLogin: "Bạn chưa đăng nhập",
+      removeHotel: "Xóa khách sạn",
+      confirmRemove: "XÁC NHẬN XÓA",
+      txtConfirmRemoveHotel: "Bạn có chắc là muốn xóa khách sạn `",
+      txtConfirmRemoveHotel1: "`?",
+      editInformationHotel: "Sửa thông tin khách sạn",
+      confirmEditHotel: "Xác nhận chỉnh sửa",
 
       // ROOM BODY
       description: "Mô tả",
@@ -87,8 +93,8 @@ export const LANGUAGE = {
       amenities: "Tiện nghi",
       thingsToKnow: "Những điều cần biết",
       hotelRules: "Nội quy khách sạn",
-      hoursCheckIn: "Nhận phòng: Sau 14:00",
-      hoursCheckOut: "Trả phòng: 12:00",
+      hoursCheckIn: "Nhận phòng: Tự do",
+      hoursCheckOut: "Trả phòng: Tự do",
       noSmoking: "Không hút thuốc",
       noPets: "Không thú cưng",
       healthSafety: "Y tế và an toàn",
@@ -123,6 +129,7 @@ export const LANGUAGE = {
       selectRoomType: "Chọn loại phòng: ",
       orderRoom: "Đặt phòng",
       outOfRoom: "Hết phòng",
+      confirmOrderRoomLoading: "Xác nhận đặt phòng...",
 
       // ROOM REVIEW
       extremelyDislike: "Cực kỳ không thích",
@@ -140,6 +147,11 @@ export const LANGUAGE = {
       canOnlyEdit: "Bạn đã đánh giá khách sạn. Bạn chỉ có thể ",
       yourReview: " đánh giá của bạn.",
       editReview: "Chỉnh sửa đánh giá",
+
+      // BOX COMMENT
+      txtRemoveCmtUser: "Bạn có muốn xóa bình luận của `",
+      txtRemoveCmtUser1: "` không?",
+      removeCmtUser: "Xóa bình luận",
 
       // ROOM SUGGESTION HOTEL
       aroundArea: "Các khách sạn xung quanh khu vực",
@@ -212,6 +224,7 @@ export const LANGUAGE = {
 
       // Menu Favorite
       hotelsFavorite: "Khách sạn yêu thích",
+      noFavoriteHotel: "Chưa có yêu thích",
 
       // Menu Booking
       noBookingHotel: "Không có phòng đang đặt",
@@ -222,12 +235,37 @@ export const LANGUAGE = {
       // Menu History Booking
       noHistory: "Không có lịch sử",
 
+      // Menu Password
+      changePassword: "Đổi mật khẩu",
+      subTitleMenuPassword: "Để bảo mật cho bạn, chúng tôi thực sự khuyên bạn nên chọn một mật khẩu duy nhất mà bạn không sử dụng cho bất kỳ tài khoản trực tuyến nào khác.",
+      notMatchPassword: "Mật khẩu mới và xác nhận mật khẩu không khớp",
+      oldPasswordIncorrect: "Mật khẩu cũ không đúng",
+      changePasswordSuccess: "Đổi mật khẩu thành công",
+      currentPassword: "Mật khẩu hiện tại",
+      enterCurrentPassword: "Nhập mật khẩu hiện tại",
+      newPassword: "Mật khẩu mới",
+      enterNewPassword: "Nhập mật khẩu mới",
+      validationNewPassword: "Mật khẩu chứa ít nhất 1 kí tự viết hoa",
+      confirmNewPassword: "Xác nhận mật khẩu mới",
+      saveChangePassword: "Lưu thay đổi",
+      yourPassword: "Mật khẩu của bạn",
+      noticeYourPassword: "Mật khẩu của bạn phải có từ 6 ký tự trở lên",
+      noticeYourPassword1: "Mật khẩu của bạn không được chứa (các) khoảng trắng",
+      noticeYourPassword2: "Mật khẩu của bạn phải có ít nhất 1 chữ cái viết hoa",
+
       // Hotel Invoice Detail
       status: "Trạng thái",
       cancelOrderRoom: "Hủy đặt phòng",
       confirmCancelOrderRoom: "Bạn có chắc muốn hủy đặt phòng khách sạn ở ",
       payments: "Hình thức thanh toán",
       idInvoice: "Mã hóa đơn",
+      txtNoReview: "Bạn chưa đánh giá khách sạn này. Hãy",
+      txtNoReview1: "đánh giá",
+      addCmt: "Thêm bình luận",
+      txtRemoveOrderHotel: "Confirm deletion of `",
+      txtRemoveOrderHotel1: "` hotel reservation?",
+      txtRemoveOrderHotel: "Xác nhận xóa đơn đặt phòng khách sạn `",
+      txtRemoveOrderHotel1: "`?",
 
       // UserManagement
       userManagement: "Quản lý người dùng",
@@ -239,6 +277,10 @@ export const LANGUAGE = {
       action: "Thao tác",
       informationUser: "Xem thông tin của ",
       informationUser1: "",
+      editInformationUser: "Chỉnh sửa thông tin của ",
+      editInformation: "Sửa thông tin",
+      removeUser: "Xóa ",
+      txtRemoveUser: "Bạn có muốn xóa `",
 
       // HotelManagement
       hotelManagement: "Quản lý khách sạn",
@@ -357,6 +399,12 @@ export const LANGUAGE = {
       savedHotel: "Saved hotel ",
       unsaved: "Unsaved hotel ",
       notLogin: "You are not logged in",
+      removeHotel: "Remove Hotel",
+      confirmRemove: "CONFIRM REMOVE",
+      txtConfirmRemoveHotel: "Are you sure want to delete the hotel `",
+      txtConfirmRemoveHotel1: "`?",
+      editInformationHotel: "Edit hotel information",
+      confirmEditHotel: "Editing confirmation",
 
       // ROOM BODY
       description: "Description",
@@ -373,8 +421,8 @@ export const LANGUAGE = {
       amenities: "Amenities",
       thingsToKnow: "Things to know",
       hotelRules: "Hotel rules",
-      hoursCheckIn: "Checkin: after 14:00",
-      hoursCheckOut: "Checkout: 12:00 PM",
+      hoursCheckIn: "Checkin: Free time",
+      hoursCheckOut: "Checkout: Free time",
       noSmoking: "No smoking",
       noPets: "No pets",
       healthSafety: "Health & safety",
@@ -409,6 +457,7 @@ export const LANGUAGE = {
       selectRoomType: "Select room type: ",
       orderRoom: "Book room",
       outOfRoom: "Out of room",
+      confirmOrderRoomLoading: "Booking confirmation...",
 
       // ROOM REVIEW
       extremelyDislike: "Extremely dislike",
@@ -426,6 +475,11 @@ export const LANGUAGE = {
       canOnlyEdit: "You have rated the hotel. You can only ",
       yourReview: " your review.",
       editReview: "Edit Review",
+
+      // BOX COMMENT
+      txtRemoveCmtUser: "Do you want to delete ",
+      txtRemoveCmtUser1: "'s comment?",
+      removeCmtUser: "Remove comment",
 
       // ROOM SUGGESTION HOTEL
       aroundArea: "Explore other options in and around ",
@@ -498,13 +552,34 @@ export const LANGUAGE = {
 
       // Menu Favorite
       hotelsFavorite: "Hotels favorite",
+      noFavoriteHotel: "No Favorite Hotel",
 
       // Menu Booking
       noBookingHotel: "No rooms are booked",
 
       // Menu Booking Card
       detailInvoice: "Invoice detail",
+
+      // Menu History Booking
       noHistory: "No history",
+
+      // Menu Password
+      changePassword: " Change password",
+      subTitleMenuPassword: "For your security, we highly recommend that you choose a unique password that you don't use for any other online account.",
+      notMatchPassword: "New passwords and password confirmation do not match",
+      oldPasswordIncorrect: "Old password is incorrect",
+      changePasswordSuccess: "Password changed successfully",
+      currentPassword: "Current password",
+      enterCurrentPassword: "Enter current password",
+      newPassword: "New password",
+      enterNewPassword: "Enter new password",
+      validationNewPassword: "Password contains at least 1 capital letter",
+      confirmNewPassword: "Confirm new password",
+      saveChangePassword: "Save changes",
+      yourPassword: "Your password",
+      noticeYourPassword: "Your password must have 6+ characters",
+      noticeYourPassword1: "Your password must contain no space(s)",
+      noticeYourPassword2: "Your password must contain at least 1 capital letter",
 
       // Hotel Invoice Detail
       status: "Status",
@@ -512,6 +587,11 @@ export const LANGUAGE = {
       confirmCancelOrderRoom: "Are you sure you want to cancel your room in hotel ",
       payments: "Payments",
       idInvoice: "Code",
+      txtNoReview: "You have not rated this hotel yet. Please",
+      txtNoReview1: "rate",
+      addCmt: "Add comment",
+      txtRemoveOrderHotel: "Confirm deletion of `",
+      txtRemoveOrderHotel1: "` hotel reservation?",
 
       // UserManagement
       userManagement: "User Management",
@@ -523,6 +603,10 @@ export const LANGUAGE = {
       action: "Action",
       informationUser: "See ",
       informationUser1: "'s information",
+      editInformationUser: "Edit ",
+      editInformation: "Edit information",
+      removeUser: "Remove ",
+      txtRemoveUser: "Do you want to delete `",
 
       // HotelManagement
       hotelManagement: "Hotel Management",

@@ -2,8 +2,8 @@ import React, {useState, useEffect, useCallback} from 'react'
 import "../../style/RoomSuggestionHotel.css"
 import axios from 'axios'
 import * as myConstClass from "../../constants/constantsLanguage"
-import SearchCard from "../../components/Search/SearchCard"
-import LoadingScreen from "../../components/LoadingScreen"
+import RoomSuggestionCard from "./RoomSuggestionCard"
+import LoadingScreen from "../LoadingScreen"
 import useToken from '../../hooks/useToken'
 import Carousel1 from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -107,11 +107,11 @@ function RoomSuggestionHotel({
         },
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 2.3
+          items: 2.6
         },
         tablet: {
           breakpoint: { max: 1024, min: 464 },
-          items: 1
+          items: 1.5
         },
         mobile: {
           breakpoint: { max: 464, min: 0 },
@@ -130,7 +130,7 @@ function RoomSuggestionHotel({
                         :
                         data.sort((a, b) => (a.room.price - b.room.price)).map((item, index) => {
                             // return  idHotel != item._id ?
-                            return      <SearchCard 
+                            return      <RoomSuggestionCard 
                                             key={index + item}
                                             id={item._id}
                                             img={item.imageLink}

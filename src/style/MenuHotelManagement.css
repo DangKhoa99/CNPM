@@ -99,6 +99,10 @@
     right: 80px;
 }
 
+.menuHotelManagement_btn.removeHotel{
+    right: 120px;
+}
+
 .menuHotelManagement_btn:hover{
     border: medium none !important;
     background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
@@ -167,3 +171,30 @@
     text-align: right;
 }
 
+.menuHotelManagement_btnScrollToTop{
+    position: fixed; 
+    border-radius: 99px;
+    /* width: 100%; */
+    background-color: transparent;
+    border: none;
+    right: 10px;
+    bottom: 40px;
+    font-size: 40px;
+    z-index: 1;
+    cursor: pointer;
+    color: green;
+}
+
+/* Custom Modal */
+.Button-module_button__3FnXy{
+    cursor: pointer !important;
+}
+
+.Button-module_--primary__1ZLkB{
+    background-color: green !important;
+}
+
+.Button-module_--light__3HiwO{
+    color: white !important;
+    background-color: red !important;
+}

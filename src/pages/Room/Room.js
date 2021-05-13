@@ -8,6 +8,8 @@ import LoadingScreen from "../../components/LoadingScreen"
 import axios from 'axios'
 import useToken from '../../hooks/useToken'
 import useLanguage from '../../hooks/useLanguage'
+import { useLocation } from 'react-router-dom'
+import history from "../../history"
 
 function Room() {
     const { language, setLanguage } = useLanguage();
@@ -23,8 +25,12 @@ function Room() {
     const roomReview = useRef();
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const searchParams = new URLSearchParams(window.location.search);
-    const getID = searchParams.get('id');
+    // const searchParams = new URLSearchParams(window.location.search);
+    // const getID = searchParams.get('id');
+    let location11 = useLocation();
+    const getID = location11.pathname.split("/").pop();
+    // console.log(getID)
+
 
     const { token, setToken } = useToken();
     const [dataFavoriteHotelOfCustomer, setDataFavoriteHotelOfCustomer] = useState([]);
@@ -56,10 +62,15 @@ function Room() {
             },
             url: "http://localhost:5000/hotel/"
             }
-            await axios(options)
+            axios(options)
             .then(response => {
+                // console.log("ROOM: ", response.data)
                 setData(response.data);
                 setIsLoading(false);
+            })
+            .catch(error => {
+                console.log("Error: ", error);
+                history.push("/404");
             })
     },[getID]); // every time id changed, new data will be loaded
 
@@ -107,6 +118,14 @@ function Room() {
                     click={() => scrollToElement(roomReview)}
                     savedHotel={savedHotel}
                     language={language}
+                    price={data.room.price}
+                    description={data.bio}
+                    roomType={data.room.roomType}
+                    quantity={data.room.quantity}
+                    tien_ich={data.tien_ich
+                        .map(function(ttt, index) {
+                            return (index ? ' · ' : '') + ttt
+                    })}
                 />
                 }
                 {isLoading ? <LoadingScreen/>

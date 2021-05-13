@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import "../../style/MenuProfile.css"
-// import { vi } from 'date-fns/locale'
-// import { DatePicker } from 'react-nice-dates'
-import 'react-nice-dates/build/style.css'
-// import { Favorite } from '@material-ui/icons'
+import { useForm } from 'react-hook-form'
+import axios from 'axios'
 import * as myConstClass from "../../constants/constantsLanguage"
 
 function MenuProfile({
@@ -15,49 +13,200 @@ function MenuProfile({
     phone,
     sex,
     address,
-    language
+    language,
+    token
 }) {
-    // const [date, setDate] = useState(new Date(2000, 8, 9))
+
     let content = myConstClass.LANGUAGE;
     language === "English"
         ? (content = content.English)
         : (content = content.Vietnam);
 
-    const [selectValue, setSelectValue] = useState(sex);
-    const [changeFullName, setChangeFullName] = useState(fullName);
-    const [changeEmail, setChangeEmail] = useState(email);
+        let gender = "Female"
+        if(sex){
+            gender = "Male"
+        }
 
-    useEffect(() => {
-        setChangeFullName(fullName);
-        setChangeEmail(email);
-    },[fullName])
+        const { register, handleSubmit, formState: { errors }} = useForm({
+            defaultValues: {
+                "idCustomer": id,
+                "fullName": fullName,
+                "username": username,
+                "email": email,
+                "phoneNumber": phone,
+                "address": address,
+                "sex": gender
+            }
+        });
 
-    const handleChangeFullName = (e) => {
-        let value = e.target.value;
-        setChangeFullName(value);
-    }
+        const onSubmit = async (data)  => {
+            console.log(data);
 
-    const handleChangeEmail = (e) => {
-        let value = e.target.value;
-        setChangeEmail(value);
-    }
+            let gender = false;
+            if(data.sex == "Male"){
+                gender = true;
+            }
 
-    const handleSelectValue = (e) =>{
-        let value = e.target.value;
-        setSelectValue(value);
-    }
-
-    const handleSubmitEditProfile = (e) => {
-        e.preventDefault();
-    }
+            const options = {
+                method: "POST",
+                headers: {
+                    "auth-token": token.authToken,
+                },
+                data: {
+                    customerId: id,
+                    name: data.fullName,
+                    email: data.email,
+                    phone: data.phoneNumber,
+                    sex: gender,
+                    address: data.address
+                },
+                url: "http://localhost:5000/customer/edit"
+            }
+            axios(options)
+            .then(response => {
+                window.location = "/account/overview/";
+            })
+            .catch(error => console.log(error))
+        }
 
     return (
         <div className="menuProfile">
             <div className="menuProfile_container">
                 <h1 className="menuProfile_title">{content.editProfile}</h1>
-                <form 
-                // onSubmit={e => this.handleSubmitForm(e)}
-                >
+                <form onSubmit={handleSubmit(onSubmit)}>
+
+                    <div className="input_row">
+                        {content.idAccount}
+                        <input
+                            style={{cursor: "not-allowed", backgroundColor:"#FAFAFA"}}
+                            className="form_input"
+                            autoComplete="off"
+                            type="text"
+                            disabled
+                            {...register("idCustomer", {
+                                required: content.validationUsername
+                            })} 
+                        />
+                        {errors.idCustomer && <p>⚠ {errors.idCustomer.message}</p>}
+                    </div>
+
+                    <div className="input_row">
+                        {content.account}
+                        <input
+                            style={{cursor: "not-allowed", backgroundColor:"#FAFAFA"}}
+                            className="form_input"
+                            autoComplete="off"
+                            type="text"
+                            disabled
+                            placeholder={content.placeholderUsername}
+                            {...register("username", {
+                                required: content.validationUsername, 
+                                pattern: {
+                                    value: /^([a-z\d]+-)*[a-z\d]+$/i,
+                                    message: content.validationUsername1
+                                }
+                            })} 
+                        />
+                        {errors.username && <p>⚠ {errors.username.message}</p>}
+                    </div>
+
+                    <div className="input_row">
+                        {content.fullName}
+                        <input 
+                            className="form_input"
+                            autoComplete="off"
+                            type="text" 
+                            placeholder={content.placeholderFullname}
+                            {...register("fullName", {
+                                required: content.validationFullname, 
+                                maxLength: {
+                                    value: 100,
+                                    message: content.validationFullname1
+                                }
+                            })} 
+                        />
+                        {errors.fullName && <p>⚠ {errors.fullName.message}</p>}
+                    </div>
+
+                    <div className="input_row">
+                        Email
+                        <input 
+                            className="form_input"
+                            autoComplete="off"
+                            type="text" 
+                            placeholder={content.placeholderEmail}
+                            {...register("email", {
+                                required: content.validationEmail, 
+                                pattern: {
+                                    value: /^\S+@\S+$/i,
+                                    message: content.validationEmail1
+                                }
+                            })} 
+                        />
+                        {errors.email && <p>⚠ {errors.email.message}</p>}
+                    </div>
+
+                    <div className="input_row">
+                        {content.address}
+                        <input 
+                            className="form_input"
+                            autoComplete="off"
+                            type="text" 
+                            placeholder="Nhập đia chỉ của bạn"
+                            {...register("address", {
+                                required: "Vui lòng nhập địa chỉ", 
+                            })} 
+                        />
+                        {errors.address && <p>⚠ {errors.address.message}</p>}
+                    </div>
+
+                    <div className="input_row">
+                        {content.phoneNumber}
+                        <input 
+                            className="form_input"
+                            autoComplete="off"
+                            type="text" 
+                            placeholder="Nhập số điện thoại"
+                            {...register("phoneNumber", {
+                                required: "Vui lòng nhập số điện thoại", 
+                                minLength: {
+                                    value: 8,
+                                    message: "Số điện thoại ít nhất 8 số"
+                                },
+                                maxLength: {
+                                    value: 12,
+                                    message: "Số điện thoại không vượt quá 12 số"
+                                }
+                            })} 
+                        />
+                        {errors.phoneNumber && <p>⚠ {errors.phoneNumber.message}</p>}
+                    </div>
+
+                    <div className="input_row">
+                        {content.sex}
+                        <div className="menuProfile_form_select">
+                            <select
+                                className="menuProfile_form_select_options"
+                                {...register("sex", { required: true })}
+                            >
+                                <option value="Male">{content.male}</option>
+                                <option value="Female">{content.female}</option>
+                            </select>
+                            <svg viewBox="0 0 1024 1024">
+                                <path d="M476.455 806.696L95.291 425.532Q80.67 410.911 80.67 390.239t14.621-34.789 35.293-14.117 34.789 14.117L508.219 698.8l349.4-349.4q14.621-14.117 35.293-14.117t34.789 14.117 14.117 34.789-14.117 34.789L546.537 800.142q-19.159 19.159-38.318 19.159t-31.764-12.605z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div className="menuProfile_form_btn">
+                        <a className="menuProfile_form_btn_cancel" href="/account/overview">{content.cancel}</a>
+                        <button className="menuProfile_form_submit" type="submit">
+                            <div className="menuProfile_form_submit_text">{content.saveProfile}</div>
+                        </button>
+                    </div>
+                </form>
+
+                {/* <form>
                     <section className="menuProfile_form">
                         <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" htmlFor="account_id">{content.idAccount}</label>
@@ -117,29 +266,9 @@ function MenuProfile({
                                 value={changeEmail}
                                 onChange={handleChangeEmail}
                             />
-                        </div>
-
-                        {/* <div className="menuProfile_form_row">
-                            <label className="menuProfile_form_label" htmlFor="birthDay">Ngày sinh</label>
-                            <input type="text" id="birthDay" className="menuProfile_form_input" name="birthDay" value="09/09/2000" />
-                            <DatePicker 
-                                date={date} 
-                                onDateChange={setDate} 
-                                locale={vi}
-                                format="dd/MM/yyyy"
-                            >
-                            {({ inputProps, focused }) => (
-                                <input
-                                id="birthDay"
-                                name="birthDay"
-                                className={'menuProfile_form_input ' + (focused ? ' -focused' : '')}
-                                {...inputProps}
-                                />
-                            )}
-                            </DatePicker>
                         </div> */}
 
-                        <div className="menuProfile_form_row">
+                        {/* <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" htmlFor="address">{content.address}</label>
                             <input 
                                 type="text" 
@@ -147,11 +276,10 @@ function MenuProfile({
                                 className="menuProfile_form_input" 
                                 name="address" 
                                 value={address}
-                                // onChange={changeAddress}
                             />
-                        </div>
+                        </div> */}
 
-                        <div className="menuProfile_form_row">
+                        {/* <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" htmlFor="phone">{content.phoneNumber}</label>
                             <input 
                                 type="text" 
@@ -159,13 +287,11 @@ function MenuProfile({
                                 className="menuProfile_form_input" 
                                 name="phone" 
                                 value={phone}
-                                // onChange={changePhone}
                             />
-                        </div>
+                        </div> */}
 
-                        <div className="menuProfile_form_row">
+                        {/* <div className="menuProfile_form_row">
                             <label className="menuProfile_form_label" htmlFor="gender">{content.sex}</label>
-                            {/* <input type="text" id="gender" name="gender" className="menuProfile_form_input" value={selectValue} /> */}
                             
                             <div className="menuProfile_form_select">
                                 <select 
@@ -182,15 +308,15 @@ function MenuProfile({
                                     <path d="M476.455 806.696L95.291 425.532Q80.67 410.911 80.67 390.239t14.621-34.789 35.293-14.117 34.789 14.117L508.219 698.8l349.4-349.4q14.621-14.117 35.293-14.117t34.789 14.117 14.117 34.789-14.117 34.789L546.537 800.142q-19.159 19.159-38.318 19.159t-31.764-12.605z"/>
                                 </svg>
                             </div>
-                        </div>
-                    </section>
-                    <div className="menuProfile_form_btn">
+                        </div> */}
+                    {/* </section> */}
+                    {/* <div className="menuProfile_form_btn">
                         <a className="menuProfile_form_btn_cancel" href="/account/overview">{content.cancel}</a>
                         <button className="menuProfile_form_submit" type="submit" onClick={handleSubmitEditProfile}>
                             <div className="menuProfile_form_submit_text">{content.saveProfile}</div>
                         </button>
-                    </div>
-                </form>
+                    </div> */}
+                {/* </form> */}
             </div>
         </div>
     )
