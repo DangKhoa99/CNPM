@@ -54,7 +54,7 @@ Open another terminal and type
 
 ## Contributors ✨
 
-Thanks to all the people who contribute.
+Thanks to all the people who contribute.[<a href="https://github.com/DangKhoa99/CNPM/graphs/contributors">Contributors</a>]
 
 <table>
   <tr>
