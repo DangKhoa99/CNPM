@@ -1,5 +1,7 @@
-<h1 align="center">Welcome to RoyalStay - Hotel Management 👋</h1>
-<h4 align="center">Software Engineering - Class groups 7 - Group 6</h4>
+<div align="center">
+  <h1>Welcome to RoyalStay - Hotel Management 👋</h1>
+  <h4>Software Engineering - Class groups 7 - Group 6</h4>
+</div>
 
 
 ## Languages and technologies
@@ -32,6 +34,22 @@ Open your terminal and then type
 To run the React project
 
 ### `$ npm start`
+
+Then open another terminal and type
+
+### `$ cd backend`
+
+### `$ nodemon server`
+
+Note: If you have not installed nodemon. Please install nodemon under the following command:
+
+### `$ npm install -g nodemon` 
+
+UNIT TEST - Launches the test runner in the interactive watch mode.
+
+Open another terminal and type
+
+### `$ npm test`
 
 
 ## Contributors ✨
