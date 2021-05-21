@@ -271,7 +271,7 @@ export const LANGUAGE = {
       userManagement: "Quản lý người dùng",
 
       // MenuUserManagement
-      placeholderSearchMenuUserManagement: "Tìm...",
+      placeholderSearchMenuUserManagement: "Tìm theo Họ tên hoặc Tài khoản...",
 
       // DataTable
       action: "Thao tác",
@@ -597,7 +597,7 @@ export const LANGUAGE = {
       userManagement: "User Management",
 
       // MenuUserManagement
-      placeholderSearchMenuUserManagement: "Find...",
+      placeholderSearchMenuUserManagement: "Search by Fullname or Username...",
 
       // DataTable
       action: "Action",

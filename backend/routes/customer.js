@@ -4,6 +4,7 @@ let {Customer, Booking} = require('../models/customer.model');
 const bcrypt = require('../../node_modules/bcrypt');
 let {Hotel, Review} = require('../models/hotel.model');
 const { HowToRegOutlined } = require('@material-ui/icons');
+let Token = require('../models/token.model');
 
 
 // Get all customers in DB | admin required
@@ -81,7 +82,15 @@ router.route('/delete').post(adminVerify, async (req, res) =>{
         .findByIdAndDelete(customerId)
         .catch(err => res.status(400).send(err.message))
 
-    res.status(200).send("Xóa người dùng thành công");
+    const isLogIn = await Token.findOne({userId: customerId});
+    if(isLogIn){
+        Token.findOneAndDelete({userId: customerId})
+        .then(() => res.json("Xóa người dùng thành công"))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else{
+        res.status(200).send("Xóa người dùng thành công");
+    }
 });
 
 // Edit user | token require

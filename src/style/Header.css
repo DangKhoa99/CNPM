@@ -321,9 +321,10 @@
 .header_search {
   border-radius: 40px;
   display: flex;
-  flex: 1;
+  flex-direction: row;
+  /* flex: 1 1; */
   align-items: center;
-  max-width: fit-content;
+  /* max-width: fit-content; */
   padding: 10px;
   height: 60px;
   margin-left: 100px;
@@ -342,8 +343,8 @@
 .header_search_btn {
   color: white !important;
   float: right;
-  /* width: 40px; */
-  width: 60px;
+  width: 40px !important;
+  /* width: 60px; */
   height: 40px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%) repeat scroll 0% 0% !important;

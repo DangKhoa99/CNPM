@@ -139,7 +139,8 @@ function HotelCard({
                                 <strong>{avgReview} </strong>({review.length})
                             </p>
                         </div>
-                        <div className="menuHotelManagement_price">
+                        <div className="menuHotelManagement_price" style={{textAlign: "right"}}>
+                            <p style={{marginBottom: "10px", color: "gray", fontStyle: "italic", fontSize: "12px"}}>{content.quantityRoom}{quantity}</p>
                             <h2>${price}</h2> <p> /{content.night}</p> 
                         </div>
                     </div>

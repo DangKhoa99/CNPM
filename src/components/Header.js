@@ -159,10 +159,14 @@ function Header(){
     }
     axios(options)
     .then(response => {
-        // console.log(response.data)
+        // console.log("dATA: ", response.data)
         setDataCustomer(response.data)
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.log("Error: ", error)
+      setDataCustomer([]);
+      localStorage.removeItem('authToken');
+    })
 }
 
   useEffect(() => {
@@ -266,7 +270,7 @@ function Header(){
               <p className={colorHeader ? 'header_bar active' : 'header_bar'}/>
             </li>
 
-            <li className={token ? 'header_item login': 'header_item'}>
+            <li className={token && dataCustomer.length != 0 ? 'header_item login': 'header_item'}>
             {/* <li className='header_item'> */}
               <a 
                 href='/sign-in' 
@@ -277,7 +281,7 @@ function Header(){
               </a>
             </li>
 
-            <li className={token ? 'header_item login': 'header_item'}>
+            <li className={token && dataCustomer.length != 0 ? 'header_item login': 'header_item'}>
             {/* <li className='header_item'> */}
               <a 
                 href='/sign-up' 
@@ -289,7 +293,7 @@ function Header(){
             </li>
 
             {/* Avatar */}
-            <li className={token ? 'header_item': 'header_item login'}>
+            <li className={token && dataCustomer.length != 0 ? 'header_item': 'header_item login'}>
             {/* <li className='header_item'> */}
               <button 
                 className={colorHeader ? 'header_avatar active' : 'header_avatar'} 
