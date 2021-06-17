@@ -21,7 +21,7 @@
 
 Open your terminal and then type
 
-### `$ git clone https://github.com/DangKhoa99/CNPM.git`
+### `$ git clone https://github.com/dangkhoa99/CNPM.git`
 
 ## ⚡ Installation
 
@@ -54,7 +54,7 @@ Open another terminal and type
 
 ## Contributors ✨
 
-Thanks to all the people who contribute.[<a href="https://github.com/DangKhoa99/CNPM/graphs/contributors">Contributors</a>]
+Thanks to all the people who contribute.[<a href="https://github.com/dangkhoa99/CNPM/graphs/contributors">Contributors</a>]
 
 <table>
   <tr>
@@ -70,13 +70,13 @@ Thanks to all the people who contribute.[<a href="https://github.com/DangKhoa99/
     </td>
     <td>
       <p align="center">
-        <a href="https://github.com/DangKhoa99"><img src="https://avatars.githubusercontent.com/u/56160839?v=4" width="100px;" alt=""/>
+        <a href="https://github.com/dangkhoa99"><img src="https://avatars.githubusercontent.com/u/56160839?v=4" width="100px;" alt=""/>
       </p>
     </td>
   </tr>
   <tr>
     <td text-align="center"><a href="https://github.com/andydam452"><b>51800924 · Đàm Đức Tài</b></td>
     <td text-align="center"><a href="https://github.com/thanhdo001121"><b>51800535 · Đặng Nguyễn Thành Đô</b></td>
-    <td text-align="center"><a href="https://github.com/DangKhoa99"><b>51800882 · Nguyễn Minh Đăng Khoa</b></td>
+    <td text-align="center"><a href="https://github.com/dangkhoa99"><b>51800882 · Nguyễn Minh Đăng Khoa</b></td>
   </tr>
 </table>
